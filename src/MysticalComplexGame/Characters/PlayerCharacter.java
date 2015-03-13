@@ -1,6 +1,6 @@
-package Mystical_Complex_Game.Characters;
+package MysticalComplexGame.Characters;
 
-import Mystical_Complex_Game.Scenes.IScene;
+import MysticalComplexGame.Scenes.IScene;
 
 /**
  * Created by sakis on 10-Mar-15.

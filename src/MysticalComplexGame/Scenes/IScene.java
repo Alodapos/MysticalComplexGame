@@ -1,4 +1,4 @@
-package Mystical_Complex_Game.Scenes;
+package MysticalComplexGame.Scenes;
 
 /**
  * Created by sakis on 08-Mar-15.

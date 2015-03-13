@@ -1,8 +1,8 @@
-package Mystical_Complex_Game.Commands;
+package MysticalComplexGame.Commands;
 
-import Mystical_Complex_Game.Characters.*;
-import Mystical_Complex_Game.InputHandler;
-import Mystical_Complex_Game.Scenes.*;
+import MysticalComplexGame.Characters.*;
+import MysticalComplexGame.InputHandler;
+import MysticalComplexGame.Scenes.*;
 
 import java.util.ArrayList;
 import java.util.Arrays;

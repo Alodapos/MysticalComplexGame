@@ -1,10 +1,10 @@
-package Mystical_Complex_Game;
+package MysticalComplexGame;
 
 
-import Mystical_Complex_Game.Characters.*;
-import Mystical_Complex_Game.Items.*;
-import Mystical_Complex_Game.Scenes.*;
-import Mystical_Complex_Game.Commands.*;
+import MysticalComplexGame.Characters.*;
+import MysticalComplexGame.Items.*;
+import MysticalComplexGame.Scenes.*;
+import MysticalComplexGame.Commands.*;
 
 import java.util.Scanner;
 

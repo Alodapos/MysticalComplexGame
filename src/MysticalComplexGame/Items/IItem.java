@@ -1,4 +1,4 @@
-package Mystical_Complex_Game.Items;
+package MysticalComplexGame.Items;
 
 /**
  * Created by sakis on 12-Mar-15.

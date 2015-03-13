@@ -1,14 +1,13 @@
-package Mystical_Complex_Game.Scenes;
+package MysticalComplexGame.Scenes;
 
-import Mystical_Complex_Game.Items.IItem;
+import MysticalComplexGame.Items.IItem;
 
 import java.util.ArrayList;
 
 /**
- * Created by sakis on 08-Mar-15.
+ * Created by sakis on 10-Mar-15.
  */
-public class SecondScene implements IScene {
-
+public class ThirdScene implements IScene {
 
     //north,south,east,west,up,down
     private int[] nextScene= new int[6];
@@ -17,8 +16,7 @@ public class SecondScene implements IScene {
     private String sceneName;
     ArrayList<IItem> itemsList = new ArrayList<IItem>();
 
-
-    public SecondScene(int id, int north, int south, int east, int west, int up, int down,IItem...items){
+    public ThirdScene(int id, int north, int south, int east, int west, int up, int down,IItem...items){
         this.sceneId = id;
         this.nextScene[0] = north;
         this.nextScene[1] = south;
@@ -26,8 +24,8 @@ public class SecondScene implements IScene {
         this.nextScene[3] = west;
         this.nextScene[4] = up;
         this.nextScene[5] = down;
-        this.sceneName = "Placeholder name #2st scene; woot?";
-        this.description = "Placeholder description for THE SECOND scene";
+        this.sceneName = "look at me i'm the third scene";
+        this.description = "woohooooooooooooooooooooooooooooooooooooo";
         for (IItem item:items) itemsList.add(item);
     }
 
@@ -69,4 +67,5 @@ public class SecondScene implements IScene {
     public void changeScene(int nextSceneId){
 
     }
+
 }

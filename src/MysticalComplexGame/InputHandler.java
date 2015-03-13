@@ -1,8 +1,8 @@
-package Mystical_Complex_Game;
+package MysticalComplexGame;
 
-import Mystical_Complex_Game.Characters.ICharacter;
-import Mystical_Complex_Game.Scenes.IScene;
-import Mystical_Complex_Game.Commands.IVerb;
+import MysticalComplexGame.Characters.ICharacter;
+import MysticalComplexGame.Scenes.IScene;
+import MysticalComplexGame.Commands.IVerb;
 
 import java.util.ArrayList;
 import java.util.regex.*;

@@ -1,19 +1,19 @@
-package Mystical_Complex_Game.Items;
+package MysticalComplexGame.Items;
 
 /**
  * Created by sakis on 12-Mar-15.
  */
-public class AnotherTestItem implements IItem
+public class TestItem implements IItem
 {
     private String name;
     private String description;
     private boolean canBeUsed;
     private boolean canBePicked;
 
-    public AnotherTestItem()
+    public TestItem()
     {
-        name = "another test item";
-        description= "loooook at me i'm another item!!";
+        name = "a test item";
+        description= "loooook at me i'm an item!!";
         canBeUsed = false;
         canBePicked = true;
     }

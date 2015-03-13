@@ -1,7 +1,7 @@
-package Mystical_Complex_Game.Commands;
+package MysticalComplexGame.Commands;
 
-import Mystical_Complex_Game.Characters.ICharacter;
-import Mystical_Complex_Game.InputHandler;
+import MysticalComplexGame.Characters.ICharacter;
+import MysticalComplexGame.InputHandler;
 
 /**
  * Created by sakis on 09-Mar-15.
