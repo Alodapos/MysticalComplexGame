@@ -1,15 +1,17 @@
-package ZorkGame.Items;
+package Mystical_Complex_Game.Items;
 
 /**
  * Created by sakis on 12-Mar-15.
  */
-public class AnotherTestItem implements IItem {
+public class TestItem implements IItem
+{
     private String name;
     private String description;
     private boolean canBeUsed;
     private boolean canBePicked;
 
-    public AnotherTestItem(){
+    public TestItem()
+    {
         name = "a test item";
         description= "loooook at me i'm an item!!";
         canBeUsed = false;
@@ -17,46 +19,55 @@ public class AnotherTestItem implements IItem {
     }
 
     @Override
-    public boolean isCanBePicked() {
+    public boolean isCanBePicked()
+    {
         return canBePicked;
     }
 
     @Override
-    public void setCanBePicked(boolean canPick) {
+    public void setCanBePicked(boolean canPick)
+    {
         this.canBePicked = canPick;
     }
 
     @Override
-    public boolean isUseable() {
+    public boolean isUseable()
+    {
         return canBeUsed;
     }
 
     @Override
-    public void setUseable(boolean canUse) {
+    public void setUseable(boolean canUse)
+    {
         this.canBeUsed = canUse;
     }
 
     @Override
-    public String getDescription() {
+    public String getDescription()
+    {
         return description;
     }
 
     @Override
-    public void setDescription(String description) {
+    public void setDescription(String description)
+    {
         this.description = description;
     }
 
     @Override
-    public String getName() {
+    public String getName()
+    {
         return name;
     }
 
     @Override
-    public void setName(String name) {
+    public void setName(String name)
+    {
         this.name = name;
     }
 
-    private void useItem (){
+    private void useItem ()
+    {
         //TODO on-use effect
     }
 }

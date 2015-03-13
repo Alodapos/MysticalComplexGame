@@ -1,11 +1,12 @@
-package ZorkGame.Characters;
+package Mystical_Complex_Game.Characters;
 
-import ZorkGame.Scenes.IScene;
+import Mystical_Complex_Game.Scenes.IScene;
 
 /**
  * Created by sakis on 10-Mar-15.
  */
-public class PlayerCharacter implements ICharacter {
+public class PlayerCharacter implements ICharacter
+{
 
     private String name;
     private IScene currentLocation;
@@ -14,22 +15,26 @@ public class PlayerCharacter implements ICharacter {
 
 
     @Override
-    public IScene getCurrentLocation() {
+    public IScene getCurrentLocation()
+    {
         return currentLocation;
     }
 
     @Override
-    public void setCurrentLocation(IScene currentLocation) {
+    public void setCurrentLocation(IScene currentLocation)
+    {
         this.currentLocation = currentLocation;
     }
 
     @Override
-    public String getName() {
+    public String getName()
+    {
         return name;
     }
 
     @Override
-    public void setName(String name) {
+    public void setName(String name)
+    {
         this.name = name;
     }
 }

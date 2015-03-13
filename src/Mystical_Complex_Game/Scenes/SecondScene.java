@@ -1,6 +1,6 @@
-package ZorkGame.Scenes;
+package Mystical_Complex_Game.Scenes;
 
-import ZorkGame.Items.IItem;
+import Mystical_Complex_Game.Items.IItem;
 
 import java.util.ArrayList;
 

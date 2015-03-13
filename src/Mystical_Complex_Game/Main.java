@@ -1,16 +1,18 @@
-package ZorkGame;
+package Mystical_Complex_Game;
 
 
-import ZorkGame.Characters.*;
-import ZorkGame.Items.*;
-import ZorkGame.Scenes.*;
-import ZorkGame.Verbs.*;
+import Mystical_Complex_Game.Characters.*;
+import Mystical_Complex_Game.Items.*;
+import Mystical_Complex_Game.Scenes.*;
+import Mystical_Complex_Game.Commands.*;
 
 import java.util.Scanner;
 
-public class Main {
+public class Main
+{
 
-    public static void main(String[] args) {
+    public static void main(String[] args)
+    {
 
         //the handler for everything
         InputHandler handler = new InputHandler();
@@ -44,7 +46,8 @@ public class Main {
         System.out.println(askForInput);
 
 
-        for (int i=0;i<1000;i++){
+        for (int i=0;i<1000;i++)
+        {
             userInput = new Scanner(System.in);
             userInputString = userInput.nextLine();
             handler.handle(userInputString, player);

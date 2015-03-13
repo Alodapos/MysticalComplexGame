@@ -1,9 +1,10 @@
-package ZorkGame.Scenes;
+package Mystical_Complex_Game.Scenes;
 
 /**
  * Created by sakis on 08-Mar-15.
  */
-public interface IScene {
+public interface IScene
+{
 
     void setSceneId(int id);
 

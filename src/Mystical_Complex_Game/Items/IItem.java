@@ -1,9 +1,10 @@
-package ZorkGame.Items;
+package Mystical_Complex_Game.Items;
 
 /**
  * Created by sakis on 12-Mar-15.
  */
-public interface IItem {
+public interface IItem
+{
 
 
     boolean isCanBePicked();

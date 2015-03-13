@@ -1,8 +1,8 @@
-package ZorkGame.Verbs;
+package Mystical_Complex_Game.Commands;
 
-import ZorkGame.Characters.*;
-import ZorkGame.InputHandler;
-import ZorkGame.Scenes.*;
+import Mystical_Complex_Game.Characters.*;
+import Mystical_Complex_Game.InputHandler;
+import Mystical_Complex_Game.Scenes.*;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -11,7 +11,8 @@ import java.util.regex.*;
 /**
  * Created by sakis on 09-Mar-15.
  */
-public class GoVerb implements IVerb {
+public class GoVerb implements IVerb
+{
 
     private final String name= "go";
     private final String missingArgument = "You'll have to say which compass direction to go in.";
@@ -25,39 +26,49 @@ public class GoVerb implements IVerb {
 
 
     @Override
-    public String getName(){
+    public String getName()
+    {
         return this.name;
     }
     @Override
-    public String getActionFailed(){
+    public String getActionFailed()
+    {
         return this.actionFailed;
     }
     @Override
-    public void executeAction(ICharacter character, String argument, InputHandler handler){
+    public void executeAction(ICharacter character, String argument, InputHandler handler)
+    {
         argument = argument.trim();
         ArrayList<IScene> scenes = handler.getScenesList();
         matcher = pattern.matcher(argument);
-        if (argument.matches("")){
+        if (argument.matches(""))
+        {
             System.out.println(missingArgument);
         }
-        else if (matcher.find()){
+        else if (matcher.find())
+        {
             desiredDirection = directions.indexOf(matcher.group()); //gets compass direction as integer
             nextSceneId = character.getCurrentLocation().getNextScene(desiredDirection); //gets ID for the scene at that direction
-            if (nextSceneId > 0){
-                for (IScene scene: scenes){
-                    if (scene.getSceneId() == nextSceneId){
+            if (nextSceneId > 0)
+            {
+                for (IScene scene: scenes)
+                {
+                    if (scene.getSceneId() == nextSceneId)
+                    {
                         character.setCurrentLocation(scenes.get(scenes.indexOf(scene)));
                         System.out.println(character.getCurrentLocation().getSceneName());
                         System.out.println(character.getCurrentLocation().getDescription());
                     }
                 }
             }
-            else {
+            else
+            {
                 Math.abs(nextSceneId);
                 System.out.println(noGoMessages.get(nextSceneId));
             }
         }
-        else{
+        else
+        {
             System.out.println(actionFailed);
         }
     }

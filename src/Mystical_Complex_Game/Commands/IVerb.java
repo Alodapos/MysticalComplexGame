@@ -1,12 +1,13 @@
-package ZorkGame.Verbs;
+package Mystical_Complex_Game.Commands;
 
-import ZorkGame.Characters.ICharacter;
-import ZorkGame.InputHandler;
+import Mystical_Complex_Game.Characters.ICharacter;
+import Mystical_Complex_Game.InputHandler;
 
 /**
  * Created by sakis on 09-Mar-15.
  */
-public interface IVerb {
+public interface IVerb
+{
     String getName();
 
     String getActionFailed();
