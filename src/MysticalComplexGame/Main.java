@@ -38,7 +38,7 @@ public class Main
         String userInputString;
         String askForInput = "What will you do?";
         System.out.println("Welcome to our text based adventure, have fun!");
-        System.out.println("\n\n\n");
+        System.out.println("\n");
         Scanner userInput;
 
         System.out.println(player.getCurrentLocation().getSceneName());
@@ -46,7 +46,7 @@ public class Main
         System.out.println(askForInput);
 
 
-        for (int i=0;i<1000;i++)
+        for (int i=0;i<9999;i++)
         {
             userInput = new Scanner(System.in);
             userInputString = userInput.nextLine();
