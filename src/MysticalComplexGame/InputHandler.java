@@ -15,33 +15,28 @@ public class InputHandler
     private final Pattern pattern = Pattern.compile("(\\w+)(.*)");
     private Matcher matcher;
     private ArrayList<IVerb> verbList = new ArrayList<IVerb>();
+    private ArrayList<String> commandNameList = new ArrayList<String>();
     private ArrayList<IScene> scenesList = new ArrayList<IScene>();
 
     public void handle(String userInput,ICharacter character)
     {
         userInput = userInput.trim();
         userInput = userInput.toLowerCase();
+        int commandPosition;
         //this.matcher.reset(); no clue what dis be doing here
         this.matcher = pattern.matcher(userInput);
         if (matcher.find())
         {
-            for (IVerb name : verbList)
-            {
-                if (matcher.group(1).equals(name.getName()))
-                {
-                    name.executeAction(character, matcher.group(2), this);
-                }
-                else
-                {
-                    System.out.println("This is not a verb I recognize!");
-                }
-            }
+            commandPosition = commandNameList.indexOf(matcher.group(1));
+            if (commandPosition == -1)  System.out.println("This is not a verb I recognize!");
+            else verbList.get(commandPosition).executeAction(character, matcher.group(2), this);
         }
     }
 
     public void addVerbs(IVerb verbToAdd)
     {
         this.verbList.add(verbToAdd);
+        this.commandNameList.add(verbToAdd.getName());
     }
 
     public void addScene(IScene sceneToAdd)

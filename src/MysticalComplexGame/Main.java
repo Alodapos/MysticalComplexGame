@@ -20,7 +20,7 @@ public class Main
         IItem testItem = new TestItem();
         //scene initializer , sceneID, northScene, south, east, west, up, down, negative or zero for no-go
         //scenes to use
-        IScene one = new FirstScene(100,0,0,200,0,0,0);
+        IScene one = new FirstScene(100,0,0,200,0,0,0,testItem);
         IScene two = new SecondScene(200,300,0,0,100,0,0);
         IScene three = new ThirdScene(300,0,200,0,0,0,0);
         handler.addScene(one);
