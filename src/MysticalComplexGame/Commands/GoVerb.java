@@ -20,7 +20,7 @@ public class GoVerb implements IVerb
     private final String PATTERN = "^(north|south|east|west|up|down)$";
     private final Pattern pattern = Pattern.compile(PATTERN);
     private final ArrayList<String> directions = new ArrayList<String>(Arrays.asList("north","south","east","west","up","down"));
-    private final ArrayList<String> noGoMessages = new ArrayList<String>(Arrays.asList("You cannot go that way.","The door is locked.","The gate is sealed and there is no keyhole"));
+    private final ArrayList<String> noGoMessages = new ArrayList<String>(Arrays.asList("You cannot go that way.","The door is locked.","The gate is sealed and there is no keyhole."));
     int desiredDirection, nextSceneId;
     private Matcher matcher;
 
