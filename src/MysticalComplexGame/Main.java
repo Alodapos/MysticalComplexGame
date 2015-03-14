@@ -19,18 +19,13 @@ public class Main
         IItem testItem = new TestItem();
         //scene initializer , sceneID, northScene, south, east, west, up, down, negative or zero for no-go
         //scenes to use
-        IScene one = new FirstScene(100,0,0,200,0,0,0,testItem);
-        IScene two = new SecondScene(200,300,0,0,100,0,0);
-        IScene three = new ThirdScene(300,0,200,0,0,0,0);
-        handler.addScene(one);
-        handler.addScene(two);
-        handler.addScene(three);
+        //TODO add scenes from manos
         //verbs to use
         ICommand go = new GoCommand();
         handler.addVerbs(go);
         //player character
         ICharacter player = new PlayerCharacter();
-        player.setCurrentLocation(one);
+        player.setCurrentLocation(null);
 
 
         //initializing some more stuff
@@ -38,20 +33,23 @@ public class Main
         Scanner userInput;
 
         //-----INTRO-----
-        //System.out.println("Intro text here");
-        //TODO INTRO
-
-        //print dis scene
+        System.out.println("ACT I - The Sage\n");
+        System.out.println("As the sun set, the nightfall finds you getting ready for the upcoming journey to the far land of Serenoth.");
+        System.out.println("You must reach this region in order to find a great sage, who is the personal advisor of king Ecthelion, son of Exelion.");
+        System.out.println("This great sage often goes by many names, but one is more common to the people of Dal'aron, Zenthar");
+        System.out.println("He is against all the strife of the two kingdoms, for he knows what really happened two hundred years ago.");
+        System.out.println("But the two kings care for nothing than the dominion of their own might all over the world.");
+        System.out.println("This is why you need his help to convince king Ecthelion to cease his actions and withdraw his armies before its too late to stop this madness.");
+        System.out.println("Therefore...\n");
         player.getCurrentLocation().printDescription();
 
         //-----GAME LOOP-----
-        for (int i=0;i<9999;i++)
+        do
         {
             userInput = new Scanner(System.in);
             userInputString = userInput.nextLine();
             handler.handle(userInputString, player);
-        }
-
-
+        } while (!player.getCurrentLocation().getSceneName().equals("The Sage"));
+        System.out.println("You have completed ACT I, ACT II is under development, stay tuned for more...");
     }
 }

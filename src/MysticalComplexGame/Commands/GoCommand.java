@@ -60,7 +60,7 @@ public class GoCommand implements ICommand
             }
             else
             {
-                Math.abs(nextSceneId);
+                nextSceneId = Math.abs(nextSceneId);
                 System.out.println(noGoMessages.get(nextSceneId));
             }
         }
