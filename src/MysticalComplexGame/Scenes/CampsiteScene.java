@@ -7,7 +7,7 @@ import java.util.ArrayList;
 /**
  * Created by sakis on 08-Mar-15.
  */
-public class FirstScene implements IScene
+public class CampsiteScene implements IScene
 {
 
     //north,south,east,west,up,down
@@ -18,7 +18,7 @@ public class FirstScene implements IScene
     private ArrayList<IItem> itemsList = new ArrayList<IItem>();
 
 
-    public FirstScene(int id, int north, int south, int east, int west, int up, int down, IItem ... items)
+    public CampsiteScene(int id, int north, int south, int east, int west, int up, int down, IItem... items)
     {
         this.sceneId = id;
         this.nextScene[0] = north;
@@ -28,8 +28,8 @@ public class FirstScene implements IScene
         this.nextScene[4] = up;
         this.nextScene[5] = down;
         //Scene name in caps please
-        this.sceneName = "Intro - Campsite";
-        this.description = "Placeholder description for first scene";
+        this.sceneName = "Campsite";
+        this.description = "You grab your stuff and begin traveling to the EAST,\nwhile the night offers you the perfect cover from prying eyes.\nYou plan to arrive at Renelor within 20 days,\nunless something unexpected happens.\nThe moment you leave the campsite you are facing a large crossroads and must decide which way to go.";
         for (IItem item:items) itemsList.add(item);
 
     }

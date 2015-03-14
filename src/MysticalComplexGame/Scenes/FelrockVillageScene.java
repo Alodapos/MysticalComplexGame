@@ -5,18 +5,21 @@ import MysticalComplexGame.Items.IItem;
 import java.util.ArrayList;
 
 /**
- * Created by sakis on 10-Mar-15.
+ * Created by sakis on 08-Mar-15.
  */
-public class ThirdScene implements IScene {
+public class FelrockVillageScene implements IScene
+{
 
     //north,south,east,west,up,down
     private int[] nextScene= new int[6];
     private int sceneId;
     private String description;
     private String sceneName;
-    ArrayList<IItem> itemsList = new ArrayList<IItem>();
+    private ArrayList<IItem> itemsList = new ArrayList<IItem>();
 
-    public ThirdScene(int id, int north, int south, int east, int west, int up, int down,IItem...items){
+
+    public FelrockVillageScene(int id, int north, int south, int east, int west, int up, int down, IItem... items)
+    {
         this.sceneId = id;
         this.nextScene[0] = north;
         this.nextScene[1] = south;
@@ -24,42 +27,51 @@ public class ThirdScene implements IScene {
         this.nextScene[3] = west;
         this.nextScene[4] = up;
         this.nextScene[5] = down;
-        this.sceneName = "look at me i'm the third scene";
-        this.description = "woohooooooooooooooooooooooooooooooooooooo";
+        //Scene name in caps please
+        this.sceneName = "Felrock Village";
+        this.description = "Description here.";
         for (IItem item:items) itemsList.add(item);
+
     }
 
     @Override
-    public void setSceneId(int id){
+    public void setSceneId(int id)
+    {
         this.sceneId=id;
     }
 
     @Override
-    public int getSceneId() {
+    public int getSceneId()
+    {
         return sceneId;
     }
 
     @Override
-    public int[] getNextScene() {
+    public int[] getNextScene()
+    {
         return nextScene;
     }
     @Override
-    public int getNextScene(int nxt) {
+    public int getNextScene(int nxt)
+    {
         return nextScene[nxt];
     }
 
     @Override
-    public void setNextScene(int[] nextScene) {
+    public void setNextScene(int[] nextScene)
+    {
         this.nextScene = nextScene;
     }
 
     @Override
-    public String getDescription() {
+    public String getDescription()
+    {
         return description;
     }
 
     @Override
-    public String getSceneName() {
+    public String getSceneName()
+    {
         return sceneName;
     }
 
@@ -74,4 +86,7 @@ public class ThirdScene implements IScene {
         }
 
     }
+
+
 }
+
