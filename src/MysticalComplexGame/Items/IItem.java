@@ -22,4 +22,8 @@ public interface IItem
     String getName();
 
     void setName(String name);
+
+    void setInventoryDescription(String inventoryDescription);
+
+    String getInventoryDescription();
 }

@@ -2,7 +2,7 @@ package MysticalComplexGame;
 
 import MysticalComplexGame.Characters.ICharacter;
 import MysticalComplexGame.Scenes.IScene;
-import MysticalComplexGame.Commands.IVerb;
+import MysticalComplexGame.Commands.ICommand;
 
 import java.util.ArrayList;
 import java.util.regex.*;
@@ -12,31 +12,32 @@ import java.util.regex.*;
 public class InputHandler
 {
 
-    private final Pattern pattern = Pattern.compile("(\\w+)(.*)");
+    private final Pattern pattern = Pattern.compile("(\\w+)(.*)"); //a word, and something else, or nothing else
+    private final String commandNotFound = "This is not a command i recognize!";
     private Matcher matcher;
-    private ArrayList<IVerb> verbList = new ArrayList<IVerb>();
-    private ArrayList<String> commandNameList = new ArrayList<String>();
-    private ArrayList<IScene> scenesList = new ArrayList<IScene>();
+    private ArrayList<ICommand> commandList = new ArrayList<ICommand>(); //commands
+    private ArrayList<IScene> scenesList = new ArrayList<IScene>();     //scenes
+    private ArrayList<String> commandNameList = new ArrayList<String>(); //scene names
+
 
     public void handle(String userInput,ICharacter character)
     {
         userInput = userInput.trim();
         userInput = userInput.toLowerCase();
-        int commandPosition;
-        //this.matcher.reset(); no clue what dis be doing here
+        int commandIndex;
         this.matcher = pattern.matcher(userInput);
-        if (matcher.find())
+        if (matcher.find()) //if we find a word
         {
-            commandPosition = commandNameList.indexOf(matcher.group(1));
-            if (commandPosition == -1)  System.out.println("This is not a verb I recognize!");
-            else verbList.get(commandPosition).executeAction(character, matcher.group(2), this);
+            commandIndex = commandNameList.indexOf(matcher.group(1));
+            if (commandIndex == -1)  System.out.println(commandNotFound);
+            else commandList.get(commandIndex).executeCommand(character, matcher.group(2), scenesList);
         }
     }
 
-    public void addVerbs(IVerb verbToAdd)
+    public void addVerbs(ICommand commandToAdd)
     {
-        this.verbList.add(verbToAdd);
-        this.commandNameList.add(verbToAdd.getName());
+        this.commandList.add(commandToAdd);
+        this.commandNameList.add(commandToAdd.getName());
     }
 
     public void addScene(IScene sceneToAdd)

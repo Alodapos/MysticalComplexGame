@@ -1,17 +1,19 @@
 package MysticalComplexGame.Commands;
 
 import MysticalComplexGame.Characters.ICharacter;
-import MysticalComplexGame.InputHandler;
+import MysticalComplexGame.Scenes.IScene;
+
+import java.util.ArrayList;
 
 /**
  * Created by sakis on 09-Mar-15.
  */
-public interface IVerb
+public interface ICommand
 {
     String getName();
 
     String getActionFailed();
 
-    void executeAction(ICharacter character, String argument, InputHandler handler);
+    void executeCommand(ICharacter character, String argument,  ArrayList<IScene> scenes);
 
 }

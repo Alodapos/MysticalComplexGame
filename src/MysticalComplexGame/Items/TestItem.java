@@ -7,6 +7,7 @@ public class TestItem implements IItem
 {
     private String name;
     private String description;
+    private String inventoryDescription;
     private boolean canBeUsed;
     private boolean canBePicked;
 
@@ -14,6 +15,7 @@ public class TestItem implements IItem
     {
         name = "a test item";
         description= "loooook at me i'm an item!!";
+        inventoryDescription = "a test item";
         canBeUsed = false;
         canBePicked = true;
     }
@@ -66,7 +68,19 @@ public class TestItem implements IItem
         this.name = name;
     }
 
-    private void useItem ()
+    @Override
+    public void setInventoryDescription(String inventoryDescription)
+    {
+        this.inventoryDescription = inventoryDescription;
+    }
+
+    @Override
+    public String getInventoryDescription()
+    {
+        return this.inventoryDescription;
+    }
+
+    public void useItem ()
     {
         //TODO on-use effect
     }

@@ -27,6 +27,7 @@ public class FirstScene implements IScene
         this.nextScene[3] = west;
         this.nextScene[4] = up;
         this.nextScene[5] = down;
+        //Scene name in caps please
         this.sceneName = "Intro - Campsite";
         this.description = "Placeholder description for first scene";
         for (IItem item:items) itemsList.add(item);
@@ -75,8 +76,14 @@ public class FirstScene implements IScene
     }
 
     @Override
-    public void changeScene(int nextSceneId)
+    public void printDescription()
     {
+        System.out.println(this.sceneName+"\n");
+        System.out.println(this.description);
+        for (IItem item : itemsList)
+        {
+            System.out.println(item.getDescription());
+        }
 
     }
 

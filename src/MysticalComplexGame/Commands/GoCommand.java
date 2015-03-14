@@ -1,8 +1,7 @@
 package MysticalComplexGame.Commands;
 
-import MysticalComplexGame.Characters.*;
-import MysticalComplexGame.InputHandler;
-import MysticalComplexGame.Scenes.*;
+import MysticalComplexGame.Characters.ICharacter;
+import MysticalComplexGame.Scenes.IScene;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -11,7 +10,7 @@ import java.util.regex.*;
 /**
  * Created by sakis on 09-Mar-15.
  */
-public class GoVerb implements IVerb
+public class GoCommand implements ICommand
 {
 
     private final String name= "go";
@@ -21,7 +20,6 @@ public class GoVerb implements IVerb
     private final Pattern pattern = Pattern.compile(PATTERN);
     private final ArrayList<String> directions = new ArrayList<String>(Arrays.asList("north","south","east","west","up","down"));
     private final ArrayList<String> noGoMessages = new ArrayList<String>(Arrays.asList("You cannot go that way.","The door is locked.","The gate is sealed and there is no keyhole."));
-    int desiredDirection, nextSceneId;
     private Matcher matcher;
 
 
@@ -36,11 +34,11 @@ public class GoVerb implements IVerb
         return this.actionFailed;
     }
     @Override
-    public void executeAction(ICharacter character, String argument, InputHandler handler)
+    public void executeCommand(ICharacter character, String argument, ArrayList<IScene> scenes)
     {
         argument = argument.trim();
-        ArrayList<IScene> scenes = handler.getScenesList();
         matcher = pattern.matcher(argument);
+        int desiredDirection, nextSceneId;
         if (argument.matches(""))
         {
             System.out.println(missingArgument);
@@ -56,8 +54,7 @@ public class GoVerb implements IVerb
                     if (scene.getSceneId() == nextSceneId)
                     {
                         character.setCurrentLocation(scenes.get(scenes.indexOf(scene)));
-                        System.out.println(character.getCurrentLocation().getSceneName());
-                        System.out.println(character.getCurrentLocation().getDescription());
+                        character.getCurrentLocation().printDescription();
                     }
                 }
             }

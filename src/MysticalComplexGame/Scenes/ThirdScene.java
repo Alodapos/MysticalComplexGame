@@ -64,8 +64,14 @@ public class ThirdScene implements IScene {
     }
 
     @Override
-    public void changeScene(int nextSceneId){
+    public void printDescription()
+    {
+        System.out.println(this.sceneName+"\n");
+        System.out.println(this.description);
+        for (IItem item : itemsList)
+        {
+            System.out.println(item.getDescription());
+        }
 
     }
-
 }

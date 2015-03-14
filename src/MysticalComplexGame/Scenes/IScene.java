@@ -18,9 +18,9 @@ public interface IScene
 
     String getDescription();
 
-    void changeScene(int nextSceneId);
-
     String getSceneName();
+
+    void printDescription();
 
 
 }

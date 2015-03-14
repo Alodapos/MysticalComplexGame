@@ -5,7 +5,6 @@ import MysticalComplexGame.Characters.*;
 import MysticalComplexGame.Items.*;
 import MysticalComplexGame.Scenes.*;
 import MysticalComplexGame.Commands.*;
-
 import java.util.Scanner;
 
 public class Main
@@ -27,25 +26,25 @@ public class Main
         handler.addScene(two);
         handler.addScene(three);
         //verbs to use
-        IVerb go = new GoVerb();
+        ICommand go = new GoCommand();
         handler.addVerbs(go);
-        //our character
+        //player character
         ICharacter player = new PlayerCharacter();
         player.setCurrentLocation(one);
 
 
-        //initializing some more shit
+        //initializing some more stuff
         String userInputString;
-        String askForInput = "What will you do?";
-        System.out.println("Welcome to our text based adventure, have fun!");
-        System.out.println("\n");
         Scanner userInput;
 
-        System.out.println(player.getCurrentLocation().getSceneName());
-        System.out.println(player.getCurrentLocation().getDescription());
-        System.out.println(askForInput);
+        //-----INTRO-----
+        //System.out.println("Intro text here");
+        //TODO INTRO
 
+        //print dis scene
+        player.getCurrentLocation().printDescription();
 
+        //-----GAME LOOP-----
         for (int i=0;i<9999;i++)
         {
             userInput = new Scanner(System.in);
