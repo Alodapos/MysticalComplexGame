@@ -38,7 +38,7 @@ public class InputHandler
         }
     }
 
-    public void addVerbs(ICommand commandToAdd)
+    public void addCommand(ICommand commandToAdd)
     {
         this.commandList.add(commandToAdd);
         this.commandNameList.add(commandToAdd.getName());

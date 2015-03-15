@@ -4,25 +4,28 @@ import MysticalComplexGame.Items.IItem;
 
 import java.util.ArrayList;
 
-public class CaveOfAnguishScene implements IScene
+public class LakeScene implements IScene
 {
 
-    //north,south,east,west
+    //north,south,east,west,up,down
     private String[] nextScene= new String[4];
     private String description;
     private String sceneName;
     private ArrayList<IItem> itemsList = new ArrayList<IItem>();
 
 
-    public CaveOfAnguishScene(String north, String south, String east, String west,IItem... items)
+    public LakeScene(String north, String south, String east, String west, IItem... items)
     {
         this.nextScene[0] = north;
         this.nextScene[1] = south;
         this.nextScene[2] = east;
         this.nextScene[3] = west;
-        this.sceneName = "Cave of Anguish";
-        this.description = "cave descr";
-
+        //Scene name in caps please
+        this.sceneName = "Lake";
+        this.description = "You head south following a downhill which leads you to a clearing.\n" +
+                "A fairly big lake is located in the center of an, 10-feet diameter, overgrown field.\n" +
+                "The water seems clean enough to be considered drinkable.\n" +
+                "Coincidentally, you start feeling thirsty. Seeing the abundance of water makes you think you could fill your flask from the lake.";
         for (IItem item:items) itemsList.add(item);
 
     }
@@ -43,7 +46,7 @@ public class CaveOfAnguishScene implements IScene
     @Override
     public String getSceneName()
     {
-        return this.sceneName;
+        return sceneName;
     }
 
     @Override
@@ -57,7 +60,6 @@ public class CaveOfAnguishScene implements IScene
         }
 
     }
-
 
 }
 

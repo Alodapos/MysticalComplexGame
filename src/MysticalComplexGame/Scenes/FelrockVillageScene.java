@@ -23,14 +23,16 @@ public class FelrockVillageScene implements IScene
         //Scene name in caps please
         this.sceneName = "Felrock Village";
         this.description = "You slowly and reluctantly enter the village,\n" +
-                "quickly throwing your eyes at everything you meet in order to examine the place and be prepared for any unpleasant surprises.\n" +
+                "quickly throwing your eyes at everything you meet\n" +
+                "in order to examine the place and be prepared for any unpleasant surprises.\n" +
                 "You can clearly see some residencies and realise that this is a small village with a very few inhabitants.\n" +
-                "There is a very big, simple, stone fountain int eh middle of the village, spouting crystal clear water from its holes.\n" +
-                "On its east you can distinguish a great and majestic building which, judging from the decoration, size and location, must be the village's worship temple.\n" +
+                "There is a very big, simple, stone fountain in the middle of the village,\n" +
+                "spouting crystal clear water from its holes.\n" +
+                "On its east you can distinguish a great and majestic building which,\n" +
+                "judging from the decoration, size and location, must be the village's worship temple.\n" +
                 "On the west, there lies a grand structure, of white and pale shades of brown which,\n" +
                 "considering the architecture that's been used and its position, must be the town hall.\n" +
-                "To the north, your sight follows a path, quite narrow, leading somewhere far ahead, but you can't see exactly where.\n" +
-                "What will you do now?";
+                "To the north, your sight follows a path, quite narrow, leading somewhere far ahead, but you can't see exactly where.";
         for (IItem item:items) itemsList.add(item);
 
     }

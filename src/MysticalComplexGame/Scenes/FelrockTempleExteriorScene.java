@@ -4,25 +4,28 @@ import MysticalComplexGame.Items.IItem;
 
 import java.util.ArrayList;
 
-public class CaveOfAnguishScene implements IScene
+public class FelrockTempleExteriorScene implements IScene
 {
 
-    //north,south,east,west
+    //north,south,east,west,up,down
     private String[] nextScene= new String[4];
     private String description;
     private String sceneName;
     private ArrayList<IItem> itemsList = new ArrayList<IItem>();
 
 
-    public CaveOfAnguishScene(String north, String south, String east, String west,IItem... items)
+    public FelrockTempleExteriorScene(String north, String south, String east, String west, IItem... items)
     {
         this.nextScene[0] = north;
         this.nextScene[1] = south;
         this.nextScene[2] = east;
         this.nextScene[3] = west;
-        this.sceneName = "Cave of Anguish";
-        this.description = "cave descr";
-
+        //Scene name in caps please
+        this.sceneName = "Felrock Village - Temple: Exterior";
+        this.description = "As you walk towards the temple you descry more and more details curved on its stone framework.\n" +
+                "You now stand in front of the construction.\n" +
+                "The intense greenery around the temple seems to have been there long before it was built.\n" +
+                "The entrance is huge and memorable and the gate is shut but probably unlocked.";
         for (IItem item:items) itemsList.add(item);
 
     }
@@ -43,7 +46,7 @@ public class CaveOfAnguishScene implements IScene
     @Override
     public String getSceneName()
     {
-        return this.sceneName;
+        return sceneName;
     }
 
     @Override
@@ -57,7 +60,6 @@ public class CaveOfAnguishScene implements IScene
         }
 
     }
-
 
 }
 

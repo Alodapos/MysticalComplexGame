@@ -19,19 +19,33 @@ public class Main
         IItem testItem = new TestItem();
         //scene initializer , sceneID, northScene, south, east, west, up, down, negative or zero for no-go
         //scenes to use
-        IScene campsite = new CampsiteScene("Crossroads","nothing","hills of masochism","hills of sadism");
-        IScene crossroads = new CrossroadsScene("nothing at all","lake of sperm","Wild Road","forest");
-        IScene wildRoad = new WildRoadScene("nothing","nothing","Felrock Village","Crossroads");
+        IScene campsite = new CampsiteScene("Crossroads","nothing at all","hills of masochism","hills of sadism");
+        IScene crossroads = new CrossroadsScene("nothing at all","lake of sperm","Wild Road","a shitty forest");
+        IScene lake = new LakeScene("Crossroads","nothing","nothing","nothing");
+        IScene wildRoad = new WildRoadScene("nothing at all","nothing at all","Felrock Village","Crossroads");
         IScene felrockVillage = new FelrockVillageScene("nothing","a fucking forest","Cave of Anguish","Wild Road");
-        IScene caveOfAnguish = new CaveOfAnguishScene("river of sperm","absolutely nothing","nothing", "Felrock Village");
+        IScene felrockTempleExterior = new FelrockTempleExteriorScene("Felrock Village","nothing","residencies","trees");
+        IScene felrockTempleInterior = new FelrockTempleInteriorScene
+                ("U wot mate, you wanna travel in da temple?","U wot mate, you wanna travel in da temple?",
+                        "U wot mate, you wanna travel in da temple?","U wot mate, you wanna travel in da temple?");
+        IScene felrockTownHallExterior = new FelrockTownHallExteriorScene("residencies","residencies","nothing","fountain");
+        IScene felrockTownHallInterior = new FelrockTempleInteriorScene
+                ("U wot mate, you wanna travel in da temple?","U wot mate, you wanna travel in da temple?",
+                        "U wot mate, you wanna travel in da temple?","U wot mate, you wanna travel in da temple?");
+        IScene caveOfAnguish = new CaveOfAnguishScene("river of vaginal fluids","absolutely nothing","nothing at all", "Felrock Village");
         handler.addScene(campsite);
         handler.addScene(crossroads);
+        handler.addScene(lake);
         handler.addScene(wildRoad);
         handler.addScene(felrockVillage);
+        handler.addScene(felrockTempleExterior);
+        handler.addScene(felrockTempleInterior);
+        handler.addScene(felrockTownHallExterior);
+        handler.addScene(felrockTownHallInterior);
         handler.addScene(caveOfAnguish);
-        //verbs to use
+        //commands to use
         ICommand go = new GoCommand();
-        handler.addVerbs(go);
+        handler.addCommand(go);
         //player character
         ICharacter player = new PlayerCharacter();
         player.setCurrentLocation(campsite);
