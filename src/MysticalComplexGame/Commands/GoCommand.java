@@ -43,7 +43,7 @@ public class GoCommand implements ICommand
             ArrayList<String> sceneNames = new ArrayList<String>();
             for (IScene scene : scenes) sceneNames.add(scene.getSceneName());       //make a table with scene names to search on it
             int nextSceneIndex = sceneNames.indexOf(character.getCurrentLocation().getNextScene(compassIndex));
-            if (nextSceneIndex == -1 ) System.out.println(character.getCurrentLocation().getNextScene(compassIndex)); //there no scene, but error message
+            if (nextSceneIndex == -1 ) System.out.println(character.getCurrentLocation().getNextScene(compassIndex)); //there's no scene, but error message
             else
             {
                 character.setCurrentLocation(scenes.get(nextSceneIndex));

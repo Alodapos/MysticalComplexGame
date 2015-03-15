@@ -23,7 +23,7 @@ public class CrossroadsScene implements IScene
         //Scene name in caps please
         this.sceneName = "Crossroads";
         this.description = "The moment you leave the campsite you see the, one and only, road leading upwards, so you take it.\n" +
-                " After a while you are facing a large crossroads and must decide which way to go.";
+                "After a while you are facing a large crossroads and must decide which way to go.";
 
         for (IItem item:items) itemsList.add(item);
 
@@ -51,7 +51,7 @@ public class CrossroadsScene implements IScene
     @Override
     public void printDescription()
     {
-        System.out.println(this.sceneName+"\n");
+        System.out.println("\t\t\t\t\""+this.sceneName+"\""+"\n");
         System.out.println(this.description);
         for (IItem item : itemsList)
         {

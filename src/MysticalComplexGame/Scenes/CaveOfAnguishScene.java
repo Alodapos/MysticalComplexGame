@@ -22,7 +22,7 @@ public class CaveOfAnguishScene implements IScene
         this.nextScene[3] = west;
         //Scene name in caps please
         this.sceneName = "Cave of Anguish";
-        this.description = "cave description";
+        this.description = "einai descr";
         for (IItem item:items) itemsList.add(item);
 
     }
@@ -49,7 +49,7 @@ public class CaveOfAnguishScene implements IScene
     @Override
     public void printDescription()
     {
-        System.out.println(this.sceneName+"\n");
+        System.out.println("\t\t\t\t\""+this.sceneName+"\""+"\n");
         System.out.println(this.description);
         for (IItem item : itemsList)
         {

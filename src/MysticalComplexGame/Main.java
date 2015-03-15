@@ -19,12 +19,16 @@ public class Main
         IItem testItem = new TestItem();
         //scene initializer , sceneID, northScene, south, east, west, up, down, negative or zero for no-go
         //scenes to use
-        IScene campsite = new CampsiteScene("              \"Crossroads\"","Cave of Anguish","the cliff is harsh", "you are a noob! you can't go there yet!");
-        IScene caveOfAnguish = new CaveOfAnguishScene("nothing","Campsite","nothing", "nothing");
-        IScene felrockVillage = new FelrockVillageScene("Campsite","nothing","nothing", "nothing");
+        IScene campsite = new CampsiteScene("Crossroads","nothing","hills of masochism","hills of sadism");
+        IScene crossroads = new CrossroadsScene("nothing at all","lake of sperm","Wild Road","forest");
+        IScene wildRoad = new WildRoadScene("nothing","nothing","Felrock Village","Crossroads");
+        IScene felrockVillage = new FelrockVillageScene("nothing","a fucking forest","Cave Of Anguish","Wild Road");
+        IScene caveOfAnguish = new CaveOfAnguishScene("river of sperm","absolutely nothing","nothing", "Felrock Village");
         handler.addScene(campsite);
-        handler.addScene(caveOfAnguish);
+        handler.addScene(crossroads);
+        handler.addScene(wildRoad);
         handler.addScene(felrockVillage);
+        handler.addScene(caveOfAnguish);
         //verbs to use
         ICommand go = new GoCommand();
         handler.addVerbs(go);

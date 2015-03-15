@@ -21,12 +21,12 @@ public class WildRoadScene implements IScene
         this.nextScene[2] = east;
         this.nextScene[3] = west;
         //Scene name in caps please
-        this.sceneName = "\"Wild Road\"";
+        this.sceneName = "Wild Road";
         this.description = "As you walk the east road, you begin to perceive a blurry landscape which,\n" +
-                " as it seems, consists by some kind of structures surrounded by tall trees.\n" +
-                " The closer you get, the clearer it becomes. It seems you have arrived at a small, remote, yet peaceful village.\n" +
-                " At the end of the path you see a sign reading \"Felrock Village\".\n" +
-                " Do you want to proceed entering the village or you want to try another path?";
+                "as it seems, consists by some kind of structures surrounded by tall trees.\n" +
+                "The closer you get, the clearer it becomes. It seems you have arrived at a small, remote, yet peaceful village.\n" +
+                "At the end of the path you see a sign reading \"Felrock Village\".\n" +
+                "Do you want to proceed entering the village or you want to try another path?";
 
         for (IItem item:items) itemsList.add(item);
 
@@ -54,7 +54,7 @@ public class WildRoadScene implements IScene
     @Override
     public void printDescription()
     {
-        System.out.println(this.sceneName+"\n");
+        System.out.println("\t\t\t\t\""+this.sceneName+"\""+"\n");
         System.out.println(this.description);
         for (IItem item : itemsList)
         {

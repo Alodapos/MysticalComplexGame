@@ -21,8 +21,7 @@ public class CampsiteScene implements IScene
         this.nextScene[2] = east;
         this.nextScene[3] = west;
         //Scene name in caps please
-        this.sceneName = "               <Renelor>\n\n" +
-                "               \"Campsite\"";
+        this.sceneName = "Campsite";
         this.description = "You grab your stuff and begin traveling to the NORTH,\n" +
                 "while the night offers you the perfect cover from prying eyes.\n" +
                 "You plan to arrive at Serenoth within 20 days,\n" +
@@ -54,7 +53,7 @@ public class CampsiteScene implements IScene
     @Override
     public void printDescription()
     {
-        System.out.println(this.sceneName+"\n");
+        System.out.println("\t\t\t\t\""+this.sceneName+"\""+"\n");
         System.out.println(this.description);
         for (IItem item : itemsList)
         {

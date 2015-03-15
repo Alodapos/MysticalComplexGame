@@ -1,6 +1,4 @@
-//This is Sakis' virtual girlfriend! Cause he can't have one IRL...
-
-
+//This is Sakis' virtual girlfriend! Cause he can't have one IRL... So stay away from "her"!
 
 
 
