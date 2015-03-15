@@ -22,7 +22,7 @@ public class Main
         IScene campsite = new CampsiteScene("Crossroads","nothing","hills of masochism","hills of sadism");
         IScene crossroads = new CrossroadsScene("nothing at all","lake of sperm","Wild Road","forest");
         IScene wildRoad = new WildRoadScene("nothing","nothing","Felrock Village","Crossroads");
-        IScene felrockVillage = new FelrockVillageScene("nothing","a fucking forest","Cave Of Anguish","Wild Road");
+        IScene felrockVillage = new FelrockVillageScene("nothing","a fucking forest","Cave of Anguish","Wild Road");
         IScene caveOfAnguish = new CaveOfAnguishScene("river of sperm","absolutely nothing","nothing", "Felrock Village");
         handler.addScene(campsite);
         handler.addScene(crossroads);
