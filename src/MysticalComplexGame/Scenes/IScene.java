@@ -6,21 +6,12 @@ package MysticalComplexGame.Scenes;
 public interface IScene
 {
 
-    void setSceneId(int id);
+    String getNextScene(int nxt);
 
-    int getSceneId();
-
-    int[] getNextScene();
-
-    int getNextScene(int nxt);
-
-    void setNextScene(int[] nextScene);
-
-    String getDescription();
+    void setNextScene(String[] nextScene);
 
     String getSceneName();
 
     void printDescription();
-
 
 }

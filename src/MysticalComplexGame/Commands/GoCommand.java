@@ -7,20 +7,18 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.regex.*;
 
-/**
- * Created by sakis on 09-Mar-15.
- */
+
 public class GoCommand implements ICommand
 {
 
     private final String name= "go";
     private final String missingArgument = "You'll have to say which compass direction to go in.";
     private final String actionFailed = "You can't see any such thing.";
-    private final String PATTERN = "^(north|south|east|west|up|down)$";
-    private final Pattern pattern = Pattern.compile(PATTERN);
-    private final ArrayList<String> directions = new ArrayList<String>(Arrays.asList("north","south","east","west","up","down"));
-    private final ArrayList<String> noGoMessages = new ArrayList<String>(Arrays.asList("You cannot go that way.","The door is locked.","The gate is sealed and there is no keyhole."));
-    private Matcher matcher;
+   // private final String PATTERN = "^(north|south|east|west|up|down)$";
+   // private final Pattern pattern = Pattern.compile(PATTERN);
+    private final ArrayList<String> directions = new ArrayList<String>(Arrays.asList("north","south","east","west"));
+   // private final ArrayList<String> noGoMessages = new ArrayList<String>(Arrays.asList("You cannot go that way.","The door is locked.","The gate is sealed and there is no keyhole."));
+   // private Matcher matcher;
 
 
     @Override
@@ -37,8 +35,38 @@ public class GoCommand implements ICommand
     public void executeCommand(ICharacter character, String argument, ArrayList<IScene> scenes)
     {
         argument = argument.trim();
+        int compassIndex = directions.indexOf(argument);
+        if (argument.matches("")) System.out.println(missingArgument); // if not argument at all
+        else if (compassIndex == -1)  System.out.println(actionFailed); //if invalid argument (not compass direction)
+        else //we got the argument to be north/south/east/west, now check the text
+        {
+            ArrayList<String> sceneNames = new ArrayList<String>();
+            for (IScene scene : scenes) sceneNames.add(scene.getSceneName());       //make a table with scene names to search on it
+            int nextSceneIndex = sceneNames.indexOf(character.getCurrentLocation().getNextScene(compassIndex));
+            if (nextSceneIndex == -1 ) System.out.println(character.getCurrentLocation().getNextScene(compassIndex)); //there no scene, but error message
+            else
+            {
+                character.setCurrentLocation(scenes.get(nextSceneIndex));
+                character.getCurrentLocation().printDescription();
+            }
+        }
+       // argument.matches("^"+directions.get(0)+"$");
+
+
+
+
+
+
+
+
+
+
+
+
+
+        /*
         matcher = pattern.matcher(argument);
-        int desiredDirection, nextSceneId;
+        , nextSceneId;
         if (argument.matches(""))
         {
             System.out.println(missingArgument);
@@ -67,6 +95,6 @@ public class GoCommand implements ICommand
         else
         {
             System.out.println(actionFailed);
-        }
+        } */
     }
 }

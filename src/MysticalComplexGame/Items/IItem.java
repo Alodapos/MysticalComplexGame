@@ -26,4 +26,20 @@ public interface IItem
     void setInventoryDescription(String inventoryDescription);
 
     String getInventoryDescription();
+
+    //boolean isDropable();
+
+    //void setDropable(boolean canDrop);
+
+    //boolean isPullable();
+
+    //void setPullable(boolean canPull);
+
+    //boolean isPushable();
+
+    //void setPushable(boolean canPush);
+
+    //boolean isPassable();
+    //COULD BE APPLIED TO A BRIDGE OR SMALL AREA IF BRIDGE OR AREA IS CONSIDERED AN ITEM (CLASS)
+    //void setPassable(boolean canPass);
 }

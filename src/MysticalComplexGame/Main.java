@@ -19,13 +19,18 @@ public class Main
         IItem testItem = new TestItem();
         //scene initializer , sceneID, northScene, south, east, west, up, down, negative or zero for no-go
         //scenes to use
-        //TODO add scenes from manos
+        IScene campsite = new CampsiteScene("              \"Crossroads\"","Cave of Anguish","the cliff is harsh", "you are a noob! you can't go there yet!");
+        IScene caveOfAnguish = new CaveOfAnguishScene("nothing","Campsite","nothing", "nothing");
+        IScene felrockVillage = new FelrockVillageScene("Campsite","nothing","nothing", "nothing");
+        handler.addScene(campsite);
+        handler.addScene(caveOfAnguish);
+        handler.addScene(felrockVillage);
         //verbs to use
         ICommand go = new GoCommand();
         handler.addVerbs(go);
         //player character
         ICharacter player = new PlayerCharacter();
-        player.setCurrentLocation(null);
+        player.setCurrentLocation(campsite);
 
 
         //initializing some more stuff

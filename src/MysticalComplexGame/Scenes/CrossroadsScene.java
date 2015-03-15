@@ -4,7 +4,7 @@ import MysticalComplexGame.Items.IItem;
 
 import java.util.ArrayList;
 
-public class FelrockVillageScene implements IScene
+public class CrossroadsScene implements IScene
 {
 
     //north,south,east,west,up,down
@@ -14,15 +14,17 @@ public class FelrockVillageScene implements IScene
     private ArrayList<IItem> itemsList = new ArrayList<IItem>();
 
 
-    public FelrockVillageScene(String north, String south, String east, String west,IItem... items)
+    public CrossroadsScene(String north, String south, String east, String west, IItem... items)
     {
         this.nextScene[0] = north;
         this.nextScene[1] = south;
         this.nextScene[2] = east;
         this.nextScene[3] = west;
         //Scene name in caps please
-        this.sceneName = "Felrock Village";
-        this.description = "village description";
+        this.sceneName = "Crossroads";
+        this.description = "The moment you leave the campsite you see the, one and only, road leading upwards, so you take it.\n" +
+                " After a while you are facing a large crossroads and must decide which way to go.";
+
         for (IItem item:items) itemsList.add(item);
 
     }
@@ -43,7 +45,7 @@ public class FelrockVillageScene implements IScene
     @Override
     public String getSceneName()
     {
-        return this.sceneName;
+        return sceneName;
     }
 
     @Override
@@ -57,7 +59,6 @@ public class FelrockVillageScene implements IScene
         }
 
     }
-
 
 }
 
