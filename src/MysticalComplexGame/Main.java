@@ -29,7 +29,7 @@ public class Main
                 ("U wot mate, you wanna travel in da temple?","U wot mate, you wanna travel in da temple?",
                         "U wot mate, you wanna travel in da temple?","U wot mate, you wanna travel in da temple?");
         IScene felrockTownHallExterior = new FelrockTownHallExteriorScene("residencies","residencies","nothing","fountain");
-        IScene felrockTownHallInterior = new FelrockTempleInteriorScene
+        IScene felrockTownHallInterior = new FelrockTownHallInteriorScene
                 ("U wot mate, you wanna travel in da temple?","U wot mate, you wanna travel in da temple?",
                         "U wot mate, you wanna travel in da temple?","U wot mate, you wanna travel in da temple?");
         IScene caveOfAnguish = new CaveOfAnguishScene("river of vaginal fluids","absolutely nothing","nothing at all", "Felrock Village");
