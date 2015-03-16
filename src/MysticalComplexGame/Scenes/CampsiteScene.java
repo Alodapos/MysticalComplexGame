@@ -62,5 +62,22 @@ public class CampsiteScene implements IScene
 
     }
 
+    @Override
+    public void addItem(IItem item)
+    {
+        this.itemsList.add(item);
+    }
+    @Override
+    public void removeItem(int itemIndex)
+    {
+        this.itemsList.remove(itemIndex);
+        itemsList.trimToSize();
+    }
+    @Override
+    public ArrayList<IItem> getItemsList()
+    {
+        return this.itemsList;
+    }
+
 }
 

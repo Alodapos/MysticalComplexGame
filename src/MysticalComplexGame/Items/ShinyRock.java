@@ -5,9 +5,7 @@ import MysticalComplexGame.Scenes.IScene;
 
 import java.util.ArrayList;
 
-/**
- * Created by sakis on 12-Mar-15.
- */
+
 public class ShinyRock implements IItem
 {
     private String name;
@@ -22,7 +20,7 @@ public class ShinyRock implements IItem
 
     public ShinyRock()
     {
-        name = "shiny rock";
+        name = "rock";
         description= "A gold , shiny rock lies on the floor...its...dazzling...";
         inventoryDescription = "A shiny-dazzling rock.";
         usable = false;

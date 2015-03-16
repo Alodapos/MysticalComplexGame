@@ -1,5 +1,9 @@
 package MysticalComplexGame.Scenes;
 
+import MysticalComplexGame.Items.IItem;
+
+import java.util.ArrayList;
+
 public interface IScene
 {
 
@@ -11,4 +15,9 @@ public interface IScene
 
     void printDescription();
 
+    void addItem(IItem item);
+
+    void removeItem(int itemIndex);
+
+    ArrayList<IItem> getItemsList();
 }

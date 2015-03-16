@@ -3,6 +3,8 @@ package MysticalComplexGame.Characters;
 import MysticalComplexGame.Items.IItem;
 import MysticalComplexGame.Scenes.IScene;
 
+import java.util.ArrayList;
+
 public interface ICharacter
 {
     IScene getCurrentLocation();
@@ -13,7 +15,10 @@ public interface ICharacter
 
     void setName(String name);
 
-    public void addToInventory(IItem itemToAdd);
+    void addToInventory(IItem itemToAdd);
 
-    public void removeFromInventory(IItem itemToRemove);
+    void removeFromInventory(IItem itemToRemove);
+
+    ArrayList<IItem> getInventory();
+
 }

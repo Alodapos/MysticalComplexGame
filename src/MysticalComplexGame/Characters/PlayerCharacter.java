@@ -48,4 +48,10 @@ public class PlayerCharacter implements ICharacter
         this.inventory.remove(itemToRemove);
         this.inventory.trimToSize();
     }
+
+    @Override
+    public ArrayList<IItem> getInventory()
+    {
+        return this.inventory;
+    }
 }

@@ -18,11 +18,7 @@ public class GoCommand implements ICommand
     {
         return this.name;
     }
-    @Override
-    public String getActionFailed()
-    {
-        return this.actionFailed;
-    }
+
     @Override
     public void executeCommand(ICharacter character, String argument, ArrayList<IScene> scenes)
     {
@@ -38,6 +34,7 @@ public class GoCommand implements ICommand
             if (nextSceneIndex == -1 ) System.out.println(character.getCurrentLocation().getNextScene(compassIndex)); //there's no scene, but error message
             else
             {
+                //CHANGE SCENE
                 character.setCurrentLocation(scenes.get(nextSceneIndex));
                 character.getCurrentLocation().printDescription();
             }

@@ -19,7 +19,7 @@ public class Main
         IItem shinyRock = new ShinyRock();
         //scene initializer , sceneID, northScene, south, east, west, up, down, negative or zero for no-go
         //scenes to use
-        IScene campsite = new CampsiteScene("Crossroads","nothing at all","hills of masochism","hills of sadism");
+        IScene campsite = new CampsiteScene("Crossroads","the path is blocked","hills of masochism","hills of sadism");
         IScene crossroads = new CrossroadsScene("nothing at all","Lake","Wild Road","a shitty forest",shinyRock);
         IScene lake = new LakeScene("Crossroads","nothing","nothing","nothing");
         IScene wildRoad = new WildRoadScene("nothing at all","nothing at all","Felrock Village","Crossroads");
@@ -43,7 +43,11 @@ public class Main
         handler.addScene(caveOfAnguish);
         //commands to use
         ICommand go = new GoCommand();
+        ICommand look = new LookCommand();
+        ICommand pick = new PickCommand();
         handler.addCommand(go);
+        handler.addCommand(look);
+        handler.addCommand(pick);
         //player character
         ICharacter player = new PlayerCharacter();
         player.setCurrentLocation(campsite);

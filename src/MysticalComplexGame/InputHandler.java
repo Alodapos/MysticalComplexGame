@@ -10,9 +10,7 @@ import MysticalComplexGame.Commands.ICommand;
 
 import java.util.ArrayList;
 import java.util.regex.*;
-/**
- * Created by sakis on 09-Mar-15.
- */
+
 public class InputHandler
 {
 
@@ -47,11 +45,6 @@ public class InputHandler
     public void addScene(IScene sceneToAdd)
     {
         this.scenesList.add(sceneToAdd);
-    }
-
-    public ArrayList<IScene> getScenesList()
-    {
-        return scenesList;
     }
 }
 
