@@ -4,9 +4,6 @@ import MysticalComplexGame.Scenes.IScene;
 import MysticalComplexGame.Items.IItem;
 import java.util.ArrayList;
 
-/**
- * Created by sakis on 10-Mar-15.
- */
 public class PlayerCharacter implements ICharacter
 {
 

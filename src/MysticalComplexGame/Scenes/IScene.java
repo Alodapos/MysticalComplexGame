@@ -1,8 +1,5 @@
 package MysticalComplexGame.Scenes;
 
-/**
- * Created by sakis on 08-Mar-15.
- */
 public interface IScene
 {
 

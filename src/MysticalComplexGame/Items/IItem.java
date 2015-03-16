@@ -1,45 +1,39 @@
 package MysticalComplexGame.Items;
 
-/**
- * Created by sakis on 12-Mar-15.
- */
+
+import MysticalComplexGame.Characters.ICharacter;
+import MysticalComplexGame.Scenes.IScene;
+
+import java.util.ArrayList;
+
 public interface IItem
 {
+    boolean isPickable();
+    void setPickable(boolean canPick);
 
+    boolean isUsable();
+    void setUsable(boolean canUse);
 
-    boolean isCanBePicked();
+    boolean isDropable();
+    void setDropable(boolean canDrop);
 
-    void setCanBePicked(boolean canPick);
+    boolean isPullable();
+    void setPullable(boolean canPull);
 
-    boolean isUseable();
+    boolean isPushable();
+    void setPushable(boolean canPush);
 
-    void setUseable(boolean canUse);
+    boolean isEnterable();
+    void setEnterable(boolean canEnter);
 
     String getDescription();
-
     void setDescription(String description);
 
     String getName();
-
     void setName(String name);
 
     void setInventoryDescription(String inventoryDescription);
-
     String getInventoryDescription();
 
-    //boolean isDropable();
-
-    //void setDropable(boolean canDrop);
-
-    //boolean isPullable();
-
-    //void setPullable(boolean canPull);
-
-    //boolean isPushable();
-
-    //void setPushable(boolean canPush);
-
-    //boolean isPassable();
-    //COULD BE APPLIED TO A BRIDGE OR SMALL AREA IF BRIDGE OR AREA IS CONSIDERED AN ITEM (CLASS)
-    //void setPassable(boolean canPass);
+    void useItem(ICharacter player, ArrayList<IScene> scenes);
 }

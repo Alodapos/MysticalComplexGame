@@ -16,22 +16,20 @@ public class Main
         //the handler for everything
         InputHandler handler = new InputHandler();
         //items to use
-        IItem testItem = new TestItem();
+        IItem shinyRock = new ShinyRock();
         //scene initializer , sceneID, northScene, south, east, west, up, down, negative or zero for no-go
         //scenes to use
         IScene campsite = new CampsiteScene("Crossroads","nothing at all","hills of masochism","hills of sadism");
-        IScene crossroads = new CrossroadsScene("nothing at all","lake of sperm","Wild Road","a shitty forest");
+        IScene crossroads = new CrossroadsScene("nothing at all","Lake","Wild Road","a shitty forest",shinyRock);
         IScene lake = new LakeScene("Crossroads","nothing","nothing","nothing");
         IScene wildRoad = new WildRoadScene("nothing at all","nothing at all","Felrock Village","Crossroads");
         IScene felrockVillage = new FelrockVillageScene("nothing","a fucking forest","Cave of Anguish","Wild Road");
         IScene felrockTempleExterior = new FelrockTempleExteriorScene("Felrock Village","nothing","residencies","trees");
-        IScene felrockTempleInterior = new FelrockTempleInteriorScene
-                ("U wot mate, you wanna travel in da temple?","U wot mate, you wanna travel in da temple?",
-                        "U wot mate, you wanna travel in da temple?","U wot mate, you wanna travel in da temple?");
+        IScene felrockTempleInterior = new FelrockTempleInteriorScene("U wot mate, you wanna travel in da temple?","U wot mate, you wanna travel in da temple?",
+                                                                      "U wot mate, you wanna travel in da temple?","U wot mate, you wanna travel in da temple?");
         IScene felrockTownHallExterior = new FelrockTownHallExteriorScene("residencies","residencies","nothing","fountain");
-        IScene felrockTownHallInterior = new FelrockTownHallInteriorScene
-                ("U wot mate, you wanna travel in da temple?","U wot mate, you wanna travel in da temple?",
-                        "U wot mate, you wanna travel in da temple?","U wot mate, you wanna travel in da temple?");
+        IScene felrockTownHallInterior = new FelrockTownHallInteriorScene("U wot mate, you wanna travel in da temple?","U wot mate, you wanna travel in da temple?",
+                                                                          "U wot mate, you wanna travel in da temple?","U wot mate, you wanna travel in da temple?");
         IScene caveOfAnguish = new CaveOfAnguishScene("river of vaginal fluids","absolutely nothing","nothing at all", "Felrock Village");
         handler.addScene(campsite);
         handler.addScene(crossroads);
