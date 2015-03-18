@@ -1,13 +1,8 @@
-//This is Sakis' virtual girlfriend! Cause he can't have one IRL... So stay away from "her"!
-
-
-
 package MysticalComplexGame;
 
 import MysticalComplexGame.Characters.ICharacter;
 import MysticalComplexGame.Scenes.IScene;
 import MysticalComplexGame.Commands.ICommand;
-
 import java.util.ArrayList;
 import java.util.regex.*;
 

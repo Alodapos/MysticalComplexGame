@@ -1,11 +1,9 @@
 package MysticalComplexGame;
 
-
 import MysticalComplexGame.Characters.*;
 import MysticalComplexGame.Items.*;
 import MysticalComplexGame.Scenes.*;
 import MysticalComplexGame.Commands.*;
-import sun.nio.cs.ext.ISCII91;
 
 import java.util.Scanner;
 
@@ -15,7 +13,6 @@ public class Main
     public static void main(String[] args)
     {
 
-        //the handler for everything
         InputHandler handler = new InputHandler();
         //items to use
         IItem shinyRock = new ShinyRock();
@@ -36,8 +33,8 @@ public class Main
         IScene caveOfAnguishInterior = new CaveOfAnguishInteriorScene("","","","");
         IScene clearing = new ClearingScene("","","","");
         IScene iceblueRiver = new IceblueRiverScene("","","","");
-        //IScene gardenofCorruption = new GardenOfCorruptionScene("","","","");
-        //IScene gardenofRadiance = new GardenofRadianceScene("","","","");
+        IScene gardenOfCorruption = new GardenOfCorruptionScene("","","","");
+        IScene gardenOfRadiance = new GardenOfRadianceScene("","","","");
         handler.addScene(campsite);
         handler.addScene(crossroads);
         handler.addScene(lake);
@@ -51,8 +48,8 @@ public class Main
         handler.addScene(caveOfAnguishInterior);
         handler.addScene(clearing);
         handler.addScene(iceblueRiver);
-        //handler.addScene(GardenofCorruption);
-        //handler.addScene(GardenofRadiance);
+        handler.addScene(gardenOfCorruption);
+        handler.addScene(gardenOfRadiance);
 
         //commands to use
         ICommand go = new GoCommand();
