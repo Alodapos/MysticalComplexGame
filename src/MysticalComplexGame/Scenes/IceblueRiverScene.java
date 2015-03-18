@@ -4,27 +4,26 @@ import MysticalComplexGame.Items.IItem;
 
 import java.util.ArrayList;
 
-public class CaveOfAnguishScene implements IScene
+public class IceblueRiverScene implements IScene
 {
 
-    //north,south,east,west
+    //north,south,east,west,up,down
     private String[] nextScene= new String[4];
     private String description;
     private String sceneName;
     private ArrayList<IItem> itemsList = new ArrayList<IItem>();
 
 
-    public CaveOfAnguishScene(String north, String south, String east, String west,IItem... items)
+    public IceblueRiverScene(String north, String south, String east, String west, IItem... items)
     {
         this.nextScene[0] = north;
         this.nextScene[1] = south;
         this.nextScene[2] = east;
         this.nextScene[3] = west;
-        this.sceneName = "Cave of Anguish";
-        this.description = "cave descr";
-
+        //Scene name in caps please
+        this.sceneName = "Iceblue River";
+        this.description = "descr";
         for (IItem item:items) itemsList.add(item);
-
     }
 
 
@@ -43,7 +42,7 @@ public class CaveOfAnguishScene implements IScene
     @Override
     public String getSceneName()
     {
-        return this.sceneName;
+        return sceneName;
     }
 
     @Override
@@ -57,7 +56,6 @@ public class CaveOfAnguishScene implements IScene
         }
 
     }
-
 
     @Override
     public void addItem(IItem item)
@@ -75,5 +73,6 @@ public class CaveOfAnguishScene implements IScene
     {
         return this.itemsList;
     }
+
 }
 

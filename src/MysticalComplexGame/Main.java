@@ -5,6 +5,8 @@ import MysticalComplexGame.Characters.*;
 import MysticalComplexGame.Items.*;
 import MysticalComplexGame.Scenes.*;
 import MysticalComplexGame.Commands.*;
+import sun.nio.cs.ext.ISCII91;
+
 import java.util.Scanner;
 
 public class Main
@@ -30,7 +32,12 @@ public class Main
         IScene felrockTownHallExterior = new FelrockTownHallExteriorScene("residencies","residencies","nothing","fountain");
         IScene felrockTownHallInterior = new FelrockTownHallInteriorScene("U wot mate, you wanna travel in da temple?","U wot mate, you wanna travel in da temple?",
                                                                           "U wot mate, you wanna travel in da temple?","U wot mate, you wanna travel in da temple?");
-        IScene caveOfAnguish = new CaveOfAnguishScene("river of vaginal fluids","absolutely nothing","nothing at all", "Felrock Village");
+        IScene caveOfAnguishExterior = new CaveOfAnguishExteriorScene("nothing","forest","nothing at all", "Felrock Village");
+        IScene caveOfAnguishInterior = new CaveOfAnguishInteriorScene("","","","");
+        IScene clearing = new ClearingScene("","","","");
+        IScene iceblueRiver = new IceblueRiverScene("","","","");
+        //IScene gardenofCorruption = new GardenOfCorruptionScene("","","","");
+        //IScene gardenofRadiance = new GardenofRadianceScene("","","","");
         handler.addScene(campsite);
         handler.addScene(crossroads);
         handler.addScene(lake);
@@ -40,7 +47,13 @@ public class Main
         handler.addScene(felrockTempleInterior);
         handler.addScene(felrockTownHallExterior);
         handler.addScene(felrockTownHallInterior);
-        handler.addScene(caveOfAnguish);
+        handler.addScene(caveOfAnguishExterior);
+        handler.addScene(caveOfAnguishInterior);
+        handler.addScene(clearing);
+        handler.addScene(iceblueRiver);
+        //handler.addScene(GardenofCorruption);
+        //handler.addScene(GardenofRadiance);
+
         //commands to use
         ICommand go = new GoCommand();
         ICommand look = new LookCommand();
