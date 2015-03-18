@@ -52,7 +52,7 @@ public class FelrockTempleExteriorScene implements IScene
     @Override
     public void printDescription()
     {
-        System.out.println("\t\t\t\t\""+this.sceneName+"\""+"\n");
+        System.out.println("\t\t\t\t\t\""+this.sceneName+"\""+"\n");
         System.out.println(this.description);
         for (IItem item : itemsList)
         {

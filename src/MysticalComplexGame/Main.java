@@ -72,7 +72,7 @@ public class Main
 
         //-----INTRO-----
         System.out.println("ACT I - The Sage\n");
-        System.out.println("As the sun set, the nightfall finds you getting ready for the upcoming journey to the far land of Serenoth.");
+        System.out.println("As the sun sets, the nightfall finds you getting ready for the upcoming journey to the far land of Serenoth.");
         System.out.println("You must reach this region in order to find a great sage, who is the personal advisor of king Ecthelion, son of Exelion.");
         System.out.println("This great sage often goes by many names, but one is more common to the people of Dal'aron, Zenthar");
         System.out.println("He is against all the strife of the two kingdoms, for he knows what really happened two hundred years ago.");

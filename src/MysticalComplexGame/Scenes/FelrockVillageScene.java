@@ -28,11 +28,11 @@ public class FelrockVillageScene implements IScene
                 "You can clearly see some residencies and realise that this is a small village with a very few inhabitants.\n" +
                 "There is a very big, simple, stone fountain in the middle of the village,\n" +
                 "spouting crystal clear water from its holes.\n" +
-                "On its east you can distinguish a great and majestic building which,\n" +
-                "judging from the decoration, size and location, must be the village's worship temple.\n" +
-                "On the west, there lies a grand structure, of white and pale shades of brown which,\n" +
+                "On its south, you can distinguish a great and majestic building which,\n" +
+                "judging from the decoration, size and location, must be the village's temple.\n" +
+                "On its east, there lies a grand structure, of white and pale shades of brown which,\n" +
                 "considering the architecture that's been used and its position, must be the town hall.\n" +
-                "To the north, your sight follows a path, quite narrow, leading somewhere far ahead, but you can't see exactly where.";
+                "Farther to the east, your sight follows a path, quite narrow, leading somewhere far ahead, but you can't see exactly where.";
         for (IItem item:items) itemsList.add(item);
 
     }
@@ -59,7 +59,7 @@ public class FelrockVillageScene implements IScene
     @Override
     public void printDescription()
     {
-        System.out.println("\t\t\t\t\""+this.sceneName+"\""+"\n");
+        System.out.println("\t\t\t\t\t\""+this.sceneName+"\""+"\n");
         System.out.println(this.description);
         for (IItem item : itemsList)
         {
