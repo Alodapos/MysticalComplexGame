@@ -45,9 +45,11 @@ public class Main
         ICommand go = new GoCommand();
         ICommand look = new LookCommand();
         ICommand pick = new PickCommand();
+        ICommand cry = new CryCommand();
         handler.addCommand(go);
         handler.addCommand(look);
         handler.addCommand(pick);
+        handler.addCommand(cry);
         //player character
         ICharacter player = new PlayerCharacter();
         player.setCurrentLocation(campsite);

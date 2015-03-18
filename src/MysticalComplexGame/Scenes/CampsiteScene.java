@@ -28,7 +28,6 @@ public class CampsiteScene implements IScene
                 "unless something unexpected happens.\n" +
                 "Are you ready to leave the camp?";
         for (IItem item:items) itemsList.add(item);
-
     }
 
 

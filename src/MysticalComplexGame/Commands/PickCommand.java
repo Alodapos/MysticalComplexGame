@@ -38,7 +38,5 @@ public class PickCommand implements ICommand
             character.getCurrentLocation().removeItem(itemIndex);
         }
         else System.out.println(actionFailed);
-
-
     }
 }
