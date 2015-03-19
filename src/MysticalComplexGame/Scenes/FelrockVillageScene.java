@@ -22,7 +22,7 @@ public class FelrockVillageScene implements IScene
         this.nextScene[2] = east;
         this.nextScene[3] = west;
         this.sceneName = "Felrock Village";
-        this.description = "You slowly and reluctantly enter the village,\n" +
+        this.description = "you slowly and reluctantly enter the village,\n" +
                 "quickly throwing your eyes at everything you meet\n" +
                 "in order to examine the place and be prepared for any unpleasant surprises.\n" +
                 "You can clearly see some residencies and realise that this is a small village with a very few inhabitants.\n" +

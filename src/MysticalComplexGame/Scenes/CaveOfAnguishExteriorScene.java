@@ -21,7 +21,7 @@ public class CaveOfAnguishExteriorScene implements IScene
         this.nextScene[1] = south;
         this.nextScene[2] = east;
         this.nextScene[3] = west;
-        this.sceneName = "Cave of Anguish: Exterior";
+        this.sceneName = "Cave Of Anguish: Exterior";
         this.description = "From the roads leading away from the village you take the northern.\n" +
                 "It's a relatively short road, not very wide, but neither too slim.\n" +
                 "Unlike the village's scenery, here lies a barren landscape, with no trees, no flowers, no water either.\n" +
