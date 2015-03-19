@@ -8,7 +8,7 @@ import java.util.Collections;
 public class FelrockVillageScene implements IScene
 {
 
-    //north,south,east,west,up,down
+    //north,south,east,west
     private String[] nextScene= new String[4];
     private final String description;
     private final String sceneName;
@@ -53,7 +53,7 @@ public class FelrockVillageScene implements IScene
     @Override
     public String getSceneName()
     {
-        return sceneName;
+        return this.sceneName;
     }
 
     @Override

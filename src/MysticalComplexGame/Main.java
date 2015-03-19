@@ -22,7 +22,7 @@ class Main
         IScene crossroads = new CrossroadsScene("nothing at all","Lake","Wild Road","a shitty forest",shinyRock);
         IScene lake = new LakeScene("Crossroads","nothing","nothing","nothing");
         IScene wildRoad = new WildRoadScene("nothing at all","nothing at all","Felrock Village","Crossroads");
-        IScene felrockVillage = new FelrockVillageScene("nothing","a fucking forest","Cave of Anguish","Wild Road");
+        IScene felrockVillage = new FelrockVillageScene("nothing","a fucking forest","Cave Of Anguish: Exterior","Wild Road");
         IScene felrockTempleExterior = new FelrockTempleExteriorScene("Felrock Village","nothing","residencies","trees");
         IScene felrockTempleInterior = new FelrockTempleInteriorScene("U wot mate, you wanna travel in da temple?","U wot mate, you wanna travel in da temple?",
                                                                       "U wot mate, you wanna travel in da temple?","U wot mate, you wanna travel in da temple?");

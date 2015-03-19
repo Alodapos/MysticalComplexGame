@@ -39,7 +39,6 @@ public class CaveOfAnguishExteriorScene implements IScene
                 "Now you can clearly feel dark energies emanating from the cave's insides.\n" +
                 "Vision is blocked beyond the threshold of the entrance and since the mountain is massive you can't see past it,\n" +
                 "for it spreads far to the east and a dense forest extends to the west.";
-
         Collections.addAll(itemsList, items);
 
     }
@@ -60,7 +59,7 @@ public class CaveOfAnguishExteriorScene implements IScene
     @Override
     public String getSceneName()
     {
-        return sceneName;
+        return this.sceneName;
     }
 
     @Override
