@@ -5,7 +5,7 @@ import MysticalComplexGame.Items.IItem;
 import java.util.ArrayList;
 import java.util.Collections;
 
-public class WildRoadScene implements IScene
+public class CrystalLakeScene implements IScene
 {
 
     //north,south,east,west,up,down
@@ -15,19 +15,17 @@ public class WildRoadScene implements IScene
     private final ArrayList<IItem> itemsList = new ArrayList<IItem>();
 
 
-    public WildRoadScene(String north, String south, String east, String west, IItem... items)
+    public CrystalLakeScene(String north, String south, String east, String west, IItem... items)
     {
         this.nextScene[0] = north;
         this.nextScene[1] = south;
         this.nextScene[2] = east;
         this.nextScene[3] = west;
-        this.sceneName = "Wild Road";
-        this.description = "As you walk the east road, you begin to perceive a blurry landscape which,\n" +
-                "as it seems, consists by some kind of structures surrounded by tall trees.\n" +
-                "The closer you get, the clearer it becomes. It seems you have arrived at a small, remote, yet peaceful village.\n" +
-                "At the end of the path you see a sign reading \"Felrock Village\".\n" +
-                "Do you want to proceed entering the village or you want to try another path?";
-
+        this.sceneName = "Lake";
+        this.description = "You head south following a downhill which leads you to a clearing.\n" +
+                "A fairly big lake is located in the center of an, 10-feet diameter, overgrown field.\n" +
+                "The water seems clean enough to be considered drinkable.\n" +
+                "Coincidentally, you start feeling thirsty. Seeing the abundance of water makes you think you could fill your flask from the lake.";
         Collections.addAll(itemsList, items);
 
     }
@@ -62,7 +60,6 @@ public class WildRoadScene implements IScene
         }
 
     }
-
 
     @Override
     public void addItem(IItem item)

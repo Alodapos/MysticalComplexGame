@@ -16,32 +16,52 @@ class Main
         InputHandler handler = new InputHandler();
         //items to use
         IItem shinyRock = new ShinyRock();
-        //scene initializer , sceneID, northScene, south, east, west, up, down, negative or zero for no-go
+        //scene initializer , sceneID, northScene, south, east, west, negative or zero for no-go
         //scenes to use
-        IScene campsite = new CampsiteScene("Crossroads","the path is blocked","hills of masochism","hills of sadism");
-        IScene crossroads = new CrossroadsScene("nothing at all","Lake","Wild Road","a shitty forest",shinyRock);
-        IScene lake = new LakeScene("Crossroads","nothing","nothing","nothing");
-        IScene wildRoad = new WildRoadScene("nothing at all","nothing at all","Felrock Village","Crossroads");
-        IScene felrockVillage = new FelrockVillageScene("nothing","a fucking forest","Cave Of Anguish: Exterior","Wild Road");
-        IScene felrockTempleExterior = new FelrockTempleExteriorScene("Felrock Village","nothing","residencies","trees");
+        IScene campsite = new CampsiteScene("Crossroads","You can't return home just yet.The Sage awaits you.",
+                                            "The Barren Hills lie on your east blocking your view.",
+                                            "The Barren Hills also lie on your west prohibiting your vision to what's beyond.");
+        IScene crossroads = new CrossroadsScene("Not yet made.","Crystal Lake","Wild Road",
+                                                "There is a forest of pine trees to your west.",shinyRock);
+        IScene lake = new CrystalLakeScene("Crossroads","You can see the campsite from here but you can't reach it, it's on a higher ground.",
+                                           "A dense forest, with short but many trees expands to your east.",
+                                           "To your west you can barely see the road connecting the Campsite with the Crossroads point.");
+        IScene wildRoad = new WildernessRoadScene("Not yet made","You now have a panoramic view of the dense forest.","Felrock Village","Crossroads");
+        IScene felrockVillage = new FelrockVillageScene("More trees forming another huge forest.","The dense forest of short trees continues to more south-eastern parts of the area.",
+                                                        "Cave Of Anguish: Exterior","Wild Road");
+        IScene felrockTempleExterior = new FelrockTempleExteriorScene("The village's stone fountain is located right in the middle of the plateau.",
+                                                                      "The dense forest completely surrounds the village, providing a good defence at the same time.",
+                                                                      "To your east are neatly built some residencies.",
+                                                                      "To your west there are some trees and, further, the road which you came from.");
         IScene felrockTempleInterior = new FelrockTempleInteriorScene("U wot mate, you wanna travel in da temple?","U wot mate, you wanna travel in da temple?",
                                                                       "U wot mate, you wanna travel in da temple?","U wot mate, you wanna travel in da temple?");
-        IScene felrockTownHallExterior = new FelrockTownHallExteriorScene("residencies","residencies","nothing","fountain");
+        IScene felrockTownHallExterior = new FelrockTownHallExteriorScene("Some more residencies are neatly built here.","Nothing more than a few houses there.",
+                                                                          "There's one weird road leading away from the village to your east.",
+                                                                          "The village's stone fountain is located right in the middle of the plateau.");
         IScene felrockTownHallInteriorGroundFloor = new FelrockTownHallInteriorGroundFloorScene("U wot mate, you wanna travel in da town hall?","U wot mate, you wanna travel in da town hall?",
                                                                           "U wot mate, you wanna travel in da town hall?","U wot mate, you wanna travel in da town hall?");
         IScene felrockTownHallInteriorFirstFloor = new FelrockTownHallInteriorFirstFloorScene("U wot mate, you wanna travel in da town hall","U wot mate, you wanna travel in da town hall",
                                                                                               "U wot mate, you wanna travel in da town hall","U wot mate, you wanna travel in da town hall");
         IScene felrockTownHallInteriorSecondFloor = new FelrockTownHallInteriorSecondFloorScene("U wot mate, you wanna travel in da town hall","U wot mate, you wanna travel in da town hall",
                                                                                                 "U wot mate, you wanna travel in da town hall","U wot mate, you wanna travel in da town hall");
-        IScene caveOfAnguishExterior = new CaveOfAnguishExteriorScene("nothing","forest","nothing at all", "Felrock Village");
+        IScene caveOfAnguishExterior = new CaveOfAnguishExteriorScene("The cave's dark hollow stands before you. Will you dare pass through?",
+                                                                      "A massive forest is all you can see to your south.",
+                                                                      "There is nothing but rocks and hills there.","Felrock Village");
         IScene caveOfAnguishInterior = new CaveOfAnguishInteriorScene("U wot mate, you wanna travel in da cave?","U wot mate, you wanna travel in da cave?",
                                                                       "U wot mate, you wanna travel in da cave?","U wot mate, you wanna travel in da cave?");
-        IScene clearing = new ClearingScene("Iceblue River","Cave of Anguish","cliff","road between river and forest");
-        IScene iceblueRiver = new IceblueRiverScene("bridge to garden","Clearing","Iceblue River","not yet made");
-        IScene gardenOfCorruption = new GardenOfCorruptionScene("the fucking void","Iceblue River","the fucking end",
-                                                                "not fucking made yet! (just kidding it's the motherfucking bridge!)");
-        IScene gardenOfRadiance = new GardenOfRadianceScene("same as above","same","same",
-                                                            "same, the motherfucking bridge doesn't walk");
+        IScene clearing = new ClearingScene("Iceblue River","Cave of Anguish: Interior","A steep cliff to your east creates a waterfall as the river falls below.",
+                                            "To your west goes a trail of dirt, splitting in half, one part going north and the other south.");
+        IScene iceblueRiver = new IceblueRiverScene("Forward, there stands a wooden bridge connecting the river's bank with the Garden of Corruption.",
+                                                    "You can still see the Clearing you left behind.",
+                                                    "The Iceblue River flows fiercely and fast.","not yet made");
+        IScene gardenOfCorruption = new GardenOfCorruptionScene("There's nothing you can see beyond this point.",
+                                                                "The Iceblue River flows fiercely, you can tell from the loud sound.",
+                                                                "The Tree of Eternity is truly magnificent!",
+                                                                "On your left, still stands the wooden bridge.");
+        /*IScene gardenOfRadiance = new GardenOfRadianceScene("There's nothing you can see beyond this point.",
+                                                            "The Iceblue River flows fiercely, you can tell from the loud sound.",
+                                                            "The Tree of Eternity is truly magnificent!",
+                                                            "On your left, still stands the wooden bridge."); */
         handler.addScene(campsite);
         handler.addScene(crossroads);
         handler.addScene(lake);
@@ -58,7 +78,7 @@ class Main
         handler.addScene(clearing);
         handler.addScene(iceblueRiver);
         handler.addScene(gardenOfCorruption);
-        handler.addScene(gardenOfRadiance);
+        //handler.addScene(gardenOfRadiance);
 
         //commands to use
         ICommand go = new GoCommand();
@@ -95,7 +115,7 @@ class Main
             userInput = new Scanner(System.in);
             userInputString = userInput.nextLine();
             handler.handle(userInputString, player);
-        } while (!player.getCurrentLocation().getSceneName().equals("Garden of Corruption"));
-        System.out.println("\n\n\nYou have completed ACT I, ACT II is under development, stay tuned for more...");
+        } while (!player.getCurrentLocation().getSceneName().equals("The Sage"));
+        System.out.println("\n\n\nYou have completed ACT I, ACT II is under development, stay tuned for more...\n");
     }
 }

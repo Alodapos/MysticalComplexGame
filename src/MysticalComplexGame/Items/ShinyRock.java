@@ -22,7 +22,7 @@ public class ShinyRock implements IItem
     {
         name = "rock";
         description= "A gold , shiny rock lies on the floor...its...dazzling...";
-        inventoryDescription = "A shiny-dazzling rock.";
+        inventoryDescription = "A dazzling-shiny rock.";
         usable = false;
         pickable = true;
         dropable = true;

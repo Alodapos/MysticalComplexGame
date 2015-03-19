@@ -24,9 +24,9 @@ public class PickCommand implements ICommand
         for (IItem item: itemsList) itemNames.add(item.getName());
         int itemIndex = itemNames.indexOf(argument);
 
-        String missingArgument = "You have to specify what do you want to pick";
+        String missingArgument = "You have to specify what you want to pick.";
         String argumentNotFound = "I can't see that thing.";
-        String actionFailed = "This is not something that I can pick!";
+        String actionFailed = "This is not something I can pick!";
         if (argument.equals("")) System.out.println(missingArgument);
         else if (itemIndex == -1) System.out.println(argumentNotFound);
         else if (itemsList.get(itemIndex).isPickable())

@@ -1,4 +1,4 @@
-package MysticalComplexGame.Scenes;
+/*package MysticalComplexGame.Scenes;
 
 import MysticalComplexGame.Items.IItem;
 
@@ -74,5 +74,5 @@ public class GardenOfRadianceScene implements IScene
         return this.itemsList;
     }
 
-}
+} */
 
