@@ -23,10 +23,10 @@ class Main
                                             "The Barren Hills also lie on your west prohibiting your vision to what's beyond.");
         IScene crossroads = new CrossroadsScene("Not yet made.","Crystal Lake","Wild Road",
                                                 "There is a forest of pine trees to your west.",shinyRock);
-        IScene lake = new CrystalLakeScene("Crossroads","You can see the campsite from here but you can't reach it, it's on a higher ground.",
+        IScene crystalLake = new CrystalLakeScene("Crossroads","You can see the campsite from here but you can't reach it, it's on a higher ground.",
                                            "A dense forest, with short but many trees expands to your east.",
                                            "To your west you can barely see the road connecting the Campsite with the Crossroads point.");
-        IScene wildRoad = new WildernessRoadScene("Not yet made","You now have a panoramic view of the dense forest.","Felrock Village","Crossroads");
+        IScene wildernessRoad = new WildernessRoadScene("Not yet made","You now have a panoramic view of the dense forest.","Felrock Village","Crossroads");
         IScene felrockVillage = new FelrockVillageScene("More trees forming another huge forest.","The dense forest of short trees continues to more south-eastern parts of the area.",
                                                         "Cave Of Anguish: Exterior","Wild Road");
         IScene felrockTempleExterior = new FelrockTempleExteriorScene("The village's stone fountain is located right in the middle of the plateau.",
@@ -64,8 +64,8 @@ class Main
                                                             "On your left, still stands the wooden bridge."); */
         handler.addScene(campsite);
         handler.addScene(crossroads);
-        handler.addScene(lake);
-        handler.addScene(wildRoad);
+        handler.addScene(crystalLake);
+        handler.addScene(wildernessRoad);
         handler.addScene(felrockVillage);
         handler.addScene(felrockTempleExterior);
         handler.addScene(felrockTempleInterior);
