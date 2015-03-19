@@ -3,15 +3,16 @@ package MysticalComplexGame.Scenes;
 import MysticalComplexGame.Items.IItem;
 
 import java.util.ArrayList;
+import java.util.Collections;
 
 public class LakeScene implements IScene
 {
 
     //north,south,east,west,up,down
     private String[] nextScene= new String[4];
-    private String description;
-    private String sceneName;
-    private ArrayList<IItem> itemsList = new ArrayList<IItem>();
+    private final String description;
+    private final String sceneName;
+    private final ArrayList<IItem> itemsList = new ArrayList<IItem>();
 
 
     public LakeScene(String north, String south, String east, String west, IItem... items)
@@ -25,7 +26,7 @@ public class LakeScene implements IScene
                 "A fairly big lake is located in the center of an, 10-feet diameter, overgrown field.\n" +
                 "The water seems clean enough to be considered drinkable.\n" +
                 "Coincidentally, you start feeling thirsty. Seeing the abundance of water makes you think you could fill your flask from the lake.";
-        for (IItem item:items) itemsList.add(item);
+        Collections.addAll(itemsList, items);
 
     }
 

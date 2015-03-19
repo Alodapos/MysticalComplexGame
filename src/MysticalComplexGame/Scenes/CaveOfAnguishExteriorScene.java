@@ -3,15 +3,16 @@ package MysticalComplexGame.Scenes;
 import MysticalComplexGame.Items.IItem;
 
 import java.util.ArrayList;
+import java.util.Collections;
 
 public class CaveOfAnguishExteriorScene implements IScene
 {
 
     //north,south,east,west
     private String[] nextScene= new String[4];
-    private String description;
-    private String sceneName;
-    private ArrayList<IItem> itemsList = new ArrayList<IItem>();
+    private final String description;
+    private final String sceneName;
+    private final ArrayList<IItem> itemsList = new ArrayList<IItem>();
 
 
     public CaveOfAnguishExteriorScene(String north, String south, String east, String west, IItem... items)
@@ -26,7 +27,7 @@ public class CaveOfAnguishExteriorScene implements IScene
                 "Unlike the village's scenery, here lies a barren landscape, with no trees, no flowers, no water either.\n" +
                 "As the road seems to be coming to its end, you begin to sense an unsettling aura filling the space around you.\n" +
                 "But what you witness further ahead is far worse.\n" +
-                "The whole place is surrounded by a thick fog and an incresed humidity fills the atmosphere.\n" +
+                "The whole place is surrounded by a thick fog and an increased humidity fills the atmosphere.\n" +
                 "A dark, blackish, rocky and extremely huge entrance stands before you.\n" +
                 "It's been dug out by men, probably many, many years ago and it bears a sign, which is too clean to be older than a month, that tells:\n" +
                 "\"WARNING!\n" +
@@ -39,7 +40,7 @@ public class CaveOfAnguishExteriorScene implements IScene
                 "Vision is blocked beyond the threshold of the entrance and since the mountain is massive you can't see past it,\n" +
                 "for it spreads far to the east and a dense forest extends to the west.";
 
-        for (IItem item:items) itemsList.add(item);
+        Collections.addAll(itemsList, items);
 
     }
 
@@ -59,7 +60,7 @@ public class CaveOfAnguishExteriorScene implements IScene
     @Override
     public String getSceneName()
     {
-        return this.sceneName;
+        return sceneName;
     }
 
     @Override

@@ -6,15 +6,13 @@ import MysticalComplexGame.Commands.ICommand;
 import java.util.ArrayList;
 import java.util.regex.*;
 
-public class InputHandler
+class InputHandler
 {
 
     private final Pattern pattern = Pattern.compile("(\\w+)(.*)"); //a word, and something else, or nothing else
-    private final String commandNotFound = "This is not a command i recognize!";
-    private Matcher matcher;
-    private ArrayList<ICommand> commandList = new ArrayList<ICommand>(); //commands
-    private ArrayList<IScene> scenesList = new ArrayList<IScene>();     //scenes
-    private ArrayList<String> commandNameList = new ArrayList<String>(); //scene names
+    private final ArrayList<ICommand> commandList = new ArrayList<ICommand>(); //commands
+    private final ArrayList<IScene> scenesList = new ArrayList<IScene>();     //scenes
+    private final ArrayList<String> commandNameList = new ArrayList<String>(); //scene names
 
 
     public void handle(String userInput,ICharacter character)
@@ -22,10 +20,11 @@ public class InputHandler
         userInput = userInput.trim();
         userInput = userInput.toLowerCase();
         int commandIndex;
-        this.matcher = pattern.matcher(userInput);
+        Matcher matcher = pattern.matcher(userInput);
         if (matcher.find()) //if we find a word
         {
             commandIndex = commandNameList.indexOf(matcher.group(1));
+            String commandNotFound = "This is not a command i recognize!";
             if (commandIndex == -1)  System.out.println(commandNotFound);
             else commandList.get(commandIndex).executeCommand(character, matcher.group(2), scenesList);
         }

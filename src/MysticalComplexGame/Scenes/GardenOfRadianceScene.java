@@ -3,15 +3,16 @@ package MysticalComplexGame.Scenes;
 import MysticalComplexGame.Items.IItem;
 
 import java.util.ArrayList;
+import java.util.Collections;
 
 public class GardenOfRadianceScene implements IScene
 {
 
     //north,south,east,west,up,down
     private String[] nextScene= new String[4];
-    private String description;
-    private String sceneName;
-    private ArrayList<IItem> itemsList = new ArrayList<IItem>();
+    private final String description;
+    private final String sceneName;
+    private final ArrayList<IItem> itemsList = new ArrayList<IItem>();
 
 
     public GardenOfRadianceScene(String north, String south, String east, String west, IItem... items)
@@ -22,7 +23,7 @@ public class GardenOfRadianceScene implements IScene
         this.nextScene[3] = west;
         this.sceneName = "Garden of Radiance";
         this.description = "descr";
-        for (IItem item:items) itemsList.add(item);
+        Collections.addAll(itemsList, items);
     }
 
 

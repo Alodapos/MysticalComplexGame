@@ -3,15 +3,16 @@ package MysticalComplexGame.Scenes;
 import MysticalComplexGame.Items.IItem;
 
 import java.util.ArrayList;
+import java.util.Collections;
 
 public class FelrockTownHallExteriorScene implements IScene
 {
 
     //north,south,east,west,up,down
     private String[] nextScene= new String[4];
-    private String description;
-    private String sceneName;
-    private ArrayList<IItem> itemsList = new ArrayList<IItem>();
+    private final String description;
+    private final String sceneName;
+    private final ArrayList<IItem> itemsList = new ArrayList<IItem>();
 
 
     public FelrockTownHallExteriorScene(String north, String south, String east, String west, IItem... items)
@@ -27,7 +28,7 @@ public class FelrockTownHallExteriorScene implements IScene
                 "It also has weird decorations all over its stony framework.\n" +
                 "No one is entering or exiting the building since it's a small and quite village with a very low population.\n" +
                 "But, surely, there will be someone inside.";
-        for (IItem item:items) itemsList.add(item);
+        Collections.addAll(itemsList, items);
 
     }
 

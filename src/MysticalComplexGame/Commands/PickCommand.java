@@ -9,15 +9,10 @@ import java.util.ArrayList;
 public class PickCommand implements ICommand
 {
 
-    private final String name= "pick";
-    private final String missingArgument = "You have to specify what do you want to pick";
-    private final String argumentNotFound = "I can't see that thing.";
-    private final String actionFailed = "This is not something that i can pick!";
-
     @Override
     public String getName()
     {
-        return this.name;
+        return "pick";
     }
 
     @Override
@@ -29,6 +24,9 @@ public class PickCommand implements ICommand
         for (IItem item: itemsList) itemNames.add(item.getName());
         int itemIndex = itemNames.indexOf(argument);
 
+        String missingArgument = "You have to specify what do you want to pick";
+        String argumentNotFound = "I can't see that thing.";
+        String actionFailed = "This is not something that I can pick!";
         if (argument.equals("")) System.out.println(missingArgument);
         else if (itemIndex == -1) System.out.println(argumentNotFound);
         else if (itemsList.get(itemIndex).isPickable())

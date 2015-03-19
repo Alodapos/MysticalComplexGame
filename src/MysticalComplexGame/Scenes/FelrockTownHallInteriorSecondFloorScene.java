@@ -3,15 +3,16 @@ package MysticalComplexGame.Scenes;
 import MysticalComplexGame.Items.IItem;
 
 import java.util.ArrayList;
+import java.util.Collections;
 
 public class FelrockTownHallInteriorSecondFloorScene implements IScene
 {
 
     //north,south,east,west,up,down
     private String[] nextScene= new String[4];
-    private String description;
-    private String sceneName;
-    private ArrayList<IItem> itemsList = new ArrayList<IItem>();
+    private final String description;
+    private final String sceneName;
+    private final ArrayList<IItem> itemsList = new ArrayList<IItem>();
 
 
     public FelrockTownHallInteriorSecondFloorScene(String north, String south, String east, String west, IItem... items)
@@ -23,7 +24,7 @@ public class FelrockTownHallInteriorSecondFloorScene implements IScene
         this.sceneName = "Felrock Village - Town Hall: Interior - Second Floor";
         this.description = "You push the door to open but it won't budge. \n" +
                 "It seems to be locked for the moment, though the right key would unlock it right away.";
-        for (IItem item:items) itemsList.add(item);
+        Collections.addAll(itemsList, items);
 
     }
 

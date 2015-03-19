@@ -8,15 +8,12 @@ import java.util.Arrays;
 public class GoCommand implements ICommand
 {
 
-    private final String name= "go";
-    private final String missingArgument = "You'll have to say which compass direction to go in.";
-    private final String actionFailed = "You can't see any such thing.";
     private final ArrayList<String> directions = new ArrayList<String>(Arrays.asList("north","south","east","west"));
 
     @Override
     public String getName()
     {
-        return this.name;
+        return "go";
     }
 
     @Override
@@ -24,6 +21,8 @@ public class GoCommand implements ICommand
     {
         argument = argument.trim();
         int compassIndex = directions.indexOf(argument);
+        String missingArgument = "You'll have to say which compass direction to go in.";
+        String actionFailed = "You can't see any such thing.";
         if (argument.matches("")) System.out.println(missingArgument); // if not argument at all
         else if (compassIndex == -1)  System.out.println(actionFailed); //if invalid argument (not compass direction)
         else //we got the argument to be north/south/east/west, now check the text

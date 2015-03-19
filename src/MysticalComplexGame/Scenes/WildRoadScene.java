@@ -3,15 +3,16 @@ package MysticalComplexGame.Scenes;
 import MysticalComplexGame.Items.IItem;
 
 import java.util.ArrayList;
+import java.util.Collections;
 
 public class WildRoadScene implements IScene
 {
 
     //north,south,east,west,up,down
     private String[] nextScene= new String[4];
-    private String description;
-    private String sceneName;
-    private ArrayList<IItem> itemsList = new ArrayList<IItem>();
+    private final String description;
+    private final String sceneName;
+    private final ArrayList<IItem> itemsList = new ArrayList<IItem>();
 
 
     public WildRoadScene(String north, String south, String east, String west, IItem... items)
@@ -27,7 +28,7 @@ public class WildRoadScene implements IScene
                 "At the end of the path you see a sign reading \"Felrock Village\".\n" +
                 "Do you want to proceed entering the village or you want to try another path?";
 
-        for (IItem item:items) itemsList.add(item);
+        Collections.addAll(itemsList, items);
 
     }
 
@@ -47,7 +48,7 @@ public class WildRoadScene implements IScene
     @Override
     public String getSceneName()
     {
-        return this.sceneName;
+        return sceneName;
     }
 
     @Override

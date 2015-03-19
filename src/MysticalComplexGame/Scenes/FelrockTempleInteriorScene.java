@@ -3,15 +3,16 @@ package MysticalComplexGame.Scenes;
 import MysticalComplexGame.Items.IItem;
 
 import java.util.ArrayList;
+import java.util.Collections;
 
 public class FelrockTempleInteriorScene implements IScene
 {
 
     //north,south,east,west,up,down
     private String[] nextScene= new String[4];
-    private String description;
-    private String sceneName;
-    private ArrayList<IItem> itemsList = new ArrayList<IItem>();
+    private final String description;
+    private final String sceneName;
+    private final ArrayList<IItem> itemsList = new ArrayList<IItem>();
 
 
     public FelrockTempleInteriorScene(String north, String south, String east, String west, IItem... items)
@@ -30,7 +31,7 @@ public class FelrockTempleInteriorScene implements IScene
                 "that looks, weirdly enough, untouched by time or decay.\n" +
                 "Also, on some points, you can detect some vertical, possibly man-made, engraves\n" +
                 "but you can't seem to understand their purpose.";
-        for (IItem item:items) itemsList.add(item);
+        Collections.addAll(itemsList, items);
 
     }
 

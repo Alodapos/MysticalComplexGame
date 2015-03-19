@@ -9,7 +9,7 @@ public class PlayerCharacter implements ICharacter
 
     private String name;
     private IScene currentLocation;
-    private ArrayList<IItem> inventory = new ArrayList<IItem>();
+    private final ArrayList<IItem> inventory = new ArrayList<IItem>();
 
 
     @Override

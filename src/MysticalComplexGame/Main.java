@@ -7,7 +7,7 @@ import MysticalComplexGame.Commands.*;
 
 import java.util.Scanner;
 
-public class Main
+class Main
 {
 
     public static void main(String[] args)
@@ -27,17 +27,21 @@ public class Main
         IScene felrockTempleInterior = new FelrockTempleInteriorScene("U wot mate, you wanna travel in da temple?","U wot mate, you wanna travel in da temple?",
                                                                       "U wot mate, you wanna travel in da temple?","U wot mate, you wanna travel in da temple?");
         IScene felrockTownHallExterior = new FelrockTownHallExteriorScene("residencies","residencies","nothing","fountain");
-        IScene felrockTownHallInteriorGroundFloor = new FelrockTownHallInteriorGroundFloorScene("U wot mate, you wanna travel in da temple?","U wot mate, you wanna travel in da temple?",
-                                                                          "U wot mate, you wanna travel in da temple?","U wot mate, you wanna travel in da temple?");
-        IScene felrockTownHallInteriorFirstFloor = new FelrockTownHallInteriorFirstFloorScene("","","","");
-        IScene felrockTownHallInteriorSecondFloor = new FelrockTownHallInteriorSecondFloorScene("","","","");
+        IScene felrockTownHallInteriorGroundFloor = new FelrockTownHallInteriorGroundFloorScene("U wot mate, you wanna travel in da town hall?","U wot mate, you wanna travel in da town hall?",
+                                                                          "U wot mate, you wanna travel in da town hall?","U wot mate, you wanna travel in da town hall?");
+        IScene felrockTownHallInteriorFirstFloor = new FelrockTownHallInteriorFirstFloorScene("U wot mate, you wanna travel in da town hall","U wot mate, you wanna travel in da town hall",
+                                                                                              "U wot mate, you wanna travel in da town hall","U wot mate, you wanna travel in da town hall");
+        IScene felrockTownHallInteriorSecondFloor = new FelrockTownHallInteriorSecondFloorScene("U wot mate, you wanna travel in da town hall","U wot mate, you wanna travel in da town hall",
+                                                                                                "U wot mate, you wanna travel in da town hall","U wot mate, you wanna travel in da town hall");
         IScene caveOfAnguishExterior = new CaveOfAnguishExteriorScene("nothing","forest","nothing at all", "Felrock Village");
-        IScene caveOfAnguishInterior = new CaveOfAnguishInteriorScene("U wot mate, you wanna travel in da temple?","U wot mate, you wanna travel in da temple?",
-                                                                      "U wot mate, you wanna travel in da temple?","U wot mate, you wanna travel in da temple?");
-        IScene clearing = new ClearingScene("","","","");
-        IScene iceblueRiver = new IceblueRiverScene("","","","");
-        IScene gardenOfCorruption = new GardenOfCorruptionScene("","","","");
-        IScene gardenOfRadiance = new GardenOfRadianceScene("","","","");
+        IScene caveOfAnguishInterior = new CaveOfAnguishInteriorScene("U wot mate, you wanna travel in da cave?","U wot mate, you wanna travel in da cave?",
+                                                                      "U wot mate, you wanna travel in da cave?","U wot mate, you wanna travel in da cave?");
+        IScene clearing = new ClearingScene("Iceblue River","Cave of Anguish","cliff","road between river and forest");
+        IScene iceblueRiver = new IceblueRiverScene("bridge to garden","Clearing","Iceblue River","not yet made");
+        IScene gardenOfCorruption = new GardenOfCorruptionScene("the fucking void","Iceblue River","the fucking end",
+                                                                "not fucking made yet! (just kidding it's the motherfucking bridge!)");
+        IScene gardenOfRadiance = new GardenOfRadianceScene("same as above","same","same",
+                                                            "same, the motherfucking bridge doesn't walk");
         handler.addScene(campsite);
         handler.addScene(crossroads);
         handler.addScene(lake);
@@ -91,7 +95,7 @@ public class Main
             userInput = new Scanner(System.in);
             userInputString = userInput.nextLine();
             handler.handle(userInputString, player);
-        } while (!player.getCurrentLocation().getSceneName().equals("The Sage"));
-        System.out.println("You have completed ACT I, ACT II is under development, stay tuned for more...");
+        } while (!player.getCurrentLocation().getSceneName().equals("Garden of Corruption"));
+        System.out.println("\n\n\nYou have completed ACT I, ACT II is under development, stay tuned for more...");
     }
 }

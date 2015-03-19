@@ -3,15 +3,16 @@ package MysticalComplexGame.Scenes;
 import MysticalComplexGame.Items.IItem;
 
 import java.util.ArrayList;
+import java.util.Collections;
 
 public class FelrockVillageScene implements IScene
 {
 
     //north,south,east,west,up,down
     private String[] nextScene= new String[4];
-    private String description;
-    private String sceneName;
-    private ArrayList<IItem> itemsList = new ArrayList<IItem>();
+    private final String description;
+    private final String sceneName;
+    private final ArrayList<IItem> itemsList = new ArrayList<IItem>();
 
 
     public FelrockVillageScene(String north, String south, String east, String west, IItem... items)
@@ -32,7 +33,7 @@ public class FelrockVillageScene implements IScene
                 "On its east, there lies a grand structure, of white and pale shades of brown which,\n" +
                 "considering the architecture that's been used and its position, must be the town hall.\n" +
                 "Farther to the east, your sight follows a path, quite narrow, leading somewhere far ahead, but you can't see exactly where.";
-        for (IItem item:items) itemsList.add(item);
+        Collections.addAll(itemsList, items);
 
     }
 

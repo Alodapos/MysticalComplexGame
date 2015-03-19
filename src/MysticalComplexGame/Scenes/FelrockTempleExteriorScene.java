@@ -3,15 +3,16 @@ package MysticalComplexGame.Scenes;
 import MysticalComplexGame.Items.IItem;
 
 import java.util.ArrayList;
+import java.util.Collections;
 
 public class FelrockTempleExteriorScene implements IScene
 {
 
     //north,south,east,west,up,down
     private String[] nextScene= new String[4];
-    private String description;
-    private String sceneName;
-    private ArrayList<IItem> itemsList = new ArrayList<IItem>();
+    private final String description;
+    private final String sceneName;
+    private final ArrayList<IItem> itemsList = new ArrayList<IItem>();
 
 
     public FelrockTempleExteriorScene(String north, String south, String east, String west, IItem... items)
@@ -25,7 +26,7 @@ public class FelrockTempleExteriorScene implements IScene
                 "You now stand in front of the construction.\n" +
                 "The intense greenery around the temple seems to have been there long before it was built.\n" +
                 "The entrance is huge and memorable and the gate is shut but probably unlocked.";
-        for (IItem item:items) itemsList.add(item);
+        Collections.addAll(itemsList, items);
 
     }
 
@@ -45,7 +46,7 @@ public class FelrockTempleExteriorScene implements IScene
     @Override
     public String getSceneName()
     {
-        return sceneName;
+        return this.sceneName;
     }
 
     @Override

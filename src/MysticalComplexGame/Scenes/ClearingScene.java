@@ -3,15 +3,16 @@ package MysticalComplexGame.Scenes;
 import MysticalComplexGame.Items.IItem;
 
 import java.util.ArrayList;
+import java.util.Collections;
 
 public class ClearingScene implements IScene
 {
 
     //north,south,east,west,up,down
     private String[] nextScene= new String[4];
-    private String description;
-    private String sceneName;
-    private ArrayList<IItem> itemsList = new ArrayList<IItem>();
+    private final String description;
+    private final String sceneName;
+    private final ArrayList<IItem> itemsList = new ArrayList<IItem>();
 
 
     public ClearingScene(String north, String south, String east, String west, IItem... items)
@@ -24,12 +25,12 @@ public class ClearingScene implements IScene
         this.description = "The bright light immediately blinds you for a while and now the gushing sound of water is louder.\n" +
                 "After your vision is restored, what you see finally gives you peace after the horrors you encountered inside the cave.\n" +
                 "Evidently, the noise was due to a fast-current river flowing from the east, continuing to the north and west,\n" +
-                "but at some point making an abrupt turn and sliping down a steep cliff, forming a waterfall which falls several feet below.\n" +
+                "but at some point making an abrupt turn and slipping down a steep cliff, forming a waterfall which falls several feet below.\n" +
                 "To the west you see,yet again, some trees forming a sparse forest.\n" +
-                "Inbetween the forest and the riverbank is formed a dusty and rocky trail of dirt, splitting in half at some point.\n" +
+                "In between the forest and the riverbank is formed a dusty and rocky trail of dirt, splitting in half at some point.\n" +
                 "One part is following the river's shore to the north and the other goes south through the forest.";
 
-        for (IItem item:items) itemsList.add(item);
+        Collections.addAll(itemsList, items);
     }
 
 

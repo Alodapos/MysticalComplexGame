@@ -3,15 +3,16 @@ package MysticalComplexGame.Scenes;
 import MysticalComplexGame.Items.IItem;
 
 import java.util.ArrayList;
+import java.util.Collections;
 
 public class CrossroadsScene implements IScene
 {
 
     //north,south,east,west,up,down
     private String[] nextScene= new String[4];
-    private String description;
-    private String sceneName;
-    private ArrayList<IItem> itemsList = new ArrayList<IItem>();
+    private final String description;
+    private final String sceneName;
+    private final ArrayList<IItem> itemsList = new ArrayList<IItem>();
 
 
     public CrossroadsScene(String north, String south, String east, String west, IItem... items)
@@ -24,7 +25,7 @@ public class CrossroadsScene implements IScene
         this.description = "The moment you leave the campsite you see the, one and only, road leading upwards, so you take it.\n" +
                 "After a while you are facing a large crossroads and must decide which way to go.";
 
-        for (IItem item:items) itemsList.add(item);
+        Collections.addAll(itemsList, items);
 
     }
 
