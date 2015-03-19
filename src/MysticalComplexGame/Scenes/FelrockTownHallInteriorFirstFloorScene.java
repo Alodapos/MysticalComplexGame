@@ -4,7 +4,7 @@ import MysticalComplexGame.Items.IItem;
 
 import java.util.ArrayList;
 
-public class FelrockTownHallExteriorScene implements IScene
+public class FelrockTownHallInteriorFirstFloorScene implements IScene
 {
 
     //north,south,east,west,up,down
@@ -14,19 +14,14 @@ public class FelrockTownHallExteriorScene implements IScene
     private ArrayList<IItem> itemsList = new ArrayList<IItem>();
 
 
-    public FelrockTownHallExteriorScene(String north, String south, String east, String west, IItem... items)
+    public FelrockTownHallInteriorFirstFloorScene(String north, String south, String east, String west, IItem... items)
     {
         this.nextScene[0] = north;
         this.nextScene[1] = south;
         this.nextScene[2] = east;
         this.nextScene[3] = west;
-        this.sceneName = "Felrock Village - Town Hall: Exterior";
-        this.description = "Only by getting closer to the building, you can estimate how magnificent it truly is.\n" +
-                "Its banners flutter as the wind passes through them.\n" +
-                "It seems well preserved and, possibly, recently built or renovated.\n" +
-                "It also has weird decorations all over its stony framework.\n" +
-                "No one is entering or exiting the building since it's a small and quite village with a very low population.\n" +
-                "But, surely, there will be someone inside.";
+        this.sceneName = "Felrock Village - Town Hall: Interior - First Floor";
+        this.description = "descr";
         for (IItem item:items) itemsList.add(item);
 
     }

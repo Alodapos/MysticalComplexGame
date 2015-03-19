@@ -20,7 +20,6 @@ public class FelrockTempleExteriorScene implements IScene
         this.nextScene[1] = south;
         this.nextScene[2] = east;
         this.nextScene[3] = west;
-        //Scene name in caps please
         this.sceneName = "Felrock Village - Temple: Exterior";
         this.description = "As you walk towards the temple you descry more and more details curved on its stone framework.\n" +
                 "You now stand in front of the construction.\n" +

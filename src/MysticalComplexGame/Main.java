@@ -27,8 +27,10 @@ public class Main
         IScene felrockTempleInterior = new FelrockTempleInteriorScene("U wot mate, you wanna travel in da temple?","U wot mate, you wanna travel in da temple?",
                                                                       "U wot mate, you wanna travel in da temple?","U wot mate, you wanna travel in da temple?");
         IScene felrockTownHallExterior = new FelrockTownHallExteriorScene("residencies","residencies","nothing","fountain");
-        IScene felrockTownHallInterior = new FelrockTownHallInteriorScene("U wot mate, you wanna travel in da temple?","U wot mate, you wanna travel in da temple?",
+        IScene felrockTownHallInteriorGroundFloor = new FelrockTownHallInteriorGroundFloorScene("U wot mate, you wanna travel in da temple?","U wot mate, you wanna travel in da temple?",
                                                                           "U wot mate, you wanna travel in da temple?","U wot mate, you wanna travel in da temple?");
+        IScene felrockTownHallInteriorFirstFloor = new FelrockTownHallInteriorFirstFloorScene("","","","");
+        IScene felrockTownHallInteriorSecondFloor = new FelrockTownHallInteriorSecondFloorScene("","","","");
         IScene caveOfAnguishExterior = new CaveOfAnguishExteriorScene("nothing","forest","nothing at all", "Felrock Village");
         IScene caveOfAnguishInterior = new CaveOfAnguishInteriorScene("U wot mate, you wanna travel in da temple?","U wot mate, you wanna travel in da temple?",
                                                                       "U wot mate, you wanna travel in da temple?","U wot mate, you wanna travel in da temple?");
@@ -44,7 +46,9 @@ public class Main
         handler.addScene(felrockTempleExterior);
         handler.addScene(felrockTempleInterior);
         handler.addScene(felrockTownHallExterior);
-        handler.addScene(felrockTownHallInterior);
+        handler.addScene(felrockTownHallInteriorGroundFloor);
+        handler.addScene(felrockTownHallInteriorFirstFloor);
+        handler.addScene(felrockTownHallInteriorSecondFloor);
         handler.addScene(caveOfAnguishExterior);
         handler.addScene(caveOfAnguishInterior);
         handler.addScene(clearing);

@@ -20,7 +20,6 @@ public class CampsiteScene implements IScene
         this.nextScene[1] = south;
         this.nextScene[2] = east;
         this.nextScene[3] = west;
-        //Scene name in caps please
         this.sceneName = "Campsite";
         this.description = "You grab your stuff and begin traveling to the NORTH,\n" +
                 "while the night offers you the perfect cover from prying eyes.\n" +

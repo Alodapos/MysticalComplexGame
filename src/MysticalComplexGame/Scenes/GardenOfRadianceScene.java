@@ -20,7 +20,6 @@ public class GardenOfRadianceScene implements IScene
         this.nextScene[1] = south;
         this.nextScene[2] = east;
         this.nextScene[3] = west;
-        //Scene name in caps please
         this.sceneName = "Garden of Radiance";
         this.description = "descr";
         for (IItem item:items) itemsList.add(item);

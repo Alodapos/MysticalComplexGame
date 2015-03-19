@@ -20,7 +20,6 @@ public class WildRoadScene implements IScene
         this.nextScene[1] = south;
         this.nextScene[2] = east;
         this.nextScene[3] = west;
-        //Scene name in caps please
         this.sceneName = "Wild Road";
         this.description = "As you walk the east road, you begin to perceive a blurry landscape which,\n" +
                 "as it seems, consists by some kind of structures surrounded by tall trees.\n" +

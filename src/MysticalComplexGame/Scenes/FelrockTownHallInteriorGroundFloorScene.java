@@ -4,7 +4,7 @@ import MysticalComplexGame.Items.IItem;
 
 import java.util.ArrayList;
 
-public class FelrockTownHallExteriorScene implements IScene
+public class FelrockTownHallInteriorGroundFloorScene implements IScene
 {
 
     //north,south,east,west,up,down
@@ -14,19 +14,23 @@ public class FelrockTownHallExteriorScene implements IScene
     private ArrayList<IItem> itemsList = new ArrayList<IItem>();
 
 
-    public FelrockTownHallExteriorScene(String north, String south, String east, String west, IItem... items)
+    public FelrockTownHallInteriorGroundFloorScene(String north, String south, String east, String west, IItem... items)
     {
         this.nextScene[0] = north;
         this.nextScene[1] = south;
         this.nextScene[2] = east;
         this.nextScene[3] = west;
-        this.sceneName = "Felrock Village - Town Hall: Exterior";
-        this.description = "Only by getting closer to the building, you can estimate how magnificent it truly is.\n" +
-                "Its banners flutter as the wind passes through them.\n" +
-                "It seems well preserved and, possibly, recently built or renovated.\n" +
-                "It also has weird decorations all over its stony framework.\n" +
-                "No one is entering or exiting the building since it's a small and quite village with a very low population.\n" +
-                "But, surely, there will be someone inside.";
+        this.sceneName = "Felrock Village - Town Hall: Interior - Ground Floor";
+        this.description = "Surprisingly, the door requires a bit above than average force to open,\n" +
+                "but with a tight grip and a strong push you manage to shove it aside.\n" +
+                "Before you spreads a long hallway, ending up in a grand lobby. \n" +
+                "On your left, a staircase extends all the way up, to the top of the Town Hall. \n" +
+                "As far as you can see there are three floors, including the ground floor. \n" +
+                "On your right and left there are several rooms, probably offices and storerooms. \n" +
+                "While you examine your surroundings and trying to see what's on the top floors, a low voice is heard in the distance, \n" +
+                "but the only words you can make out are: \"cave\" and \"corruption\". \n" +
+                "At once, a different voice replies and you can only hear the words: \"dying\" and \"leave\". \n" +
+                "The conversation continues...";
         for (IItem item:items) itemsList.add(item);
 
     }

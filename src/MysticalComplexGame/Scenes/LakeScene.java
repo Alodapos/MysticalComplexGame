@@ -20,7 +20,6 @@ public class LakeScene implements IScene
         this.nextScene[1] = south;
         this.nextScene[2] = east;
         this.nextScene[3] = west;
-        //Scene name in caps please
         this.sceneName = "Lake";
         this.description = "You head south following a downhill which leads you to a clearing.\n" +
                 "A fairly big lake is located in the center of an, 10-feet diameter, overgrown field.\n" +

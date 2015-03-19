@@ -20,7 +20,6 @@ public class CrossroadsScene implements IScene
         this.nextScene[1] = south;
         this.nextScene[2] = east;
         this.nextScene[3] = west;
-        //Scene name in caps please
         this.sceneName = "Crossroads";
         this.description = "The moment you leave the campsite you see the, one and only, road leading upwards, so you take it.\n" +
                 "After a while you are facing a large crossroads and must decide which way to go.";

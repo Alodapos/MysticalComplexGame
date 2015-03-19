@@ -20,7 +20,6 @@ public class IceblueRiverScene implements IScene
         this.nextScene[1] = south;
         this.nextScene[2] = east;
         this.nextScene[3] = west;
-        //Scene name in caps please
         this.sceneName = "Iceblue River";
         this.description = "descr";
         for (IItem item:items) itemsList.add(item);

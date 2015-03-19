@@ -20,7 +20,6 @@ public class ClearingScene implements IScene
         this.nextScene[1] = south;
         this.nextScene[2] = east;
         this.nextScene[3] = west;
-        //Scene name in caps please
         this.sceneName = "Clearing";
         this.description = "The bright light immediately blinds you for a while and now the gushing sound of water is louder.\n" +
                 "After your vision is restored, what you see finally gives you peace after the horrors you encountered inside the cave.\n" +
