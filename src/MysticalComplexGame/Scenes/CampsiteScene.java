@@ -8,7 +8,7 @@ import java.util.Collections;
 public class CampsiteScene implements IScene
 {
 
-    //north,south,east,west,up,down
+    //north,south,east,west
     private String[] nextScene= new String[4];
     private final String description;
     private final String sceneName;
@@ -77,6 +77,5 @@ public class CampsiteScene implements IScene
     {
         return this.itemsList;
     }
-
 }
 

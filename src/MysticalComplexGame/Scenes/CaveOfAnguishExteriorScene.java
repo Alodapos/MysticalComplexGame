@@ -75,7 +75,6 @@ public class CaveOfAnguishExteriorScene implements IScene
 
     }
 
-
     @Override
     public void addItem(IItem item)
     {
