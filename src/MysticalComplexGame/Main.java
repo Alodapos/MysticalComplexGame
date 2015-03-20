@@ -40,7 +40,9 @@ class Main
                                                                           "There's one weird road leading away from the village to your east.",
                                                                           "The village's stone fountain is located right in the middle of the plateau.");
         IScene felrockTownHallInteriorGroundFloor = new FelrockTownHallInteriorGroundFloorScene("U wot mate, you wanna travel in da town hall?","U wot mate, you wanna travel in da town hall?",
-                                                                          "U wot mate, you wanna travel in da town hall?","U wot mate, you wanna travel in da town hall?");
+                                                                                                "U wot mate, you wanna travel in da town hall?","U wot mate, you wanna travel in da town hall?");
+        IScene felrockTownHallInteriorLobby = new FelrockTownHallInteriorLobbyScene("U wot mate, you wanna travel in da town hall?","U wot mate, you wanna travel in da town hall?",
+                                                                                    "U wot mate, you wanna travel in da town hall?","U wot mate, you wanna travel in da town hall?");
         IScene felrockTownHallInteriorFirstFloor = new FelrockTownHallInteriorFirstFloorScene("U wot mate, you wanna travel in da town hall","U wot mate, you wanna travel in da town hall",
                                                                                               "U wot mate, you wanna travel in da town hall","U wot mate, you wanna travel in da town hall");
         IScene felrockTownHallInteriorSecondFloor = new FelrockTownHallInteriorSecondFloorScene("U wot mate, you wanna travel in da town hall","U wot mate, you wanna travel in da town hall",
@@ -59,7 +61,6 @@ class Main
                                                                 "The Iceblue River flows fiercely, you can tell from the loud sound.",
                                                                 "The Tree of Eternity is truly magnificent!",
                                                                 "On your left, still stands the wooden bridge.");
-        IScene felrockTownHallInteriorLobby = new FelrockTownHallInteriorLobbyScene("","","","");
         /*IScene gardenOfRadiance = new GardenOfRadianceScene("There's nothing you can see beyond this point.",
                                                             "The Iceblue River flows fiercely, you can tell from the loud sound.",
                                                             "The Tree of Eternity is truly magnificent!",
