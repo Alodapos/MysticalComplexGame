@@ -16,11 +16,12 @@ class Main
         InputHandler handler = new InputHandler();
         //items to use
         IItem shinyRock = new ShinyRock();
+        IItem flask = new Flask();
         //scene initializer , sceneID, northScene, south, east, west, negative or zero for no-go
         //scenes to use
         IScene campsite = new CampsiteScene("Crossroads","You can't return home just yet.The Sage awaits you.",
                                             "The Barren Hills lie on your east blocking your view.",
-                                            "The Barren Hills also lie on your west prohibiting your vision to what's beyond.");
+                                            "The Barren Hills also lie on your west prohibiting your vision to what's beyond.",flask);
         IScene crossroads = new CrossroadsScene("Not yet made.","Crystal Lake","Wild Road",
                                                 "There is a forest of pine trees to your west.",shinyRock);
         IScene crystalLake = new CrystalLakeScene("Crossroads","You can see the campsite from here but you can't reach it, it's on a higher ground.",

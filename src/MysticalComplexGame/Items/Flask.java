@@ -6,26 +6,26 @@ import MysticalComplexGame.Scenes.IScene;
 import java.util.ArrayList;
 
 
-public class ShinyRock implements IItem
+public class Flask implements IItem
 {
     private String name;
     private String description;
     private String inventoryDescription;
+    private boolean usable;
     private boolean pickable;
     private boolean dropable;
-    private boolean usable;
     private boolean pullable;
     private boolean pushable;
     private boolean enterable;
 
-    public ShinyRock()
+    public Flask()
     {
-        name = "rock";
-        description = "A gold , shiny rock lies on the floor...its...dazzling...";
-        inventoryDescription = "A dazzling-shiny rock.";
+        name = "flask";
+        description= "A small sized, leather flask filled at 3/5 with water.";
+        inventoryDescription = "A small flask.";
         pickable = true;
         dropable = true;
-        usable = false;
+        usable = true;
         pushable = false;
         pullable = false;
         enterable = false;
@@ -34,6 +34,17 @@ public class ShinyRock implements IItem
     public void useItem(ICharacter player, ArrayList<IScene> scenes)
     {
         //TODO use item
+
+        ArrayList<IItem> itemsList = player.getCurrentLocation().getItemsList();
+        ArrayList<String> itemNames = new ArrayList<String>();
+        for (IItem item: itemsList) itemNames.add(item.getName());
+        int itemIndex = itemNames.indexOf("water");
+
+        if(itemIndex == -1)
+            System.out.println("Can't find a water source.");
+        else
+        //TODO else
+            System.out.println("Flask filled!");
     }
 
     @Override
