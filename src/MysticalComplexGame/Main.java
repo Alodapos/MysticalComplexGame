@@ -86,14 +86,17 @@ class Main
         ICommand look = new LookCommand();
         ICommand pick = new PickCommand();
         ICommand cry = new CryCommand();
+        ICommand drop = new DropCommand();
+        ICommand inventory = new InventoryCommand();
         handler.addCommand(go);
         handler.addCommand(look);
         handler.addCommand(pick);
         handler.addCommand(cry);
+        handler.addCommand(drop);
+        handler.addCommand(inventory);
         //player character
         ICharacter player = new PlayerCharacter();
         player.setCurrentLocation(campsite);
-
 
         //initializing some more stuff
         String userInputString;
