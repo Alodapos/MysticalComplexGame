@@ -59,6 +59,7 @@ class Main
                                                                 "The Iceblue River flows fiercely, you can tell from the loud sound.",
                                                                 "The Tree of Eternity is truly magnificent!",
                                                                 "On your left, still stands the wooden bridge.");
+        IScene felrockTownHallInteriorLobby = new FelrockTownHallInteriorLobbyScene("","","","");
         /*IScene gardenOfRadiance = new GardenOfRadianceScene("There's nothing you can see beyond this point.",
                                                             "The Iceblue River flows fiercely, you can tell from the loud sound.",
                                                             "The Tree of Eternity is truly magnificent!",
@@ -72,6 +73,7 @@ class Main
         handler.addScene(felrockTempleInterior);
         handler.addScene(felrockTownHallExterior);
         handler.addScene(felrockTownHallInteriorGroundFloor);
+        handler.addScene(felrockTownHallInteriorLobby);
         handler.addScene(felrockTownHallInteriorFirstFloor);
         handler.addScene(felrockTownHallInteriorSecondFloor);
         handler.addScene(caveOfAnguishExterior);
