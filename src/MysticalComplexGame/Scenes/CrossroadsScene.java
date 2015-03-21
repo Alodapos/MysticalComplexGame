@@ -1,11 +1,11 @@
-package MysticalComplexGame.Scenes;
+/*package MysticalComplexGame.Scenes;
 
 import MysticalComplexGame.Items.IItem;
 
 import java.util.ArrayList;
 import java.util.Collections;
 
-public class CrossroadsScene implements IScene
+public class CrossroadsScene implements Scene
 {
 
     //north,south,east,west,up,down
@@ -22,8 +22,7 @@ public class CrossroadsScene implements IScene
         this.nextScene[2] = east;
         this.nextScene[3] = west;
         this.sceneName = "Crossroads";
-        this.description = "The moment you leave the campsite you see the, one and only, road leading upwards, so you take it.\n" +
-                "After a while you are facing a large crossroads and must decide which way to go.";
+        this.description = ;
 
         Collections.addAll(itemsList, items);
 
@@ -72,9 +71,10 @@ public class CrossroadsScene implements IScene
         itemsList.trimToSize();
     }
     @Override
-    public ArrayList<IItem> getItemsList()
+    public ArrayList<IItem> getItems()
     {
         return this.itemsList;
     }
 }
 
+/*/

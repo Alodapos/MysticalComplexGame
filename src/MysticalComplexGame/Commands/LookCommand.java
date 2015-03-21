@@ -1,25 +1,30 @@
 package MysticalComplexGame.Commands;
 
-import MysticalComplexGame.Characters.ICharacter;
-import MysticalComplexGame.Scenes.IScene;
-
-import java.util.ArrayList;
+import MysticalComplexGame.Character;
+import MysticalComplexGame.Scene;
+import java.util.Map;
 
 public class LookCommand implements ICommand
 {
 
-    @Override
-    public String getName()
+    String name;
+    String invalidArgument;
+    public LookCommand()
     {
-        return "look";
+        name = "look";
+        invalidArgument = "I understood as far as you wanted to look";
     }
 
     @Override
-    public void executeCommand(ICharacter character, String argument, ArrayList<IScene> scenes)
+    public String getName()
     {
-        argument = argument.trim();
-        String actionFailed = "I understood as far as you wanted to look.";
-        if (argument.equals("") || argument.equals("around")) character.getCurrentLocation().printDescription();
-        else System.out.println(actionFailed);
+        return name;
+    }
+
+    @Override
+    public void executeCommand(Character character, String argument, Map<String, Scene> scenes)
+    {
+        if (argument.equals("") || argument.equals("around")) character.getLocation().printDescription();
+        else System.out.println(invalidArgument);
     }
 }

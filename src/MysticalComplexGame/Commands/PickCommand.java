@@ -1,40 +1,49 @@
 package MysticalComplexGame.Commands;
 
-import MysticalComplexGame.Characters.ICharacter;
-import MysticalComplexGame.Items.IItem;
-import MysticalComplexGame.Scenes.IScene;
-
-import java.util.ArrayList;
+import MysticalComplexGame.Character;
+import MysticalComplexGame.Scene;
+import java.util.Map;
 
 public class PickCommand implements ICommand
 {
 
+    String missingArgument;
+    String invalidArgument;
+    String actionFailed;
+    String skippedWord;
+    String name;
+    public PickCommand()
+    {
+        missingArgument = "You have to specify what do you want to pick.";
+        invalidArgument = "I can't see such a thing.";
+        actionFailed = "This is not something I can pick!";
+        skippedWord = "up ";
+        name = "pick";
+
+    }
     @Override
     public String getName()
     {
-        return "pick";
+        return this.name;
     }
 
     @Override
-    public void executeCommand(ICharacter character, String argument, ArrayList<IScene> scenes)
+    public void executeCommand(Character character, String argument, Map<String, Scene> scenes)
     {
-        argument = argument.trim();
-        ArrayList<IItem> itemsList = character.getCurrentLocation().getItemsList();
-        ArrayList<String> itemNames = new ArrayList<String>();
-        for (IItem item: itemsList) itemNames.add(item.getName());
-        int itemIndex = itemNames.indexOf(argument);
-
-        String missingArgument = "You have to specify what you want to pick.";
-        String argumentNotFound = "I can't see that thing.";
-        String actionFailed = "This is not something I can pick!";
+        argument = trimArgument(argument);
         if (argument.equals("")) System.out.println(missingArgument);
-        else if (itemIndex == -1) System.out.println(argumentNotFound);
-        else if (itemsList.get(itemIndex).isPickable())
+        else if (!character.getLocation().getItems().containsKey(argument)) System.out.println(invalidArgument);
+        else if (!character.getLocation().getItems().get(argument).getTags().contains(this.name)) System.out.println(actionFailed);
+        else
         {
-            character.addToInventory(itemsList.get(itemIndex));
+            character.addToInventory(character.getLocation().getItems().get(argument));
             System.out.println("Picked "+ argument +".");
-            character.getCurrentLocation().removeItem(itemIndex);
+            character.getLocation().removeItem(argument);
         }
-        else System.out.println(actionFailed);
+    }
+    private String trimArgument(String argument)
+    {
+        if (argument.startsWith(skippedWord)) argument = argument.replaceFirst("up +","");
+        return argument;
     }
 }

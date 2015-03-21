@@ -1,11 +1,11 @@
-package MysticalComplexGame.Scenes;
+/*package MysticalComplexGame.Scenes;
 
 import MysticalComplexGame.Items.IItem;
 
 import java.util.ArrayList;
 import java.util.Collections;
 
-public class FelrockTownHallInteriorLobbyScene implements IScene
+public class FelrockTownHallInteriorLobbyScene implements Scene
 {
 
     //north,south,east,west
@@ -80,9 +80,10 @@ public class FelrockTownHallInteriorLobbyScene implements IScene
         itemsList.trimToSize();
     }
     @Override
-    public ArrayList<IItem> getItemsList()
+    public ArrayList<IItem> getItems()
     {
         return this.itemsList;
     }
 }
 
+/*/

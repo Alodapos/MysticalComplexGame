@@ -1,40 +1,39 @@
 package MysticalComplexGame.Commands;
 
-import MysticalComplexGame.Characters.ICharacter;
-import MysticalComplexGame.Items.IItem;
-import MysticalComplexGame.Scenes.IScene;
-
-import java.util.ArrayList;
+import MysticalComplexGame.Character;
+import MysticalComplexGame.Scene;
+import java.util.Map;
 
 public class DropCommand implements ICommand
 {
 
+    String missingArgument;
+    String invalidArgument;
+    String actionFailed;
+    String name;
+    public DropCommand()
+    {
+        missingArgument = "You have to specify what do you want to drop.";
+        invalidArgument = "I do not have this item with me.";
+        actionFailed = "I will not drop this, it's very important!";
+        name = "drop";
+    }
     @Override
     public String getName()
     {
-        return "drop";
+        return name;
     }
-
     @Override
-    public void executeCommand(ICharacter character, String argument, ArrayList<IScene> scenes)
+    public void executeCommand(Character character, String argument, Map<String, Scene> scenes)
     {
-        argument = argument.trim();
-        ArrayList<IItem> itemsList = character.getInventory();
-        ArrayList<String> itemNames = new ArrayList<String>();
-        for (IItem item: itemsList) itemNames.add(item.getName());
-        int itemIndex = itemNames.indexOf(argument);
-
-        String missingArgument = "You have to specify what you want to drop.";
-        String argumentNotFound = "I don't have this in my inventory.";
-        String actionFailed = "You'd better not drop this.";
         if (argument.equals("")) System.out.println(missingArgument);
-        else if (itemIndex == -1) System.out.println(argumentNotFound);
-        else if (itemsList.get(itemIndex).isPickable())
+        else if (!character.getInventory().containsKey(argument)) System.out.println(invalidArgument);
+        else if (!character.getInventory().get(argument).getTags().contains(this.name)) System.out.println(actionFailed);
+        else
         {
-            character.getCurrentLocation().addItem(itemsList.get(itemIndex));
+            character.getLocation().addItem(character.getInventory().get(argument));
             System.out.println("Dropped "+ argument +".");
-            character.removeFromInventory(itemsList.get(itemIndex));
+            character.removeFromInventory(argument);
         }
-        else System.out.println(actionFailed);
     }
 }

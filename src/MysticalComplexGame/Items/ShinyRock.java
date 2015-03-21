@@ -1,9 +1,10 @@
 package MysticalComplexGame.Items;
 
-import MysticalComplexGame.Characters.ICharacter;
-import MysticalComplexGame.Scenes.IScene;
-
+import MysticalComplexGame.Character;
+import MysticalComplexGame.Scene;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
 
 public class ShinyRock implements IItem
@@ -11,91 +12,23 @@ public class ShinyRock implements IItem
     private String name;
     private String description;
     private String inventoryDescription;
-    private boolean pickable;
-    private boolean dropable;
-    private boolean usable;
-    private boolean pullable;
-    private boolean pushable;
-    private boolean enterable;
+    private String useFailed;
+    private List<String> tags;
 
-    public ShinyRock()
+    public ShinyRock(String...tags)
     {
         name = "rock";
         description = "A gold , shiny rock lies on the floor...its...dazzling...";
         inventoryDescription = "A dazzling-shiny rock.";
-        pickable = true;
-        dropable = true;
-        usable = false;
-        pushable = false;
-        pullable = false;
-        enterable = false;
+        useFailed = "I can't use a rock.";
+        this.tags = new ArrayList<String>();
+        Collections.addAll(this.tags,tags);
     }
     @Override
-    public void useItem(ICharacter player, ArrayList<IScene> scenes)
+    public void useItem(Character player, List<Scene> scenes)
     {
-        //TODO use item
+        System.out.println(useFailed);
     }
-
-    @Override
-    public boolean isEnterable() {
-        return enterable;
-    }
-
-    @Override
-    public void setEnterable(boolean enterable) {
-        this.enterable = enterable;
-    }
-
-    @Override
-    public boolean isPushable() {
-        return pushable;
-    }
-
-    @Override
-    public void setPushable(boolean pushable) {
-        this.pushable = pushable;
-    }
-
-    @Override
-    public boolean isPullable() {
-        return pullable;
-    }
-
-    @Override
-    public void setPullable(boolean pullable) {
-        this.pullable = pullable;
-    }
-
-    @Override
-    public boolean isDropable() {
-        return dropable;
-    }
-
-    @Override
-    public void setDropable(boolean dropable) {
-        this.dropable = dropable;
-    }
-
-    @Override
-    public boolean isPickable() {
-        return pickable;
-    }
-
-    @Override
-    public void setPickable(boolean pickable) {
-        this.pickable = pickable;
-    }
-
-    @Override
-    public boolean isUsable() {
-        return usable;
-    }
-
-    @Override
-    public void setUsable(boolean usable) {
-        this.usable = usable;
-    }
-
     @Override
     public String getInventoryDescription() {
         return inventoryDescription;
@@ -124,5 +57,11 @@ public class ShinyRock implements IItem
     @Override
     public void setName(String name) {
         this.name = name;
+    }
+
+    @Override
+    public List<String> getTags()
+    {
+        return this.tags;
     }
 }

@@ -1,44 +1,47 @@
 package MysticalComplexGame;
 
-import MysticalComplexGame.Characters.ICharacter;
-import MysticalComplexGame.Scenes.IScene;
 import MysticalComplexGame.Commands.ICommand;
-import java.util.ArrayList;
-import java.util.regex.*;
+
+import java.util.HashMap;
+import java.util.Map;
 
 class InputHandler
 {
+    private Map<String, ICommand> commands;
+    private Map<String, Scene> scenes;
+    String commandNotFound;
 
-    private final Pattern pattern = Pattern.compile("(\\w+)(.*)"); //a word, and something else, or nothing else
-    private final ArrayList<ICommand> commandList = new ArrayList<ICommand>(); //commands
-    private final ArrayList<IScene> scenesList = new ArrayList<IScene>();     //scenes
-    private final ArrayList<String> commandNameList = new ArrayList<String>(); //scene names
-
-
-    public void handle(String userInput,ICharacter character)
+    public InputHandler()
     {
-        userInput = userInput.trim();
+        commandNotFound = "This is not a command that i recognize!";
+        commands = new HashMap<String, ICommand>();
+        scenes = new HashMap<String, Scene>();
+    }
+
+    public void handleInput(String userInput, Character character)
+    {
         userInput = userInput.toLowerCase();
-        int commandIndex;
-        Matcher matcher = pattern.matcher(userInput);
-        if (matcher.find()) //if we find a word
+        String[] input = new String[2];
+        if (userInput.contains(" ")) input = userInput.split(" ",2);
+        else
         {
-            commandIndex = commandNameList.indexOf(matcher.group(1));
-            String commandNotFound = "This is not a command i recognize!";
-            if (commandIndex == -1)  System.out.println(commandNotFound);
-            else commandList.get(commandIndex).executeCommand(character, matcher.group(2), scenesList);
+            input[0] = userInput;
+            input[1] = "";
         }
+
+        if (commands.containsKey(input[0])) commands.get(input[0]).executeCommand(character,input[1].isEmpty() ? "" : input[1].trim(),scenes);
+        else System.err.println(commandNotFound);
     }
 
     public void addCommand(ICommand commandToAdd)
     {
-        this.commandList.add(commandToAdd);
-        this.commandNameList.add(commandToAdd.getName());
+        this.commands.put(commandToAdd.getName(),commandToAdd);
     }
 
-    public void addScene(IScene sceneToAdd)
+    public void addScene(Scene scene)
     {
-        this.scenesList.add(sceneToAdd);
+        this.scenes.put(scene.getName(), scene);
     }
 }
+
 

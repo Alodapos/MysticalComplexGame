@@ -1,33 +1,39 @@
 package MysticalComplexGame.Commands;
 
-import MysticalComplexGame.Characters.ICharacter;
+import MysticalComplexGame.Character;
 import MysticalComplexGame.Items.IItem;
-import MysticalComplexGame.Scenes.IScene;
-
-import java.util.ArrayList;
+import MysticalComplexGame.Scene;
+import java.util.HashMap;
+import java.util.Map;
 
 public class InventoryCommand implements ICommand
 {
 
+    String name;
+    String invalidArgument;
+    String emptyInventory;
+
+    public InventoryCommand()
+    {
+        name = "inventory";
+        invalidArgument = "I understood as far as you wanted to take a look at your inventory";
+        emptyInventory = "You have no items with you!";
+    }
     @Override
     public String getName()
     {
-        return "inventory";
+        return name;
     }
 
     @Override
-    public void executeCommand(ICharacter character, String argument, ArrayList<IScene> scenes)
+    public void executeCommand(Character character, String argument, Map<String, Scene> scenes)
     {
-        String invalidArgument = "I understood as far as you wanted to look at your inventory.";
-        String emptyInventory = "You have no items!";
-        argument = argument.trim();
-
         if (!argument.equals("")) System.out.println(invalidArgument);
         else if (character.getInventory().isEmpty()) System.out.println(emptyInventory);
         else
         {
-            System.out.printf("Your inventory:\n");
-            for (IItem item: character.getInventory()) System.out.println(item.getInventoryDescription());
+            System.out.println("Your inventory:");
+            for (Map.Entry<String, IItem> item: character.getInventory().entrySet()) System.out.println(item.getValue().getInventoryDescription());
         }
     }
 }

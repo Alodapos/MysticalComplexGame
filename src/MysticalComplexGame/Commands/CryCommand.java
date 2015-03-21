@@ -1,9 +1,8 @@
 package MysticalComplexGame.Commands;
 
-import MysticalComplexGame.Characters.ICharacter;
-import MysticalComplexGame.Scenes.IScene;
-
-import java.util.ArrayList;
+import MysticalComplexGame.Character;
+import MysticalComplexGame.Scene;
+import java.util.Map;
 
 public class CryCommand implements ICommand
 {
@@ -15,7 +14,7 @@ public class CryCommand implements ICommand
     }
 
     @Override
-    public void executeCommand(ICharacter character, String argument, ArrayList<IScene> scenes)
+    public void executeCommand(Character character, String argument, Map<String, Scene> scenes)
     {
         argument = argument.trim();
         String actionFailed = "I understood as far as you wanted to CRI!";
