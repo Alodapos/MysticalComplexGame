@@ -11,7 +11,7 @@ class Main
         InputHandler handler = new InputHandler();
         //items init
         IItem shinyRock = new ShinyRock("pick","drop");
-        IItem flask = new Flask("pick","drop");
+        IItem flask = new Flask("pick","drop","drink");
         //scene init
         Scene campsite = new Scene("Campsite","You grab your stuff and begin traveling to the NORTH,\n" +
                 "while the night offers you the perfect cover from prying eyes.\n" +
