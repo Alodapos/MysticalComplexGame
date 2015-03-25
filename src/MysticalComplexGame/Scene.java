@@ -32,7 +32,8 @@ public class Scene
 
     public void setConnection(Direction direction,String place)
     {
-        this.connections.replace(direction,place);
+        this.connections.remove(direction);
+        this.connections.put(direction,place);
     }
 
     public void printDescription()

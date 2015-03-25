@@ -29,7 +29,7 @@ class InputHandler
             input[1] = "";
         }
 
-        if (commands.containsKey(input[0])) commands.get(input[0]).executeCommand(character,input[1].isEmpty() ? "" : input[1].trim(),scenes);
+        if (commands.containsKey(input[0])) commands.get(input[0]).executeCommand(character,input[1].trim(),scenes);
         else System.err.println(commandNotFound);
     }
 
