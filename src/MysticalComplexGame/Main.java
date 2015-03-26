@@ -10,12 +10,113 @@ class Main
     static String textNameCampsite;
     static String textNameCrossroads;
     static String textNameCrystalLake;
+    static String textNameWildernessRoad;
+    static String textNameFelrockVillage;
+    static String textNameFelrockTempleExterior;
+    static String textNameFelrockTempleInterior;
+    static String textNameFelrockTownHallExterior;
+    static String textNameFelrockTownHallInteriorGroundFloor;
+    static String textNameFelrockTownHallInteriorLobby;
+    static String textNameFelrockTownHallInteriorFirstFloor;
+    static String textNameFelrockTownHallInteriorSecondFloor;
+    static String textNameCaveOfAnguishExterior;
+    static String textNameCaveOfAnguishInterior;
+    static String textNameClearing;
+    static String textNameIceblueRiver;
+    static String textNameGardenOfCorruption;
+    static String textNameGardenOfRadiance;
 
     static String textDescriptionCampsite;
+    static String textDescriptionCrossroads;
+    static String textDescriptionCrystalLake;
+    static String textDescriptionWildernessRoad;
+    static String textDescriptionFelrockVillage;
+    static String textDescriptionFelrockTempleExterior;
+    static String textDescriptionFelrockTempleInterior;
+    static String textDescriptionFelrockTownHallExterior;
+    static String textDescriptionFelrockTownHallInteriorGroundFloor;
+    static String textDescriptionFelrockTownHallInteriorLobby;
+    static String textDescriptionFelrockTownHallInteriorFirstFloor;
+    static String textDescriptionFelrockTownHallInteriorSecondFloor;
+    static String textDescriptionCaveOfAnguishExterior;
+    static String textDescriptionCaveOfAnguishInterior;
+    static String textDescriptionClearing;
+    static String textDescriptionIceblueRiver;
+    static String textDescriptionGardenOfCorruption;
+    static String textDescriptionGardenOfRadiance;
 
+    //Campsite
     static String textCampsiteSouth;
     static String textCampsiteEast;
     static String textCampsiteWest;
+    //Crossroads
+    static String textCrossroadsNorth;
+    static String textCrossroadsWest;
+    //Crystal Lake
+    static String textCrystalLakeSouth;
+    static String textCrystalLakeEast;
+    static String textCrystalLakeWest;
+    //Wilderness Road
+    static String textWildernessRoadNorth;
+    static String textWildernessRoadSouth;
+    //Felrock Village
+    static String textFelrockVillageNorth;
+    //Felrock TempleExterior
+    static String textFelrockTempleExteriorSouth;
+    static String textFelrockTempleExteriorEast;
+    static String textFelrockTempleExteriorWest;
+    //Felrock TempleInterior
+    static String textFelrockTempleInteriorNorth;
+    static String textFelrockTempleInteriorSouth;
+    static String textFelrockTempleInteriorEast;
+    static String textFelrockTempleInteriorWest;
+    //Felrock Town Hall Exterior
+    static String textFelrockTownHallExteriorNorth;
+    static String textFelrockTownHallExteriorEast;
+    static String textFelrockTownHallExteriorWest;
+    //Felrock Town Hall Interior Ground Floor
+    static String textFelrockTownHallInteriorGroundFloorNorth;
+    static String textFelrockTownHallInteriorGroundFloorSouth;
+    static String textFelrockTownHallInteriorGroundFloorWest;
+    static String textFelrockTownHallInteriorGroundFloorEast;
+    //Felrock Town Hall Interior Lobby
+    static String textFelrockTownHallInteriorLobbyNorth;
+    static String textFelrockTownHallInteriorLobbySouth;
+    static String textFelrockTownHallInteriorLobbyWest;
+    static String textFelrockTownHallInteriorLobbyEast;
+    //Felrock Town Hall Interior First Floor
+    static String textFelrockTownHallInteriorFirstFloorNorth;
+    static String textFelrockTownHallInteriorFirstFloorSouth;
+    static String textFelrockTownHallInteriorFirstFloorWest;
+    static String textFelrockTownHallInteriorFirstFloorEast;
+    //Felrock Town Hall Interior Second Floor
+    static String textFelrockTownHallInteriorSecondFloorNorth;
+    static String textFelrockTownHallInteriorSecondFloorSouth;
+    static String textFelrockTownHallInteriorSecondFloorWest;
+    static String textFelrockTownHallInteriorSecondFloorEast;
+    //Cave Of Anguish Exterior
+    static String textCaveOfAnguishExteriorNorth;
+    static String textCaveOfAnguishExteriorEast;
+    static String textCaveOfAnguishExteriorWest;
+    //Cave Of Anguish Interior
+    static String textCaveOfAnguishInteriorNorth;
+    static String textCaveOfAnguishInteriorSouth;
+    static String textCaveOfAnguishInteriorEast;
+    static String textCaveOfAnguishInteriorWest;
+    //Clearing
+    static String textClearingNorth;
+    static String textClearingEast;
+    //Iceblue River
+    static String textIceblueRiverEast;
+    //Garden Of Corruption
+    static String textGardenOfCorruptionNorth;
+    static String textGardenOfCorruptionSouth;
+    static String textGardenOfCorruptionEast;
+    //Garden Of Radiance
+    static String textGardenOfRadianceNorth;
+    static String textGardenOfRadianceSouth;
+    static String textGardenOfRadianceEast;
+
     public static void main(String[] args)
     {
         InitializeComponents();
@@ -25,16 +126,12 @@ class Main
         IItem flask = new Flask("pick","drop");
         //scene init
         Scene campsite = new Scene(textNameCampsite,textDescriptionCampsite, textNameCrossroads,textCampsiteSouth,textCampsiteEast,textCampsiteWest, flask);
-        Scene crossroads = new Scene("Crossroads","The moment you leave the campsite you see the, one and only, road leading upwards, so you take it.\n" +
-                "After a while you are facing a large crossroads and must decide which way to go.","Not yet made","Crystal Lake","Wild Road", "There is a pine forest to your west.", shinyRock);
+        Scene crossroads = new Scene(textNameCrossroads,textDescriptionCrossroads,textCrossroadsNorth,textNameCrystalLake,textNameFelrockVillage,textCrossroadsWest,shinyRock);
+        Scene crystalLake = new Scene(textNameCrystalLake,textDescriptionCrystalLake,textNameCrossroads,textCrystalLakeSouth,textCrystalLakeEast,textCrystalLakeWest);
+        Scene wildernessRoad = new Scene(textNameWildernessRoad,textDescriptionWildernessRoad,textWildernessRoadNorth,textWildernessRoadSouth,textNameFelrockVillage,textNameCrossroads);
         /*
-        Scene crystalLake = new CrystalLakeScene("Crossroads","You can see the campsite from here but you can't reach it, it's on a higher ground.",
-                                           "A dense forest, with short but many trees expands to your east.",
-                                           "To your west you can barely see the road connecting the Campsite with the Crossroads point.");
-        Scene wildernessRoad = new WildernessRoadScene("Not yet made","You now have a panoramic view of the dense forest.","Felrock Village","Crossroads");
-        Scene felrockVillage = new FelrockVillageScene("More trees forming another huge forest.","The dense forest of short trees continues to more south-eastern parts of the area.",
-                                                        "Cave Of Anguish: Exterior","Wild Road");
-        Scene felrockTempleExterior = new FelrockTempleExteriorScene("The village's stone fountain is located right in the middle of the plateau.",
+        Scene felrockVillage = new Scene("More trees forming another huge forest.","The dense forest of short trees continues to more south-eastern parts of the area.", "Cave Of Anguish: Exterior","Wild Road");
+        Scene felrockTempleExterior = new Scene("The village's stone fountain is located right in the middle of the plateau.",
                                                                       "The dense forest completely surrounds the village, providing a good defence at the same time.",
                                                                       "To your east are neatly built some residencies.",
                                                                       "To your west there are some trees and, further, the road which you came from.");
@@ -71,7 +168,6 @@ class Main
                                                             "On your left, still stands the wooden bridge."); */
         handler.addScene(campsite);
         handler.addScene(crossroads);
-        /*
         handler.addScene(crystalLake);
         handler.addScene(wildernessRoad);
         handler.addScene(felrockVillage);
@@ -87,7 +183,7 @@ class Main
         handler.addScene(clearing);
         handler.addScene(iceblueRiver);
         handler.addScene(gardenOfCorruption);
-        //handler.addScene(gardenOfRadiance); */
+        handler.addScene(gardenOfRadiance);
 
         //commands to use
         ICommand go = new GoCommand();
@@ -96,6 +192,7 @@ class Main
         ICommand cry = new CryCommand();
         ICommand drop = new DropCommand();
         ICommand inventory = new InventoryCommand();
+
         handler.addCommand(go);
         handler.addCommand(look);
         handler.addCommand(pick);
@@ -131,11 +228,48 @@ class Main
     {
         textNameCampsite = "Campsite";
         textNameCrossroads = "Crossroads";
+        textNameCrystalLake = "Crystal Lake";
+        textNameWildernessRoad = "Wilderness Road";
+        textNameFelrockVillage = "Felrock Village";
+        textNameFelrockTempleExterior = "Felrock Temple Exterior";
+        textNameFelrockTempleInterior = "Felrock Temple Interior";
+        textNameFelrockTownHallExterior = "Felrock Town Hall Exterior";
+        textNameFelrockTownHallInteriorGroundFloor = "Felrock Town Hall Interior Ground Floor";
+        textNameFelrockTownHallInteriorLobby = "Felrock Town Hall Interior Lobby";
+        textNameFelrockTownHallInteriorFirstFloor = "Felrock Town Hall Interior First Floor";
+        textNameFelrockTownHallInteriorSecondFloor = "Felrock Town Hall Interior Second Floor";
+        textNameCaveOfAnguishExterior = "Cave Of Anguish Exterior";
+        textNameCaveOfAnguishInterior = "Cave Of Anguish Interior";
+        textNameClearing = "Clearing";
+        textNameIceblueRiver = "Iceblue River";
+        textNameGardenOfCorruption = "Garden Of Corruption";
+        textNameGardenOfRadiance = "Garden Of Radiance";
 
-        textDescriptionCampsite = "You grab your stuff and begin traveling to the NORTH, while the night offers you the perfect cover from prying eyes.\nYou plan to arrive at Serenoth within 20 days,\nunless something unexpected happens.";
-        textCampsiteEast = "nothing!";
-        textCampsiteSouth = "notign";
-        textCampsiteWest = "nooooothing";
+        textDescriptionCampsite = "You grab your stuff and begin traveling to the NORTH,\n" +
+                "while the night offers you the perfect cover from prying eyes.\n" +
+                "You plan to arrive at Serenoth within 20 days,\n" +
+                "unless something unexpected happens.";
+        textCampsiteSouth = "You can't return home yet. The war still rages and the world needs a hero. Will you not be the one?";
+        textCampsiteEast = "The Campsite is located in a rather rocky and mountainous scenery \n" +
+                "so the only thing to see are some really big hills blocking your view to the far east.";
+        textCampsiteWest = "Not much to see to the west, for the mighty hills hinder your sight \n" +
+                "and the western part of this area remains unknown.";
+
+        textDescriptionCrossroads = "The moment you leave the campsite you see the, one and only, road leading upwards, so you take it. \n" +
+                "After a while you are facing a large crossroads and must decide which way to go.";
+        textCrossroadsNorth = "There is nothing up to the north.";
+        textCrossroadsWest = "A dimly lit and steep trail leads to a dark forest to the west. \n" +
+                "It would, probably, be a good idea not to follow that road.";
+
+        textDescriptionCrystalLake = "You head south following a downhill which leads you to a clearing. \n" +
+                "A fairly big lake is located in the center of a, 10-feet diameter, overgrown field. \n" +
+                "The water seems clean enough to be considered drinkable. \n" +
+                "Coincidentally, you start feeling thirsty. \n" +
+                "Seeing the abundance of water makes you think you could fill your flask from the lake.";
+        textCrystalLakeSouth = "You can clearly see the Campsite from down here, despite being at a lower level. \n" +
+                "Unfortunately, there is a steep slope that prevents you from going back that way.";
+        textCrystalLakeEast = "There is nothing to see but trees and mountainsides.";
+        textCrystalLakeWest = "The road that you took when you left the campsite is visible from here too.";
     }
 
 
