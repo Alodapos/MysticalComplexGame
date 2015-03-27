@@ -6,17 +6,25 @@ import java.util.Scanner;
 
 class Main
 {
+
+    static String textNameCampsite;
+    static String textNameCrossroads;
+    static String textNameCrystalLake;
+
+    static String textDescriptionCampsite;
+
+    static String textCampsiteSouth;
+    static String textCampsiteEast;
+    static String textCampsiteWest;
     public static void main(String[] args)
     {
+        InitializeComponents();
         InputHandler handler = new InputHandler();
         //items init
         IItem shinyRock = new ShinyRock("pick","drop");
         IItem flask = new Flask("pick","drop");
         //scene init
-        Scene campsite = new Scene("Campsite","You grab your stuff and begin traveling to the NORTH,\n" +
-                "while the night offers you the perfect cover from prying eyes.\n" +
-                "You plan to arrive at Serenoth within 20 days,\n" +
-                "unless something unexpected happens.\n" ,"Crossroads", "nothing", "nothing", "nothing", flask);
+        Scene campsite = new Scene(textNameCampsite,textDescriptionCampsite, textNameCrossroads,textCampsiteSouth,textCampsiteEast,textCampsiteWest, flask);
         Scene crossroads = new Scene("Crossroads","The moment you leave the campsite you see the, one and only, road leading upwards, so you take it.\n" +
                 "After a while you are facing a large crossroads and must decide which way to go.","Not yet made","Crystal Lake","Wild Road", "There is a pine forest to your west.", shinyRock);
         /*
@@ -118,5 +126,17 @@ class Main
         } while (!player.getLocation().getName().equals("The Sage"));
         System.out.println("\n\n\nYou have completed ACT I, ACT II is under development, stay tuned for more...\n");
     }
+
+    private static  void InitializeComponents()
+    {
+        textNameCampsite = "Campsite";
+        textNameCrossroads = "Crossroads";
+
+        textDescriptionCampsite = "You grab your stuff and begin traveling to the NORTH, while the night offers you the perfect cover from prying eyes.\nYou plan to arrive at Serenoth within 20 days,\nunless something unexpected happens.";
+        textCampsiteEast = "nothing!";
+        textCampsiteSouth = "notign";
+        textCampsiteWest = "nooooothing";
+    }
+
 
 }
