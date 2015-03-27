@@ -60,7 +60,7 @@ class Main
     static String textWildernessRoadNorth;
     static String textWildernessRoadSouth;
     //Felrock Village
-    static String textFelrockVillageNorth;
+    //TODO future changes
     //Felrock TempleExterior
     static String textFelrockTempleExteriorSouth;
     static String textFelrockTempleExteriorEast;
@@ -104,10 +104,10 @@ class Main
     static String textCaveOfAnguishInteriorEast;
     static String textCaveOfAnguishInteriorWest;
     //Clearing
-    static String textClearingNorth;
     static String textClearingEast;
     //Iceblue River
     static String textIceblueRiverEast;
+    static String textIceblueRiverWest;
     //Garden Of Corruption
     static String textGardenOfCorruptionNorth;
     static String textGardenOfCorruptionSouth;
@@ -126,7 +126,7 @@ class Main
         IItem flask = new Flask("pick","drop");
         //scene init
         Scene campsite = new Scene(textNameCampsite,textDescriptionCampsite, textNameCrossroads,textCampsiteSouth,textCampsiteEast,textCampsiteWest, flask);
-        Scene crossroads = new Scene(textNameCrossroads,textDescriptionCrossroads,textCrossroadsNorth,textNameCrystalLake,textNameFelrockVillage,textCrossroadsWest,shinyRock);
+        Scene crossroads = new Scene(textNameCrossroads,textDescriptionCrossroads,textCrossroadsNorth,textNameCrystalLake,textNameWildernessRoad,textCrossroadsWest,shinyRock);
         Scene crystalLake = new Scene(textNameCrystalLake,textDescriptionCrystalLake,textNameCrossroads,textCrystalLakeSouth,textCrystalLakeEast,textCrystalLakeWest);
         Scene wildernessRoad = new Scene(textNameWildernessRoad,textDescriptionWildernessRoad,textWildernessRoadNorth,textWildernessRoadSouth,textNameFelrockVillage,textNameCrossroads);
         /*
@@ -170,6 +170,7 @@ class Main
         handler.addScene(crossroads);
         handler.addScene(crystalLake);
         handler.addScene(wildernessRoad);
+        /*
         handler.addScene(felrockVillage);
         handler.addScene(felrockTempleExterior);
         handler.addScene(felrockTempleInterior);
@@ -183,7 +184,7 @@ class Main
         handler.addScene(clearing);
         handler.addScene(iceblueRiver);
         handler.addScene(gardenOfCorruption);
-        handler.addScene(gardenOfRadiance);
+        handler.addScene(gardenOfRadiance); */
 
         //commands to use
         ICommand go = new GoCommand();
@@ -257,9 +258,10 @@ class Main
 
         textDescriptionCrossroads = "The moment you leave the campsite you see the, one and only, road leading upwards, so you take it. \n" +
                 "After a while you are facing a large crossroads and must decide which way to go.";
-        textCrossroadsNorth = "There is nothing up to the north.";
-        textCrossroadsWest = "A dimly lit and steep trail leads to a dark forest to the west. \n" +
+        textCrossroadsNorth = "A dimly lit and steep trail leads to a dark forest to the west. \n" +
                 "It would, probably, be a good idea not to follow that road.";
+        textCrossroadsWest = "There lies the path you came from, you should continue your journey.";
+
 
         textDescriptionCrystalLake = "You head south following a downhill which leads you to a clearing. \n" +
                 "A fairly big lake is located in the center of a, 10-feet diameter, overgrown field. \n" +
@@ -270,6 +272,99 @@ class Main
                 "Unfortunately, there is a steep slope that prevents you from going back that way.";
         textCrystalLakeEast = "There is nothing to see but trees and mountainsides.";
         textCrystalLakeWest = "The road that you took when you left the campsite is visible from here too.";
+
+        textDescriptionWildernessRoad = "As you walk the east road, you begin to perceive a blurry landscape which, as it seems, consists by some kind of structures surrounded by tall trees. \n" +
+                "The closer you get, the clearer it becomes. It seems you have arrived at a small, remote, yet peaceful village. \n" +
+                "At the end of the path you see a sign reading \"Felrock Village\". \n" +
+                "Do you want to proceed entering the village or you want to try another path?";
+        textWildernessRoadNorth = "Not made yet";
+        textWildernessRoadSouth = "You can see the Crystal Lake fading away as you keep walking down that road. \n" +
+                "The trees now block your sight as you leave the Campsite and the Crystal Lake behind.";
+
+        textDescriptionFelrockVillage = "You slowly and reluctantly enter the village, \n" +
+                "quickly throwing your eyes at everything you meet in order to examine the place and be prepared for any unpleasant surprises. \n" +
+                "You can clearly see some residencies and realise that this is a small village with a very few inhabitants. \n" +
+                "There is a very big, simple, stone fountain in the middle of the village, spouting crystal clear water from its holes. \n" +
+                "On its east you can distinguish a great and majestic building which, judging from the decoration, size and location, must be the village's worship temple. \n" +
+                "On the west, there lies a grand structure, of white and pale shades of brown which, considering the architecture that's been used and its position, must be the town hall. \n" +
+                "To the north, your sight follows a path, quite narrow, leading somewhere far ahead, but you can't see exactly where.";
+
+        textDescriptionFelrockTempleExterior = "As you walk towards the temple you descry more and more details curved on its stone framework. \n" +
+                "You now stand in front of the construction. \n" +
+                "The intense greenery around the temple seems to have been there long before it was built. \n" +
+                "The entrance is huge and memorable and the gate is shut but probably unlocked.";
+        textFelrockTempleExteriorSouth = "The dense forest completely surrounds the village, providing a good defence at the same time.";
+        textFelrockTempleExteriorEast = "To your east are neatly built some residencies. \n" +
+                "It's late in the afternoon so it would be a good idea not to disturb the villagers.";
+        textFelrockTempleExteriorWest = "To your west there are some trees and, further, the road which you came from.";
+
+        textDescriptionFelrockTempleInterior = "You get in front of the gate and with a strong push you open it wide. \n" +
+                "What you encounter is a bit more than surprising. \n" +
+                "It seems like this temple has not been visited or used in any way for a long time. \n" +
+                "Cobwebs in every corner, dusty benches and rusted metal candlesticks lie on the floor. \n" +
+                "Further inside, there is an altar, with a pile of scriptures on top. \n" +
+                "On the leftmost section of the hall is a wide, flat surface on the wall \n" +
+                "that looks, weirdly enough, untouched by time or decay. \n" +
+                "Also, on some points, you can detect some vertical, possibly man-made, engraves \n" +
+                "but you can't seem to understand their purpose.";
+        textFelrockTempleInteriorNorth = "You can't travel while inside the Temple.";
+        textFelrockTempleInteriorSouth = "You can't travel while inside the Temple.";
+        textFelrockTempleInteriorEast = "You can't travel while inside the Temple.";
+        textFelrockTempleInteriorWest = "You can't travel while inside the Temple.";
+
+        textDescriptionFelrockTownHallExterior = "Only by getting closer to the building, you can estimate how magnificent it truly is. \n" +
+                "Its banners flutter as the wind passes through them. \n" +
+                "It seems well preserved and, possibly, recently built or renovated. \n" +
+                "It also has weird decorations all over its stony framework. \n" +
+                "No one is entering or exiting the building since it's a small and quite village with a very low population. \n" +
+                "But, surely, there will be someone inside.";
+        textFelrockTownHallExteriorNorth = "More of a dense growth over there.";
+        textFelrockTownHallExteriorEast = "There's one weird road leading away from the village to your east.";
+        textFelrockTownHallExteriorWest = "Some more residencies are neatly built here.";
+
+        textDescriptionFelrockTownHallInteriorGroundFloor = "Surprisingly, the door requires a bit above than average force to open, \n" +
+                "but with a tight grip and a strong push you manage to shove it aside. \n" +
+                "Before you spreads a long hallway, ending up in a grand lobby. \n" +
+                "On your left, a staircase extends all the way up, to the top of the Town Hall. \n" +
+                "As far as you can see there are three floors, including the ground floor. \n" +
+                "On your right and left there are several rooms, probably offices and storerooms. \n" +
+                "While you examine your surroundings and trying to see what's on the top floors, a low voice is heard in the distance, \n" +
+                "but the only words you can make out are: \"cave\" and \"corruption\". \n" +
+                "At once, a different voice replies and you can only hear the words: \"dying\" and \"leave\". \n" +
+                "The conversation continues...";
+        textFelrockTownHallInteriorGroundFloorNorth = "You can't travel while inside the Town Hall.";
+        textFelrockTownHallInteriorGroundFloorSouth = "You can't travel while inside the Town Hall.";
+        textFelrockTownHallInteriorGroundFloorEast = "You can't travel while inside the Town Hall.";
+        textFelrockTownHallInteriorGroundFloorWest = "You can't travel while inside the Town Hall.";
+
+        textDescriptionFelrockTownHallInteriorLobby = "Reluctantly, you get closer to the room and the voices are getting clearer. \n" +
+                "The two men hear your footsteps and stop at once. \n" +
+                "When you reveal yourself they look at you with shirred eyes and a concerned expression. +\n" +
+                "Now one of them is approaching you. He is tall, wearing some kind of armour and holds a stick in his right hand. \n" +
+                "You sense that he could be a very strict character and probably a high-ranked member of the village's army. \n" +
+                "He greets you with a brief introduction, telling you his name: <General \"name of tall man\"> and asking for yours. \n" +
+                "...<user name input>... \n" +
+                "You kindly introduce yourself to both and ask to learn who the other man is. \n" +
+                "He is significantly shorter than <name of tall man> and wears neat and elegant clothes making him very prestigious. \n" +
+                "He holds a small case in his hands. His name is <name of short man>. \n" +
+                "He tells you that he is the mayor's advisor.";
+        textFelrockTownHallInteriorLobbyNorth = "You can't travel while inside the Town Hall.";
+        textFelrockTownHallInteriorLobbySouth = "You can't travel while inside the Town Hall.";
+        textFelrockTownHallInteriorLobbyEast = "You can't travel while inside the Town Hall.";
+        textFelrockTownHallInteriorLobbyWest = "You can't travel while inside the Town Hall.";
+
+        textDescriptionFelrockTownHallInteriorFirstFloor = "";
+        textFelrockTownHallInteriorFirstFloorNorth = "You can't travel while inside the Town Hall.";
+        textFelrockTownHallInteriorFirstFloorSouth = "You can't travel while inside the Town Hall.";
+        textFelrockTownHallInteriorFirstFloorEast = "You can't travel while inside the Town Hall.";
+        textFelrockTownHallInteriorFirstFloorWest = "You can't travel while inside the Town Hall.";
+
+        textDescriptionFelrockTownHallInteriorSecondFloor = "You push the door to open but it won't budge. \n" +
+                "It seems to be locked for the moment, though the right key would unlock it right away.";
+        textFelrockTownHallInteriorSecondFloorNorth = "You can't travel while inside the Town Hall.";
+        textFelrockTownHallInteriorSecondFloorSouth = "You can't travel while inside the Town Hall.";
+        textFelrockTownHallInteriorSecondFloorEast = "You can't travel while inside the Town Hall.";
+        textFelrockTownHallInteriorSecondFloorWest = "You can't travel while inside the Town Hall.";
     }
 
 
