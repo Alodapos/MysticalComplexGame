@@ -35,6 +35,8 @@ public class GoCommand implements ICommand
         {
             character.setLocation(scenes.get(character.getLocation().getConnection(desiredDirection)));
             character.getLocation().printDescription();
+            character.setThirstLevel(character.getThirstLevel()-1);
+
         }
 
     }
