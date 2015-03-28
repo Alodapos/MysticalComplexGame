@@ -8,7 +8,7 @@ import java.util.Collections;
 import java.util.List;
 
 
-public class Flask implements IItem
+public class Flask  extends LiquidContainer implements IItem
 {
     private String name;
     private String description;
@@ -20,7 +20,7 @@ public class Flask implements IItem
     public Flask(String...tags)
     {
         name = "flask";
-        description= "A small sized, leather flask filled at 3/5 with water.";
+        description= "There is a small sized, leather flask fully filled with water lying on a wooden table.";
         inventoryDescription = "A small flask.";
         useFailed = "There is no water source nearby.";
         useSuccessful = "You fill your flask with water.";
@@ -31,7 +31,7 @@ public class Flask implements IItem
     @Override
     public void useItem(Character player, List<Scene> scenes)
     {
-        if(!player.getInventory().containsKey("water"))
+        if(!player.getLocation().getItems().containsKey("water"))
             System.out.println(useFailed);
         else
         //TODO else
@@ -39,33 +39,41 @@ public class Flask implements IItem
     }
 
     @Override
-    public String getInventoryDescription() {
-        return inventoryDescription;
+    public void drink(Character character)
+    {
+        character.setThirstLevel(10);
+        System.out.println("You drink from the " + this.name + " and quench your thirst.");
     }
 
     @Override
-    public void setInventoryDescription(String inventoryDescription) {
-        this.inventoryDescription = inventoryDescription;
+    public String getDescription()
+    {
+        return  this.description;
     }
-
     @Override
-    public String getDescription() {
-        return description;
-    }
-
-    @Override
-    public void setDescription(String description) {
+    public void setDescription(String description)
+    {
         this.description = description;
     }
-
     @Override
-    public String getName() {
-        return name;
+    public String getName()
+    {
+        return this.name;
     }
-
     @Override
-    public void setName(String name) {
+    public void setName(String name)
+    {
         this.name = name;
+    }
+    @Override
+    public void setInventoryDescription(String inventoryDescription)
+    {
+        this.inventoryDescription = inventoryDescription;
+    }
+    @Override
+    public String getInventoryDescription()
+    {
+        return this.inventoryDescription;
     }
 
     @Override

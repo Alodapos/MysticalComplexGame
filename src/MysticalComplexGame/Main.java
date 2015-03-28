@@ -2,6 +2,7 @@ package MysticalComplexGame;
 
 import MysticalComplexGame.Items.*;
 import MysticalComplexGame.Commands.*;
+
 import java.util.Scanner;
 
 class Main
@@ -96,13 +97,10 @@ class Main
     static String textFelrockTownHallInteriorSecondFloorEast;
     //Cave Of Anguish Exterior
     static String textCaveOfAnguishExteriorNorth;
+    static String textCaveOfAnguishExteriorSouth;
     static String textCaveOfAnguishExteriorEast;
-    static String textCaveOfAnguishExteriorWest;
     //Cave Of Anguish Interior
-    static String textCaveOfAnguishInteriorNorth;
-    static String textCaveOfAnguishInteriorSouth;
-    static String textCaveOfAnguishInteriorEast;
-    static String textCaveOfAnguishInteriorWest;
+    static String textCaveOfAnguishInteriorNoPass;
     //Clearing
     static String textClearingEast;
     //Iceblue River
@@ -123,7 +121,7 @@ class Main
         InputHandler handler = new InputHandler();
         //items init
         IItem shinyRock = new ShinyRock("pick","drop");
-        IItem flask = new Flask("pick","drop");
+        IItem flask = new Flask("pick","drop","drink");
         //scene init
         Scene campsite = new Scene(textNameCampsite,textDescriptionCampsite, textNameCrossroads,textCampsiteSouth,textCampsiteEast,textCampsiteWest, flask);
         Scene crossroads = new Scene(textNameCrossroads,textDescriptionCrossroads,textCrossroadsNorth,textNameCrystalLake,textNameWildernessRoad,textCrossroadsWest,shinyRock);
@@ -193,6 +191,7 @@ class Main
         ICommand cry = new CryCommand();
         ICommand drop = new DropCommand();
         ICommand inventory = new InventoryCommand();
+        ICommand drink = new DrinkCommand();
 
         handler.addCommand(go);
         handler.addCommand(look);
@@ -200,6 +199,7 @@ class Main
         handler.addCommand(cry);
         handler.addCommand(drop);
         handler.addCommand(inventory);
+        handler.addCommand(drink);
         //player character
         Character player = new Character("player",campsite);
         //initializing some more stuff
@@ -221,6 +221,11 @@ class Main
             userInput = new Scanner(System.in);
             userInputString = userInput.nextLine().trim();
             handler.handleInput(userInputString, player);
+            if (player.getThirstLevel() == 0 )
+            {
+                System.out.println("You fall to your knees from dehydration and...slowly.....die...RIP IN PIS "+player.getName());
+                System.exit(-10);
+            }
         } while (!player.getLocation().getName().equals("The Sage"));
         System.out.println("\n\n\nYou have completed ACT I, ACT II is under development, stay tuned for more...\n");
     }
@@ -275,9 +280,8 @@ class Main
 
         textDescriptionWildernessRoad = "As you walk the east road, you begin to perceive a blurry landscape which, as it seems, consists by some kind of structures surrounded by tall trees. \n" +
                 "The closer you get, the clearer it becomes. It seems you have arrived at a small, remote, yet peaceful village. \n" +
-                "At the end of the path you see a sign reading \"Felrock Village\". \n" +
-                "Do you want to proceed entering the village or you want to try another path?";
-        textWildernessRoadNorth = "Not made yet";
+                "At the end of the path you see a sign reading \"Felrock Village\".";
+        textWildernessRoadNorth = "Not made yet.";
         textWildernessRoadSouth = "You can see the Crystal Lake fading away as you keep walking down that road. \n" +
                 "The trees now block your sight as you leave the Campsite and the Crystal Lake behind.";
 
@@ -365,6 +369,33 @@ class Main
         textFelrockTownHallInteriorSecondFloorSouth = "You can't travel while inside the Town Hall.";
         textFelrockTownHallInteriorSecondFloorEast = "You can't travel while inside the Town Hall.";
         textFelrockTownHallInteriorSecondFloorWest = "You can't travel while inside the Town Hall.";
+
+        textDescriptionCaveOfAnguishExterior = "From the roads leading away from the village you take the northern. +\n" +
+                "It's a relatively short road, not very wide, but neither too slim. \n" +
+                "Unlike the village's scenery, here lies a barren landscape, with no trees, no flowers, no water either. \n" +
+                "As the road seems to be coming to its end, you begin to sense an unsettling aura filling the space around you. \n" +
+                "But what you witness further ahead is far worse. \n" +
+                "The whole place is surrounded by a thick fog and an increased humidity fills the atmosphere. \n" +
+                "A dark, blackish, rocky and extremely huge entrance stands before you. \n" +
+                "It's been dug out by men, probably many, many years ago and it bears a sign, which is too clean to be older than a month, that tells: \n" +
+                "\"WARNING! \n" +
+                "You are about to enter the Cave of Anguish. \n" +
+                "Death awaits all those who enter and all who have entered did not return. \n" +
+                "Proceed at your own risk. \n" +
+                "WARNING! \n" +
+                " There are also two medium sized torches placed on each side of the cave's entrance that burn bright. \n" +
+                "Now you can clearly feel dark energies emanating from the cave's insides. \n" +
+                "Vision is blocked beyond the threshold of the entrance and since the mountain is massive you can't see past it, \n" +
+                "for it spreads far to the east and a dense forest extends to the west.";
+        textCaveOfAnguishExteriorNorth = "The cave's dark hollow stands before you. Will you dare pass through?";
+        textCaveOfAnguishExteriorSouth = "A massive forest is all you can see to your south.";
+        textCaveOfAnguishExteriorEast = "There is nothing but rocks and hills there.";
+
+        textDescriptionCaveOfAnguishInterior = "";
+        textCaveOfAnguishInteriorNoPass = "You can't travel while inside the Cave";
+
+
+
     }
 
 
