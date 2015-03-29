@@ -1,17 +1,16 @@
 package MysticalComplexGame.Commands;
 
 import MysticalComplexGame.Character;
+import MysticalComplexGame.GameContent;
 import MysticalComplexGame.Items.IItem;
-import MysticalComplexGame.Scene;
-import java.util.HashMap;
 import java.util.Map;
 
 public class InventoryCommand implements ICommand
 {
 
-    String name;
-    String invalidArgument;
-    String emptyInventory;
+    private String name;
+    private String invalidArgument;
+    private String emptyInventory;
 
     public InventoryCommand()
     {
@@ -26,7 +25,7 @@ public class InventoryCommand implements ICommand
     }
 
     @Override
-    public void executeCommand(Character character, String argument, Map<String, Scene> scenes)
+    public void executeCommand(Character character, String argument, GameContent content)
     {
         if (!argument.equals("")) System.out.println(invalidArgument);
         else if (character.getInventory().isEmpty()) System.out.println(emptyInventory);

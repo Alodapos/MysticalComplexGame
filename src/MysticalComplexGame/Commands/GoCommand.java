@@ -2,8 +2,7 @@ package MysticalComplexGame.Commands;
 
 import MysticalComplexGame.Character;
 import MysticalComplexGame.Direction;
-import MysticalComplexGame.Scene;
-import java.util.*;
+import MysticalComplexGame.GameContent;
 
 public class GoCommand implements ICommand
 {
@@ -25,19 +24,17 @@ public class GoCommand implements ICommand
     }
 
     @Override
-    public void executeCommand(Character character, String argument, Map<String, Scene> scenes)
+    public void executeCommand(Character character, String argument, GameContent content)
     {
         Direction desiredDirection = Direction.fromString(argument);
         if (argument.matches("")) System.out.println(missingArgument);
         else if (desiredDirection == null) System.out.println(invalidArgument);
-        else if (!scenes.containsKey(character.getLocation().getConnection(desiredDirection))) System.out.println(character.getLocation().getConnection(desiredDirection));
+        else if (!character.getLocation().getConnection(desiredDirection).isOpen()) System.out.println(character.getLocation().getConnection(desiredDirection));
         else
         {
-            character.setLocation(scenes.get(character.getLocation().getConnection(desiredDirection)));
+            character.setLocation(character.getLocation().getConnection(desiredDirection).getNextScene());
             character.getLocation().printDescription();
             character.setThirstLevel(character.getThirstLevel()-1);
-
         }
-
     }
 }

@@ -1,16 +1,15 @@
 package MysticalComplexGame.Commands;
 
 import MysticalComplexGame.Character;
-import MysticalComplexGame.Scene;
-import java.util.Map;
+import MysticalComplexGame.GameContent;
 
 public class DropCommand implements ICommand
 {
 
-    String missingArgument;
-    String invalidArgument;
-    String actionFailed;
-    String name;
+    private String missingArgument;
+    private String invalidArgument;
+    private String actionFailed;
+    private String name;
     public DropCommand()
     {
         missingArgument = "You have to specify what do you want to drop.";
@@ -24,7 +23,7 @@ public class DropCommand implements ICommand
         return name;
     }
     @Override
-    public void executeCommand(Character character, String argument, Map<String, Scene> scenes)
+    public void executeCommand(Character character, String argument, GameContent content)
     {
         if (argument.equals("")) System.out.println(missingArgument);
         else if (!character.getInventory().containsKey(argument)) System.out.println(invalidArgument);

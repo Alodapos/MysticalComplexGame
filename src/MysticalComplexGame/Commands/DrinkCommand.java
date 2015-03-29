@@ -1,9 +1,9 @@
 package MysticalComplexGame.Commands;
 
 import MysticalComplexGame.Character;
+import MysticalComplexGame.GameContent;
 import MysticalComplexGame.Items.LiquidContainer;
-import MysticalComplexGame.Scene;
-import java.util.Map;
+
 
 public class DrinkCommand implements ICommand
 {
@@ -13,6 +13,7 @@ public class DrinkCommand implements ICommand
     private String itemMissing;
     private String invalidArgument;
     private String tag;
+
 
     public DrinkCommand()
     {
@@ -29,15 +30,13 @@ public class DrinkCommand implements ICommand
     }
 
     @Override
-    public void executeCommand(Character character, String argument, Map<String, Scene> scenes)
+    public void executeCommand(Character character, String argument, GameContent content)
     {
+        LiquidContainer itemArgument = (LiquidContainer)character.getInventory().get(argument);
         if (argument.isEmpty()) System.out.println(missingArgument);
-        else if (character.getInventory().get(argument)== null) System.out.println(itemMissing);
-        else if (!character.getInventory().get(argument).getTags().contains(tag)) System.out.println(invalidArgument);
-        else
-        {
-            LiquidContainer item = (LiquidContainer)character.getInventory().get(argument);
-            item.drink(character);
-        }
+        else if (itemArgument == null) System.out.println(itemMissing);
+        else if (!itemArgument.getTags().contains(tag)) System.out.println(invalidArgument);
+        else itemArgument.drink(character);
+
     }
 }

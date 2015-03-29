@@ -11,7 +11,6 @@ public enum Direction {
     {
         this.direction = direction;
     }
-
     public static Direction fromString(String direction)
     {
         if (direction != null) {

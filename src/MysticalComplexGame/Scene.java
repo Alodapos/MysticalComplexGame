@@ -9,30 +9,20 @@ public class Scene
     private String description;
     private String name;
     private Map<String, IItem> items;
-    private Map<Direction,String> connections;
+    private Map<Direction, SceneConnection> connections;
 
-    public Scene(String name, String description,String northPlace, String southPlace, String eastPlace, String westPlace,IItem...items)
+    public Scene(String name, String description,IItem...items)
     {
-        this.connections = new HashMap<Direction, String>();
+        this.connections = new HashMap<Direction, SceneConnection>();
         this.items = new HashMap<String,IItem>();
         this.name = name;
         this.description = description;
         for (IItem item: items) this.items.put(item.getName(),item);
-        connections.put(Direction.NORTH,northPlace);
-        connections.put(Direction.SOUTH,southPlace);
-        connections.put(Direction.EAST,eastPlace);
-        connections.put(Direction.WEST,westPlace);
     }
 
-
-    public String getConnection(Direction direction)
+    public SceneConnection getConnection(Direction direction)
     {
         return this.connections.get(direction);
-    }
-
-    public void setConnection(Direction direction,String place)
-    {
-        this.connections.replace(direction,place);
     }
 
     public void printDescription()
@@ -40,6 +30,11 @@ public class Scene
         System.out.println("\t\t\t\t\t\""+this.name +"\""+"\n");
         System.out.println(this.description);
         for (Map.Entry<String, IItem> item : items.entrySet()) System.out.println(item.getValue().getDescription());
+    }
+
+    public void addConnection(Direction direction, SceneConnection connection)
+    {
+        connections.put(direction,connection);
     }
 
     public void addItem(IItem item)

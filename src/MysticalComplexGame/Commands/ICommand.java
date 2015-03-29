@@ -1,13 +1,11 @@
 package MysticalComplexGame.Commands;
 
 import MysticalComplexGame.Character;
-import MysticalComplexGame.Scene;
-import java.util.Map;
+import MysticalComplexGame.GameContent;
 
 public interface ICommand
 {
     String getName();
 
-    void executeCommand(Character character, String argument,  Map<String, Scene> scenes);
-
+    void executeCommand(Character character, String argument, GameContent content);
 }

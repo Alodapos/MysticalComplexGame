@@ -1,18 +1,19 @@
 package MysticalComplexGame.Commands;
 
 import MysticalComplexGame.Character;
-import MysticalComplexGame.Scene;
-import java.util.Map;
+import MysticalComplexGame.GameContent;
 
 public class LookCommand implements ICommand
 {
 
-    String name;
-    String invalidArgument;
+    private String name;
+    private String invalidArgument;
+    private String skippedWord;
     public LookCommand()
     {
         name = "look";
         invalidArgument = "I understood as far as you wanted to look";
+        skippedWord = "around";
     }
 
     @Override
@@ -22,9 +23,15 @@ public class LookCommand implements ICommand
     }
 
     @Override
-    public void executeCommand(Character character, String argument, Map<String, Scene> scenes)
+    public void executeCommand(Character character, String argument, GameContent content)
     {
-        if (argument.equals("") || argument.equals("around")) character.getLocation().printDescription();
+        argument = trimArgument(argument,skippedWord);
+        if (argument.equals("")) character.getLocation().printDescription();
         else System.out.println(invalidArgument);
+    }
+    private String trimArgument(String argument, String toTrim)
+    {
+        if (argument.startsWith(toTrim)) argument = argument.replaceFirst(toTrim+" +","");
+        return argument;
     }
 }
