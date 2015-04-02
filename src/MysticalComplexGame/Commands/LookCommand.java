@@ -31,7 +31,7 @@ public class LookCommand implements ICommand
     }
     private String trimArgument(String argument, String toTrim)
     {
-        if (argument.startsWith(toTrim)) argument = argument.replaceFirst(toTrim+" +","");
+        if (argument.startsWith(toTrim)) argument = argument.replaceFirst(toTrim + " +","");
         return argument;
     }
 }

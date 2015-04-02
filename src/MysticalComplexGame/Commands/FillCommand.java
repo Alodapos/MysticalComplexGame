@@ -5,7 +5,7 @@ import MysticalComplexGame.GameContent;
 import MysticalComplexGame.Items.LiquidContainer;
 
 
-public class DrinkCommand implements ICommand
+public class FillCommand implements ICommand
 {
 
     private String name;
@@ -13,11 +13,11 @@ public class DrinkCommand implements ICommand
     private String itemMissing;
     private String invalidArgument;
 
-    public DrinkCommand()
+    public FillCommand()
     {
-        name = "drink";
-        missingArgument = "You have to specify what do you want to drink!";
-        invalidArgument = "This is not something that i can drink from...idiot...";
+        name = "fill";
+        missingArgument = "You have to specify what do you want to fill!";
+        invalidArgument = "This is not something that i can fill";
         itemMissing = "You don't have something like this with you.";
     }
     @Override
@@ -36,7 +36,7 @@ public class DrinkCommand implements ICommand
         else
         {
             LiquidContainer itemArgument = (LiquidContainer)character.getInventory().get(argument);
-            itemArgument.drink(character);
+            itemArgument.fill(character);
         }
     }
 }

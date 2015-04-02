@@ -1,9 +1,11 @@
 package MysticalComplexGame;
 
 import MysticalComplexGame.Commands.*;
-import MysticalComplexGame.Items.Flask;
-import MysticalComplexGame.Items.IItem;
-import MysticalComplexGame.Items.ShinyRock;
+import MysticalComplexGame.Connections.ConnectionAllwaysOpen;
+import MysticalComplexGame.Connections.ConnectionDeadEnd;
+import MysticalComplexGame.Connections.ConnectionPassive;
+import MysticalComplexGame.Connections.IConnector;
+import MysticalComplexGame.Items.*;
 
 import java.util.Scanner;
 
@@ -34,6 +36,7 @@ public class GameEngine
 
         String textDescriptionCampsite = "You grab your stuff and begin traveling to the NORTH,\nwhile the night offers you the perfect cover from prying eyes.\nYou plan to arrive at Serenoth within the next 20 days";
         String textCampsiteSouth = "You can't return home yet. The war still rages and the world needs a hero.";
+        String textCampsiteNorth = "You better pack up before leaving the camp.";
         String textCampsiteEast = "The Campsite is located in a rather rocky and mountainous scenery \nso the only thing to see are some really big hills blocking your view to the far east.";
         String textCampsiteWest = "Not much to see to the west, for the mighty hills hinder your sight \nand the western part of this area remains unknown.";
 
@@ -155,7 +158,8 @@ public class GameEngine
         GameContent content = new GameContent();
         // <editor-fold defaultstate="collapsed" desc="ITEMS">
         IItem shinyRock = new ShinyRock("pick","drop");
-        IItem flask = new Flask("pick","drop","drink");
+        IItem flask = new Flask(LiquidContainerState.EMPTY,"pick");
+        IItem water = new WaterSource("water");
         //</editor-fold>
         // <editor-fold defaultstate="collapsed" desc="COMMANDS">
         ICommand go = new GoCommand();
@@ -164,6 +168,7 @@ public class GameEngine
         ICommand drop = new DropCommand();
         ICommand inventory = new InventoryCommand();
         ICommand drink = new DrinkCommand();
+        ICommand fill = new FillCommand();
 
         content.addCommand(go);
         content.addCommand(look);
@@ -171,11 +176,12 @@ public class GameEngine
         content.addCommand(drop);
         content.addCommand(inventory);
         content.addCommand(drink);
+        content.addCommand(fill);
         //</editor-fold>
         // <editor-fold defaultstate="collapsed" desc="SCENES">
         Scene sceneCampsite = new Scene(textNameCampsite,textDescriptionCampsite,flask);
         Scene sceneCrossroads = new Scene(textNameCrossroads,textDescriptionCrossroads,shinyRock);
-        Scene sceneCrystalLake = new Scene(textNameCrystalLake,textDescriptionCrystalLake);
+        Scene sceneCrystalLake = new Scene(textNameCrystalLake,textDescriptionCrystalLake,water);
         Scene sceneWildernessRoad = new Scene(textNameWildernessRoad,textDescriptionWildernessRoad);
         Scene sceneFelrockVillage = new Scene(textNameFelrockVillage,textDescriptionFelrockVillage);
 
@@ -186,25 +192,25 @@ public class GameEngine
         content.addScene(sceneFelrockVillage);
         //</editor-fold>
         // <editor-fold defaultstate="collapsed" desc="CONNECTIONS">
-        SceneConnection connectionCampsiteNorth = new SceneConnection(State.OPEN,null,sceneCrossroads);
-        SceneConnection connectionCampsiteSouth = new SceneConnection(State.CLOSED,textCampsiteSouth,null);
-        SceneConnection connectionCampsiteEast = new SceneConnection(State.CLOSED,textCampsiteEast,null);
-        SceneConnection connectionCampsiteWest = new SceneConnection(State.CLOSED,textCampsiteWest,null);
+        IConnector connectionCampsiteNorth = new ConnectionPassive(textCampsiteNorth,sceneCrossroads,flask);
+        IConnector connectionCampsiteSouth = new ConnectionDeadEnd(textCampsiteSouth);
+        IConnector connectionCampsiteEast = new ConnectionDeadEnd(textCampsiteEast);
+        IConnector connectionCampsiteWest = new ConnectionDeadEnd(textCampsiteWest);
 
-        SceneConnection connectionCrossroadsNorth = new SceneConnection(State.CLOSED,textCrossroadsNorth,null);
-        SceneConnection connectionCrossroadsSouth = new SceneConnection(State.OPEN,null,sceneCrystalLake);
-        SceneConnection connectionCrossroadsEast = new SceneConnection(State.OPEN,null,sceneWildernessRoad);
-        SceneConnection connectionCrossroadsWest = new SceneConnection(State.CLOSED,textCrossroadsWest,null);
+        IConnector connectionCrossroadsNorth = new ConnectionDeadEnd(textCrossroadsNorth);
+        IConnector connectionCrossroadsSouth = new ConnectionAllwaysOpen(sceneCrystalLake);
+        IConnector connectionCrossroadsEast = new ConnectionAllwaysOpen(sceneWildernessRoad);
+        IConnector connectionCrossroadsWest = new ConnectionDeadEnd(textCrossroadsWest);
 
-        SceneConnection connectionCrystalLakeNorth = new SceneConnection(State.OPEN,null,sceneCrossroads);
-        SceneConnection connectionCrystalLakeSouth = new SceneConnection(State.CLOSED,textCrystalLakeSouth,null);
-        SceneConnection connectionCrystalLakeEast = new SceneConnection(State.CLOSED,textCrystalLakeEast,null);
-        SceneConnection connectionCrystalLakeWest = new SceneConnection(State.CLOSED,textCrystalLakeWest,null);
+        IConnector connectionCrystalLakeNorth = new ConnectionAllwaysOpen(sceneCrossroads);
+        IConnector connectionCrystalLakeSouth = new ConnectionDeadEnd(textCrystalLakeSouth);
+        IConnector connectionCrystalLakeEast = new ConnectionDeadEnd(textCrystalLakeEast);
+        IConnector connectionCrystalLakeWest = new ConnectionDeadEnd(textCrystalLakeWest);
 
-        SceneConnection connectionWildernessRoadNorth = new SceneConnection(State.CLOSED,textWildernessRoadNorth,null);
-        SceneConnection connectionWildernessRoadSouth = new SceneConnection(State.CLOSED,textWildernessRoadSouth,null);
-        SceneConnection connectionWildernessRoadEast = new SceneConnection(State.OPEN,null,sceneFelrockVillage);
-        SceneConnection connectionWildernessRoadWest = new SceneConnection(State.OPEN,null,sceneCrossroads);
+        IConnector connectionWildernessRoadNorth = new ConnectionDeadEnd(textWildernessRoadNorth);
+        IConnector connectionWildernessRoadSouth = new ConnectionDeadEnd(textWildernessRoadSouth);
+        IConnector connectionWildernessRoadEast = new ConnectionAllwaysOpen(sceneFelrockVillage);
+        IConnector connectionWildernessRoadWest = new ConnectionAllwaysOpen(sceneCrossroads);
         //</editor-fold>
         // <editor-fold defaultstate="collapsed" desc="ADD CONNECTIONS">
         sceneCampsite.addConnection(Direction.NORTH,connectionCampsiteNorth);
@@ -238,6 +244,7 @@ public class GameEngine
         System.out.println("Therefore...\n");
         //CHARACTERS
         String playerName = getPlayerName();
+
         Character player = new Character(playerName,sceneCampsite);
 
         content.addCharacter(player);
@@ -272,7 +279,8 @@ public class GameEngine
     }
     private void checkThirst(Character player)
     {
-        if (player.getThirstLevel() == 0 )
+        if (player.getThirstLevel() == 5) System.out.println("You begin to feel thirsty, you better find some water to drink soon or you'll probably die");
+        else if (player.getThirstLevel() == 0 )
         {
             System.out.println("You fall to your knees from dehydration and...slowly.....die...RIP IN PIS "+player.getName());
             System.exit(-10);

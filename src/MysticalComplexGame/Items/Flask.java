@@ -8,42 +8,64 @@ import java.util.Collections;
 import java.util.List;
 
 
-public class Flask  extends LiquidContainer implements IItem
+public class Flask extends LiquidContainer implements IItem
 {
     private String name;
     private String description;
     private String inventoryDescription;
-    private String useFailed;
-    private String useSuccessful;
     private List<String> tags;
+    private LiquidContainerState fullness;
+    private String containerEmpty;
+    private String drinkSuccess;
+    private String fillSuccess;
+    private String fillFailed;
+    private String noWaterSource;
 
-    public Flask(String...tags)
+    public Flask(LiquidContainerState fullness, String... tags)
     {
         name = "flask";
-        description= "There is a small sized, leather flask fully filled with water lying on a wooden table.";
-        inventoryDescription = "A small flask.";
-        useFailed = "There is no water source nearby.";
-        useSuccessful = "You fill your flask with water.";
+        this.fullness = fullness;
+        description= "There is a small sized," + this.fullness.getFullness() +" leather flask on a wooden table.";
+        inventoryDescription = "A small "+ this.fullness.getFullness() + " flask";
         this.tags = new ArrayList<String>();
         Collections.addAll(this.tags, tags);
+        containerEmpty = "This is empty, i cannot drink from it.";
+        drinkSuccess = "You drink from the " + this.name + " and quench your thirst.";
+        fillSuccess = "You fill your flask with water.";
+        fillFailed = "The flask is already filled.";
+        noWaterSource = "There is no water source nearby to fill this.";
 
-    }
-    @Override
-    public void useItem(Character player, List<Scene> scenes)
-    {
-        if(!player.getLocation().getItems().containsKey("water"))
-            System.out.println(useFailed);
-        else
-        //TODO else
-            System.out.println(useSuccessful);
     }
 
     @Override
     public void drink(Character character)
     {
-        character.setThirstLevel(10);
-        System.out.println("You drink from the " + this.name + " and quench your thirst.");
+        if (fullness == LiquidContainerState.FILLED)
+        {
+            character.setThirstLevel(10);
+            System.out.println(drinkSuccess);
+            description= "There is a small sized," + this.fullness.getFullness() +" leather flask on a wooden table.";
+            inventoryDescription = "A small "+ this.fullness.getFullness() + " flask";
+            this.fullness = LiquidContainerState.EMPTY;
+        }
+        else System.out.println(containerEmpty);
+
     }
+
+    @Override
+    public void fill(Character character)
+    {
+        if (fullness == LiquidContainerState.FILLED) System.out.println(fillFailed);
+        else if (character.getLocation().getItems().containsKey("water"))
+        {
+            this.fullness = LiquidContainerState.FILLED;
+            System.out.println(fillSuccess);
+            description= "There is a small sized," + this.fullness.getFullness() +" leather flask on a wooden table.";
+            inventoryDescription = "A small "+ this.fullness.getFullness() + " flask";
+        }
+        else System.out.println(noWaterSource);
+    }
+
 
     @Override
     public String getDescription()

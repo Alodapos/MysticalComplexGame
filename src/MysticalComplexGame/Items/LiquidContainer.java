@@ -6,5 +6,5 @@ import MysticalComplexGame.Character;
 public abstract class LiquidContainer implements IItem{
 
     public abstract void drink(Character character);
-
+    public abstract void fill(Character character);
 }

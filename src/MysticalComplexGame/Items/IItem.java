@@ -18,7 +18,5 @@ public interface IItem
     void setInventoryDescription(String inventoryDescription);
     String getInventoryDescription();
 
-    void useItem(Character player, List<Scene> scenes);
-
     List<String> getTags();
 }

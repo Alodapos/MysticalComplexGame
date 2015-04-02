@@ -1,8 +1,10 @@
 package MysticalComplexGame.Commands;
 
 import MysticalComplexGame.Character;
+import MysticalComplexGame.Connections.ConnectionPassive;
 import MysticalComplexGame.Direction;
 import MysticalComplexGame.GameContent;
+import MysticalComplexGame.Scene;
 
 public class GoCommand implements ICommand
 {
@@ -29,12 +31,19 @@ public class GoCommand implements ICommand
         Direction desiredDirection = Direction.fromString(argument);
         if (argument.matches("")) System.out.println(missingArgument);
         else if (desiredDirection == null) System.out.println(invalidArgument);
-        else if (!character.getLocation().getConnection(desiredDirection).isOpen()) System.out.println(character.getLocation().getConnection(desiredDirection));
-        else
+        else if ((!character.getLocation().getConnection(desiredDirection).isOpen()) && (character.getLocation().getConnection(desiredDirection) instanceof ConnectionPassive))
         {
-            character.setLocation(character.getLocation().getConnection(desiredDirection).getNextScene());
-            character.getLocation().printDescription();
-            character.setThirstLevel(character.getThirstLevel()-1);
+            character.getLocation().getConnection(desiredDirection).openConnection(character,null);
+            if (character.getLocation().getConnection(desiredDirection).isOpen()) moveCharacter(character,character.getLocation().getConnection(desiredDirection).getNextScene());
+            else System.out.println( character.getLocation().getConnection(desiredDirection).getDescription());
         }
+        else if (!character.getLocation().getConnection(desiredDirection).isOpen()) System.out.println( character.getLocation().getConnection(desiredDirection).getDescription());
+        else moveCharacter(character,character.getLocation().getConnection(desiredDirection).getNextScene());
+    }
+    private void moveCharacter(Character character, Scene scene)
+    {
+        character.setLocation(scene);
+        character.getLocation().printDescription();
+        character.setThirstLevel(character.getThirstLevel()-1);
     }
 }

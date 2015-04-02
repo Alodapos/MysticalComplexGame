@@ -4,21 +4,21 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-
-public class ShinyRock implements IItem
+public class WaterSource implements IItem
 {
+
     private String name;
     private String description;
     private String inventoryDescription;
     private List<String> tags;
 
-    public ShinyRock(String...tags)
+    public WaterSource(String...tags)
     {
-        name = "rock";
-        description = "A gold , shiny rock lies on the floor...its...dazzling...";
-        inventoryDescription = "A dazzling-shiny rock.";
+        name = "water";
+        description = "";
+        inventoryDescription = "";
         this.tags = new ArrayList<String>();
-        Collections.addAll(this.tags,tags);
+        Collections.addAll(this.tags, tags);
     }
     @Override
     public String getInventoryDescription() {
