@@ -26,18 +26,8 @@ public class ShinyRock implements IItem
     }
 
     @Override
-    public void setInventoryDescription(String inventoryDescription) {
-        this.inventoryDescription = inventoryDescription;
-    }
-
-    @Override
     public String getDescription() {
         return description;
-    }
-
-    @Override
-    public void setDescription(String description) {
-        this.description = description;
     }
 
     @Override

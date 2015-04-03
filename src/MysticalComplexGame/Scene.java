@@ -2,7 +2,10 @@ package MysticalComplexGame;
 
 import MysticalComplexGame.Connections.IConnector;
 import MysticalComplexGame.Items.IItem;
+
+import java.util.Collection;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class Scene
@@ -35,7 +38,7 @@ public class Scene
 
     public void addConnection(Direction direction, IConnector connection)
     {
-        connections.put(direction,connection);
+        connections.put(direction, connection);
     }
 
     public void addItem(IItem item)
@@ -55,5 +58,10 @@ public class Scene
     public String getName()
     {
         return name;
+    }
+
+    public Collection<IConnector> getConnections()
+    {
+        return this.connections.values();
     }
 }

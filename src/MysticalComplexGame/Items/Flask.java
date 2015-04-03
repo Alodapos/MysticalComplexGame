@@ -8,7 +8,7 @@ import java.util.Collections;
 import java.util.List;
 
 
-public class Flask extends LiquidContainer implements IItem
+public class Flask implements IItem,LiquidContainer
 {
     private String name;
     private String description;
@@ -20,13 +20,13 @@ public class Flask extends LiquidContainer implements IItem
     private String fillSuccess;
     private String fillFailed;
     private String noWaterSource;
+    private int power;
 
-    public Flask(LiquidContainerState fullness, String... tags)
+    public Flask(int power,LiquidContainerState fullness, String... tags)
     {
         name = "flask";
         this.fullness = fullness;
-        description= "There is a small sized," + this.fullness.getFullness() +" leather flask on a wooden table.";
-        inventoryDescription = "A small "+ this.fullness.getFullness() + " flask";
+        setDescription(fullness);
         this.tags = new ArrayList<String>();
         Collections.addAll(this.tags, tags);
         containerEmpty = "This is empty, i cannot drink from it.";
@@ -34,7 +34,7 @@ public class Flask extends LiquidContainer implements IItem
         fillSuccess = "You fill your flask with water.";
         fillFailed = "The flask is already filled.";
         noWaterSource = "There is no water source nearby to fill this.";
-
+        this.power = power;
     }
 
     @Override
@@ -42,10 +42,9 @@ public class Flask extends LiquidContainer implements IItem
     {
         if (fullness == LiquidContainerState.FILLED)
         {
-            character.setThirstLevel(10);
+            character.setThirstLevel(power);
             System.out.println(drinkSuccess);
-            description= "There is a small sized," + this.fullness.getFullness() +" leather flask on a wooden table.";
-            inventoryDescription = "A small "+ this.fullness.getFullness() + " flask";
+            setDescription(fullness);
             this.fullness = LiquidContainerState.EMPTY;
         }
         else System.out.println(containerEmpty);
@@ -60,23 +59,17 @@ public class Flask extends LiquidContainer implements IItem
         {
             this.fullness = LiquidContainerState.FILLED;
             System.out.println(fillSuccess);
-            description= "There is a small sized," + this.fullness.getFullness() +" leather flask on a wooden table.";
-            inventoryDescription = "A small "+ this.fullness.getFullness() + " flask";
+            setDescription(fullness);
         }
         else System.out.println(noWaterSource);
     }
-
 
     @Override
     public String getDescription()
     {
         return  this.description;
     }
-    @Override
-    public void setDescription(String description)
-    {
-        this.description = description;
-    }
+
     @Override
     public String getName()
     {
@@ -88,11 +81,6 @@ public class Flask extends LiquidContainer implements IItem
         this.name = name;
     }
     @Override
-    public void setInventoryDescription(String inventoryDescription)
-    {
-        this.inventoryDescription = inventoryDescription;
-    }
-    @Override
     public String getInventoryDescription()
     {
         return this.inventoryDescription;
@@ -102,5 +90,11 @@ public class Flask extends LiquidContainer implements IItem
     public List<String> getTags()
     {
         return this.tags;
+    }
+
+    private void setDescription(LiquidContainerState state)
+    {
+        this.description= "There is a small sized," + state.getFullness() +" leather flask on a wooden table.";
+        this.inventoryDescription = "A small "+ state.getFullness() + " flask";
     }
 }

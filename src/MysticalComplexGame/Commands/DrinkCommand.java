@@ -17,7 +17,7 @@ public class DrinkCommand implements ICommand
     {
         name = "drink";
         missingArgument = "You have to specify what do you want to drink!";
-        invalidArgument = "This is not something that i can drink from...idiot...";
+        invalidArgument = "This is not something that i can drink from...";
         itemMissing = "You don't have something like this with you.";
     }
     @Override
