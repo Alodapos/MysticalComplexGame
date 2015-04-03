@@ -171,7 +171,7 @@ public class GameEngine
         // <editor-fold defaultstate="collapsed" desc="ITEMS">
         IItem shinyRock = new ShinyRock("pick","drop");
         IItem flask = new Flask(10,LiquidContainerState.EMPTY,"pick");
-        IItem water = new WaterSource("water");
+        IItem water = new WaterSource();
         IItem keyItemFelrockSign = new FelrockSign();
         //</editor-fold>
         // <editor-fold defaultstate="collapsed" desc="COMMANDS">

@@ -94,7 +94,7 @@ public class Flask implements IItem,LiquidContainer
 
     private void setDescription(LiquidContainerState state)
     {
-        this.description= "There is a small sized," + state.getFullness() +" leather flask on a wooden table.";
+        this.description= "There is a small sized, " + state.getFullness() + ", leather flask on a wooden table.";
         this.inventoryDescription = "A small "+ state.getFullness() + " flask";
     }
 }

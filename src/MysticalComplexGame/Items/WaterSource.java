@@ -15,7 +15,7 @@ public class WaterSource implements IItem
 
     @Override
     public String getDescription() {
-        return null;
+        return " ";
     }
 
     @Override
