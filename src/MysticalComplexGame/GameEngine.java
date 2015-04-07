@@ -171,7 +171,7 @@ public class GameEngine
         // <editor-fold defaultstate="collapsed" desc="ITEMS">
         IItem shinyRock = new ShinyRock("pick","drop");
         IItem flask = new Flask(10,LiquidContainerState.EMPTY,"pick");
-        IItem water = new WaterSource("water");
+        IItem water = new WaterSource();
         IItem keyItemFelrockSign = new FelrockSign();
         //</editor-fold>
         // <editor-fold defaultstate="collapsed" desc="COMMANDS">
@@ -183,6 +183,7 @@ public class GameEngine
         ICommand drink = new DrinkCommand();
         ICommand fill = new FillCommand();
         ICommand read = new ReadCommand();
+        ICommand empty = new EmptyCommand();
 
         content.addCommand(go);
         content.addCommand(look);
@@ -192,6 +193,7 @@ public class GameEngine
         content.addCommand(drink);
         content.addCommand(fill);
         content.addCommand(read);
+        content.addCommand(empty);
         //</editor-fold>
         // <editor-fold defaultstate="collapsed" desc="SCENES">
         Scene sceneCampsite = new Scene(textNameCampsite,textDescriptionCampsite,flask);

@@ -1,12 +1,16 @@
 package MysticalComplexGame.Items;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class WaterSource implements IItem
 {
 
+    private String name;
     public WaterSource()
-    {    }
+    {
+        name = "water";
+    }
     @Override
     public String getInventoryDescription() {
         return null ;
@@ -15,12 +19,12 @@ public class WaterSource implements IItem
 
     @Override
     public String getDescription() {
-        return null;
+        return "";
     }
 
     @Override
     public String getName() {
-        return null;
+        return name;
     }
 
     @Override
@@ -30,6 +34,7 @@ public class WaterSource implements IItem
     @Override
     public List<String> getTags()
     {
-        return null;
+        List<String> noTags= new ArrayList<String>();
+        return noTags;
     }
 }

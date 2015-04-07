@@ -21,6 +21,7 @@ public class Flask implements IItem,LiquidContainer
     private String fillFailed;
     private String noWaterSource;
     private int power;
+    private String isAlreadyEmpty;
 
     public Flask(int power,LiquidContainerState fullness, String... tags)
     {
@@ -35,6 +36,7 @@ public class Flask implements IItem,LiquidContainer
         fillFailed = "The flask is already filled.";
         noWaterSource = "There is no water source nearby to fill this.";
         this.power = power;
+        isAlreadyEmpty = "You cannot empty that, it is already empty.";
     }
 
     @Override
@@ -62,6 +64,18 @@ public class Flask implements IItem,LiquidContainer
             setDescription(fullness);
         }
         else System.out.println(noWaterSource);
+    }
+
+    @Override
+    public void empty(Character character)
+    {
+        if (fullness == LiquidContainerState.EMPTY) System.out.println(isAlreadyEmpty);
+        else
+        {
+            fullness = LiquidContainerState.EMPTY;
+            setDescription(fullness);
+            System.out.println("You pour the water to the ground till the "+this.name + " is completely empty.");
+        }
     }
 
     @Override
