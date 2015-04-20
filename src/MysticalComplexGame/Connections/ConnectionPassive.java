@@ -1,7 +1,7 @@
 package MysticalComplexGame.Connections;
 
 import MysticalComplexGame.*;
-import MysticalComplexGame.Character;
+import MysticalComplexGame.Player;
 import MysticalComplexGame.Items.IItem;
 
 public class ConnectionPassive implements IConnector
@@ -27,10 +27,6 @@ public class ConnectionPassive implements IConnector
         return description;
     }
     @Override
-    public State getState() {
-        return state;
-    }
-    @Override
     public void changeState(State state)
     {
         this.state = state;
@@ -42,8 +38,8 @@ public class ConnectionPassive implements IConnector
         else return false;
     }
     @Override
-    public void openConnection(Character character, IItem key)
+    public void openConnection(IItem key)
     {
-        if (character.getInventory().get(this.key.getName()) != null) changeState(State.OPEN);
+        if (Player.getInventory().get(this.key.getName()) != null) changeState(State.OPEN);
     }
 }

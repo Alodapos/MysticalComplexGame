@@ -1,20 +1,31 @@
 package MysticalComplexGame.Items;
 
-
-import MysticalComplexGame.Character;
-import MysticalComplexGame.Scene;
-
 import java.util.List;
 
-public interface IItem
+public abstract class IItem
 {
+    protected String name;
+    protected String description;
+    protected String inventoryDescription;
+    protected List<String> tags;
 
-    String getDescription();
+    public String getDescription()
+    {
+        return description;
+    }
 
-    String getName();
-    void setName(String name);
+    public String getName()
+    {
+        return name;
+    }
 
-    String getInventoryDescription();
+    public String getInventoryDescription()
+    {
+        return inventoryDescription;
+    }
 
-    List<String> getTags();
+    public List<String> getTags()
+    {
+        return tags;
+    }
 }

@@ -1,12 +1,13 @@
-package MysticalComplexGame;
+package MysticalComplexGame.Parser;
 
+import MysticalComplexGame.*;
 import MysticalComplexGame.Commands.ICommand;
 
-class InputHandler
+public class InputHandler
 {
     private String commandNotFound = "This is not a command that i recognize";
     private ICommand command;
-    public void tryParse(String userInput,GameContent content, Character character)
+    public void tryParse(String userInput, GameContent content)
     {
         userInput = userInput.toLowerCase();
         String[] input = new String[2];
@@ -17,8 +18,8 @@ class InputHandler
             input[1] = "";
         }
         command = content.getCommand(input[0]);
-        if (command != null) command.executeCommand(character,input[1],content);
-        else System.err.println(commandNotFound);
+        if (command != null) command.executeCommand(input[1],content);
+        else GameEngine.textOutput(commandNotFound);
     }
 }
 

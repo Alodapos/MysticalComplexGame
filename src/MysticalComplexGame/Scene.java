@@ -31,9 +31,9 @@ public class Scene
 
     public void printDescription()
     {
-        System.out.println("\t\t\t\t\t\""+this.name +"\""+"\n");
-        System.out.println(this.description);
-        for (Map.Entry<String, IItem> item : items.entrySet()) System.out.println(item.getValue().getDescription());
+        GameEngine.textOutput("\t\t\t\t\t\"" + this.name + "\"" + "\n");
+        GameEngine.textOutput(this.description);
+        for (Map.Entry<String, IItem> item : items.entrySet()) GameEngine.textOutput(item.getValue().getDescription());
     }
 
     public void addConnection(Direction direction, IConnector connection)
@@ -46,9 +46,9 @@ public class Scene
         this.items.put(item.getName(),item);
     }
 
-    public void removeItem(String item)
+    public void removeItem(IItem item)
     {
-        this.items.remove(item);
+        items.remove(item.getName(),item);
     }
 
     public Map<String,IItem> getItems()

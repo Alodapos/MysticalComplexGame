@@ -1,6 +1,6 @@
 package MysticalComplexGame.Connections;
 
-import MysticalComplexGame.Character;
+import MysticalComplexGame.Player;
 import MysticalComplexGame.Items.IItem;
 import MysticalComplexGame.Scene;
 import MysticalComplexGame.State;
@@ -28,10 +28,6 @@ public class ConnectionActive implements IConnector
         return description;
     }
     @Override
-    public State getState() {
-        return state;
-    }
-    @Override
     public void changeState(State state)
     {
         this.state = state;
@@ -43,7 +39,7 @@ public class ConnectionActive implements IConnector
         else return false;
     }
     @Override
-    public void openConnection(Character character,IItem key)
+    public void openConnection(IItem key)
     {
         if (key == this.key) changeState(State.OPEN);
     }

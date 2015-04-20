@@ -1,7 +1,7 @@
 package MysticalComplexGame.Connections;
 
 import MysticalComplexGame.*;
-import MysticalComplexGame.Character;
+import MysticalComplexGame.Player;
 import MysticalComplexGame.Items.IItem;
 
 public class ConnectionDeadEnd implements IConnector
@@ -21,10 +21,6 @@ public class ConnectionDeadEnd implements IConnector
         return description;
     }
     @Override
-    public State getState() {
-        return State.CLOSED;
-    }
-    @Override
     public void changeState(State state)
     {}
     @Override
@@ -33,6 +29,6 @@ public class ConnectionDeadEnd implements IConnector
         return false;
     }
     @Override
-    public void openConnection(Character character, IItem key)
+    public void openConnection(IItem key)
     {}
 }

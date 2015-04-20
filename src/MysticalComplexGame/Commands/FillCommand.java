@@ -1,42 +1,33 @@
 package MysticalComplexGame.Commands;
 
-import MysticalComplexGame.Character;
+import MysticalComplexGame.Items.IItem;
+import MysticalComplexGame.Player;
 import MysticalComplexGame.GameContent;
+import MysticalComplexGame.GameEngine;
 import MysticalComplexGame.Items.LiquidContainer;
 
 
-public class FillCommand implements ICommand
+public class FillCommand extends ICommandVerbItem
 {
-
-    private String name;
-    private String missingArgument;
     private String itemMissing;
     private String invalidArgument;
 
     public FillCommand()
     {
-        name = "fill";
-        missingArgument = "You have to specify what do you want to fill!";
+        key = "fill";
         invalidArgument = "This is not something that i can fill";
         itemMissing = "You don't have something like this with you.";
     }
-    @Override
-    public String getName()
-    {
-        return this.name;
-    }
 
     @Override
-    public void executeCommand(Character character, String argument, GameContent content)
+    public void executeCommand(IItem item)
     {
-
-        if (argument.isEmpty()) System.out.println(missingArgument);
-        else if (character.getInventory().get(argument) == null) System.out.println(itemMissing);
-        else if (!(character.getInventory().get(argument) instanceof LiquidContainer)) System.out.println(invalidArgument);
+        if (!Player.getInventory().containsValue(item)) GameEngine.textOutput(itemMissing);
+        else if (!(item instanceof LiquidContainer)) GameEngine.textOutput(invalidArgument);
         else
         {
-            LiquidContainer itemArgument = (LiquidContainer)character.getInventory().get(argument);
-            itemArgument.fill(character);
+            LiquidContainer itemArgument = (LiquidContainer) item;
+            itemArgument.fill();
         }
     }
 }

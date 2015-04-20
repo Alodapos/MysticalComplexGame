@@ -1,50 +1,43 @@
 package MysticalComplexGame.Commands;
 
-import MysticalComplexGame.Character;
+import MysticalComplexGame.Player;
 import MysticalComplexGame.GameContent;
+import MysticalComplexGame.GameEngine;
 import MysticalComplexGame.Items.IItem;
-import MysticalComplexGame.Items.LiquidContainer;
 import MysticalComplexGame.Items.ReadableItem;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 
-public class ReadCommand implements ICommand
+public class ReadCommand extends ICommandVerbItem
 {
-
-    private String name;
-    private String missingArgument;
     private String itemMissing;
     private String invalidArgument;
 
     public ReadCommand()
     {
-        name = "read";
-        missingArgument = "You have to specify what do you want to read!";
+        key = "read";
         invalidArgument = "This is not something that you can read...";
         itemMissing = "You don't see or have such a thing.";
     }
-    @Override
-    public String getName()
-    {
-        return this.name;
-    }
 
     @Override
-    public void executeCommand(Character character, String argument, GameContent content)
+    public void executeCommand(IItem item)
     {
 
-        Map<String,IItem> allItems = new HashMap<String,IItem>();
-        allItems.putAll(character.getInventory());
-        allItems.putAll(character.getLocation().getItems());
-        if (argument.isEmpty()) System.out.println(missingArgument);
-        else if (allItems.get(argument) == null) System.out.println(itemMissing);
-        else if (!(allItems.get(argument) instanceof ReadableItem)) System.out.println(invalidArgument);
+        List<IItem> localItems = new ArrayList<IItem>();
+        localItems.addAll(Player.getInventory().values());
+        localItems.addAll(Player.getLocation().getItems().values());
+
+        if (!localItems.contains(item)) GameEngine.textOutput(itemMissing);
+        else if (!(item instanceof ReadableItem)) GameEngine.textOutput(invalidArgument);
         else
         {
-            ReadableItem itemArgument = (ReadableItem)allItems.get(argument);
-            itemArgument.read(character);
+            ReadableItem toRead = (ReadableItem)item;
+            toRead.read();
         }
     }
 }

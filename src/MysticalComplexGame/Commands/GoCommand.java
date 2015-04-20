@@ -1,49 +1,32 @@
 package MysticalComplexGame.Commands;
 
-import MysticalComplexGame.Character;
+import MysticalComplexGame.*;
+import MysticalComplexGame.Player;
 import MysticalComplexGame.Connections.ConnectionPassive;
-import MysticalComplexGame.Direction;
-import MysticalComplexGame.GameContent;
-import MysticalComplexGame.Scene;
 
-public class GoCommand implements ICommand
+public class GoCommand extends ICommandVerbDirection
 {
-    private String missingArgument;
-    private String invalidArgument;
-    private String name;
-
     public GoCommand()
     {
-        name = "go";
-        missingArgument = "You'll have to say which compass direction to go in.";
-        invalidArgument = "You can't see any such place.";
+        key = "go";
     }
 
     @Override
-    public String getName()
+    public void executeCommand(Direction direction)
     {
-        return name;
-    }
-
-    @Override
-    public void executeCommand(Character character, String argument, GameContent content)
-    {
-        Direction desiredDirection = Direction.fromString(argument);
-        if (argument.matches("")) System.out.println(missingArgument);
-        else if (desiredDirection == null) System.out.println(invalidArgument);
-        else if ((!character.getLocation().getConnection(desiredDirection).isOpen()) && (character.getLocation().getConnection(desiredDirection) instanceof ConnectionPassive))
+        if ((!Player.getLocation().getConnection(direction).isOpen()) && (Player.getLocation().getConnection(direction) instanceof ConnectionPassive))
         {
-            character.getLocation().getConnection(desiredDirection).openConnection(character,null);
-            if (character.getLocation().getConnection(desiredDirection).isOpen()) moveCharacter(character,character.getLocation().getConnection(desiredDirection).getNextScene());
-            else System.out.println( character.getLocation().getConnection(desiredDirection).getDescription());
+            Player.getLocation().getConnection(direction).openConnection(null);
+            if (Player.getLocation().getConnection(direction).isOpen()) movePlayer(Player.getLocation().getConnection(direction).getNextScene());
+            else GameEngine.textOutput(Player.getLocation().getConnection(direction).getDescription());
         }
-        else if (!character.getLocation().getConnection(desiredDirection).isOpen()) System.out.println( character.getLocation().getConnection(desiredDirection).getDescription());
-        else moveCharacter(character,character.getLocation().getConnection(desiredDirection).getNextScene());
+        else if (!Player.getLocation().getConnection(direction).isOpen()) GameEngine.textOutput(Player.getLocation().getConnection(direction).getDescription());
+        else movePlayer(Player.getLocation().getConnection(direction).getNextScene());
     }
-    private void moveCharacter(Character character, Scene scene)
+    private void movePlayer(Scene scene)
     {
-        character.setLocation(scene);
-        character.getLocation().printDescription();
-        character.setThirstLevel(character.getThirstLevel()-1);
+        Player.setLocation(scene);
+        Player.getLocation().printDescription();
+        Player.setThirstLevel(Player.getThirstLevel()-1);
     }
 }

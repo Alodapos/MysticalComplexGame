@@ -3,12 +3,13 @@ package MysticalComplexGame;
 import MysticalComplexGame.Commands.*;
 import MysticalComplexGame.Connections.*;
 import MysticalComplexGame.Items.*;
+import MysticalComplexGame.Parser.InputHandler;
 
 import java.util.Scanner;
 
 public class GameEngine
 {
-    public void startGame()
+    public static void startGame()
     {
         // <editor-fold defaultstate="collapsed" desc="TEXTS">
         String textNameCampsite = "Campsite";
@@ -261,32 +262,31 @@ public class GameEngine
         sceneFelrockVillage.addConnection(Direction.WEST,connectionFelrockVillageWest);
         //</editor-fold>
         //-----INTRO-----
-        System.out.println("ACT I - The Sage\n");
-        System.out.println("As the sun sets, the nightfall finds you getting ready for the upcoming journey to the far land of Serenoth.");
-        System.out.println("You must reach this region in order to find a great sage, who is the personal advisor of king Ecthelion, son of Exelion.");
-        System.out.println("This great sage often goes by many names, but one is more common to the people of Dal'aron, Zenthar");
-        System.out.println("He is against all the strife of the two kingdoms, for he knows what really happened two hundred years ago.");
-        System.out.println("But the two kings care for nothing than the dominion of their own might all over the world.");
-        System.out.println("This is why you need his help to convince king Ecthelion to cease his actions and withdraw his armies before its too late to stop this madness.");
-        System.out.println("Therefore...\n");
+        textOutput("ACT I - The Sage\n");
+        textOutput("As the sun sets, the nightfall finds you getting ready for the upcoming journey to the far land of Serenoth.");
+        textOutput("You must reach this region in order to find a great sage, who is the personal advisor of king Ecthelion, son of Exelion.");
+        textOutput("This great sage often goes by many names, but one is more common to the people of Dal'aron, Zenthar");
+        textOutput("He is against all the strife of the two kingdoms, for he knows what really happened two hundred years ago.");
+        textOutput("But the two kings care for nothing than the dominion of their own might all over the world.");
+        textOutput("This is why you need his help to convince king Ecthelion to cease his actions and withdraw his armies before its too late to stop this madness.");
+        textOutput("Therefore...\n");
         //CHARACTERS
         String playerName = getPlayerName();
-        Character player = new Character(playerName,sceneCampsite);
-
-        content.addCharacter(player);
+        Player.setName(playerName);
+        Player.setLocation(sceneCampsite);
         //FIRST SCENE
-        player.getLocation().printDescription();
+        Player.getLocation().printDescription();
         //GAME LOOP
-        gameLoop(player,content);
+        gameLoop(content);
     }
-    private String getPlayerName()
+    private static String getPlayerName()
     {
-        System.out.println("What is your name?");
+        textOutput("What is your name?");
         Scanner name = new Scanner(System.in);
         return  name.nextLine();
     }
 
-    private void gameLoop(Character player,GameContent content)
+    private static void gameLoop(GameContent content)
     {
         //USER INPUT
         String userInputString;
@@ -297,19 +297,25 @@ public class GameEngine
         {
             userInput = new Scanner(System.in);
             userInputString = userInput.nextLine().trim();
-            handler.tryParse(userInputString,content,player);
-            checkThirst(player);
+            handler.tryParse(userInputString,content);
+            checkThirst();
 
-        } while (!player.getLocation().getName().equals("The Sage"));
-        System.out.println("\n\n\nYou have completed ACT I, ACT II is under development, stay tuned for more...\n");
+        } while (!Player.getLocation().getName().equals("The Sage"));
+        textOutput("\n\n\nYou have completed ACT I, ACT II is under development, stay tuned for more...\n");
     }
-    private void checkThirst(Character player)
+
+    private static void checkThirst()
     {
-        if (player.getThirstLevel() == 5) System.out.println("\nYou begin to feel thirsty, you better find some water to drink soon or you'll probably die");
-        else if (player.getThirstLevel() == 0 )
+        if (Player.getThirstLevel() == 5) textOutput("\nYou begin to feel thirsty, you better find some water to drink soon or you'll probably die");
+        else if (Player.getThirstLevel() == 0 )
         {
-            System.out.println("You fall to your knees from dehydration and...slowly.....die...\nRest in peace "+player.getName()+", your deeds shall be remembered.");
+            textOutput("You fall to your knees from dehydration and...slowly.....die...\nRest in peace " + Player.getName() + ", your deeds shall be remembered.");
             System.exit(-10);
         }
+    }
+
+    public static void textOutput(String output)
+    {
+        System.out.println(output);
     }
 }

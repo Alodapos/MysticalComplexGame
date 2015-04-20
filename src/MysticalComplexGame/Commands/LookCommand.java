@@ -1,37 +1,17 @@
 package MysticalComplexGame.Commands;
 
-import MysticalComplexGame.Character;
-import MysticalComplexGame.GameContent;
+import MysticalComplexGame.Player;
 
-public class LookCommand implements ICommand
+public class LookCommand extends ICommandVerbAlone
 {
-
-    private String name;
-    private String invalidArgument;
-    private String skippedWord;
     public LookCommand()
     {
-        name = "look";
-        invalidArgument = "I understood as far as you wanted to look";
-        skippedWord = "around";
+        key = "look";
     }
 
     @Override
-    public String getName()
+    public void executeCommand()
     {
-        return name;
-    }
-
-    @Override
-    public void executeCommand(Character character, String argument, GameContent content)
-    {
-        argument = trimArgument(argument,skippedWord);
-        if (argument.equals("")) character.getLocation().printDescription();
-        else System.out.println(invalidArgument);
-    }
-    private String trimArgument(String argument, String toTrim)
-    {
-        if (argument.startsWith(toTrim)) argument = argument.replaceFirst(toTrim + " +","");
-        return argument;
+        Player.getLocation().printDescription();
     }
 }
