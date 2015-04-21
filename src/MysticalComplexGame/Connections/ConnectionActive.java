@@ -1,9 +1,7 @@
 package MysticalComplexGame.Connections;
 
-import MysticalComplexGame.Player;
 import MysticalComplexGame.Items.IItem;
 import MysticalComplexGame.Scene;
-import MysticalComplexGame.State;
 
 public class ConnectionActive implements IConnector
 {

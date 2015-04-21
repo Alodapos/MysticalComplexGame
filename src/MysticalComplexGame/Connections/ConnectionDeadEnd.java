@@ -1,7 +1,6 @@
 package MysticalComplexGame.Connections;
 
 import MysticalComplexGame.*;
-import MysticalComplexGame.Player;
 import MysticalComplexGame.Items.IItem;
 
 public class ConnectionDeadEnd implements IConnector

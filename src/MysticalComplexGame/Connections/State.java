@@ -1,4 +1,4 @@
-package MysticalComplexGame;
+package MysticalComplexGame.Connections;
 
 public enum State
 {

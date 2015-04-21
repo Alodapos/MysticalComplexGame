@@ -3,12 +3,19 @@ package MysticalComplexGame;
 import MysticalComplexGame.Commands.*;
 import MysticalComplexGame.Connections.*;
 import MysticalComplexGame.Items.*;
-import MysticalComplexGame.Parser.InputHandler;
+import MysticalComplexGame.Parser.*;
 
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Scanner;
 
 public class GameEngine
 {
+    //CONTENT
+    static GameContent content = new GameContent();
+    static Tokenizer tokenizer = new Tokenizer();
+    static Parser parser = new Parser();
+
     public static void startGame()
     {
         // <editor-fold defaultstate="collapsed" desc="TEXTS">
@@ -167,13 +174,21 @@ public class GameEngine
         String textGardenOfRadianceWest = "On your left, still stands the wooden bridge.";
 
         // </editor-fold>
-        //CONTENT
-        GameContent content = new GameContent();
         // <editor-fold defaultstate="collapsed" desc="ITEMS">
         IItem shinyRock = new ShinyRock("pick","drop");
         IItem flask = new Flask(10,LiquidContainerState.EMPTY,"pick");
         IItem water = new WaterSource();
         IItem keyItemFelrockSign = new FelrockSign();
+
+        tokenizer.addToken("rock", Token.ITEM);
+        tokenizer.addToken("flask",Token.ITEM);
+        tokenizer.addToken("water",Token.ITEM);
+        tokenizer.addToken("sign",Token.ITEM);
+
+        content.addItem(shinyRock);
+        content.addItem(flask);
+        content.addItem(water);
+        content.addItem(keyItemFelrockSign);
         //</editor-fold>
         // <editor-fold defaultstate="collapsed" desc="COMMANDS">
         ICommand go = new GoCommand();
@@ -195,6 +210,21 @@ public class GameEngine
         content.addCommand(fill);
         content.addCommand(read);
         content.addCommand(empty);
+
+        tokenizer.addToken("go", Token.VERBDIRECTION);
+        tokenizer.addToken("look", Token.VERBSOLO);
+        tokenizer.addToken("inventory",Token.VERBSOLO);
+        tokenizer.addToken("pick",Token.VERBITEM);
+        tokenizer.addToken("drop",Token.VERBITEM);
+        tokenizer.addToken("fill",Token.VERBITEM);
+        tokenizer.addToken("drink",Token.VERBITEM);
+        tokenizer.addToken("empty",Token.VERBITEM);
+        tokenizer.addToken("read",Token.VERBITEM);
+
+        tokenizer.addToken("north",Token.DIRECTION);
+        tokenizer.addToken("south",Token.DIRECTION);
+        tokenizer.addToken("east",Token.DIRECTION);
+        tokenizer.addToken("west",Token.DIRECTION);
         //</editor-fold>
         // <editor-fold defaultstate="collapsed" desc="SCENES">
         Scene sceneCampsite = new Scene(textNameCampsite,textDescriptionCampsite,flask);
@@ -277,7 +307,7 @@ public class GameEngine
         //FIRST SCENE
         Player.getLocation().printDescription();
         //GAME LOOP
-        gameLoop(content);
+        gameLoop();
     }
     private static String getPlayerName()
     {
@@ -286,20 +316,21 @@ public class GameEngine
         return  name.nextLine();
     }
 
-    private static void gameLoop(GameContent content)
+    private static void gameLoop()
     {
         //USER INPUT
         String userInputString;
         Scanner userInput;
+        TokenStream tokenizedInput = new TokenStream();
         //COMMAND PARSE
-        InputHandler handler = new InputHandler();
         do
         {
+            tokenizedInput.clear();
             userInput = new Scanner(System.in);
-            userInputString = userInput.nextLine().trim();
-            handler.tryParse(userInputString,content);
+            userInputString = userInput.nextLine().trim().toLowerCase();
+            tokenizedInput = tokenizer.tokenize(userInputString);
+            parser.parse(tokenizedInput,content);
             checkThirst();
-
         } while (!Player.getLocation().getName().equals("The Sage"));
         textOutput("\n\n\nYou have completed ACT I, ACT II is under development, stay tuned for more...\n");
     }
