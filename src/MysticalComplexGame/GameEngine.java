@@ -1,7 +1,6 @@
 package MysticalComplexGame;
 
 import MysticalComplexGame.Commands.*;
-import MysticalComplexGame.Connections.*;
 import MysticalComplexGame.Items.*;
 import MysticalComplexGame.Parser.*;
 
@@ -238,30 +237,30 @@ public class GameEngine
         content.addScene(sceneFelrockVillage);
         //</editor-fold>
         // <editor-fold defaultstate="collapsed" desc="CONNECTIONS">
-        IConnector connectionCampsiteNorth = new ConnectionPassive(textCampsiteNorth,sceneCrossroads,flask);
-        IConnector connectionCampsiteSouth = new ConnectionDeadEnd(textCampsiteSouth);
-        IConnector connectionCampsiteEast = new ConnectionDeadEnd(textCampsiteEast);
-        IConnector connectionCampsiteWest = new ConnectionDeadEnd(textCampsiteWest);
+        Connector connectionCampsiteNorth = new Connector(sceneCrossroads,flask,textCampsiteNorth);
+        Connector connectionCampsiteSouth = new Connector(textCampsiteSouth);
+        Connector connectionCampsiteEast = new Connector(textCampsiteEast);
+        Connector connectionCampsiteWest = new Connector(textCampsiteWest);
 
-        IConnector connectionCrossroadsNorth = new ConnectionDeadEnd(textCrossroadsNorth);
-        IConnector connectionCrossroadsSouth = new ConnectionOpen(sceneCrystalLake);
-        IConnector connectionCrossroadsEast = new ConnectionOpen(sceneWildernessRoad);
-        IConnector connectionCrossroadsWest = new ConnectionDeadEnd(textCrossroadsWest);
+        Connector connectionCrossroadsNorth = new Connector(textCrossroadsNorth);
+        Connector connectionCrossroadsSouth = new Connector(sceneCrystalLake);
+        Connector connectionCrossroadsEast = new Connector(sceneWildernessRoad);
+        Connector connectionCrossroadsWest = new Connector(textCrossroadsWest);
 
-        IConnector connectionCrystalLakeNorth = new ConnectionOpen(sceneCrossroads);
-        IConnector connectionCrystalLakeSouth = new ConnectionDeadEnd(textCrystalLakeSouth);
-        IConnector connectionCrystalLakeEast = new ConnectionDeadEnd(textCrystalLakeEast);
-        IConnector connectionCrystalLakeWest = new ConnectionDeadEnd(textCrystalLakeWest);
+        Connector connectionCrystalLakeNorth = new Connector(sceneCrossroads);
+        Connector connectionCrystalLakeSouth = new Connector(textCrystalLakeSouth);
+        Connector connectionCrystalLakeEast = new Connector(textCrystalLakeEast);
+        Connector connectionCrystalLakeWest = new Connector(textCrystalLakeWest);
 
-        IConnector connectionWildernessRoadNorth = new ConnectionDeadEnd(textWildernessRoadNorth);
-        IConnector connectionWildernessRoadSouth = new ConnectionDeadEnd(textWildernessRoadSouth);
-        IConnector connectionWildernessRoadEast = new ConnectionActive(textWildernessRoadEast,sceneFelrockVillage,keyItemFelrockSign);
-        IConnector connectionWildernessRoadWest = new ConnectionOpen(sceneCrossroads);
+        Connector connectionWildernessRoadNorth = new Connector(textWildernessRoadNorth);
+        Connector connectionWildernessRoadSouth = new Connector(textWildernessRoadSouth);
+        Connector connectionWildernessRoadEast = new Connector(sceneFelrockVillage,keyItemFelrockSign,textWildernessRoadEast,"You should take a look at that village");
+        Connector connectionWildernessRoadWest = new Connector(sceneCrossroads);
 
-        IConnector connectionFelrockVillageNorth = new ConnectionDeadEnd("a");
-        IConnector connectionFelrockVillageSouth = new ConnectionDeadEnd("b");
-        IConnector connectionFelrockVillageEast = new ConnectionDeadEnd("c");
-        IConnector connectionFelrockVillageWest = new ConnectionDeadEnd("d");
+        Connector connectionFelrockVillageNorth = new Connector("a");
+        Connector connectionFelrockVillageSouth = new Connector("b");
+        Connector connectionFelrockVillageEast = new Connector("c");
+        Connector connectionFelrockVillageWest = new Connector("d");
         //</editor-fold>
         // <editor-fold defaultstate="collapsed" desc="ADD CONNECTIONS">
         sceneCampsite.addConnection(Direction.NORTH,connectionCampsiteNorth);

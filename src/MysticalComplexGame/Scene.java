@@ -1,6 +1,5 @@
 package MysticalComplexGame;
 
-import MysticalComplexGame.Connections.IConnector;
 import MysticalComplexGame.Items.IItem;
 
 import java.util.Collection;
@@ -12,18 +11,18 @@ public class Scene
     private String description;
     private String name;
     private Map<String, IItem> items;
-    private Map<Direction, IConnector> connections;
+    private Map<Direction, Connector> connections;
 
     public Scene(String name, String description,IItem...items)
     {
-        this.connections = new HashMap<Direction, IConnector>();
+        this.connections = new HashMap<Direction, Connector>();
         this.items = new HashMap<String,IItem>();
         this.name = name;
         this.description = description;
         for (IItem item: items) this.items.put(item.getName(),item);
     }
 
-    public IConnector getConnection(Direction direction)
+    public Connector getConnection(Direction direction)
     {
         return this.connections.get(direction);
     }
@@ -35,7 +34,7 @@ public class Scene
         for (Map.Entry<String, IItem> item : items.entrySet()) GameEngine.textOutput(item.getValue().getDescription());
     }
 
-    public void addConnection(Direction direction, IConnector connection)
+    public void addConnection(Direction direction, Connector connection)
     {
         connections.put(direction, connection);
     }
@@ -59,7 +58,7 @@ public class Scene
         return name;
     }
 
-    public Collection<IConnector> getConnections()
+    public Collection<Connector> getConnections()
     {
         return this.connections.values();
     }

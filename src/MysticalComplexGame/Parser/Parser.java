@@ -45,6 +45,7 @@ public class Parser
         if (stream.getToken(0) == Token.VERBSOLO)
         {
             stream.popToken();
+            parseSuccess = true;
             verbSoloExec();
         }
     }
@@ -56,7 +57,6 @@ public class Parser
             ICommandVerbAlone command;
             command = (ICommandVerbAlone)content.getCommand(stream.getText(0));
             command.executeCommand();
-            parseSuccess = true;
         }
         else outputWrongGrammar("");
     }
@@ -66,6 +66,7 @@ public class Parser
         if (stream.getToken(0) == Token.VERBDIRECTION)
         {
             stream.popToken();
+            parseSuccess = true;
             verbDirectionArg();
         }
     }
@@ -84,7 +85,6 @@ public class Parser
             ICommandVerbDirection command;
             command = (ICommandVerbDirection)content.getCommand(stream.getText(0));
             command.executeCommand(Direction.fromString(stream.getText(1)));
-            parseSuccess = true;
         }
         else outputWrongGrammar(stream.getText(1));
     }
@@ -94,6 +94,7 @@ public class Parser
         if (stream.getToken(0) == Token.VERBITEM)
         {
             stream.popToken();
+            parseSuccess = true;
             verbItemArg();
         }
     }
@@ -112,7 +113,6 @@ public class Parser
             ICommandVerbItem command;
             command = (ICommandVerbItem)content.getCommand(stream.getText(0));
             command.executeCommand(content.stringToItem(stream.getText(1)));
-            parseSuccess = true;
         }
         else outputWrongGrammar(stream.getText(1));
     }

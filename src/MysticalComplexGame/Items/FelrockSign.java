@@ -1,8 +1,8 @@
 package MysticalComplexGame.Items;
 
+import MysticalComplexGame.ConnectionState;
 import MysticalComplexGame.Player;
-import MysticalComplexGame.Connections.ConnectionActive;
-import MysticalComplexGame.Connections.IConnector;
+import MysticalComplexGame.Connector;
 import MysticalComplexGame.GameEngine;
 
 public class FelrockSign extends IItem implements ReadableItem
@@ -21,8 +21,8 @@ public class FelrockSign extends IItem implements ReadableItem
     public void read()
     {
         GameEngine.textOutput(text);
-        for (IConnector connection : Player.getLocation().getConnections())
-            if (connection instanceof ConnectionActive)
+        for (Connector connection : Player.getLocation().getConnections())
+            if (connection.getState() == ConnectionState.CLOSED)
                 if (!connection.isOpen()) connection.openConnection(this);
     }
 }
