@@ -11,6 +11,7 @@ public class FelrockSign extends IItem implements ReadableItem
 
     public FelrockSign()
     {
+        pickable = false;
         name = "sign";
         description = "There is a sign by the end of the path.";
         text = "Welcome to Felrock Village!";

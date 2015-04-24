@@ -1,8 +1,8 @@
 package MysticalComplexGame.Commands;
 
 import MysticalComplexGame.Items.IItem;
+import MysticalComplexGame.Items.IKeyItem;
 import MysticalComplexGame.Player;
-import MysticalComplexGame.GameContent;
 import MysticalComplexGame.GameEngine;
 
 public class DropCommand extends ICommandVerbItem
@@ -20,7 +20,7 @@ public class DropCommand extends ICommandVerbItem
     public void executeCommand(IItem item)
     {
         if (!Player.getInventory().containsValue(item)) GameEngine.textOutput(invalidArgument);
-        else if (!item.getTags().contains(this.key)) GameEngine.textOutput(actionFailed);
+        else if (item instanceof IKeyItem) GameEngine.textOutput(actionFailed);
         else
         {
             Player.getLocation().addItem(item);

@@ -3,11 +3,11 @@ package MysticalComplexGame.Connections;
 import MysticalComplexGame.Items.IItem;
 import MysticalComplexGame.Scene;
 
-public class ConnectionAllwaysOpen implements IConnector
+public class ConnectionOpen implements IConnector
 {
     private final Scene nextScene;
 
-    public ConnectionAllwaysOpen(Scene scene)
+    public ConnectionOpen(Scene scene)
     {
         this.nextScene = scene;
     }

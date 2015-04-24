@@ -3,10 +3,7 @@ package MysticalComplexGame.Items;
 import MysticalComplexGame.Player;
 import MysticalComplexGame.GameEngine;
 
-import java.util.ArrayList;
-import java.util.Collections;
-
-public class Flask extends IItem implements LiquidContainer
+public class Flask extends IItem implements LiquidContainer,IKeyItem
 {
     private LiquidContainerState fullness;
     private String containerEmpty;
@@ -16,14 +13,14 @@ public class Flask extends IItem implements LiquidContainer
     private String noWaterSource;
     private int power;
     private String isAlreadyEmpty;
+    private String water;
 
-    public Flask(int power,LiquidContainerState fullness, String... tags)
+    public Flask(int power,LiquidContainerState fullness)
     {
+        pickable = true;
         name = "flask";
         this.fullness = fullness;
         setDescription(fullness);
-        this.tags = new ArrayList<String>();
-        Collections.addAll(this.tags, tags);
         containerEmpty = "This is empty, i cannot drink from it.";
         drinkSuccess = "You drink from the " + name + " and quench your thirst.";
         fillSuccess = "You fill your flask with water.";
@@ -31,6 +28,7 @@ public class Flask extends IItem implements LiquidContainer
         noWaterSource = "There is no water source nearby to fill this.";
         this.power = power;
         isAlreadyEmpty = "You cannot empty that, it is already empty.";
+        water = "water";
     }
 
     @Override
@@ -51,7 +49,7 @@ public class Flask extends IItem implements LiquidContainer
     public void fill()
     {
         if (fullness == LiquidContainerState.FILLED) GameEngine.textOutput(fillFailed);
-        else if (Player.getLocation().getItems().containsKey("water"))
+        else if (Player.getLocation().getItems().get(water)!=null)
         {
             this.fullness = LiquidContainerState.FILLED;
             GameEngine.textOutput(fillSuccess);

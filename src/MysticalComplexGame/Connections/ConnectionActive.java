@@ -33,8 +33,7 @@ public class ConnectionActive implements IConnector
     @Override
     public boolean isOpen()
     {
-        if (state == State.OPEN) return true;
-        else return false;
+        return state == State.OPEN;
     }
     @Override
     public void openConnection(IItem key)

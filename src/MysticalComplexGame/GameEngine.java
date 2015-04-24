@@ -5,8 +5,6 @@ import MysticalComplexGame.Connections.*;
 import MysticalComplexGame.Items.*;
 import MysticalComplexGame.Parser.*;
 
-import java.util.HashMap;
-import java.util.Map;
 import java.util.Scanner;
 
 public class GameEngine
@@ -175,8 +173,8 @@ public class GameEngine
 
         // </editor-fold>
         // <editor-fold defaultstate="collapsed" desc="ITEMS">
-        IItem shinyRock = new ShinyRock("pick","drop");
-        IItem flask = new Flask(10,LiquidContainerState.EMPTY,"pick");
+        IItem shinyRock = new ShinyRock();
+        IItem flask = new Flask(10,LiquidContainerState.EMPTY);
         IItem water = new WaterSource();
         IItem keyItemFelrockSign = new FelrockSign();
 
@@ -246,11 +244,11 @@ public class GameEngine
         IConnector connectionCampsiteWest = new ConnectionDeadEnd(textCampsiteWest);
 
         IConnector connectionCrossroadsNorth = new ConnectionDeadEnd(textCrossroadsNorth);
-        IConnector connectionCrossroadsSouth = new ConnectionAllwaysOpen(sceneCrystalLake);
-        IConnector connectionCrossroadsEast = new ConnectionAllwaysOpen(sceneWildernessRoad);
+        IConnector connectionCrossroadsSouth = new ConnectionOpen(sceneCrystalLake);
+        IConnector connectionCrossroadsEast = new ConnectionOpen(sceneWildernessRoad);
         IConnector connectionCrossroadsWest = new ConnectionDeadEnd(textCrossroadsWest);
 
-        IConnector connectionCrystalLakeNorth = new ConnectionAllwaysOpen(sceneCrossroads);
+        IConnector connectionCrystalLakeNorth = new ConnectionOpen(sceneCrossroads);
         IConnector connectionCrystalLakeSouth = new ConnectionDeadEnd(textCrystalLakeSouth);
         IConnector connectionCrystalLakeEast = new ConnectionDeadEnd(textCrystalLakeEast);
         IConnector connectionCrystalLakeWest = new ConnectionDeadEnd(textCrystalLakeWest);
@@ -258,7 +256,7 @@ public class GameEngine
         IConnector connectionWildernessRoadNorth = new ConnectionDeadEnd(textWildernessRoadNorth);
         IConnector connectionWildernessRoadSouth = new ConnectionDeadEnd(textWildernessRoadSouth);
         IConnector connectionWildernessRoadEast = new ConnectionActive(textWildernessRoadEast,sceneFelrockVillage,keyItemFelrockSign);
-        IConnector connectionWildernessRoadWest = new ConnectionAllwaysOpen(sceneCrossroads);
+        IConnector connectionWildernessRoadWest = new ConnectionOpen(sceneCrossroads);
 
         IConnector connectionFelrockVillageNorth = new ConnectionDeadEnd("a");
         IConnector connectionFelrockVillageSouth = new ConnectionDeadEnd("b");

@@ -1,7 +1,6 @@
 package MysticalComplexGame.Commands;
 
 import MysticalComplexGame.*;
-import MysticalComplexGame.Player;
 import MysticalComplexGame.Connections.ConnectionPassive;
 
 public class GoCommand extends ICommandVerbDirection

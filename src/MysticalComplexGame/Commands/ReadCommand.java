@@ -1,15 +1,12 @@
 package MysticalComplexGame.Commands;
 
 import MysticalComplexGame.Player;
-import MysticalComplexGame.GameContent;
 import MysticalComplexGame.GameEngine;
 import MysticalComplexGame.Items.IItem;
 import MysticalComplexGame.Items.ReadableItem;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 
 public class ReadCommand extends ICommandVerbItem

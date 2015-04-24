@@ -19,7 +19,7 @@ public class PickCommand extends ICommandVerbItem
     public void executeCommand(IItem item)
     {
         if (!Player.getLocation().getItems().containsValue(item)) GameEngine.textOutput(invalidArgument);
-        else if (!Player.getLocation().getItems().get(item.getName()).getTags().contains(this.key)) GameEngine.textOutput(actionFailed);
+        else if (!item.isPickable()) GameEngine.textOutput(actionFailed);
         else
         {
             Player.addToInventory(item);

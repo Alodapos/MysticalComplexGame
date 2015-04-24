@@ -1,13 +1,11 @@
 package MysticalComplexGame.Items;
 
-import java.util.List;
-
 public abstract class IItem
 {
     protected String name;
     protected String description;
     protected String inventoryDescription;
-    protected List<String> tags;
+    protected boolean pickable;
 
     public String getDescription()
     {
@@ -24,8 +22,18 @@ public abstract class IItem
         return inventoryDescription;
     }
 
-    public List<String> getTags()
+    public boolean isPickable()
     {
-        return tags;
+        return pickable;
+    }
+
+    public void makePickable()
+    {
+        pickable = true;
+    }
+
+    public void makeUnpickable()
+    {
+        pickable = false;
     }
 }

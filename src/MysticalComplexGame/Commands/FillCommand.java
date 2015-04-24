@@ -2,7 +2,6 @@ package MysticalComplexGame.Commands;
 
 import MysticalComplexGame.Items.IItem;
 import MysticalComplexGame.Player;
-import MysticalComplexGame.GameContent;
 import MysticalComplexGame.GameEngine;
 import MysticalComplexGame.Items.LiquidContainer;
 
