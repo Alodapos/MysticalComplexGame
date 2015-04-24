@@ -1,31 +1,22 @@
 package MysticalComplexGame.Commands;
 
-import MysticalComplexGame.Items.IItem;
-import MysticalComplexGame.Player;
+import MysticalComplexGame.Connector;
+import MysticalComplexGame.Direction;
 import MysticalComplexGame.GameEngine;
-import MysticalComplexGame.Items.LiquidContainer;
+import MysticalComplexGame.Player;
 
-public class GazeCommand extends ICommandVerbItem
+public class GazeCommand extends ICommandVerbDirection
 {
-    private String itemMissing;
-    private String invalidArgument;
-
-    public GazeCommand()
+      public GazeCommand()
     {
-        key = "drink";
-        invalidArgument = "This is not something that i can drink from...";
-        itemMissing = "You don't have something like this with you.";
+        key = "gaze";
     }
 
     @Override
-    public void executeCommand(IItem item)
+    public void executeCommand(Direction direction)
     {
-        if (!Player.getInventory().containsValue(item)) GameEngine.textOutput(itemMissing);
-        else if (!(item instanceof LiquidContainer)) GameEngine.textOutput(invalidArgument);
-        else
-        {
-            LiquidContainer itemArgument = (LiquidContainer) item;
-            itemArgument.drink();
-        }
+        Connector connector = Player.getLocation().getConnection(direction);
+        if (connector.getNextScene() != null) GameEngine.textOutput("You can see the "+connector.getNextScene().getName());
+        else GameEngine.textOutput(connector.getDescription());
     }
 }

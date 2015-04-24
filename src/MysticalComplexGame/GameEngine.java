@@ -197,6 +197,7 @@ public class GameEngine
         ICommand fill = new FillCommand();
         ICommand read = new ReadCommand();
         ICommand empty = new EmptyCommand();
+        ICommand gaze = new GazeCommand();
 
         content.addCommand(go);
         content.addCommand(look);
@@ -207,8 +208,10 @@ public class GameEngine
         content.addCommand(fill);
         content.addCommand(read);
         content.addCommand(empty);
+        content.addCommand(gaze);
 
         tokenizer.addToken("go", Token.VERBDIRECTION);
+        tokenizer.addToken("gaze",Token.VERBDIRECTION);
         tokenizer.addToken("look", Token.VERBSOLO);
         tokenizer.addToken("inventory",Token.VERBSOLO);
         tokenizer.addToken("pick",Token.VERBITEM);
