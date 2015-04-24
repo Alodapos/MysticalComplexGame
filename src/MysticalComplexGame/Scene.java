@@ -1,11 +1,9 @@
 package MysticalComplexGame;
 
-import MysticalComplexGame.Connections.IConnector;
 import MysticalComplexGame.Items.IItem;
 
 import java.util.Collection;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 public class Scene
@@ -13,30 +11,30 @@ public class Scene
     private String description;
     private String name;
     private Map<String, IItem> items;
-    private Map<Direction, IConnector> connections;
+    private Map<Direction, Connector> connections;
 
     public Scene(String name, String description,IItem...items)
     {
-        this.connections = new HashMap<Direction, IConnector>();
+        this.connections = new HashMap<Direction, Connector>();
         this.items = new HashMap<String,IItem>();
         this.name = name;
         this.description = description;
         for (IItem item: items) this.items.put(item.getName(),item);
     }
 
-    public IConnector getConnection(Direction direction)
+    public Connector getConnection(Direction direction)
     {
         return this.connections.get(direction);
     }
 
     public void printDescription()
     {
-        System.out.println("\t\t\t\t\t\""+this.name +"\""+"\n");
-        System.out.println(this.description);
-        for (Map.Entry<String, IItem> item : items.entrySet()) System.out.println(item.getValue().getDescription());
+        GameEngine.textOutput("\t\t\t\t\t\"" + this.name + "\"" + "\n");
+        GameEngine.textOutput(this.description);
+        for (Map.Entry<String, IItem> item : items.entrySet()) GameEngine.textOutput(item.getValue().getDescription());
     }
 
-    public void addConnection(Direction direction, IConnector connection)
+    public void addConnection(Direction direction, Connector connection)
     {
         connections.put(direction, connection);
     }
@@ -46,9 +44,9 @@ public class Scene
         this.items.put(item.getName(),item);
     }
 
-    public void removeItem(String item)
+    public void removeItem(IItem item)
     {
-        this.items.remove(item);
+        items.remove(item.getName(),item);
     }
 
     public Map<String,IItem> getItems()
@@ -60,7 +58,7 @@ public class Scene
         return name;
     }
 
-    public Collection<IConnector> getConnections()
+    public Collection<Connector> getConnections()
     {
         return this.connections.values();
     }

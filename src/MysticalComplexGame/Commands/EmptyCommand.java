@@ -6,15 +6,15 @@ import MysticalComplexGame.GameEngine;
 import MysticalComplexGame.Items.LiquidContainer;
 
 
-public class FillCommand extends ICommandVerbItem
+public class EmptyCommand extends ICommandVerbItem
 {
     private String itemMissing;
     private String invalidArgument;
 
-    public FillCommand()
+    public EmptyCommand()
     {
-        key = "fill";
-        invalidArgument = "This is not something that i can fill";
+        key = "empty";
+        invalidArgument = "This is not something that i can empty.";
         itemMissing = "You don't have something like this with you.";
     }
 
@@ -26,7 +26,7 @@ public class FillCommand extends ICommandVerbItem
         else
         {
             LiquidContainer itemArgument = (LiquidContainer) item;
-            itemArgument.fill();
+            itemArgument.empty();
         }
     }
 }

@@ -1,14 +1,19 @@
 package MysticalComplexGame;
 
 import MysticalComplexGame.Commands.*;
-import MysticalComplexGame.Connections.*;
 import MysticalComplexGame.Items.*;
+import MysticalComplexGame.Parser.*;
 
 import java.util.Scanner;
 
 public class GameEngine
 {
-    public void startGame()
+    //CONTENT
+    static GameContent content = new GameContent();
+    static Tokenizer tokenizer = new Tokenizer();
+    static Parser parser = new Parser();
+
+    public static void startGame()
     {
         // <editor-fold defaultstate="collapsed" desc="TEXTS">
         String textNameCampsite = "Campsite";
@@ -166,13 +171,21 @@ public class GameEngine
         String textGardenOfRadianceWest = "On your left, still stands the wooden bridge.";
 
         // </editor-fold>
-        //CONTENT
-        GameContent content = new GameContent();
         // <editor-fold defaultstate="collapsed" desc="ITEMS">
-        IItem shinyRock = new ShinyRock("pick","drop");
-        IItem flask = new Flask(10,LiquidContainerState.EMPTY,"pick");
+        IItem shinyRock = new ShinyRock();
+        IItem flask = new Flask(10,LiquidContainerState.EMPTY);
         IItem water = new WaterSource();
         IItem keyItemFelrockSign = new FelrockSign();
+
+        tokenizer.addToken("rock", Token.ITEM);
+        tokenizer.addToken("flask",Token.ITEM);
+        tokenizer.addToken("water",Token.ITEM);
+        tokenizer.addToken("sign",Token.ITEM);
+
+        content.addItem(shinyRock);
+        content.addItem(flask);
+        content.addItem(water);
+        content.addItem(keyItemFelrockSign);
         //</editor-fold>
         // <editor-fold defaultstate="collapsed" desc="COMMANDS">
         ICommand go = new GoCommand();
@@ -183,6 +196,7 @@ public class GameEngine
         ICommand drink = new DrinkCommand();
         ICommand fill = new FillCommand();
         ICommand read = new ReadCommand();
+        ICommand empty = new EmptyCommand();
 
         content.addCommand(go);
         content.addCommand(look);
@@ -192,6 +206,22 @@ public class GameEngine
         content.addCommand(drink);
         content.addCommand(fill);
         content.addCommand(read);
+        content.addCommand(empty);
+
+        tokenizer.addToken("go", Token.VERBDIRECTION);
+        tokenizer.addToken("look", Token.VERBSOLO);
+        tokenizer.addToken("inventory",Token.VERBSOLO);
+        tokenizer.addToken("pick",Token.VERBITEM);
+        tokenizer.addToken("drop",Token.VERBITEM);
+        tokenizer.addToken("fill",Token.VERBITEM);
+        tokenizer.addToken("drink",Token.VERBITEM);
+        tokenizer.addToken("empty",Token.VERBITEM);
+        tokenizer.addToken("read",Token.VERBITEM);
+
+        tokenizer.addToken("north",Token.DIRECTION);
+        tokenizer.addToken("south",Token.DIRECTION);
+        tokenizer.addToken("east",Token.DIRECTION);
+        tokenizer.addToken("west",Token.DIRECTION);
         //</editor-fold>
         // <editor-fold defaultstate="collapsed" desc="SCENES">
         Scene sceneCampsite = new Scene(textNameCampsite,textDescriptionCampsite,flask);
@@ -207,30 +237,30 @@ public class GameEngine
         content.addScene(sceneFelrockVillage);
         //</editor-fold>
         // <editor-fold defaultstate="collapsed" desc="CONNECTIONS">
-        IConnector connectionCampsiteNorth = new ConnectionPassive(textCampsiteNorth,sceneCrossroads,flask);
-        IConnector connectionCampsiteSouth = new ConnectionDeadEnd(textCampsiteSouth);
-        IConnector connectionCampsiteEast = new ConnectionDeadEnd(textCampsiteEast);
-        IConnector connectionCampsiteWest = new ConnectionDeadEnd(textCampsiteWest);
+        Connector connectionCampsiteNorth = new Connector(sceneCrossroads,flask,textCampsiteNorth);
+        Connector connectionCampsiteSouth = new Connector(textCampsiteSouth);
+        Connector connectionCampsiteEast = new Connector(textCampsiteEast);
+        Connector connectionCampsiteWest = new Connector(textCampsiteWest);
 
-        IConnector connectionCrossroadsNorth = new ConnectionDeadEnd(textCrossroadsNorth);
-        IConnector connectionCrossroadsSouth = new ConnectionAllwaysOpen(sceneCrystalLake);
-        IConnector connectionCrossroadsEast = new ConnectionAllwaysOpen(sceneWildernessRoad);
-        IConnector connectionCrossroadsWest = new ConnectionDeadEnd(textCrossroadsWest);
+        Connector connectionCrossroadsNorth = new Connector(textCrossroadsNorth);
+        Connector connectionCrossroadsSouth = new Connector(sceneCrystalLake);
+        Connector connectionCrossroadsEast = new Connector(sceneWildernessRoad);
+        Connector connectionCrossroadsWest = new Connector(textCrossroadsWest);
 
-        IConnector connectionCrystalLakeNorth = new ConnectionAllwaysOpen(sceneCrossroads);
-        IConnector connectionCrystalLakeSouth = new ConnectionDeadEnd(textCrystalLakeSouth);
-        IConnector connectionCrystalLakeEast = new ConnectionDeadEnd(textCrystalLakeEast);
-        IConnector connectionCrystalLakeWest = new ConnectionDeadEnd(textCrystalLakeWest);
+        Connector connectionCrystalLakeNorth = new Connector(sceneCrossroads);
+        Connector connectionCrystalLakeSouth = new Connector(textCrystalLakeSouth);
+        Connector connectionCrystalLakeEast = new Connector(textCrystalLakeEast);
+        Connector connectionCrystalLakeWest = new Connector(textCrystalLakeWest);
 
-        IConnector connectionWildernessRoadNorth = new ConnectionDeadEnd(textWildernessRoadNorth);
-        IConnector connectionWildernessRoadSouth = new ConnectionDeadEnd(textWildernessRoadSouth);
-        IConnector connectionWildernessRoadEast = new ConnectionActive(textWildernessRoadEast,sceneFelrockVillage,keyItemFelrockSign);
-        IConnector connectionWildernessRoadWest = new ConnectionAllwaysOpen(sceneCrossroads);
+        Connector connectionWildernessRoadNorth = new Connector(textWildernessRoadNorth);
+        Connector connectionWildernessRoadSouth = new Connector(textWildernessRoadSouth);
+        Connector connectionWildernessRoadEast = new Connector(sceneFelrockVillage,keyItemFelrockSign,textWildernessRoadEast,"You should take a look at that village");
+        Connector connectionWildernessRoadWest = new Connector(sceneCrossroads);
 
-        IConnector connectionFelrockVillageNorth = new ConnectionDeadEnd("a");
-        IConnector connectionFelrockVillageSouth = new ConnectionDeadEnd("b");
-        IConnector connectionFelrockVillageEast = new ConnectionDeadEnd("c");
-        IConnector connectionFelrockVillageWest = new ConnectionDeadEnd("d");
+        Connector connectionFelrockVillageNorth = new Connector("a");
+        Connector connectionFelrockVillageSouth = new Connector("b");
+        Connector connectionFelrockVillageEast = new Connector("c");
+        Connector connectionFelrockVillageWest = new Connector("d");
         //</editor-fold>
         // <editor-fold defaultstate="collapsed" desc="ADD CONNECTIONS">
         sceneCampsite.addConnection(Direction.NORTH,connectionCampsiteNorth);
@@ -259,55 +289,61 @@ public class GameEngine
         sceneFelrockVillage.addConnection(Direction.WEST,connectionFelrockVillageWest);
         //</editor-fold>
         //-----INTRO-----
-        System.out.println("ACT I - The Sage\n");
-        System.out.println("As the sun sets, the nightfall finds you getting ready for the upcoming journey to the far land of Serenoth.");
-        System.out.println("You must reach this region in order to find a great sage, who is the personal advisor of king Ecthelion, son of Exelion.");
-        System.out.println("This great sage often goes by many names, but one is more common to the people of Dal'aron, Zenthar");
-        System.out.println("He is against all the strife of the two kingdoms, for he knows what really happened two hundred years ago.");
-        System.out.println("But the two kings care for nothing than the dominion of their own might all over the world.");
-        System.out.println("This is why you need his help to convince king Ecthelion to cease his actions and withdraw his armies before its too late to stop this madness.");
-        System.out.println("Therefore...\n");
+        textOutput("ACT I - The Sage\n");
+        textOutput("As the sun sets, the nightfall finds you getting ready for the upcoming journey to the far land of Serenoth.");
+        textOutput("You must reach this region in order to find a great sage, who is the personal advisor of king Ecthelion, son of Exelion.");
+        textOutput("This great sage often goes by many names, but one is more common to the people of Dal'aron, Zenthar");
+        textOutput("He is against all the strife of the two kingdoms, for he knows what really happened two hundred years ago.");
+        textOutput("But the two kings care for nothing than the dominion of their own might all over the world.");
+        textOutput("This is why you need his help to convince king Ecthelion to cease his actions and withdraw his armies before its too late to stop this madness.");
+        textOutput("Therefore...\n");
         //CHARACTERS
         String playerName = getPlayerName();
-        Character player = new Character(playerName,sceneCampsite);
-
-        content.addCharacter(player);
+        Player.setName(playerName);
+        Player.setLocation(sceneCampsite);
         //FIRST SCENE
-        player.getLocation().printDescription();
+        Player.getLocation().printDescription();
         //GAME LOOP
-        gameLoop(player,content);
+        gameLoop();
     }
-    private String getPlayerName()
+    private static String getPlayerName()
     {
-        System.out.println("What is your name?");
+        textOutput("What is your name?");
         Scanner name = new Scanner(System.in);
         return  name.nextLine();
     }
 
-    private void gameLoop(Character player,GameContent content)
+    private static void gameLoop()
     {
         //USER INPUT
         String userInputString;
         Scanner userInput;
+        TokenStream tokenizedInput = new TokenStream();
         //COMMAND PARSE
-        InputHandler handler = new InputHandler();
         do
         {
+            tokenizedInput.clear();
             userInput = new Scanner(System.in);
-            userInputString = userInput.nextLine().trim();
-            handler.tryParse(userInputString,content,player);
-            checkThirst(player);
-
-        } while (!player.getLocation().getName().equals("The Sage"));
-        System.out.println("\n\n\nYou have completed ACT I, ACT II is under development, stay tuned for more...\n");
+            userInputString = userInput.nextLine().trim().toLowerCase();
+            tokenizedInput = tokenizer.tokenize(userInputString);
+            parser.parse(tokenizedInput,content);
+            checkThirst();
+        } while (!Player.getLocation().getName().equals("The Sage"));
+        textOutput("\n\n\nYou have completed ACT I, ACT II is under development, stay tuned for more...\n");
     }
-    private void checkThirst(Character player)
+
+    private static void checkThirst()
     {
-        if (player.getThirstLevel() == 5) System.out.println("\nYou begin to feel thirsty, you better find some water to drink soon or you'll probably die");
-        else if (player.getThirstLevel() == 0 )
+        if (Player.getThirstLevel() == 5) textOutput("\nYou begin to feel thirsty, you better find some water to drink soon or you'll probably die");
+        else if (Player.getThirstLevel() == 0 )
         {
-            System.out.println("You fall to your knees from dehydration and...slowly.....die...\nRest in peace "+player.getName()+", your deeds shall be remembered.");
+            textOutput("You fall to your knees from dehydration and...slowly.....die...\nRest in peace " + Player.getName() + ", your deeds shall be remembered.");
             System.exit(-10);
         }
+    }
+
+    public static void textOutput(String output)
+    {
+        System.out.println(output);
     }
 }

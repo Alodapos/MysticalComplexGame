@@ -1,6 +1,7 @@
 package MysticalComplexGame;
 
 import MysticalComplexGame.Commands.ICommand;
+import MysticalComplexGame.Items.IItem;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -9,29 +10,36 @@ public class GameContent
 {
     private Map<String, ICommand> commandMap;
     private Map<String, Scene> sceneMap;
-    private Map<String, Character> characterMap;
+    private Map<String, IItem> itemMap;
 
     public GameContent()
     {
         commandMap = new HashMap<String, ICommand>();
         sceneMap = new HashMap<String, Scene>();
-        characterMap = new HashMap<String, Character>();
+        itemMap = new HashMap<String,IItem>();
     }
-    public void addCharacter(Character character)
-    {
-        this.characterMap.put(character.getName(),character);
-    }
+
     public void addCommand(ICommand command)
     {
-        this.commandMap.put(command.getName(),command);
+        commandMap.put(command.getKey(),command);
+    }
+    public void addItem(IItem item)
+    {
+        itemMap.put(item.getName(),item);
+    }
+
+    public IItem stringToItem(String item)
+    {
+        return itemMap.get(item);
+    }
+
+    public void removeItem(IItem item)
+    {
+        itemMap.remove(item.getName());
     }
     public void addScene(Scene scene)
     {
         this.sceneMap.put(scene.getName(),scene);
-    }
-    public Character getCharacter(String character)
-    {
-        return this.characterMap.get(character);
     }
     public ICommand getCommand(String command)
     {
