@@ -1,22 +1,19 @@
 package MysticalComplexGame.Commands;
 
-import MysticalComplexGame.Connector;
-import MysticalComplexGame.Direction;
-import MysticalComplexGame.GameEngine;
-import MysticalComplexGame.Player;
+import MysticalComplexGame.*;
 
 public class GazeCommand extends ICommandVerbDirection
 {
-      public GazeCommand()
+    public GazeCommand()
     {
         key = "gaze";
     }
 
     @Override
-    public void executeCommand(Direction direction)
+    public void executeCommand(Player player,Direction direction)
     {
-        Connector connector = Player.getLocation().getConnection(direction);
-        if (connector.getNextScene() != null) GameEngine.textOutput("You can see the "+connector.getNextScene().getName());
-        else GameEngine.textOutput(connector.getDescription());
+        Connector connection = player.getLocation().getConnection(direction);
+        if (connection.getNextScene() != null) GameEngine.textOutput("You see the "+connection.getNextScene().getName());
+        else GameEngine.textOutput(connection.getDescription());
     }
 }

@@ -22,19 +22,19 @@ public class ReadCommand extends ICommandVerbItem
     }
 
     @Override
-    public void executeCommand(IItem item)
+    public void executeCommand(Player player,IItem item)
     {
 
         List<IItem> localItems = new ArrayList<IItem>();
-        localItems.addAll(Player.getInventory().values());
-        localItems.addAll(Player.getLocation().getItems().values());
+        localItems.addAll(player.getInventory().values());
+        localItems.addAll(player.getLocation().getItems().values());
 
         if (!localItems.contains(item)) GameEngine.textOutput(itemMissing);
         else if (!(item instanceof ReadableItem)) GameEngine.textOutput(invalidArgument);
         else
         {
             ReadableItem toRead = (ReadableItem)item;
-            toRead.read();
+            toRead.read(player);
         }
     }
 }

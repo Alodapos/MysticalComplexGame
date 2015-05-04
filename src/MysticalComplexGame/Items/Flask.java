@@ -11,11 +11,10 @@ public class Flask extends IItem implements LiquidContainer,IKeyItem
     private String fillSuccess;
     private String fillFailed;
     private String noWaterSource;
-    private int power;
     private String isAlreadyEmpty;
     private String water;
 
-    public Flask(int power,LiquidContainerState fullness)
+    public Flask(LiquidContainerState fullness)
     {
         pickable = true;
         name = "flask";
@@ -26,17 +25,16 @@ public class Flask extends IItem implements LiquidContainer,IKeyItem
         fillSuccess = "You fill your flask with water.";
         fillFailed = "The flask is already filled.";
         noWaterSource = "There is no water source nearby to fill this.";
-        this.power = power;
         isAlreadyEmpty = "You cannot empty that, it is already empty.";
         water = "water";
     }
 
     @Override
-    public void drink()
+    public void drink(Player player)
     {
         if (fullness == LiquidContainerState.FILLED)
         {
-            Player.setThirstLevel(power);
+            player.setThirstLevel(10);
             GameEngine.textOutput(drinkSuccess);
             setDescription(fullness);
             this.fullness = LiquidContainerState.EMPTY;
@@ -46,10 +44,10 @@ public class Flask extends IItem implements LiquidContainer,IKeyItem
     }
 
     @Override
-    public void fill()
+    public void fill(Player player)
     {
         if (fullness == LiquidContainerState.FILLED) GameEngine.textOutput(fillFailed);
-        else if (Player.getLocation().getItems().get(water)!=null)
+        else if (player.getLocation().getItems().get(water)!=null)
         {
             this.fullness = LiquidContainerState.FILLED;
             GameEngine.textOutput(fillSuccess);

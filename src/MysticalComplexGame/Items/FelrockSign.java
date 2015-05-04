@@ -18,10 +18,10 @@ public class FelrockSign extends IItem implements ReadableItem
     }
 
     @Override
-    public void read()
+    public void read(Player player)
     {
         GameEngine.textOutput(text);
-        for (Connector connection : Player.getLocation().getConnections())
+        for (Connector connection : player.getLocation().getConnections())
             if (connection.getState() == ConnectionState.CLOSED)
                 if (!connection.isOpen()) connection.openConnection(this);
     }

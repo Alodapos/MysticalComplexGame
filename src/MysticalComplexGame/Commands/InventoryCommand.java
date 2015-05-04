@@ -17,13 +17,13 @@ public class InventoryCommand extends ICommandVerbAlone
     }
 
     @Override
-    public void executeCommand()
+    public void executeCommand(Player player)
     {
-        if (Player.getInventory().isEmpty()) GameEngine.textOutput(emptyInventory);
+        if (player.getInventory().isEmpty()) GameEngine.textOutput(emptyInventory);
         else
         {
             GameEngine.textOutput("Your inventory:");
-            for (Map.Entry<String, IItem> item: Player.getInventory().entrySet()) GameEngine.textOutput(item.getValue().getInventoryDescription());
+            for (Map.Entry<String, IItem> item: player.getInventory().entrySet()) GameEngine.textOutput(item.getValue().getInventoryDescription());
         }
     }
 }

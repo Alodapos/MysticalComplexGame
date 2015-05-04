@@ -18,14 +18,14 @@ public class DrinkCommand extends ICommandVerbItem
     }
 
     @Override
-    public void executeCommand(IItem item)
+    public void executeCommand(Player player,IItem item)
     {
-        if (!Player.getInventory().containsValue(item)) GameEngine.textOutput(itemMissing);
+        if (!player.getInventory().containsValue(item)) GameEngine.textOutput(itemMissing);
         else if (!(item instanceof LiquidContainer)) GameEngine.textOutput(invalidArgument);
         else
         {
             LiquidContainer itemArgument = (LiquidContainer) item;
-            itemArgument.drink();
+            itemArgument.drink(player);
         }
     }
 }

@@ -1,6 +1,8 @@
 package MysticalComplexGame.Items;
 
+import MysticalComplexGame.Player;
+
 public interface ReadableItem
 {
-    void read();
+    void read(Player player);
 }

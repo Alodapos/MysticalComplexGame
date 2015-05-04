@@ -173,19 +173,22 @@ public class GameEngine
         // </editor-fold>
         // <editor-fold defaultstate="collapsed" desc="ITEMS">
         IItem shinyRock = new ShinyRock();
-        IItem flask = new Flask(10,LiquidContainerState.EMPTY);
+        IItem flask = new Flask(LiquidContainerState.EMPTY);
         IItem water = new WaterSource();
         IItem keyItemFelrockSign = new FelrockSign();
+        IItem papyrusItem = new Papyrus();
 
         tokenizer.addToken("rock", Token.ITEM);
         tokenizer.addToken("flask",Token.ITEM);
         tokenizer.addToken("water",Token.ITEM);
         tokenizer.addToken("sign",Token.ITEM);
+        tokenizer.addToken("papyrus",Token.ITEM);
 
         content.addItem(shinyRock);
         content.addItem(flask);
         content.addItem(water);
         content.addItem(keyItemFelrockSign);
+        content.addItem(papyrusItem);
         //</editor-fold>
         // <editor-fold defaultstate="collapsed" desc="COMMANDS">
         ICommand go = new GoCommand();
@@ -197,7 +200,8 @@ public class GameEngine
         ICommand fill = new FillCommand();
         ICommand read = new ReadCommand();
         ICommand empty = new EmptyCommand();
-        ICommand gaze = new GazeCommand();
+        ICommand gazeCommand = new GazeCommand();
+        ICommand writeCommand = new WriteCommand();
 
         content.addCommand(go);
         content.addCommand(look);
@@ -208,18 +212,22 @@ public class GameEngine
         content.addCommand(fill);
         content.addCommand(read);
         content.addCommand(empty);
-        content.addCommand(gaze);
+        content.addCommand(gazeCommand);
+        content.addCommand(writeCommand);
 
         tokenizer.addToken("go", Token.VERBDIRECTION);
         tokenizer.addToken("gaze",Token.VERBDIRECTION);
+
         tokenizer.addToken("look", Token.VERBSOLO);
         tokenizer.addToken("inventory",Token.VERBSOLO);
+
         tokenizer.addToken("pick",Token.VERBITEM);
         tokenizer.addToken("drop",Token.VERBITEM);
         tokenizer.addToken("fill",Token.VERBITEM);
         tokenizer.addToken("drink",Token.VERBITEM);
         tokenizer.addToken("empty",Token.VERBITEM);
         tokenizer.addToken("read",Token.VERBITEM);
+        tokenizer.addToken("write",Token.VERBITEM);
 
         tokenizer.addToken("north",Token.DIRECTION);
         tokenizer.addToken("south",Token.DIRECTION);
@@ -230,7 +238,7 @@ public class GameEngine
         Scene sceneCampsite = new Scene(textNameCampsite,textDescriptionCampsite,flask);
         Scene sceneCrossroads = new Scene(textNameCrossroads,textDescriptionCrossroads,shinyRock);
         Scene sceneCrystalLake = new Scene(textNameCrystalLake,textDescriptionCrystalLake,water);
-        Scene sceneWildernessRoad = new Scene(textNameWildernessRoad,textDescriptionWildernessRoad,keyItemFelrockSign);
+        Scene sceneWildernessRoad = new Scene(textNameWildernessRoad,textDescriptionWildernessRoad,keyItemFelrockSign,papyrusItem);
         Scene sceneFelrockVillage = new Scene(textNameFelrockVillage,textDescriptionFelrockVillage);
 
         content.addScene(sceneCampsite);
@@ -301,13 +309,13 @@ public class GameEngine
         textOutput("This is why you need his help to convince king Ecthelion to cease his actions and withdraw his armies before its too late to stop this madness.");
         textOutput("Therefore...\n");
         //CHARACTERS
+        Player player = new Player(sceneCampsite);
         String playerName = getPlayerName();
-        Player.setName(playerName);
-        Player.setLocation(sceneCampsite);
+        player.setName(playerName);
         //FIRST SCENE
-        Player.getLocation().printDescription();
+        player.getLocation().printDescription();
         //GAME LOOP
-        gameLoop();
+        gameLoop(player);
     }
     private static String getPlayerName()
     {
@@ -316,7 +324,7 @@ public class GameEngine
         return  name.nextLine();
     }
 
-    private static void gameLoop()
+    private static void gameLoop(Player player)
     {
         //USER INPUT
         String userInputString;
@@ -329,18 +337,19 @@ public class GameEngine
             userInput = new Scanner(System.in);
             userInputString = userInput.nextLine().trim().toLowerCase();
             tokenizedInput = tokenizer.tokenize(userInputString);
-            parser.parse(tokenizedInput,content);
-            checkThirst();
-        } while (!Player.getLocation().getName().equals("The Sage"));
+            parser.parse(tokenizedInput,content,player);
+            //TODO PARSE STUFF
+            checkThirst(player);
+        } while (!player.getLocation().getName().equals("The Sage"));
         textOutput("\n\n\nYou have completed ACT I, ACT II is under development, stay tuned for more...\n");
     }
 
-    private static void checkThirst()
+    private static void checkThirst(Player player)
     {
-        if (Player.getThirstLevel() == 5) textOutput("\nYou begin to feel thirsty, you better find some water to drink soon or you'll probably die");
-        else if (Player.getThirstLevel() == 0 )
+        if (player.getThirstLevel() == 5) textOutput("\nYou begin to feel thirsty, you better find some water to drink soon or you'll probably die");
+        else if (player.getThirstLevel() == 0 )
         {
-            textOutput("You fall to your knees from dehydration and...slowly.....die...\nRest in peace " + Player.getName() + ", your deeds shall be remembered.");
+            textOutput("You fall to your knees from dehydration and...slowly.....die...\nRest in peace " + player.getName() + ", your deeds shall be remembered.");
             System.exit(-10);
         }
     }
