@@ -16,15 +16,15 @@ public class PickCommand extends ICommandVerbItem
     }
 
     @Override
-    public void executeCommand(IItem item)
+    public void executeCommand(Player player,IItem item)
     {
-        if (!Player.getLocation().getItems().containsValue(item)) GameEngine.textOutput(invalidArgument);
+        if (!player.getLocation().getItems().containsValue(item)) GameEngine.textOutput(invalidArgument);
         else if (!item.isPickable()) GameEngine.textOutput(actionFailed);
         else
         {
-            Player.addToInventory(item);
+            player.addToInventory(item);
             GameEngine.textOutput("Picked " + item.getName() + ".");
-            Player.getLocation().removeItem(item);
+            player.getLocation().removeItem(item);
         }
     }
 }

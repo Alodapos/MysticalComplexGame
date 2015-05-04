@@ -6,6 +6,7 @@ import MysticalComplexGame.Commands.ICommandVerbItem;
 import MysticalComplexGame.Direction;
 import MysticalComplexGame.GameContent;
 import MysticalComplexGame.GameEngine;
+import MysticalComplexGame.Player;
 
 public class Parser
 {
@@ -16,6 +17,7 @@ public class Parser
     String textWrongItem;
     TokenStream stream;
     GameContent content;
+    Player player;
 
     public Parser()
     {
@@ -25,13 +27,15 @@ public class Parser
         textWrongDirection = " somewhere.";
         textWrongItem = " something.";
         stream = new TokenStream();
+
     }
 
-    public void parse(TokenStream input, GameContent content)
+    public void parse(TokenStream input, GameContent content,Player player)
     {
         parseSuccess = false;
         stream = input;
         this.content = content;
+        this.player = player;
 
         verbSoloParse();
         if (!parseSuccess) verbDirectionParse();
@@ -56,7 +60,7 @@ public class Parser
         {
             ICommandVerbAlone command;
             command = (ICommandVerbAlone)content.getCommand(stream.getText(0));
-            command.executeCommand();
+            command.executeCommand(player);
         }
         else outputWrongGrammar("");
     }
@@ -84,7 +88,7 @@ public class Parser
         {
             ICommandVerbDirection command;
             command = (ICommandVerbDirection)content.getCommand(stream.getText(0));
-            command.executeCommand(Direction.fromString(stream.getText(1)));
+            command.executeCommand(player,Direction.fromString(stream.getText(1)));
         }
         else outputWrongGrammar(stream.getText(1));
     }
@@ -112,7 +116,7 @@ public class Parser
         {
             ICommandVerbItem command;
             command = (ICommandVerbItem)content.getCommand(stream.getText(0));
-            command.executeCommand(content.stringToItem(stream.getText(1)));
+            command.executeCommand(player,content.stringToItem(stream.getText(1)));
         }
         else outputWrongGrammar(stream.getText(1));
     }

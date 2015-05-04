@@ -41,16 +41,6 @@ public class TokenStream
         tokenStream.add(token);
     }
 
-    public List<String> texts()
-    {
-        return textStream;
-    }
-
-    public List<Token> tokens()
-    {
-        return tokenStream;
-    }
-
     public boolean isEmpty()
     {
         return tokenStream.isEmpty();

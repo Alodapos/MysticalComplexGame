@@ -17,15 +17,15 @@ public class DropCommand extends ICommandVerbItem
     }
 
     @Override
-    public void executeCommand(IItem item)
+    public void executeCommand(Player player,IItem item)
     {
-        if (!Player.getInventory().containsValue(item)) GameEngine.textOutput(invalidArgument);
+        if (!player.getInventory().containsValue(item)) GameEngine.textOutput(invalidArgument);
         else if (item instanceof IKeyItem) GameEngine.textOutput(actionFailed);
         else
         {
-            Player.getLocation().addItem(item);
+            player.getLocation().addItem(item);
             GameEngine.textOutput("Dropped " + item.getName() + ".");
-            Player.removeFromInventory(item);
+            player.removeFromInventory(item);
         }
     }
 }

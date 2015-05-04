@@ -10,8 +10,8 @@ public class LookCommand extends ICommandVerbAlone
     }
 
     @Override
-    public void executeCommand()
+    public void executeCommand(Player player)
     {
-        Player.getLocation().printDescription();
+        player.getLocation().printDescription();
     }
 }

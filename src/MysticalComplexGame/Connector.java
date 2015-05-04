@@ -1,8 +1,6 @@
 package MysticalComplexGame;
 
-import MysticalComplexGame.ConnectionState;
 import MysticalComplexGame.Items.IItem;
-import MysticalComplexGame.Scene;
 
 public class Connector
 {
@@ -15,7 +13,7 @@ public class Connector
     public Connector(String description)
     {
         this.description = description;
-        connectionState = ConnectionState.OPEN;
+        connectionState = ConnectionState.CLOSED;
         key = null;
         nextScene = null;
         unlockText = null;

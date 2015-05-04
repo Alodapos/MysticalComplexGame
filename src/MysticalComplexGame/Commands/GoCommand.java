@@ -10,18 +10,17 @@ public class GoCommand extends ICommandVerbDirection
     }
 
     @Override
-    public void executeCommand(Direction direction)
+    public void executeCommand(Player player,Direction direction)
     {
-        Connector connector = Player.getLocation().getConnection(direction);
-        if (connector.getState() == ConnectionState.PASSIVE && Player.getInventory().containsValue(connector.getKey()))
+        Connector connector = player.getLocation().getConnection(direction);
+        if (connector.getState() == ConnectionState.PASSIVE && player.getInventory().containsValue(connector.getKey()))
             connector.changeState(ConnectionState.OPEN);
-        if (connector.isOpen()) movePlayer(connector.getNextScene());
+        if (connector.isOpen())
+        {
+            player.setLocation(connector.getNextScene());
+            player.getLocation().printDescription();
+            player.setThirstLevel(player.getThirstLevel()-1);
+        }
         else GameEngine.textOutput(connector.getDescription());
-    }
-    private void movePlayer(Scene scene)
-    {
-        Player.setLocation(scene);
-        Player.getLocation().printDescription();
-        Player.setThirstLevel(Player.getThirstLevel()-1);
     }
 }
