@@ -21,7 +21,8 @@ public class TokenStream
 
     public Token popToken()
     {
-        return tokenStream.remove(0);
+        if (tokenStream.isEmpty()) return  null;
+        else return tokenStream.remove(0);
     }
 
     public Token getToken(int index)

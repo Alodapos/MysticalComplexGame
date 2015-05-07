@@ -330,6 +330,7 @@ public class GameEngine
         String userInputString;
         Scanner userInput;
         TokenStream tokenizedInput = new TokenStream();
+        ParsedCommand nextCommand;
         //COMMAND PARSE
         do
         {
@@ -337,8 +338,8 @@ public class GameEngine
             userInput = new Scanner(System.in);
             userInputString = userInput.nextLine().trim().toLowerCase();
             tokenizedInput = tokenizer.tokenize(userInputString);
-            parser.parse(tokenizedInput,content,player);
-            //TODO PARSE STUFF
+            nextCommand = parser.parse(tokenizedInput, content, player);
+            if (nextCommand != null) nextCommand.executeCommand(player);
             checkThirst(player);
         } while (!player.getLocation().getName().equals("The Sage"));
         textOutput("\n\n\nYou have completed ACT I, ACT II is under development, stay tuned for more...\n");
@@ -352,6 +353,13 @@ public class GameEngine
             textOutput("You fall to your knees from dehydration and...slowly.....die...\nRest in peace " + player.getName() + ", your deeds shall be remembered.");
             System.exit(-10);
         }
+    }
+
+    public static String textInput()
+    {
+        Scanner input;
+        input = new Scanner(System.in);
+        return input.nextLine().trim().toLowerCase();
     }
 
     public static void textOutput(String output)

@@ -1,5 +1,7 @@
 package MysticalComplexGame.Parser;
 
+import MysticalComplexGame.GameEngine;
+
 import java.util.*;
 
 public class Tokenizer
@@ -22,10 +24,7 @@ public class Tokenizer
     {
         tokens.clear();
         String tokens[] = input.split(" ");
-        for (String str:tokens)
-        {
-            this.tokens.add(str, tokenInfo.get(str));
-        }
+        for (String str:tokens) this.tokens.add(str, tokenInfo.get(str));
         return this.tokens;
     }
 }
