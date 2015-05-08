@@ -2,18 +2,18 @@ package MysticalComplexGame;
 
 import MysticalComplexGame.Items.IItem;
 
+import java.io.Serializable;
 import java.util.HashMap;
 
-public class Player
+public class Player implements Serializable
 {
     private String name;
     private Scene currentLocation;
     private HashMap<String, IItem> inventory = new HashMap<String, IItem>();
     private int thirstLevel;
 
-    public Player(Scene location)
+    public Player()
     {
-        currentLocation = location;
         thirstLevel = 10;
     }
 

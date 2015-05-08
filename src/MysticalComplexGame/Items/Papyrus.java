@@ -3,8 +3,6 @@ package MysticalComplexGame.Items;
 import MysticalComplexGame.GameEngine;
 import MysticalComplexGame.Player;
 
-import java.util.Scanner;
-
 public class Papyrus extends IItem implements ReadableItem,WritableItem
 {
     private String text;
@@ -30,10 +28,9 @@ public class Papyrus extends IItem implements ReadableItem,WritableItem
     public void write()
     {
         GameEngine.textOutput("Write down some text to the papyrus:");
-        Scanner scanner;
-        scanner = new Scanner(System.in);
-        text= text + "\n"+ scanner.nextLine();
-        scanner = new Scanner(System.in);
+        String text;
+        text = GameEngine.textInput();
+        this.text = this.text + "\n"+ text;
         GameEngine.textOutput("You write the text on the papyrus.");
     }
 }

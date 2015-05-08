@@ -3,20 +3,37 @@ package MysticalComplexGame;
 import MysticalComplexGame.Commands.ICommand;
 import MysticalComplexGame.Items.IItem;
 
+import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Map;
 
-public class GameContent
+public class GameContent implements Serializable
 {
-    private Map<String, ICommand> commandMap;
+    private transient Map<String, ICommand> commandMap;
     private Map<String, Scene> sceneMap;
     private Map<String, IItem> itemMap;
+    private Player player;
 
     public GameContent()
     {
-        commandMap = new HashMap<String, ICommand>();
-        sceneMap = new HashMap<String, Scene>();
-        itemMap = new HashMap<String,IItem>();
+        sceneMap = new HashMap<>();
+        itemMap = new HashMap<>();
+        player = new Player();
+    }
+
+    public void initializeCommands()
+    {
+        commandMap = new HashMap<>();
+    }
+
+    public void setPlayer(Player player)
+    {
+        this.player = player;
+    }
+
+    public Player getPlayer()
+    {
+        return player;
     }
 
     public void addCommand(ICommand command)

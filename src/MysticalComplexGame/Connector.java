@@ -2,7 +2,9 @@ package MysticalComplexGame;
 
 import MysticalComplexGame.Items.IItem;
 
-public class Connector
+import java.io.Serializable;
+
+public class Connector implements Serializable
 {
     private ConnectionState connectionState;
     private String description;

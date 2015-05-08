@@ -4,16 +4,164 @@ import MysticalComplexGame.Commands.*;
 import MysticalComplexGame.Items.*;
 import MysticalComplexGame.Parser.*;
 
+import java.io.*;
 import java.util.Scanner;
 
 public class GameEngine
 {
     //CONTENT
-    static GameContent content = new GameContent();
+    static GameContent content;
     static Tokenizer tokenizer = new Tokenizer();
     static Parser parser = new Parser();
 
     public static void startGame()
+    {
+        //-----INTRO-----
+        textOutput("ACT I - The Sage\n");
+        textOutput("As the sun sets, the nightfall finds you getting ready for the upcoming journey to the far land of Serenoth.");
+        textOutput("You must reach this region in order to find a great sage, who is the personal advisor of king Ecthelion, son of Exelion.");
+        textOutput("This great sage often goes by many names, but one is more common to the people of Dal'aron, Zenthar");
+        textOutput("He is against all the strife of the two kingdoms, for he knows what really happened two hundred years ago.");
+        textOutput("But the two kings care for nothing than the dominion of their own might all over the world.");
+        textOutput("This is why you need his help to convince king Ecthelion to cease his actions and withdraw his armies before its too late to stop this madness.");
+        textOutput("Therefore...\n");
+
+        content = new GameContent();
+        String playerName = getPlayerName();
+        File loadFile = new File(playerName.concat(".dat"));
+        if (loadFile.isFile()) loadGame(playerName);
+        else newGame(playerName);
+        initializeConstants();
+        //FIRST SCENE
+        content.getPlayer().getLocation().printDescription();
+        //GAME LOOP
+        gameLoop(content.getPlayer());
+    }
+    private static String getPlayerName()
+    {
+        textOutput("What is your name?");
+        return textInput();
+    }
+
+    private static void gameLoop(Player player)
+    {
+        //USER INPUT
+        String userInputString;
+        Scanner userInput;
+        TokenStream tokenizedInput = new TokenStream();
+        ParsedCommand nextCommand;
+        //COMMAND PARSE
+        do
+        {
+            tokenizedInput.clear();
+            userInput = new Scanner(System.in);
+            userInputString = userInput.nextLine().trim().toLowerCase();
+            tokenizedInput = tokenizer.tokenize(userInputString);
+            nextCommand = parser.parse(tokenizedInput, content, player);
+            if (nextCommand != null) nextCommand.executeCommand(player);
+            checkThirst(player);
+            saveGame(player.getName());
+        } while (!player.getLocation().getName().equals("The Sage"));
+        textOutput("\n\n\nYou have completed ACT I, ACT II is under development, stay tuned for more...\n");
+    }
+
+    private static void checkThirst(Player player)
+    {
+        if (player.getThirstLevel() == 5) textOutput("\nYou begin to feel thirsty, you better find some water to drink soon or you'll probably die");
+        else if (player.getThirstLevel() == 0 )
+        {
+            textOutput("You fall to your knees from dehydration and...slowly.....die...\nRest in peace " + player.getName() + ", your deeds shall be remembered.");
+            System.exit(-10);
+        }
+    }
+
+    public static String textInput()
+    {
+        Scanner input;
+        input = new Scanner(System.in);
+        return input.nextLine().trim().toLowerCase();
+    }
+
+    public static void textOutput(String output)
+    {
+        System.out.println(output);
+    }
+
+    private static void initializeConstants()
+    {
+        // <editor-fold defaultstate="collapsed" desc="COMMANDS">
+        content.initializeCommands();
+
+        ICommand go = new GoCommand();
+        ICommand look = new LookCommand();
+        ICommand pick = new PickCommand();
+        ICommand drop = new DropCommand();
+        ICommand inventory = new InventoryCommand();
+        ICommand drink = new DrinkCommand();
+        ICommand fill = new FillCommand();
+        ICommand read = new ReadCommand();
+        ICommand empty = new EmptyCommand();
+        ICommand gazeCommand = new GazeCommand();
+        ICommand writeCommand = new WriteCommand();
+
+        content.addCommand(go);
+        content.addCommand(look);
+        content.addCommand(pick);
+        content.addCommand(drop);
+        content.addCommand(inventory);
+        content.addCommand(drink);
+        content.addCommand(fill);
+        content.addCommand(read);
+        content.addCommand(empty);
+        content.addCommand(gazeCommand);
+        content.addCommand(writeCommand);
+
+        tokenizer.addToken("go", Token.VERBDIRECTION);
+        tokenizer.addToken("gaze", Token.VERBDIRECTION);
+
+        tokenizer.addToken("look", Token.VERBSOLO);
+        tokenizer.addToken("inventory", Token.VERBSOLO);
+
+        tokenizer.addToken("pick",Token.VERBITEM);
+        tokenizer.addToken("drop",Token.VERBITEM);
+        tokenizer.addToken("fill",Token.VERBITEM);
+        tokenizer.addToken("drink",Token.VERBITEM);
+        tokenizer.addToken("empty",Token.VERBITEM);
+        tokenizer.addToken("read",Token.VERBITEM);
+        tokenizer.addToken("write",Token.VERBITEM);
+
+        tokenizer.addToken("north",Token.DIRECTION);
+        tokenizer.addToken("south",Token.DIRECTION);
+        tokenizer.addToken("east",Token.DIRECTION);
+        tokenizer.addToken("west",Token.DIRECTION);
+        //</editor-fold>
+        tokenizer.addToken("rock", Token.ITEM);
+        tokenizer.addToken("flask",Token.ITEM);
+        tokenizer.addToken("water",Token.ITEM);
+        tokenizer.addToken("sign",Token.ITEM);
+        tokenizer.addToken("papyrus",Token.ITEM);
+    }
+
+    private static void loadGame(String s)
+    {
+        String saveName = s.concat(".dat");
+        GameContent loadedContent;
+        try
+        {
+            FileInputStream loadFile = new FileInputStream(saveName);
+            BufferedInputStream loadBuffer = new BufferedInputStream(loadFile);
+            ObjectInputStream loadObject = new ObjectInputStream(loadBuffer);
+            loadedContent = (GameContent)loadObject.readObject();
+            content = loadedContent;
+            loadObject.close();
+            GameEngine.textOutput("Loaded \"" + s + "\".");
+        }catch (IOException | ClassNotFoundException e)
+        {
+            e.printStackTrace();
+        }
+    }
+
+    private static void newGame(String s)
     {
         // <editor-fold defaultstate="collapsed" desc="TEXTS">
         String textNameCampsite = "Campsite";
@@ -178,61 +326,11 @@ public class GameEngine
         IItem keyItemFelrockSign = new FelrockSign();
         IItem papyrusItem = new Papyrus();
 
-        tokenizer.addToken("rock", Token.ITEM);
-        tokenizer.addToken("flask",Token.ITEM);
-        tokenizer.addToken("water",Token.ITEM);
-        tokenizer.addToken("sign",Token.ITEM);
-        tokenizer.addToken("papyrus",Token.ITEM);
-
         content.addItem(shinyRock);
         content.addItem(flask);
         content.addItem(water);
         content.addItem(keyItemFelrockSign);
         content.addItem(papyrusItem);
-        //</editor-fold>
-        // <editor-fold defaultstate="collapsed" desc="COMMANDS">
-        ICommand go = new GoCommand();
-        ICommand look = new LookCommand();
-        ICommand pick = new PickCommand();
-        ICommand drop = new DropCommand();
-        ICommand inventory = new InventoryCommand();
-        ICommand drink = new DrinkCommand();
-        ICommand fill = new FillCommand();
-        ICommand read = new ReadCommand();
-        ICommand empty = new EmptyCommand();
-        ICommand gazeCommand = new GazeCommand();
-        ICommand writeCommand = new WriteCommand();
-
-        content.addCommand(go);
-        content.addCommand(look);
-        content.addCommand(pick);
-        content.addCommand(drop);
-        content.addCommand(inventory);
-        content.addCommand(drink);
-        content.addCommand(fill);
-        content.addCommand(read);
-        content.addCommand(empty);
-        content.addCommand(gazeCommand);
-        content.addCommand(writeCommand);
-
-        tokenizer.addToken("go", Token.VERBDIRECTION);
-        tokenizer.addToken("gaze",Token.VERBDIRECTION);
-
-        tokenizer.addToken("look", Token.VERBSOLO);
-        tokenizer.addToken("inventory",Token.VERBSOLO);
-
-        tokenizer.addToken("pick",Token.VERBITEM);
-        tokenizer.addToken("drop",Token.VERBITEM);
-        tokenizer.addToken("fill",Token.VERBITEM);
-        tokenizer.addToken("drink",Token.VERBITEM);
-        tokenizer.addToken("empty",Token.VERBITEM);
-        tokenizer.addToken("read",Token.VERBITEM);
-        tokenizer.addToken("write",Token.VERBITEM);
-
-        tokenizer.addToken("north",Token.DIRECTION);
-        tokenizer.addToken("south",Token.DIRECTION);
-        tokenizer.addToken("east",Token.DIRECTION);
-        tokenizer.addToken("west",Token.DIRECTION);
         //</editor-fold>
         // <editor-fold defaultstate="collapsed" desc="SCENES">
         Scene sceneCampsite = new Scene(textNameCampsite,textDescriptionCampsite,flask);
@@ -276,12 +374,12 @@ public class GameEngine
         // <editor-fold defaultstate="collapsed" desc="ADD CONNECTIONS">
         sceneCampsite.addConnection(Direction.NORTH,connectionCampsiteNorth);
         sceneCampsite.addConnection(Direction.SOUTH,connectionCampsiteSouth);
-        sceneCampsite.addConnection(Direction.EAST,connectionCampsiteEast);
-        sceneCampsite.addConnection(Direction.WEST,connectionCampsiteWest);
+        sceneCampsite.addConnection(Direction.EAST, connectionCampsiteEast);
+        sceneCampsite.addConnection(Direction.WEST, connectionCampsiteWest);
 
-        sceneCrossroads.addConnection(Direction.NORTH,connectionCrossroadsNorth);
-        sceneCrossroads.addConnection(Direction.SOUTH,connectionCrossroadsSouth);
-        sceneCrossroads.addConnection(Direction.EAST,connectionCrossroadsEast);
+        sceneCrossroads.addConnection(Direction.NORTH, connectionCrossroadsNorth);
+        sceneCrossroads.addConnection(Direction.SOUTH, connectionCrossroadsSouth);
+        sceneCrossroads.addConnection(Direction.EAST, connectionCrossroadsEast);
         sceneCrossroads.addConnection(Direction.WEST,connectionCrossroadsWest);
 
         sceneCrystalLake.addConnection(Direction.NORTH,connectionCrystalLakeNorth);
@@ -297,65 +395,27 @@ public class GameEngine
         sceneFelrockVillage.addConnection(Direction.NORTH,connectionFelrockVillageNorth);
         sceneFelrockVillage.addConnection(Direction.SOUTH,connectionFelrockVillageSouth);
         sceneFelrockVillage.addConnection(Direction.EAST,connectionFelrockVillageEast);
-        sceneFelrockVillage.addConnection(Direction.WEST,connectionFelrockVillageWest);
+        sceneFelrockVillage.addConnection(Direction.WEST, connectionFelrockVillageWest);
         //</editor-fold>
-        //-----INTRO-----
-        textOutput("ACT I - The Sage\n");
-        textOutput("As the sun sets, the nightfall finds you getting ready for the upcoming journey to the far land of Serenoth.");
-        textOutput("You must reach this region in order to find a great sage, who is the personal advisor of king Ecthelion, son of Exelion.");
-        textOutput("This great sage often goes by many names, but one is more common to the people of Dal'aron, Zenthar");
-        textOutput("He is against all the strife of the two kingdoms, for he knows what really happened two hundred years ago.");
-        textOutput("But the two kings care for nothing than the dominion of their own might all over the world.");
-        textOutput("This is why you need his help to convince king Ecthelion to cease his actions and withdraw his armies before its too late to stop this madness.");
-        textOutput("Therefore...\n");
-        //CHARACTERS
-        Player player = new Player(sceneCampsite);
-        String playerName = getPlayerName();
-        player.setName(playerName);
-        //FIRST SCENE
-        player.getLocation().printDescription();
-        //GAME LOOP
-        gameLoop(player);
-    }
-    private static String getPlayerName()
-    {
-        textOutput("What is your name?");
-        Scanner name = new Scanner(System.in);
-        return  name.nextLine();
+        Player player = new Player();
+        player.setName(s);
+        content.setPlayer(player);
+        player.setLocation(sceneCampsite);
     }
 
-    private static void gameLoop(Player player)
+    private static void saveGame(String s)
     {
-        //USER INPUT
-        String userInputString;
-        Scanner userInput;
-        TokenStream tokenizedInput = new TokenStream();
-        //COMMAND PARSE
-        do
+        String saveName = s.concat(".dat");
+        try
         {
-            tokenizedInput.clear();
-            userInput = new Scanner(System.in);
-            userInputString = userInput.nextLine().trim().toLowerCase();
-            tokenizedInput = tokenizer.tokenize(userInputString);
-            parser.parse(tokenizedInput,content,player);
-            //TODO PARSE STUFF
-            checkThirst(player);
-        } while (!player.getLocation().getName().equals("The Sage"));
-        textOutput("\n\n\nYou have completed ACT I, ACT II is under development, stay tuned for more...\n");
-    }
-
-    private static void checkThirst(Player player)
-    {
-        if (player.getThirstLevel() == 5) textOutput("\nYou begin to feel thirsty, you better find some water to drink soon or you'll probably die");
-        else if (player.getThirstLevel() == 0 )
+            FileOutputStream saveFile = new FileOutputStream(saveName);
+            BufferedOutputStream saveBuffer = new BufferedOutputStream(saveFile);
+            ObjectOutputStream saveObject = new ObjectOutputStream(saveBuffer);
+            saveObject.writeObject(content);
+            saveObject.close();
+        }catch (IOException e)
         {
-            textOutput("You fall to your knees from dehydration and...slowly.....die...\nRest in peace " + player.getName() + ", your deeds shall be remembered.");
-            System.exit(-10);
+            e.printStackTrace();
         }
-    }
-
-    public static void textOutput(String output)
-    {
-        System.out.println(output);
     }
 }

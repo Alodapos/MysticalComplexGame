@@ -2,11 +2,12 @@ package MysticalComplexGame;
 
 import MysticalComplexGame.Items.IItem;
 
+import java.io.Serializable;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
 
-public class Scene
+public class Scene implements Serializable
 {
     private String description;
     private String name;

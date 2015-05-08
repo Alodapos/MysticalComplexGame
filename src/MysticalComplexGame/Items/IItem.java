@@ -1,6 +1,8 @@
 package MysticalComplexGame.Items;
 
-public abstract class IItem
+import java.io.Serializable;
+
+public abstract class IItem implements Serializable
 {
     protected String name;
     protected String description;
