@@ -12,9 +12,8 @@ public class Player implements Serializable
     private HashMap<String, IItem> inventory = new HashMap<String, IItem>();
     private int thirstLevel;
 
-    public Player(Scene location)
+    public Player()
     {
-        currentLocation = location;
         thirstLevel = 10;
     }
 
