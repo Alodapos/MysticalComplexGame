@@ -50,7 +50,7 @@ public class Parser
     private void verbSoloExec()
     {
         if (stream.isEmpty()) command.setCommand(content.getCommand(stream.getText(0)));
-        else outputWrongGrammar("");
+        else outputWrongGrammar(".");
     }
 
     private void verbDirectionParse()

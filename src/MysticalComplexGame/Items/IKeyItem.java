@@ -1,4 +1,5 @@
 package MysticalComplexGame.Items;
 
-public interface IKeyItem {
+public interface IKeyItem
+{
 }

@@ -61,6 +61,7 @@ public class GameEngine
             if (nextCommand != null) nextCommand.executeCommand(player);
             checkThirst(player);
             saveGame(player.getName());
+            nextCommand = null;
         } while (!player.getLocation().getName().equals("The Sage"));
         textOutput("\n\n\nYou have completed ACT I, ACT II is under development, stay tuned for more...\n");
     }
@@ -103,6 +104,8 @@ public class GameEngine
         ICommand empty = new EmptyCommand();
         ICommand gazeCommand = new GazeCommand();
         ICommand writeCommand = new WriteCommand();
+        ICommand equipCommand = new EquipCommand();
+        ICommand unequipCommand = new UnequipCommand();
 
         content.addCommand(go);
         content.addCommand(look);
@@ -115,12 +118,15 @@ public class GameEngine
         content.addCommand(empty);
         content.addCommand(gazeCommand);
         content.addCommand(writeCommand);
+        content.addCommand(equipCommand);
+        content.addCommand(unequipCommand);
 
         tokenizer.addToken("go", Token.VERBDIRECTION);
         tokenizer.addToken("gaze", Token.VERBDIRECTION);
 
         tokenizer.addToken("look", Token.VERBSOLO);
         tokenizer.addToken("inventory", Token.VERBSOLO);
+        tokenizer.addToken("unequip", Token.VERBSOLO);
 
         tokenizer.addToken("pick",Token.VERBITEM);
         tokenizer.addToken("drop",Token.VERBITEM);
@@ -129,6 +135,7 @@ public class GameEngine
         tokenizer.addToken("empty",Token.VERBITEM);
         tokenizer.addToken("read",Token.VERBITEM);
         tokenizer.addToken("write",Token.VERBITEM);
+        tokenizer.addToken("equip",Token.VERBITEM);
 
         tokenizer.addToken("north",Token.DIRECTION);
         tokenizer.addToken("south",Token.DIRECTION);
@@ -140,6 +147,7 @@ public class GameEngine
         tokenizer.addToken("water",Token.ITEM);
         tokenizer.addToken("sign",Token.ITEM);
         tokenizer.addToken("papyrus",Token.ITEM);
+        tokenizer.addToken("sword",Token.ITEM);
     }
 
     private static void loadGame(String s)
@@ -325,17 +333,19 @@ public class GameEngine
         IItem water = new WaterSource();
         IItem keyItemFelrockSign = new FelrockSign();
         IItem papyrusItem = new Papyrus();
+        IItem ironSwordItem = new SimpleWeapon("sword",8,2);
 
         content.addItem(shinyRock);
         content.addItem(flask);
         content.addItem(water);
         content.addItem(keyItemFelrockSign);
         content.addItem(papyrusItem);
+        content.addItem(ironSwordItem);
         //</editor-fold>
         // <editor-fold defaultstate="collapsed" desc="SCENES">
         Scene sceneCampsite = new Scene(textNameCampsite,textDescriptionCampsite,flask);
         Scene sceneCrossroads = new Scene(textNameCrossroads,textDescriptionCrossroads,shinyRock);
-        Scene sceneCrystalLake = new Scene(textNameCrystalLake,textDescriptionCrystalLake,water);
+        Scene sceneCrystalLake = new Scene(textNameCrystalLake,textDescriptionCrystalLake,water,ironSwordItem);
         Scene sceneWildernessRoad = new Scene(textNameWildernessRoad,textDescriptionWildernessRoad,keyItemFelrockSign,papyrusItem);
         Scene sceneFelrockVillage = new Scene(textNameFelrockVillage,textDescriptionFelrockVillage);
 
