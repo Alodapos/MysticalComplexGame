@@ -1,49 +1,30 @@
 package MysticalComplexGame.Commands;
 
-import MysticalComplexGame.Character;
-import MysticalComplexGame.Scene;
-import java.util.Map;
+import MysticalComplexGame.Items.IItem;
+import MysticalComplexGame.Player;
+import MysticalComplexGame.GameEngine;
 
-public class PickCommand implements ICommand
+public class PickCommand extends ICommandVerbItem
 {
-
-    String missingArgument;
-    String invalidArgument;
-    String actionFailed;
-    String skippedWord;
-    String name;
+    private String invalidArgument;
+    private String actionFailed;
     public PickCommand()
     {
-        missingArgument = "You have to specify what do you want to pick.";
         invalidArgument = "I can't see such a thing.";
         actionFailed = "This is not something I can pick!";
-        skippedWord = "up ";
-        name = "pick";
-
-    }
-    @Override
-    public String getName()
-    {
-        return this.name;
+        key = "pick";
     }
 
     @Override
-    public void executeCommand(Character character, String argument, Map<String, Scene> scenes)
+    public void executeCommand(Player player,IItem item)
     {
-        argument = trimArgument(argument);
-        if (argument.equals("")) System.out.println(missingArgument);
-        else if (!character.getLocation().getItems().containsKey(argument)) System.out.println(invalidArgument);
-        else if (!character.getLocation().getItems().get(argument).getTags().contains(this.name)) System.out.println(actionFailed);
+        if (!player.getLocation().getItems().containsValue(item)) GameEngine.textOutput(invalidArgument);
+        else if (!item.isPickable()) GameEngine.textOutput(actionFailed);
         else
         {
-            character.addToInventory(character.getLocation().getItems().get(argument));
-            System.out.println("Picked "+ argument +".");
-            character.getLocation().removeItem(argument);
+            player.addToInventory(item);
+            GameEngine.textOutput("Picked " + item.getName() + ".");
+            player.getLocation().removeItem(item);
         }
-    }
-    private String trimArgument(String argument)
-    {
-        if (argument.startsWith(skippedWord)) argument = argument.replaceFirst("up +","");
-        return argument;
     }
 }

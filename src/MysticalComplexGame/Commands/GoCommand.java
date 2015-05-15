@@ -1,41 +1,26 @@
 package MysticalComplexGame.Commands;
 
-import MysticalComplexGame.Character;
-import MysticalComplexGame.Direction;
-import MysticalComplexGame.Scene;
-import java.util.*;
+import MysticalComplexGame.*;
 
-public class GoCommand implements ICommand
+public class GoCommand extends ICommandVerbDirection
 {
-    private String missingArgument;
-    private String invalidArgument;
-    private String name;
-
     public GoCommand()
     {
-        name = "go";
-        missingArgument = "You'll have to say which compass direction to go in.";
-        invalidArgument = "You can't see any such place.";
+        key = "go";
     }
 
     @Override
-    public String getName()
+    public void executeCommand(Player player,Direction direction)
     {
-        return name;
-    }
-
-    @Override
-    public void executeCommand(Character character, String argument, Map<String, Scene> scenes)
-    {
-        Direction desiredDirection = Direction.fromString(argument);
-        if (argument.matches("")) System.out.println(missingArgument);
-        else if (desiredDirection == null) System.out.println(invalidArgument);
-        else if (!scenes.containsKey(character.getLocation().getConnection(desiredDirection))) System.out.println(character.getLocation().getConnection(desiredDirection));
-        else
+        Connector connector = player.getLocation().getConnection(direction);
+        if (connector.getState() == ConnectionState.PASSIVE && player.getInventory().containsValue(connector.getKey()))
+            connector.changeState(ConnectionState.OPEN);
+        if (connector.isOpen())
         {
-            character.setLocation(scenes.get(character.getLocation().getConnection(desiredDirection)));
-            character.getLocation().printDescription();
+            player.setLocation(connector.getNextScene());
+            player.getLocation().printDescription();
+            player.setThirstLevel(player.getThirstLevel()-1);
         }
-
+        else GameEngine.textOutput(connector.getDescription());
     }
 }

@@ -1,24 +1,39 @@
 package MysticalComplexGame.Items;
 
-
-import MysticalComplexGame.Character;
-import MysticalComplexGame.Scene;
-
-import java.util.List;
-
-public interface IItem
+public abstract class IItem
 {
+    protected String name;
+    protected String description;
+    protected String inventoryDescription;
+    protected boolean pickable;
 
-    String getDescription();
-    void setDescription(String description);
+    public String getDescription()
+    {
+        return description;
+    }
 
-    String getName();
-    void setName(String name);
+    public String getName()
+    {
+        return name;
+    }
 
-    void setInventoryDescription(String inventoryDescription);
-    String getInventoryDescription();
+    public String getInventoryDescription()
+    {
+        return inventoryDescription;
+    }
 
-    void useItem(Character player, List<Scene> scenes);
+    public boolean isPickable()
+    {
+        return pickable;
+    }
 
-    List<String> getTags();
+    public void makePickable()
+    {
+        pickable = true;
+    }
+
+    public void makeUnpickable()
+    {
+        pickable = false;
+    }
 }
