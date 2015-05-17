@@ -14,6 +14,11 @@ public class Player implements Serializable
     private HashMap<String, IItem> inventory = new HashMap<String, IItem>();
     private int thirstLevel;
 
+    public Player()
+    {
+        thirstLevel = 10;
+    }
+
     public WeaponItem getEquippedWeapon()
     {
         return equippedWeapon;
@@ -35,12 +40,6 @@ public class Player implements Serializable
         addToInventory((IItem)equippedWeapon);
         GameEngine.textOutput(((IItem) equippedWeapon).getName() + " unequipped.");
         equippedWeapon = null;
-    }
-
-    public Player()
-    {
-        thirstLevel = 10;
-
     }
 
     public Scene getLocation()

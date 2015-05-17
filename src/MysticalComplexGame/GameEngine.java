@@ -57,11 +57,10 @@ public class GameEngine
             userInput = new Scanner(System.in);
             userInputString = userInput.nextLine().trim().toLowerCase();
             tokenizedInput = tokenizer.tokenize(userInputString);
-            nextCommand = parser.parse(tokenizedInput, content, player);
+            nextCommand = parser.parse(tokenizedInput, content);
             if (nextCommand != null) nextCommand.executeCommand(player);
             checkThirst(player);
             saveGame(player.getName());
-            nextCommand = null;
         } while (!player.getLocation().getName().equals("The Sage"));
         textOutput("\n\n\nYou have completed ACT I, ACT II is under development, stay tuned for more...\n");
     }
@@ -148,25 +147,6 @@ public class GameEngine
         tokenizer.addToken("sign",Token.ITEM);
         tokenizer.addToken("papyrus",Token.ITEM);
         tokenizer.addToken("sword",Token.ITEM);
-    }
-
-    private static void loadGame(String s)
-    {
-        String saveName = s.concat(".dat");
-        GameContent loadedContent;
-        try
-        {
-            FileInputStream loadFile = new FileInputStream(saveName);
-            BufferedInputStream loadBuffer = new BufferedInputStream(loadFile);
-            ObjectInputStream loadObject = new ObjectInputStream(loadBuffer);
-            loadedContent = (GameContent)loadObject.readObject();
-            content = loadedContent;
-            loadObject.close();
-            GameEngine.textOutput("Loaded \"" + s + "\".");
-        }catch (IOException | ClassNotFoundException e)
-        {
-            e.printStackTrace();
-        }
     }
 
     private static void newGame(String s)
@@ -411,6 +391,23 @@ public class GameEngine
         player.setName(s);
         content.setPlayer(player);
         player.setLocation(sceneCampsite);
+    }
+
+    private static void loadGame(String s)
+    {
+        String saveName = s.concat(".dat");
+        try
+        {
+            FileInputStream loadFile = new FileInputStream(saveName);
+            BufferedInputStream loadBuffer = new BufferedInputStream(loadFile);
+            ObjectInputStream loadObject = new ObjectInputStream(loadBuffer);
+            content = (GameContent)loadObject.readObject();
+            loadObject.close();
+            GameEngine.textOutput("Loaded \"" + s + "\".");
+        }catch (IOException | ClassNotFoundException e)
+        {
+            e.printStackTrace();
+        }
     }
 
     private static void saveGame(String s)

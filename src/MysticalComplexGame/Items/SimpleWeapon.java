@@ -7,6 +7,16 @@ public class SimpleWeapon extends IItem implements WeaponItem
     private Integer durability;
     private Integer damage;
 
+    public SimpleWeapon(String name,int durability,int damage)
+    {
+        this.name = name.toLowerCase();
+        description = "A simple iron " + this.name + " lies on the ground.";
+        inventoryDescription = "A simple " + this.name + ".";
+        pickable = true;
+        setDurability(durability);
+        setDamage(damage);
+    }
+
     @Override
     public Integer getDurability()
     {
@@ -44,15 +54,5 @@ public class SimpleWeapon extends IItem implements WeaponItem
     public void unequip(Player player)
     {
         player.unequipWeapon();
-    }
-
-    public SimpleWeapon(String name, int durability, int damage)
-    {
-        this.name = name.toLowerCase();
-        description = "A simple iron " + this.name + " lies on the ground.";
-        inventoryDescription = "A simple " + this.name + ".";
-        pickable = true;
-        setDurability(durability);
-        setDamage(damage);
     }
 }

@@ -16,8 +16,8 @@ public class Scene implements Serializable
 
     public Scene(String name, String description,IItem...items)
     {
-        this.connections = new HashMap<Direction, Connector>();
-        this.items = new HashMap<String,IItem>();
+        this.connections = new HashMap<>();
+        this.items = new HashMap<>();
         this.name = name;
         this.description = description;
         for (IItem item: items) this.items.put(item.getName(),item);
