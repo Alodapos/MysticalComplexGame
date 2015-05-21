@@ -39,8 +39,15 @@ public class GameEngine
     }
     private static String getPlayerName()
     {
+        String name;
         textOutput("What is your name?");
-        return textInput();
+        name = textInput();
+        while(name.contains(":") || name.contains("*") || name.contains("?") || name.contains("\"") || name.contains("<") || name.contains(">") || name.contains("|") || name.contains("/") || name.contains("\\") || name.length()>16)
+        {
+            textOutput("The name must be up to 16 characters long and it cannot contain any of these characters: \\/:\"?*<>|:\nPlease input a different name:");
+            name = textInput();
+        }
+        return  name;
     }
 
     private static void gameLoop(Player player)
@@ -147,6 +154,9 @@ public class GameEngine
         tokenizer.addToken("sign",Token.ITEM);
         tokenizer.addToken("papyrus",Token.ITEM);
         tokenizer.addToken("sword",Token.ITEM);
+
+        tokenizer.addToken("shiny",Token.PREITEM);
+        tokenizer.addToken("leather",Token.PREITEM);
     }
 
     private static void newGame(String s)

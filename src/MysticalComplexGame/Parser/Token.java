@@ -6,5 +6,6 @@ public enum Token
     VERBITEM,
     VERBDIRECTION,
     ITEM,
-    DIRECTION
+    DIRECTION,
+    PREITEM
 }

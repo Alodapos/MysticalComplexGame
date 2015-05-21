@@ -11,7 +11,7 @@ public class Tokenizer
 
     public Tokenizer()
     {
-        tokenInfo = new HashMap<String, Token>();
+        tokenInfo = new HashMap<>();
         tokens = new TokenStream();
     }
 
@@ -24,7 +24,19 @@ public class Tokenizer
     {
         tokens.clear();
         String tokens[] = input.split(" ");
-        for (String str:tokens) this.tokens.add(str, tokenInfo.get(str));
+        for (int i=0;i<tokens.length;i++)
+        {
+            String str = tokens[i];
+            if (tokenInfo.get(str) == Token.PREITEM && i+1<tokens.length)
+            {
+                this.tokens.add((str+" "+tokens[i+1]), Token.ITEM);
+                i++;
+            }
+            else if (tokenInfo.get(str) == Token.PREITEM)
+                this.tokens.add(str, Token.ITEM);
+            else
+                this.tokens.add(str, tokenInfo.get(str));
+        }
         return this.tokens;
     }
 }

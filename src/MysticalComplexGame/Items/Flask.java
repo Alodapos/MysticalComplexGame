@@ -17,7 +17,7 @@ public class Flask extends IItem implements LiquidContainer,IKeyItem
     public Flask(LiquidContainerState fullness)
     {
         pickable = true;
-        name = "flask";
+        name = "leather flask";
         this.fullness = fullness;
         setDescription(fullness);
         containerEmpty = "This is empty, i cannot drink from it.";
