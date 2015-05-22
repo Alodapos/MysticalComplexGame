@@ -161,6 +161,7 @@ public class GameEngine
 
         tokenizer.addToken("shiny",Token.PREITEM);
         tokenizer.addToken("leather",Token.PREITEM);
+        tokenizer.addToken("iron",Token.PREITEM);
     }
 
     private static void newGame(String s)
@@ -329,7 +330,7 @@ public class GameEngine
         IItem water = new WaterSource();
         IItem keyItemFelrockSign = new FelrockSign();
         IItem papyrusItem = new Papyrus();
-        IItem ironSwordItem = new SimpleWeapon("sword",8,2);
+        IItem ironSwordItem = new SimpleWeapon("iron sword",8,2);
         IItem advisorItem = new Advisor();
 
         content.addItem(shinyRock);

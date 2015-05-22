@@ -10,7 +10,7 @@ public class SimpleWeapon extends IItem implements WeaponItem
     public SimpleWeapon(String name,int durability,int damage)
     {
         this.name = name.toLowerCase();
-        description = "A simple iron " + this.name + " lies on the ground.";
+        description = "A simple " + this.name + " lies on the ground.";
         inventoryDescription = "A simple " + this.name + ".";
         pickable = true;
         setDurability(durability);

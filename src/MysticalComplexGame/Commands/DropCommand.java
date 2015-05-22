@@ -11,8 +11,8 @@ public class DropCommand extends ICommandVerbItem
     private String actionFailed;
     public DropCommand()
     {
-        invalidArgument = "I do not have this item with me.";
-        actionFailed = "I will not drop this, it's very important!";
+        invalidArgument = "You do not have this item with you.";
+        actionFailed = "You should not drop this, it's very important!";
         key = "drop";
     }
 

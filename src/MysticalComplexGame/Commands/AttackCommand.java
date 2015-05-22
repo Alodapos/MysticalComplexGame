@@ -17,7 +17,7 @@ public class AttackCommand extends ICommandVerbItem
     public AttackCommand()
     {
         key = "attack";
-        invalidArgument = "This is not something that you can attack...";
+        invalidArgument = "This is not something that you can attack.";
         itemMissing = "You don't see or have such a thing.";
     }
 
