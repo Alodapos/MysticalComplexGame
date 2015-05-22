@@ -5,10 +5,10 @@ import MysticalComplexGame.Player;
 
 import java.util.Scanner;
 
-public class VaseItem extends IItem implements BreakableItem {
+public class Vase extends IItem implements BreakableItem {
     boolean broken;
 
-    public VaseItem() {
+    public Vase() {
         pickable = false;
         name = "vase";
         description = "An old, dusty, ceramic vase covered in webs sits behind a pillar.";

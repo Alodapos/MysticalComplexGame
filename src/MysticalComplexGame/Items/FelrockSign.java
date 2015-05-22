@@ -22,7 +22,6 @@ public class FelrockSign extends IItem implements ReadableItem
     {
         GameEngine.textOutput(text);
         for (Connector connection : player.getLocation().getConnections())
-            if (connection.getState() == ConnectionState.CLOSED)
-                if (!connection.isOpen()) connection.openConnection(this);
+            connection.openConnection(this);
     }
 }

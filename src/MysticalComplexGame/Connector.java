@@ -70,7 +70,7 @@ public class Connector implements Serializable
 
     public void openConnection(IItem key)
     {
-        if (key == this.key)
+        if (key == this.key && !this.isOpen())
         {
             changeState(ConnectionState.OPEN);
             GameEngine.textOutput(unlockText);
