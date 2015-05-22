@@ -112,6 +112,7 @@ public class GameEngine
         ICommand writeCommand = new WriteCommand();
         ICommand equipCommand = new EquipCommand();
         ICommand unequipCommand = new UnequipCommand();
+        ICommand attackCommand = new AttackCommand();
 
         content.addCommand(go);
         content.addCommand(look);
@@ -126,6 +127,7 @@ public class GameEngine
         content.addCommand(writeCommand);
         content.addCommand(equipCommand);
         content.addCommand(unequipCommand);
+        content.addCommand(attackCommand);
 
         tokenizer.addToken("go", Token.VERBDIRECTION);
         tokenizer.addToken("gaze", Token.VERBDIRECTION);
@@ -142,6 +144,7 @@ public class GameEngine
         tokenizer.addToken("read",Token.VERBITEM);
         tokenizer.addToken("write",Token.VERBITEM);
         tokenizer.addToken("equip",Token.VERBITEM);
+        tokenizer.addToken("attack",Token.VERBITEM);
 
         tokenizer.addToken("north",Token.DIRECTION);
         tokenizer.addToken("south",Token.DIRECTION);
@@ -154,6 +157,7 @@ public class GameEngine
         tokenizer.addToken("sign",Token.ITEM);
         tokenizer.addToken("papyrus",Token.ITEM);
         tokenizer.addToken("sword",Token.ITEM);
+        tokenizer.addToken("advisor",Token.ITEM);
 
         tokenizer.addToken("shiny",Token.PREITEM);
         tokenizer.addToken("leather",Token.PREITEM);
@@ -161,7 +165,7 @@ public class GameEngine
 
     private static void newGame(String s)
     {
-        // <editor-fold defaultstate="collapsed" desc="TEXTS">
+        // <editor-fold defaultstate="collapsed" desc="SCRIPTS">
         String textNameCampsite = "Campsite";
         String textNameCrossroads = "Crossroads";
         String textNameCrystalLake = "Crystal Lake";
@@ -255,7 +259,9 @@ public class GameEngine
                 "You kindly introduce yourself to both and ask to learn who the other man is. \n" +
                 "He is significantly shorter than <name of tall man> and wears neat and elegant clothes making him very prestigious. \n" +
                 "He holds a small case in his hands. His name is <name of short man>. \n" +
-                "He tells you that he is the mayor's advisor.";
+                "He tells you that he is the mayor's advisor. But when you ask to know where the mayor himself is, \n" +
+                "<name of tall man> tells you that he's gone missing for a few days now.";
+
         String textFelrockTownHallInteriorLobbyNoPass = "You can't travel while inside the Town Hall.";
 
         String textDescriptionFelrockTownHallInteriorFirstFloor = "NOT MADE YET.";
@@ -324,6 +330,7 @@ public class GameEngine
         IItem keyItemFelrockSign = new FelrockSign();
         IItem papyrusItem = new Papyrus();
         IItem ironSwordItem = new SimpleWeapon("sword",8,2);
+        IItem advisorItem = new Advisor();
 
         content.addItem(shinyRock);
         content.addItem(flask);
@@ -331,6 +338,7 @@ public class GameEngine
         content.addItem(keyItemFelrockSign);
         content.addItem(papyrusItem);
         content.addItem(ironSwordItem);
+        content.addItem(advisorItem);
         //</editor-fold>
         // <editor-fold defaultstate="collapsed" desc="SCENES">
         Scene sceneCampsite = new Scene(textNameCampsite,textDescriptionCampsite,flask);

@@ -9,7 +9,6 @@ public class Papyrus extends IItem implements ReadableItem,WritableItem
 
     public Papyrus()
     {
-        pickable = false;
         name = "papyrus";
         inventoryDescription = "A papyrus that you can read and write";
         description = "A rugged papyrus lies on the floor.";
