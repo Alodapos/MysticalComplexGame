@@ -1,12 +1,14 @@
 package MysticalComplexGame.Items;
 
-import MysticalComplexGame.GameEngine;
 import MysticalComplexGame.Player;
 
 public class Advisor extends IItem implements AttackableItem
 {
+    private boolean alive;
+
     public Advisor()
     {
+        alive = true;
         pickable = false;
         name = "advisor";
         description = "He is significantly shorter than <name of tall man> and wears neat and elegant clothes making him very prestigious.\n" +
@@ -17,6 +19,14 @@ public class Advisor extends IItem implements AttackableItem
     @Override
     public void attack(Player player)
     {
+        alive = false;
+        description = "The Advisor lies dead on the floor.";
+        //TODO drop loot & text on death
+    }
 
+    @Override
+    public boolean isAlive()
+    {
+        return alive;
     }
 }

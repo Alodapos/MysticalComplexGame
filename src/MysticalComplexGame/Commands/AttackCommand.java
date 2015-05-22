@@ -25,16 +25,16 @@ public class AttackCommand extends ICommandVerbItem
     public void executeCommand(Player player,IItem item)
     {
 
-        List<IItem> localItems = new ArrayList<IItem>();
-        localItems.addAll(player.getInventory().values());
-        localItems.addAll(player.getLocation().getItems().values());
-
-        if (!localItems.contains(item)) GameEngine.textOutput(itemMissing);
+        if (!player.getLocation().getItems().containsValue(item)) GameEngine.textOutput(itemMissing);
         else if (!(item instanceof AttackableItem)) GameEngine.textOutput(invalidArgument);
         else
         {
             AttackableItem toAttack = (AttackableItem)item;
-            toAttack.attack(player);
+            if(!toAttack.isAlive())
+                GameEngine.textOutput("The "+item.getName()+" is already dead!");
+            else if(player.getEquippedWeapon() == null)
+                GameEngine.textOutput("You need a weapon equipped to attack!");
+            else toAttack.attack(player);
         }
     }
 }
