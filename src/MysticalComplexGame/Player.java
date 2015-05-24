@@ -11,8 +11,10 @@ public class Player implements Serializable
     private String name;
     private Scene currentLocation;
     private WeaponItem equippedWeapon;
-    private HashMap<String, IItem> inventory = new HashMap<String, IItem>();
+    private HashMap<String, IItem> inventory = new HashMap<>();
     private int thirstLevel;
+    private Scene previousScene;
+    private boolean canExitScene = false;
     //private int burnLevel;
 
     public Player()
@@ -32,17 +34,32 @@ public class Player implements Serializable
         {
             equippedWeapon = weapon;
             removeFromInventory((IItem)weapon);
-            GameEngine.textOutput("You equip a " + ((IItem) weapon).getName() + ".");
+            GameEngine.textOutput("You equip the " + ((IItem) weapon).getName() + ".");
         }
     }
 
+    public boolean canExitScene() {
+        return canExitScene;
+    }
+
+    public void setCanExitScene(boolean canExitScene) {
+        this.canExitScene = canExitScene;
+    }
+
+    public void setPreviousScene(Scene previousScene)
+    {
+        this.previousScene = previousScene;
+    }
     public void unequipWeapon()
     {
         addToInventory((IItem)equippedWeapon);
         GameEngine.textOutput(((IItem) equippedWeapon).getName() + " unequipped.");
         equippedWeapon = null;
     }
-
+    public Scene getPreviousScene()
+    {
+        return previousScene;
+    }
     public Scene getLocation()
     {
         return currentLocation;

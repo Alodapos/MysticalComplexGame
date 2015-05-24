@@ -5,8 +5,7 @@ import MysticalComplexGame.GameEngine;
 
 public class TorchMedium extends IItem implements LightEmitter
 {
-    public LightEmitterState burning;
-    public LightEmitterState2 spot;
+    private LightEmitterState burning;
     private String emitterBurning;
     private String lightSuccess;
     private String noFireSource;
@@ -16,12 +15,12 @@ public class TorchMedium extends IItem implements LightEmitter
     private String isAlreadyQuenched;
     private String fire;
 
-    public TorchMedium(LightEmitterState burning, LightEmitterState2 spot)
+    public TorchMedium(LightEmitterState burning)
     {
         pickable = true;
         name = "medium torch";
         this.burning = burning;
-        setDescription(burning, spot);
+        setDescription(burning);
         emitterBurning = "This is already burning, you can't relight it.";
         lightSuccess = "You light the " + name + " and your surroundings are shrouded in light.";
         attachSuccess = "You attach your " + name + " to a steady spot.";
@@ -52,7 +51,7 @@ public class TorchMedium extends IItem implements LightEmitter
         {
             this.burning = LightEmitterState.LIT;
             GameEngine.textOutput(lightSuccess);
-            setDescription(burning, spot);
+            setDescription(burning);
         }
         else GameEngine.textOutput(noFireSource);
     }
@@ -64,14 +63,15 @@ public class TorchMedium extends IItem implements LightEmitter
         else
         {
             burning = LightEmitterState.QUENCHED;
-            setDescription(burning, spot);
+            setDescription(burning);
             GameEngine.textOutput(quenchSuccess);
         }
     }
 
-    private void setDescription(LightEmitterState state, LightEmitterState2 spot)
+    private void setDescription(LightEmitterState state)
     {
-        this.description= "There is a " + state.getBurning() + "," + " medium sized torch attached on " + spot.getSpot();
+        this.description= "There is a " + state.getBurning() + "," + " medium sized torch attached on " + "--SPOT PLACEHOLDER--";
+        //TODO SPOT
         this.inventoryDescription = "A medium "+ state.getBurning() + " torch.";
     }
 }

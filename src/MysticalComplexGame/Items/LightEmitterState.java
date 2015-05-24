@@ -18,20 +18,3 @@ public enum LightEmitterState
         return this.burning;
     }
 }
-
-enum LightEmitterState2
-{
-    CAMPSITE("a steady post.");
-
-    private final String spot;
-
-    LightEmitterState2(String spot)
-    {
-        this.spot = spot;
-    }
-
-    public String getSpot()
-    {
-        return this.spot;
-    }
-}

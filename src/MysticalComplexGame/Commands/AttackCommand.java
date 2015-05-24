@@ -5,10 +5,6 @@ import MysticalComplexGame.Items.IItem;
 import MysticalComplexGame.Items.AttackableItem;
 import MysticalComplexGame.Player;
 
-import java.util.ArrayList;
-import java.util.List;
-
-
 public class AttackCommand extends ICommandVerbItem
 {
     private String itemMissing;

@@ -1,7 +1,5 @@
 package MysticalComplexGame;
 
-import MysticalComplexGame.Items.IItem;
-
 import java.io.Serializable;
 
 public class Connector implements Serializable
@@ -9,14 +7,12 @@ public class Connector implements Serializable
     private ConnectionState connectionState;
     private String description;
     private Scene nextScene;
-    private IItem key;
     private String unlockText;
 
     public Connector(String description)
     {
         this.description = description;
         connectionState = ConnectionState.CLOSED;
-        key = null;
         nextScene = null;
         unlockText = null;
     }
@@ -25,24 +21,13 @@ public class Connector implements Serializable
     {
         this.nextScene = nextScene;
         description = null;
-        key = null;
         unlockText = null;
         connectionState = ConnectionState.OPEN;
     }
 
-    public Connector(Scene nextScene,IItem key,String description)
+    public Connector(Scene nextScene,String description,String unlockText)
     {
         this.nextScene = nextScene;
-        this.key = key;
-        unlockText = null;
-        this.description = description;
-        connectionState = ConnectionState.PASSIVE;
-    }
-
-    public Connector(Scene nextScene,IItem key,String description,String unlockText)
-    {
-        this.nextScene = nextScene;
-        this.key = key;
         this.unlockText = unlockText;
         this.description = description;
         connectionState = ConnectionState.CLOSED;
@@ -58,32 +43,17 @@ public class Connector implements Serializable
        return description;
     }
 
-    public void changeState(ConnectionState connectionState)
+    public boolean isClosed()
     {
-        this.connectionState = connectionState;
+        return connectionState == ConnectionState.CLOSED;
     }
 
-    public boolean isOpen()
+    public void openConnection()
     {
-        return connectionState == ConnectionState.OPEN;
-    }
-
-    public void openConnection(IItem key)
-    {
-        if (key == this.key && !this.isOpen())
+        if (connectionState == ConnectionState.CLOSED)
         {
-            changeState(ConnectionState.OPEN);
+            connectionState = ConnectionState.OPEN;
             GameEngine.textOutput(unlockText);
         }
-    }
-
-    public ConnectionState getState()
-    {
-        return connectionState;
-    }
-
-    public IItem getKey()
-    {
-        return key;
     }
 }

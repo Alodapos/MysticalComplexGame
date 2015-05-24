@@ -5,7 +5,6 @@ import MysticalComplexGame.Player;
 import MysticalComplexGame.GameEngine;
 import MysticalComplexGame.Items.LiquidContainer;
 
-
 public class FillCommand extends ICommandVerbItem
 {
     private String itemMissing;
@@ -21,12 +20,11 @@ public class FillCommand extends ICommandVerbItem
     @Override
     public void executeCommand(Player player,IItem item)
     {
-        if (!player.getInventory().containsValue(item)) GameEngine.textOutput(itemMissing);
-        else if (!(item instanceof LiquidContainer)) GameEngine.textOutput(invalidArgument);
+        if (!player.getInventory().containsValue(item))
+            GameEngine.textOutput(itemMissing);
+        else if (!(item instanceof LiquidContainer))
+            GameEngine.textOutput(invalidArgument);
         else
-        {
-            LiquidContainer itemArgument = (LiquidContainer) item;
-            itemArgument.fill(player);
-        }
+            ((LiquidContainer)item).fill(player);
     }
 }

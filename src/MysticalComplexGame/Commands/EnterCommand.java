@@ -1,20 +1,20 @@
 package MysticalComplexGame.Commands;
 
 import MysticalComplexGame.GameEngine;
+import MysticalComplexGame.Items.GatewayItem;
 import MysticalComplexGame.Items.IItem;
-import MysticalComplexGame.Items.BreakableItem;
 import MysticalComplexGame.Player;
 
-public class BreakCommand extends ICommandVerbItem
+public class EnterCommand extends ICommandVerbItem
 {
     private String itemMissing;
     private String invalidArgument;
 
-    public BreakCommand()
+    public EnterCommand()
     {
-        key = "break";
-        invalidArgument = "This is not something that you can break...";
-        itemMissing = "You can't see such a thing.";
+        key = "enter";
+        invalidArgument = "This is not something that you can "+this.key+".";
+        itemMissing = "You don't see or have such a place.";
     }
 
     @Override
@@ -23,9 +23,9 @@ public class BreakCommand extends ICommandVerbItem
 
         if (!player.getLocation().getItems().containsValue(item))
             GameEngine.textOutput(itemMissing);
-        else if (!(item instanceof BreakableItem))
+        else if (!(item instanceof GatewayItem))
             GameEngine.textOutput(invalidArgument);
         else
-            ((BreakableItem)item).breakObject(player);
+            ((GatewayItem) item).enter(player);
     }
 }

@@ -1,9 +1,10 @@
 package MysticalComplexGame.Items;
 
+import MysticalComplexGame.Connector;
 import MysticalComplexGame.Player;
 import MysticalComplexGame.GameEngine;
 
-public class Flask extends IItem implements LiquidContainer,IKeyItem
+public class Flask extends IItem implements LiquidContainer,KeyItem
 {
     private LiquidContainerState fullness;
     private String containerEmpty;
@@ -13,8 +14,9 @@ public class Flask extends IItem implements LiquidContainer,IKeyItem
     private String noWaterSource;
     private String isAlreadyEmpty;
     private String water;
+    private Connector toOpen;
 
-    public Flask(LiquidContainerState fullness)
+    public Flask(LiquidContainerState fullness, Connector toUnlock)
     {
         pickable = true;
         name = "leather flask";
@@ -27,6 +29,7 @@ public class Flask extends IItem implements LiquidContainer,IKeyItem
         noWaterSource = "There is no water source nearby to fill this.";
         isAlreadyEmpty = "You cannot empty that, it is already empty.";
         water = "water";
+        this.toOpen = toUnlock;
     }
 
     @Override
@@ -72,5 +75,12 @@ public class Flask extends IItem implements LiquidContainer,IKeyItem
     {
         this.description= "There is a small sized, " + state.getFullness() + ", leather flask on a wooden table.";
         this.inventoryDescription = "A small "+ state.getFullness() + " flask.";
+    }
+
+    @Override
+    public void pick(Player player)
+    {
+        super.pick(player);
+        toOpen.openConnection();
     }
 }

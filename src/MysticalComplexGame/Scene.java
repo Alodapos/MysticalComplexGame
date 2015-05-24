@@ -14,13 +14,12 @@ public class Scene implements Serializable
     private Map<String, IItem> items;
     private Map<Direction, Connector> connections;
 
-    public Scene(String name, String description,IItem...items)
+    public Scene(String name, String description)
     {
         this.connections = new HashMap<>();
         this.items = new HashMap<>();
         this.name = name;
         this.description = description;
-        for (IItem item: items) this.items.put(item.getName(),item);
     }
 
     public Connector getConnection(Direction direction)
