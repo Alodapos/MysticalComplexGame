@@ -339,7 +339,7 @@ public class GameEngine
         IItem papyrusItem = new Papyrus();
         IItem ironSwordItem = new SimpleWeapon("iron sword",8,2);
         IItem advisorItem = new Advisor();
-        IItem torchMediumItem = new TorchMedium(LightEmitterState.LIT);
+        IItem torchMediumItem = new TorchMedium(LightEmitterState.LIT, LightEmitterState2.CAMPSITE);
 
         content.addItem(shinyRockItem);
         content.addItem(flaskItem);

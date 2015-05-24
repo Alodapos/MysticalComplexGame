@@ -19,13 +19,13 @@ public enum LightEmitterState
     }
 }
 
-enum LightEmitterPlace
+enum LightEmitterState2
 {
     CAMPSITE("a steady post.");
 
     private final String spot;
 
-    LightEmitterPlace(String spot)
+    LightEmitterState2(String spot)
     {
         this.spot = spot;
     }

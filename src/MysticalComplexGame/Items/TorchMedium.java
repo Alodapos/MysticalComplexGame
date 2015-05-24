@@ -6,7 +6,7 @@ import MysticalComplexGame.GameEngine;
 public class TorchMedium extends IItem implements LightEmitter
 {
     public LightEmitterState burning;
-    public LightEmitterPlace spot;
+    public LightEmitterState2 spot;
     private String emitterBurning;
     private String lightSuccess;
     private String noFireSource;
@@ -16,7 +16,7 @@ public class TorchMedium extends IItem implements LightEmitter
     private String isAlreadyQuenched;
     private String fire;
 
-    public TorchMedium(LightEmitterState burning)
+    public TorchMedium(LightEmitterState burning, LightEmitterState2 spot)
     {
         pickable = true;
         name = "medium torch";
@@ -69,9 +69,9 @@ public class TorchMedium extends IItem implements LightEmitter
         }
     }
 
-    private void setDescription(LightEmitterState state, LightEmitterPlace place)
+    private void setDescription(LightEmitterState state, LightEmitterState2 spot)
     {
-        this.description= "There is a " + state.getBurning() + "," + " medium sized torch attached on " + place.getSpot();
+        this.description= "There is a " + state.getBurning() + "," + " medium sized torch attached on " + spot.getSpot();
         this.inventoryDescription = "A medium "+ state.getBurning() + " torch.";
     }
 }

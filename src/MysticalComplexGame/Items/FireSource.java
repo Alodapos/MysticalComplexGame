@@ -1,9 +1,11 @@
 package MysticalComplexGame.Items;
 
-public class FireSource extends IItem{
-    public FireSource() {
+public class FireSource extends IItem
+{
+    public FireSource()
+    {
         description = "";
-        name = "light";
+        name = "fire";
         inventoryDescription = "";
         pickable = false;
     }
