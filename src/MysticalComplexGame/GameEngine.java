@@ -112,6 +112,8 @@ public class GameEngine
         ICommand writeCommand = new WriteCommand();
         ICommand equipCommand = new EquipCommand();
         ICommand unequipCommand = new UnequipCommand();
+        ICommand attackCommand = new AttackCommand();
+        ICommand lightCommand = new LightCommand();
 
         content.addCommand(go);
         content.addCommand(look);
@@ -126,6 +128,8 @@ public class GameEngine
         content.addCommand(writeCommand);
         content.addCommand(equipCommand);
         content.addCommand(unequipCommand);
+        content.addCommand(attackCommand);
+        content.addCommand(lightCommand);
 
         tokenizer.addToken("go", Token.VERBDIRECTION);
         tokenizer.addToken("gaze", Token.VERBDIRECTION);
@@ -142,6 +146,8 @@ public class GameEngine
         tokenizer.addToken("read",Token.VERBITEM);
         tokenizer.addToken("write",Token.VERBITEM);
         tokenizer.addToken("equip",Token.VERBITEM);
+        tokenizer.addToken("attack",Token.VERBITEM);
+        tokenizer.addToken("light",Token.VERBITEM);
 
         tokenizer.addToken("north",Token.DIRECTION);
         tokenizer.addToken("south",Token.DIRECTION);
@@ -154,14 +160,18 @@ public class GameEngine
         tokenizer.addToken("sign",Token.ITEM);
         tokenizer.addToken("papyrus",Token.ITEM);
         tokenizer.addToken("sword",Token.ITEM);
+        tokenizer.addToken("advisor",Token.ITEM);
+        tokenizer.addToken("torch",Token.ITEM);
 
         tokenizer.addToken("shiny",Token.PREITEM);
         tokenizer.addToken("leather",Token.PREITEM);
+        tokenizer.addToken("iron",Token.PREITEM);
+        tokenizer.addToken("medium",Token.PREITEM);
     }
 
     private static void newGame(String s)
     {
-        // <editor-fold defaultstate="collapsed" desc="TEXTS">
+        // <editor-fold defaultstate="collapsed" desc="SCRIPTS">
         String textNameCampsite = "Campsite";
         String textNameCrossroads = "Crossroads";
         String textNameCrystalLake = "Crystal Lake";
@@ -181,7 +191,10 @@ public class GameEngine
         String textNameGardenOfCorruption = "Garden Of Corruption";
         String textNameGardenOfRadiance = "Garden Of Radiance";
 
-        String textDescriptionCampsite = "You grab your stuff and begin traveling to the NORTH,\nwhile the night offers you the perfect cover from prying eyes.\nYou plan to arrive at Serenoth within the next 20 days";
+        String textDescriptionCampsite = "The camp is overwhelmed with deafening silence. \n" +
+                "You and your comrades prepare your gear under the moonlight and the brightness of the stars. \n" +
+                "You grab your stuff and decide to travel to the NORTH, while the night offers you the perfect cover from prying eyes. \n" +
+                "You plan to arrive at Serenoth within the next 20 days.";
         String textCampsiteSouth = "You can't return home yet. The war still rages and the world needs a hero.";
         String textCampsiteNorth = "You better pack up before leaving the camp.";
         String textCampsiteEast = "The Campsite is located in a rather rocky and mountainous scenery \nso the only thing to see are some really big hills blocking your view to the far east.";
@@ -255,7 +268,8 @@ public class GameEngine
                 "You kindly introduce yourself to both and ask to learn who the other man is. \n" +
                 "He is significantly shorter than <name of tall man> and wears neat and elegant clothes making him very prestigious. \n" +
                 "He holds a small case in his hands. His name is <name of short man>. \n" +
-                "He tells you that he is the mayor's advisor.";
+                "He tells you that he is the mayor's advisor. But when you ask to know where the mayor himself is, \n" +
+                "<name of tall man> tells you that he's gone missing for a few days now.";
         String textFelrockTownHallInteriorLobbyNoPass = "You can't travel while inside the Town Hall.";
 
         String textDescriptionFelrockTownHallInteriorFirstFloor = "NOT MADE YET.";
@@ -318,24 +332,28 @@ public class GameEngine
 
         // </editor-fold>
         // <editor-fold defaultstate="collapsed" desc="ITEMS">
-        IItem shinyRock = new ShinyRock();
-        IItem flask = new Flask(LiquidContainerState.EMPTY);
-        IItem water = new WaterSource();
+        IItem shinyRockItem = new ShinyRock();
+        IItem flaskItem = new Flask(LiquidContainerState.EMPTY);
+        IItem waterItem = new WaterSource();
         IItem keyItemFelrockSign = new FelrockSign();
         IItem papyrusItem = new Papyrus();
-        IItem ironSwordItem = new SimpleWeapon("sword",8,2);
+        IItem ironSwordItem = new SimpleWeapon("iron sword",8,2);
+        IItem advisorItem = new Advisor();
+        IItem torchMediumItem = new TorchMedium(LightEmitterState.LIT, LightEmitterState2.CAMPSITE);
 
-        content.addItem(shinyRock);
-        content.addItem(flask);
-        content.addItem(water);
+        content.addItem(shinyRockItem);
+        content.addItem(flaskItem);
+        content.addItem(waterItem);
         content.addItem(keyItemFelrockSign);
         content.addItem(papyrusItem);
         content.addItem(ironSwordItem);
+        content.addItem(advisorItem);
+        content.addItem(torchMediumItem);
         //</editor-fold>
         // <editor-fold defaultstate="collapsed" desc="SCENES">
-        Scene sceneCampsite = new Scene(textNameCampsite,textDescriptionCampsite,flask);
-        Scene sceneCrossroads = new Scene(textNameCrossroads,textDescriptionCrossroads,shinyRock);
-        Scene sceneCrystalLake = new Scene(textNameCrystalLake,textDescriptionCrystalLake,water,ironSwordItem);
+        Scene sceneCampsite = new Scene(textNameCampsite,textDescriptionCampsite,flaskItem,torchMediumItem);
+        Scene sceneCrossroads = new Scene(textNameCrossroads,textDescriptionCrossroads,shinyRockItem);
+        Scene sceneCrystalLake = new Scene(textNameCrystalLake,textDescriptionCrystalLake,waterItem,ironSwordItem);
         Scene sceneWildernessRoad = new Scene(textNameWildernessRoad,textDescriptionWildernessRoad,keyItemFelrockSign,papyrusItem);
         Scene sceneFelrockVillage = new Scene(textNameFelrockVillage,textDescriptionFelrockVillage);
 
@@ -346,7 +364,7 @@ public class GameEngine
         content.addScene(sceneFelrockVillage);
         //</editor-fold>
         // <editor-fold defaultstate="collapsed" desc="CONNECTIONS">
-        Connector connectionCampsiteNorth = new Connector(sceneCrossroads,flask,textCampsiteNorth);
+        Connector connectionCampsiteNorth = new Connector(sceneCrossroads,flaskItem,textCampsiteNorth);
         Connector connectionCampsiteSouth = new Connector(textCampsiteSouth);
         Connector connectionCampsiteEast = new Connector(textCampsiteEast);
         Connector connectionCampsiteWest = new Connector(textCampsiteWest);

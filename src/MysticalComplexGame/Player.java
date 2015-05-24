@@ -13,6 +13,7 @@ public class Player implements Serializable
     private WeaponItem equippedWeapon;
     private HashMap<String, IItem> inventory = new HashMap<String, IItem>();
     private int thirstLevel;
+    //private int burnLevel;
 
     public Player()
     {
