@@ -179,10 +179,11 @@ public class GameEngine
 
         tokenizer.addToken("shiny",Token.PREITEM);
         tokenizer.addToken("leather",Token.PREITEM);
-        tokenizer.addToken("iron",Token.PREITEM);
+        tokenizer.addToken("rusty",Token.PREITEM);
         tokenizer.addToken("medium",Token.PREITEM);
         tokenizer.addToken("lucky",Token.PREITEM);
         tokenizer.addToken("sacred",Token.PREITEM);
+        tokenizer.addToken("rugged",Token.PREITEM);
     }
 
     private static void newGame(String s)
@@ -218,7 +219,7 @@ public class GameEngine
         String textCampsiteWest = "Not much to see to the west, for the mighty hills hinder your sight \nand the western part of this area remains unknown.";
 
         String textDescriptionCrossroads = "The moment you leave the campsite you see the, one and only, road leading upwards, so you take it.\nAfter a while you are facing a large crossroads and must decide which way to go.";
-        String textCrossroadsNorth = "A dimly lit and steep trail leads to a dark forest to the west. \nIt would, probably, be a good idea not to follow that road.";
+        String textCrossroadsNorth = "A dimly lit and steep trail leads to a dark forest to the north. \nIt would, probably, be a good idea not to follow that road.";
         String textCrossroadsWest = "There lies the path you came from, you should continue your journey.";
         String textCrossroadsSouth = "The wooden barricade blocks your way and there's no way around.";
 
@@ -478,7 +479,7 @@ public class GameEngine
         IItem waterItem = new WaterSource();
         IItem felrockSignItem = new FelrockSign(connectionWildernessRoadEast);
         IItem papyrusItem = new Papyrus();
-        IItem ironSwordItem = new SimpleWeapon("iron sword",8,2);
+        IItem rustySwordItem = new SimpleWeapon("rusty sword",1,2);
         IItem advisorItem = new Advisor();
         IItem barricadeItem = new Barricade(connectionCrossroadsSouth);
         IItem templeEntrance = new GatewayItem("temple","The intense greenery around the stony temple seems to have been there long before it was built.\\nThe entrance is huge and memorable and the gate is shut but probably unlocked.",sceneCampsite);
@@ -491,7 +492,7 @@ public class GameEngine
         content.addItem(waterItem);
         content.addItem(felrockSignItem);
         content.addItem(papyrusItem);
-        content.addItem(ironSwordItem);
+        content.addItem(rustySwordItem);
         content.addItem(advisorItem);
         content.addItem(barricadeItem);
         content.addItem(templeEntrance);
@@ -519,7 +520,7 @@ public class GameEngine
         sceneCrystalLake.addConnection(Direction.EAST,connectionCrystalLakeEast);
         sceneCrystalLake.addConnection(Direction.WEST,connectionCrystalLakeWest);
         sceneCrystalLake.addItem(waterItem);
-        sceneCrystalLake.addItem(ironSwordItem);
+        sceneCrystalLake.addItem(rustySwordItem);
 
         sceneWildernessRoad.addConnection(Direction.NORTH, connectionWildernessRoadNorth);
         sceneWildernessRoad.addConnection(Direction.SOUTH,connectionWildernessRoadSouth);

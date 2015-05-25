@@ -26,7 +26,7 @@ public class Barricade extends IItem implements BreakableItem {
         else
         {
             broken = true;
-            description = "Some wooden planks and pieces are scattered on the ground, its the barricade you broke not so long ago.";
+            description = "Some wooden planks and pieces are scattered on the ground, it's the barricade you broke not so long ago.";
             GameEngine.textOutput("You assault the wooden barricade until it's completely wrecked!");
             toOpen.openConnection();
         }
