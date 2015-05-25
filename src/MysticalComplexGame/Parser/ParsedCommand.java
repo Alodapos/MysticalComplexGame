@@ -47,4 +47,9 @@ public class ParsedCommand
             command.executeCommand(player,itemArgument);
         }
     }
+
+    public boolean exists()
+    {
+        return commandToExecute != null;
+    }
 }
