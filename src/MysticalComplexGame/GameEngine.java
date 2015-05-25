@@ -173,11 +173,16 @@ public class GameEngine
         tokenizer.addToken("torch",Token.ITEM);
         tokenizer.addToken("barricade",Token.ITEM);
         tokenizer.addToken("temple",Token.ITEM);
+        tokenizer.addToken("vase",Token.ITEM);
+        tokenizer.addToken("coin",Token.ITEM);
+        tokenizer.addToken("scroll",Token.ITEM);
 
         tokenizer.addToken("shiny",Token.PREITEM);
         tokenizer.addToken("leather",Token.PREITEM);
         tokenizer.addToken("iron",Token.PREITEM);
         tokenizer.addToken("medium",Token.PREITEM);
+        tokenizer.addToken("lucky",Token.PREITEM);
+        tokenizer.addToken("sacred",Token.PREITEM);
     }
 
     private static void newGame(String s)
@@ -199,6 +204,7 @@ public class GameEngine
         String textNameCaveOfAnguish = "Cave Of Anguish";
         String textNameClearing = "Clearing";
         String textNameIceblueRiver = "Iceblue River";
+        String textNameBridgeOfSighs = "Bridge Of Sighs";
         String textNameGardenOfCorruption = "Garden Of Corruption";
         String textNameGardenOfRadiance = "Garden Of Radiance";
 
@@ -325,22 +331,23 @@ public class GameEngine
         String textClearingWest = "To your west goes a trail of dirt, splitting in half, one part going north and the other south.";
 
         String textDescriptionIceblueRiver = "NOT MADE YET.";
-        String textIceblueRiverNorth = "Forward, there stands a wooden bridge connecting the river's bank with the Garden of Corruption.";
-        String textIceblueRiverSouth = "You can still see the Clearing you left behind.";
         String textIceblueRiverEast = "The Iceblue River flows fiercely and fast.";
         String textIceblueRiverWest = "NOT MADE YET.";
+
+        String textDescriptionBridgeOfSighs = "NOT MADE YET.";
+        String textBridgeOfSighsNorth = "Something.";
+        String textBridgeOfSighsSouth = "Something.";
+        String textBridgeOfSighsEast = "The bridge is badly damaged and not safe to cross. You better find some resources to rebuild it.";
 
         String textDescriptionGardenOfCorruption = "NOT MADE YET.";
         String textGardenOfCorruptionNorth = "There's nothing you can see beyond this point.";
         String textGardenOfCorruptionSouth = "The Iceblue River flows fiercely, you can tell from the loud sound.";
-        String textGardenOfCorruptionEast = "The Tree of Eternity seems sick...";
-        String textGardenOfCorruptionWest = "On your left, still stands the wooden bridge.";
+        String textGardenOfCorruptionEast = "The Tree of Eternity seems corrupted and sick...";
 
         String textDescriptionGardenOfRadiance = "NOT MADE YET.";
         String textGardenOfRadianceNorth = "There's nothing you can see beyond this point.";
         String textGardenOfRadianceSouth = "The Iceblue River flows fiercely, you can tell from the loud sound.";
-        String textGardenOfRadianceEast = "The Tree of Eternity is truly magnificent!";
-        String textGardenOfRadianceWest = "On your left, still stands the wooden bridge.";
+        String textGardenOfRadianceEast = "The Tree of Eternity has regained its radiance and looks truly magnificent!";
 
         // </editor-fold>
         // <editor-fold defaultstate="collapsed" desc="SCENES">
@@ -356,10 +363,11 @@ public class GameEngine
         Scene sceneFelrockTownHallLobby = new Scene(textNameFelrockTownHallLobby,textDescriptionFelrockTownHallLobby);
         Scene sceneFelrockTownHallFirstFloor = new Scene(textNameFelrockTownHallFirstFloor,textDescriptionFelrockTownHallFirstFloor);
         Scene sceneFelrockTownHallSecondFloor = new Scene(textNameFelrockTownHallSecondFloor,textDescriptionFelrockTownHallSecondFloor);
-        Scene sceneCaveOfAnguishEntrance = new Scene(textNameCaveOfAnguishEntrance,textDescriptionCaveOfAnguish);
+        Scene sceneCaveOfAnguishEntrance = new Scene(textNameCaveOfAnguishEntrance,textDescriptionCaveOfAnguishEntrance);
         Scene sceneCaveOfAnguish = new Scene(textNameCaveOfAnguish,textDescriptionCaveOfAnguish);
         Scene sceneClearing = new Scene(textNameClearing,textDescriptionClearing);
         Scene sceneIceblueRiver = new Scene(textNameIceblueRiver,textDescriptionIceblueRiver);
+        Scene sceneBridgeOfSighs = new Scene(textNameBridgeOfSighs,textDescriptionBridgeOfSighs);
         Scene sceneGardenOfCorruption = new Scene(textNameGardenOfCorruption,textDescriptionGardenOfCorruption);
         Scene sceneGardenOfRadiance = new Scene(textNameGardenOfRadiance,textDescriptionGardenOfRadiance);
 
@@ -380,8 +388,10 @@ public class GameEngine
         content.addScene(sceneCaveOfAnguish);
         content.addScene(sceneClearing);
         content.addScene(sceneIceblueRiver);
+        content.addScene(sceneBridgeOfSighs);
         content.addScene(sceneGardenOfCorruption);
         content.addScene(sceneGardenOfRadiance);
+
         //</editor-fold>
         // <editor-fold defaultstate="collapsed" desc="CONNECTIONS">
         Connector connectionCampsiteNorth = new Connector(sceneCrossroads,textCampsiteNorth,"That was the last of your stuff, you should be ready to go.");
@@ -414,7 +424,52 @@ public class GameEngine
         Connector connectionFelrockTempleEntranceEast = new Connector(textFelrockTempleEntranceEast);
         Connector connectionFelrockTempleEntranceWest = new Connector(textFelrockTempleEntranceWest);
 
-        Connector connectionFelrockTempleNoPass = new Connector(textFelrockTempleNoPass);
+        Connector connectionFelrockTemple = new Connector(textFelrockTempleNoPass);
+
+        Connector connectionFelrockTownHallEntranceNorth = new Connector(textFelrockTownHallEntranceNorth);
+        Connector connectionFelrockTownHallEntranceSouth = new Connector(sceneFelrockVillage);
+        Connector connectionFelrockTownHallEntranceEast = new Connector(textFelrockTownHallEntranceEast);
+        Connector connectionFelrockTownHallEntranceWest = new Connector(textFelrockTownHallEntranceWest);
+
+        Connector connectionFelrockTownHall = new Connector(textFelrockTownHallNoPass);
+
+        Connector connectionFelrockTownHallLobby = new Connector(textFelrockTownHallLobbyNoPass);
+
+        Connector connectionFelrockTownHallFirstFloor = new Connector(textFelrockTownHallFirstFloorNoPass);
+
+        Connector connectionFelrockTownHallSecondFloor = new Connector(textFelrockTownHallSecondFloorNoPass);
+
+        Connector connectionCaveOfAnguishEntranceNorth = new Connector(textCaveOfAnguishEntranceNorth);
+        Connector connectionCaveOfAnguishEntranceSouth = new Connector(textCaveOfAnguishEntranceSouth);
+        Connector connectionCaveOfAnguishEntranceEast = new Connector(textCaveOfAnguishEntranceEast);
+        Connector connectionCaveOfAnguishEntranceWest = new Connector(sceneFelrockVillage);
+
+        Connector connectionCaveOfAnguish = new Connector(textCaveOfAnguishNoPass);
+
+        Connector connectionClearingNorth = new Connector(sceneIceblueRiver);
+        Connector connectionClearingSouth = new Connector(sceneCaveOfAnguish);
+        Connector connectionClearingEast = new Connector(textClearingEast);
+        Connector connectionClearingWest = new Connector(textClearingWest);
+
+        Connector connectionIceblueRiverNorth = new Connector(sceneBridgeOfSighs);
+        Connector connectionIceblueRiverSouth = new Connector(sceneClearing);
+        Connector connectionIceblueRiverEast = new Connector(textIceblueRiverEast);
+        Connector connectionIceblueRiverWest = new Connector(textIceblueRiverWest);
+
+        Connector connectionBridgeOfSighsNorth = new Connector(textBridgeOfSighsNorth);
+        Connector connectionBridgeOfSighsSouth = new Connector(textBridgeOfSighsSouth);
+        Connector connectionBridgeOfSighsEast = new Connector(sceneGardenOfCorruption,textBridgeOfSighsEast,"The bridge is finally repaired and ready to be crossed.");
+        Connector connectionBridgeOfSighsWest = new Connector(sceneIceblueRiver);
+
+        Connector connectionGardenOfCorruptionNorth = new Connector(textGardenOfCorruptionNorth);
+        Connector connectionGardenOfCorruptionSouth = new Connector(textGardenOfCorruptionSouth);
+        Connector connectionGardenOfCorruptionEast = new Connector(textGardenOfCorruptionEast);
+        Connector connectionGardenOfCorruptionWest = new Connector(sceneBridgeOfSighs);
+
+        Connector connectionGardenOfRadianceNorth = new Connector(textGardenOfRadianceNorth);
+        Connector connectionGardenOfRadianceSouth = new Connector(textGardenOfRadianceSouth);
+        Connector connectionGardenOfRadianceEast = new Connector(textGardenOfRadianceEast);
+        Connector connectionGardenOfRadianceWest = new Connector(sceneBridgeOfSighs);
 
         //</editor-fold>
         // <editor-fold defaultstate="collapsed" desc="ITEMS">
@@ -427,6 +482,9 @@ public class GameEngine
         IItem advisorItem = new Advisor();
         IItem barricadeItem = new Barricade(connectionCrossroadsSouth);
         IItem templeEntrance = new GatewayItem("temple","The intense greenery around the stony temple seems to have been there long before it was built.\\nThe entrance is huge and memorable and the gate is shut but probably unlocked.",sceneCampsite);
+        //IItem vaseItem = new Vase();TODO parameters
+        //IItem luckyCoinItem = new LuckyCoin();TODO parameters
+        //IItem sacredScrollItem = new SacredScroll();TODO parameters
 
         content.addItem(shinyRockItem);
         content.addItem(flaskItem);
@@ -437,6 +495,10 @@ public class GameEngine
         content.addItem(advisorItem);
         content.addItem(barricadeItem);
         content.addItem(templeEntrance);
+        //content.addItem(vaseItem);
+        //content.addItem(luckyCoinItem);
+        //content.addItem(sacredScrollItem);
+
         //</editor-fold>
         // <editor-fold defaultstate="collapsed" desc="ADD CONNECTIONS/ITEMS TO SCENES">
         sceneCampsite.addConnection(Direction.NORTH,connectionCampsiteNorth);
@@ -470,6 +532,80 @@ public class GameEngine
         sceneFelrockVillage.addConnection(Direction.SOUTH,connectionFelrockVillageSouth);
         sceneFelrockVillage.addConnection(Direction.EAST,connectionFelrockVillageEast);
         sceneFelrockVillage.addConnection(Direction.WEST, connectionFelrockVillageWest);
+        //sceneFelrockVillage.addItem(luckyCoinItem);
+
+        sceneFelrockTempleEntrance.addConnection(Direction.NORTH,connectionFelrockTempleEntranceNorth);
+        sceneFelrockTempleEntrance.addConnection(Direction.SOUTH,connectionFelrockTempleEntranceSouth);
+        sceneFelrockTempleEntrance.addConnection(Direction.EAST,connectionFelrockTempleEntranceEast);
+        sceneFelrockTempleEntrance.addConnection(Direction.WEST,connectionFelrockTempleEntranceWest);
+
+        sceneFelrockTemple.addConnection(Direction.NORTH,connectionFelrockTemple);
+        sceneFelrockTemple.addConnection(Direction.SOUTH,connectionFelrockTemple);
+        sceneFelrockTemple.addConnection(Direction.EAST,connectionFelrockTemple);
+        sceneFelrockTemple.addConnection(Direction.WEST,connectionFelrockTemple);
+        //sceneFelrockTemple.addItem(sacredScrollItem);
+        //sceneFelrockTemple.addItem(vaseItem);
+
+        sceneFelrockTownHallEntrance.addConnection(Direction.NORTH,connectionFelrockTownHallEntranceNorth);
+        sceneFelrockTownHallEntrance.addConnection(Direction.SOUTH,connectionFelrockTownHallEntranceSouth);
+        sceneFelrockTownHallEntrance.addConnection(Direction.EAST,connectionFelrockTownHallEntranceEast);
+        sceneFelrockTownHallEntrance.addConnection(Direction.WEST,connectionFelrockTownHallEntranceWest);
+
+        sceneFelrockTownHall.addConnection(Direction.NORTH,connectionFelrockTownHall);
+        sceneFelrockTownHall.addConnection(Direction.SOUTH,connectionFelrockTownHall);
+        sceneFelrockTownHall.addConnection(Direction.EAST,connectionFelrockTownHall);
+        sceneFelrockTownHall.addConnection(Direction.WEST,connectionFelrockTownHall);
+
+        sceneFelrockTownHallLobby.addConnection(Direction.NORTH,connectionFelrockTownHallLobby);
+        sceneFelrockTownHallLobby.addConnection(Direction.SOUTH,connectionFelrockTownHallLobby);
+        sceneFelrockTownHallLobby.addConnection(Direction.EAST,connectionFelrockTownHallLobby);
+        sceneFelrockTownHallLobby.addConnection(Direction.WEST,connectionFelrockTownHallLobby);
+
+        sceneFelrockTownHallFirstFloor.addConnection(Direction.NORTH,connectionFelrockTownHallFirstFloor);
+        sceneFelrockTownHallFirstFloor.addConnection(Direction.SOUTH,connectionFelrockTownHallFirstFloor);
+        sceneFelrockTownHallFirstFloor.addConnection(Direction.EAST,connectionFelrockTownHallFirstFloor);
+        sceneFelrockTownHallFirstFloor.addConnection(Direction.WEST,connectionFelrockTownHallFirstFloor);
+
+        sceneFelrockTownHallSecondFloor.addConnection(Direction.NORTH,connectionFelrockTownHallSecondFloor);
+        sceneFelrockTownHallSecondFloor.addConnection(Direction.SOUTH,connectionFelrockTownHallSecondFloor);
+        sceneFelrockTownHallSecondFloor.addConnection(Direction.EAST,connectionFelrockTownHallSecondFloor);
+        sceneFelrockTownHallSecondFloor.addConnection(Direction.WEST,connectionFelrockTownHallSecondFloor);
+
+        sceneCaveOfAnguishEntrance.addConnection(Direction.NORTH,connectionCaveOfAnguishEntranceNorth);
+        sceneCaveOfAnguishEntrance.addConnection(Direction.SOUTH,connectionCaveOfAnguishEntranceSouth);
+        sceneCaveOfAnguishEntrance.addConnection(Direction.EAST,connectionCaveOfAnguishEntranceEast);
+        sceneCaveOfAnguishEntrance.addConnection(Direction.WEST,connectionCaveOfAnguishEntranceWest);
+
+        sceneCaveOfAnguish.addConnection(Direction.NORTH,connectionCaveOfAnguish);
+        sceneCaveOfAnguish.addConnection(Direction.SOUTH,connectionCaveOfAnguish);
+        sceneCaveOfAnguish.addConnection(Direction.WEST,connectionCaveOfAnguish);
+        sceneCaveOfAnguish.addConnection(Direction.WEST,connectionCaveOfAnguish);
+
+        sceneClearing.addConnection(Direction.NORTH,connectionClearingNorth);
+        sceneClearing.addConnection(Direction.SOUTH,connectionClearingSouth);
+        sceneClearing.addConnection(Direction.EAST,connectionClearingEast);
+        sceneClearing.addConnection(Direction.WEST,connectionClearingWest);
+
+        sceneIceblueRiver.addConnection(Direction.NORTH,connectionIceblueRiverNorth);
+        sceneIceblueRiver.addConnection(Direction.SOUTH,connectionIceblueRiverSouth);
+        sceneIceblueRiver.addConnection(Direction.EAST,connectionIceblueRiverEast);
+        sceneIceblueRiver.addConnection(Direction.WEST,connectionIceblueRiverWest);
+
+        sceneBridgeOfSighs.addConnection(Direction.NORTH,connectionBridgeOfSighsNorth);
+        sceneBridgeOfSighs.addConnection(Direction.SOUTH,connectionBridgeOfSighsSouth);
+        sceneBridgeOfSighs.addConnection(Direction.EAST,connectionBridgeOfSighsEast);
+        sceneBridgeOfSighs.addConnection(Direction.WEST,connectionBridgeOfSighsWest);
+
+        sceneGardenOfCorruption.addConnection(Direction.NORTH,connectionGardenOfCorruptionNorth);
+        sceneGardenOfCorruption.addConnection(Direction.SOUTH,connectionGardenOfCorruptionSouth);
+        sceneGardenOfCorruption.addConnection(Direction.EAST,connectionGardenOfCorruptionEast);
+        sceneGardenOfCorruption.addConnection(Direction.WEST,connectionGardenOfCorruptionWest);
+
+        sceneGardenOfRadiance.addConnection(Direction.NORTH,connectionGardenOfRadianceNorth);
+        sceneGardenOfRadiance.addConnection(Direction.SOUTH,connectionGardenOfRadianceSouth);
+        sceneGardenOfRadiance.addConnection(Direction.EAST,connectionGardenOfRadianceEast);
+        sceneGardenOfRadiance.addConnection(Direction.WEST,connectionGardenOfRadianceWest);
+
         //</editor-fold>
         Player player = new Player();
         player.setName(s);
