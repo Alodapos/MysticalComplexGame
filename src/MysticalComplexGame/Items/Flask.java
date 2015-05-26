@@ -37,7 +37,7 @@ public class Flask extends IItem implements LiquidContainer,KeyItem
     {
         if (fullness == LiquidContainerState.FILLED)
         {
-            player.setThirstLevel(10);
+            player.setThirstLevel(15);
             GameEngine.textOutput(drinkSuccess);
             setDescription(fullness);
             this.fullness = LiquidContainerState.EMPTY;

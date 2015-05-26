@@ -3,7 +3,9 @@ package MysticalComplexGame.Items;
 public enum LightEmitterState
 {
     LIT("lit"),
-    QUENCHED("quenched");
+    QUENCHED("quenched"),
+    POSTED("post"),
+    ATTACHED("wall");
 
     private final String burning;
 

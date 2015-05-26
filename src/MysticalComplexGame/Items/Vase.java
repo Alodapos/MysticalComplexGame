@@ -8,10 +8,11 @@ public class Vase extends IItem implements BreakableItem,ContainerItem {
     boolean broken;
     IItem loot;
 
-    public Vase(IItem loot) {
+    public Vase(IItem loot)
+    {
         pickable = false;
         name = "vase";
-        description = "An old, dusty, ceramic vase covered in webs sits behind a pillar.";
+        description = "An old, dusty, ceramic vase covered in webs sits atop the altar.";
         inventoryDescription = "";
         broken = false;
         this.loot = loot;
@@ -20,11 +21,11 @@ public class Vase extends IItem implements BreakableItem,ContainerItem {
     @Override
     public void breakObject(Player player)
     {
-        if (broken) GameEngine.textOutput("This is already broken");
+        if (broken) GameEngine.textOutput("This is already broken.");
         else
         {
             broken = true;
-            description = "You see the ceramic pieces of the vase you broke earlier behind the pillar";
+            description = "You see the ceramic pieces of the vase you broke earlier atop the altar.";
             GameEngine.textOutput("You smash the vase with your boots and it shatters into pieces. What a badass you are! " + player.getName() + " the vase-slayer!!");
             dropLoot(player);
         }
@@ -33,7 +34,17 @@ public class Vase extends IItem implements BreakableItem,ContainerItem {
     @Override
     public void dropLoot(Player player)
     {
-        player.getLocation().addItem(loot);
-        GameEngine.textOutput("After breaking the " + this.name + " a " + this.loot + " drops on the floor.");
+        if(!player.getInventory().containsKey("golden artifact"))
+        {
+            player.getLocation().addItem(loot);
+            GameEngine.textOutput("After breaking the " + this.name + " a " + loot.getName() + " drops on the floor.");
+        }
+    }
+
+    @Override
+    public void pickLoot(Player player)
+    {
+        player.addToInventory(loot);
+        GameEngine.textOutput("You loot the " + this.name + " and find a " + loot.getName() + "!");
     }
 }

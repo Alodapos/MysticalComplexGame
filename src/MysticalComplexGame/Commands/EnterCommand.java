@@ -14,7 +14,7 @@ public class EnterCommand extends ICommandVerbItem
     {
         key = "enter";
         invalidArgument = "This is not something that you can "+this.key+".";
-        itemMissing = "You don't see or have such a place.";
+        itemMissing = "You don't see such a place.";
     }
 
     @Override
@@ -26,6 +26,10 @@ public class EnterCommand extends ICommandVerbItem
         else if (!(item instanceof GatewayItem))
             GameEngine.textOutput(invalidArgument);
         else
+        {
+            player.setPreviousScene(player.getLocation());
             ((GatewayItem) item).enter(player);
+        }
+
     }
 }

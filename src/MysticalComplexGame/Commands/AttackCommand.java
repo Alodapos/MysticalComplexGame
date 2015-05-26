@@ -14,7 +14,7 @@ public class AttackCommand extends ICommandVerbItem
     {
         key = "attack";
         invalidArgument = "This is not something that you can attack.";
-        itemMissing = "You don't see or have such a thing.";
+        itemMissing = "You don't see such a thing.";
     }
 
     @Override

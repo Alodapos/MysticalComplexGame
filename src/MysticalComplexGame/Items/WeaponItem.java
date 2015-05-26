@@ -8,11 +8,11 @@ public interface WeaponItem
 
     void unequip(Player player);
 
-    public Integer getDurability();
+    Integer getDurability();
 
-    public void setDurability(Integer durability);
+    void setDurability(Integer durability);
 
-    public Integer getDamage();
+    Integer getDamage();
 
-    public void setDamage(Integer damage);
+    void setDamage(Integer damage);
 }

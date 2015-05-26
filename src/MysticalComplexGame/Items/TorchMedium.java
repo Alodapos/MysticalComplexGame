@@ -70,9 +70,8 @@ public class TorchMedium extends IItem implements LightEmitter
 
     private void setDescription(LightEmitterState state)
     {
-        this.description= "There is a " + state.getBurning() + "," + " medium sized torch attached on " + "--SPOT PLACEHOLDER--";
+        this.description = "There is a " + state.getBurning() + "," + " medium sized torch attached on a " + LightEmitterState.ATTACHED + ".";
         //TODO SPOT
-        this.inventoryDescription = "A medium "+ state.getBurning() + " torch.";
     }
 }
 

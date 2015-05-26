@@ -14,14 +14,14 @@ public class LightCommand extends ICommandVerbItem
     public LightCommand()
     {
         key = "light";
-        invalidArgument = "This is not something that i can light";
-        itemMissing = "You don't have something like this with you.";
+        invalidArgument = "This is not something that I can light";
+        itemMissing = "There is not something like that around.";
     }
 
     @Override
     public void executeCommand(Player player,IItem item)
     {
-        if (!player.getInventory().containsValue(item)) GameEngine.textOutput(itemMissing);
+        if (!player.getLocation().getItems().containsValue(item)) GameEngine.textOutput(itemMissing);
         else if (!(item instanceof LightEmitter)) GameEngine.textOutput(invalidArgument);
         else
         {

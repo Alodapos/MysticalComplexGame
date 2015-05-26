@@ -74,7 +74,7 @@ public class GameEngine
 
     private static void checkThirst(Player player)
     {
-        if (player.getThirstLevel() == 5) textOutput("\nYou begin to feel thirsty, you better find some water to drink soon or you'll probably die");
+        if (player.getThirstLevel() == 5) textOutput("\nYou begin to feel thirsty, you better find some water to drink soon or you'll probably die.");
         else if (player.getThirstLevel() == 0 )
         {
             textOutput("You fall to your knees from dehydration and...slowly.....die...\nRest in peace " + player.getName() + ", your deeds shall be remembered.");
@@ -117,6 +117,7 @@ public class GameEngine
         ICommand enterCommand = new EnterCommand();
         ICommand exitCommand = new ExitCommand();
         ICommand breakCommand = new BreakCommand();
+        ICommand lootCommand = new LootCommand();
 
         content.addCommand(go);
         content.addCommand(look);
@@ -136,6 +137,7 @@ public class GameEngine
         content.addCommand(enterCommand);
         content.addCommand(exitCommand);
         content.addCommand(breakCommand);
+        content.addCommand(lootCommand);
 
         tokenizer.addToken("go", Token.VERBDIRECTION);
         tokenizer.addToken("gaze", Token.VERBDIRECTION);
@@ -157,6 +159,7 @@ public class GameEngine
         tokenizer.addToken("light",Token.VERBITEM);
         tokenizer.addToken("enter",Token.VERBITEM);
         tokenizer.addToken("break",Token.VERBITEM);
+        tokenizer.addToken("loot",Token.VERBITEM);
 
         tokenizer.addToken("north",Token.DIRECTION);
         tokenizer.addToken("south",Token.DIRECTION);
@@ -173,9 +176,12 @@ public class GameEngine
         tokenizer.addToken("torch",Token.ITEM);
         tokenizer.addToken("barricade",Token.ITEM);
         tokenizer.addToken("temple",Token.ITEM);
+        tokenizer.addToken("hall",Token.ITEM);
         tokenizer.addToken("vase",Token.ITEM);
         tokenizer.addToken("coin",Token.ITEM);
         tokenizer.addToken("scroll",Token.ITEM);
+        tokenizer.addToken("artifact",Token.ITEM);
+        tokenizer.addToken("fountain",Token.ITEM);
 
         tokenizer.addToken("shiny",Token.PREITEM);
         tokenizer.addToken("leather",Token.PREITEM);
@@ -184,6 +190,8 @@ public class GameEngine
         tokenizer.addToken("lucky",Token.PREITEM);
         tokenizer.addToken("sacred",Token.PREITEM);
         tokenizer.addToken("rugged",Token.PREITEM);
+        tokenizer.addToken("golden",Token.PREITEM);
+        tokenizer.addToken("town",Token.PREITEM);
     }
 
     private static void newGame(String s)
@@ -218,25 +226,28 @@ public class GameEngine
         String textCampsiteEast = "The Campsite is located in a rather rocky and mountainous scenery \nso the only thing to see are some really big hills blocking your view to the far east.";
         String textCampsiteWest = "Not much to see to the west, for the mighty hills hinder your sight \nand the western part of this area remains unknown.";
 
-        String textDescriptionCrossroads = "The moment you leave the campsite you see the, one and only, road leading upwards, so you take it.\nAfter a while you are facing a large crossroads and must decide which way to go.";
+        String textDescriptionCrossroads = "The moment you leave the campsite you see the, one and only, road leading upwards, so you take it.\n" +
+                "After a while you are facing a large crossroads and must decide which way to go.";
         String textCrossroadsNorth = "A dimly lit and steep trail leads to a dark forest to the north. \nIt would, probably, be a good idea not to follow that road.";
         String textCrossroadsWest = "There lies the path you came from, you should continue your journey.";
         String textCrossroadsSouth = "The wooden barricade blocks your way and there's no way around.";
 
-        String textDescriptionCrystalLake = "A fairly big lake is located in the center of a, 10-feet diameter, overgrown field.\nThe water seems clean enough to be considered drinkable. \nCoincidentally, you start feeling thirsty.";
+        String textDescriptionCrystalLake = "A fairly big lake is located in the center of a, 10-feet diameter, overgrown field.\n" +
+                "The water seems clean enough to be considered drinkable. \nCoincidentally, you start feeling thirsty.";
         String textCrystalLakeSouth = "You can clearly see the Campsite from down here, despite being at a lower level. \nUnfortunately, there is a steep slope that prevents you from going back that way.";
         String textCrystalLakeEast = "There is nothing to see but trees and mountainsides.";
         String textCrystalLakeWest = "The road that you took when you left the campsite is visible from here too.";
 
-        String textDescriptionWildernessRoad = "As you walk the east road, you begin to perceive a blurry landscape which, as it seems, consists by some kind of structures surrounded by tall trees.\nThe closer you get, the clearer it becomes. It seems you have arrived at a small, remote, yet peaceful village.";
+        String textDescriptionWildernessRoad = "As you walk the east road, you begin to perceive a blurry landscape which, as it seems, consists by some kind of structures surrounded by tall trees.\n" +
+                "The closer you get, the clearer it becomes. It seems you have arrived at a small, remote, yet peaceful village.";
         String textWildernessRoadNorth = "Not made yet.";
         String textWildernessRoadEast = "There is a sign, you'd better read it before you go there.";
         String textWildernessRoadSouth = "You can see the Crystal Lake fading away as you keep walking down that road. \nThe trees now block your sight as you leave the Campsite and the Crystal Lake behind.";
 
         String textDescriptionFelrockVillage = "You can clearly see some residencies and realise that this is a small village with a very few inhabitants.\n" +
-                "There is a very big, simple, stone fountain in the middle of the village, spouting crystal clear water from its holes.\n" +
-                "On its north you can distinguish a great and majestic building which, judging from the decoration, size and location, must be the village's worship temple.\n" +
-                "On its south, there lies a grand structure, of white and pale shades of brown which, considering the architecture that's been used and its position, must be the town hall.\nTo the north, your sight follows a path, quite narrow, leading somewhere far ahead, but you can't see exactly where.";
+                "To the south you can distinguish a great and majestic building which, judging from the decoration, size and location, must be the village's worship temple.\n" +
+                "To the north, there lies a grand structure, of white and pale shades of brown which, considering the architecture that's been used and its position, must be the town hall.\n" +
+                "To the east, your sight follows a path, quite narrow, leading somewhere far ahead, but you can't see exactly where.";
         String textFelrockVillageEast = "The road is currently guarded by a husky man that won't let you pass until you present to him a special license, signed by the village mayor.";
 
         String textDescriptionFelrockTempleEntrance = "You now stand in front of the temple.";
@@ -271,7 +282,7 @@ public class GameEngine
                 "On your left, a staircase extends all the way up, to the top of the Town Hall. \n" +
                 "As far as you can see there are three floors, including the ground floor. \n" +
                 "On your right and left there are several rooms, probably offices and storerooms. \n" +
-                "While you examine your surroundings and trying to see what's on the top floors, a low voice is heard in the distance, \n" +
+                "While you examine your surroundings and trying to see what's on the top floors, a low voice is heard in the distance, further onto your right, in what seems to be the lobby. \n" +
                 "but the only words you can make out are: \"cave\" and \"corruption\". \n" +
                 "At once, a different voice replies and you can only hear the words: \"dying\" and \"leave\". \n" +
                 "The conversation continues...";
@@ -279,16 +290,15 @@ public class GameEngine
 
         String textDescriptionFelrockTownHallLobby = "Reluctantly, you get closer to the room and the voices are getting clearer. \n" +
                 "The two men hear your footsteps and stop at once. \n" +
-                "When you reveal yourself they look at you with shirred eyes and a concerned expression. +\n" +
+                "When you reveal yourself they look at you with shirred eyes and a concerned expression. \n" +
                 "Now one of them is approaching you. He is tall, wearing some kind of armour and holds a stick in his right hand. \n" +
                 "You sense that he could be a very strict character and probably a high-ranked member of the village's army. \n" +
-                "He greets you with a brief introduction, telling you his name: <General \"name of tall man\"> and asking for yours. \n" +
-                "...<user name input>... \n" +
-                "You kindly introduce yourself to both and ask to learn who the other man is. \n" +
-                "He is significantly shorter than <name of tall man> and wears neat and elegant clothes making him very prestigious. \n" +
-                "He holds a small case in his hands. His name is <name of short man>. \n" +
+                "He greets you with a brief introduction, telling you his name: \"General Patrick Eugene Cornelius\" and asking for yours. \n" +
+                "You kindly introduce yourself to both as: " + getPlayerName() + " of the Guild of Resuscitation and ask to learn who the other man is.\n" +
+                "He is significantly shorter than General Cornelius and wears neat and elegant clothes making him very prestigious. \n" +
+                "He holds a small case in his hands. His name is Luwin Maester. \n" +
                 "He tells you that he is the mayor's advisor. But when you ask to know where the mayor himself is, \n" +
-                "<name of tall man> tells you that he's gone missing for a few days now.";
+                "General Cornelius tells you that he's gone missing for a few days now.";
         String textFelrockTownHallLobbyNoPass = "You can't travel while inside the Town Hall.";
 
         String textDescriptionFelrockTownHallFirstFloor = "NOT MADE YET.";
@@ -474,18 +484,40 @@ public class GameEngine
 
         //</editor-fold>
         // <editor-fold defaultstate="collapsed" desc="ITEMS">
-        IItem shinyRockItem = new ShinyRock();
+
+        //LOOTS
+        IItem goldenArtifactItem = new GoldenArtifact();
+        IItem luckyCoinItem = new LuckyCoin();
+
+        //PATH BLOCKERS
         IItem flaskItem = new Flask(LiquidContainerState.EMPTY,connectionCampsiteNorth);
-        IItem waterItem = new WaterSource();
         IItem felrockSignItem = new FelrockSign(connectionWildernessRoadEast);
-        IItem papyrusItem = new Papyrus();
-        IItem rustySwordItem = new SimpleWeapon("rusty sword",1,2);
-        IItem advisorItem = new Advisor();
         IItem barricadeItem = new Barricade(connectionCrossroadsSouth);
-        IItem templeEntrance = new GatewayItem("temple","The intense greenery around the stony temple seems to have been there long before it was built.\\nThe entrance is huge and memorable and the gate is shut but probably unlocked.",sceneCampsite);
-        //IItem vaseItem = new Vase();TODO parameters
-        //IItem luckyCoinItem = new LuckyCoin();TODO parameters
-        //IItem sacredScrollItem = new SacredScroll();TODO parameters
+
+        //COMMONS
+        IItem shinyRockItem = new ShinyRock();
+        IItem waterItem = new WaterSource();
+        IItem papyrusItem = new Papyrus();
+        IItem sacredScrollItem = new SacredScroll();
+        IItem rustySwordItem = new SimpleWeapon("rusty sword",1,2);
+        IItem mediumTorch = new TorchMedium(LightEmitterState.LIT);
+
+        //CONTAINERS
+        IItem vaseItem = new Vase(goldenArtifactItem);
+        IItem felrockFountainItem = new FelrockFountain(luckyCoinItem);
+
+        //ENTITIES
+        IItem advisorItem = new Advisor();
+
+        //GATEWAYS
+        IItem templeEntrance = new GatewayItem("temple","The intense greenery around the stony temple seems to have been there long before it was built.\n" +
+                                               "The entrance is huge and memorable and the gate is shut but probably unlocked.",sceneFelrockTemple);
+        IItem townHallEntrance = new GatewayItem("town hall","Only by getting closer to the building, you can estimate how magnificent it truly is.\n" +
+                "Its banners flutter as the wind passes through them.\n" +
+                "It seems well preserved and, possibly, recently built or renovated.\n" +
+                "It also has weird decorations all over its stony framework.\n" +
+                "No one is entering or exiting the building since it's a small and quite village with a very low population.\n" +
+                "But, surely, there will be someone inside.",sceneFelrockTownHall);
 
         content.addItem(shinyRockItem);
         content.addItem(flaskItem);
@@ -495,10 +527,14 @@ public class GameEngine
         content.addItem(rustySwordItem);
         content.addItem(advisorItem);
         content.addItem(barricadeItem);
+        content.addItem(felrockFountainItem);
         content.addItem(templeEntrance);
-        //content.addItem(vaseItem);
-        //content.addItem(luckyCoinItem);
-        //content.addItem(sacredScrollItem);
+        content.addItem(townHallEntrance);
+        content.addItem(vaseItem);
+        content.addItem(goldenArtifactItem);
+        content.addItem(luckyCoinItem);
+        content.addItem(sacredScrollItem);
+        content.addItem(mediumTorch);
 
         //</editor-fold>
         // <editor-fold defaultstate="collapsed" desc="ADD CONNECTIONS/ITEMS TO SCENES">
@@ -533,24 +569,25 @@ public class GameEngine
         sceneFelrockVillage.addConnection(Direction.SOUTH,connectionFelrockVillageSouth);
         sceneFelrockVillage.addConnection(Direction.EAST,connectionFelrockVillageEast);
         sceneFelrockVillage.addConnection(Direction.WEST, connectionFelrockVillageWest);
-        //sceneFelrockVillage.addItem(luckyCoinItem);
+        sceneFelrockVillage.addItem(felrockFountainItem);
 
         sceneFelrockTempleEntrance.addConnection(Direction.NORTH,connectionFelrockTempleEntranceNorth);
         sceneFelrockTempleEntrance.addConnection(Direction.SOUTH,connectionFelrockTempleEntranceSouth);
         sceneFelrockTempleEntrance.addConnection(Direction.EAST,connectionFelrockTempleEntranceEast);
         sceneFelrockTempleEntrance.addConnection(Direction.WEST,connectionFelrockTempleEntranceWest);
+        sceneFelrockTempleEntrance.addItem(templeEntrance);
 
         sceneFelrockTemple.addConnection(Direction.NORTH,connectionFelrockTemple);
         sceneFelrockTemple.addConnection(Direction.SOUTH,connectionFelrockTemple);
         sceneFelrockTemple.addConnection(Direction.EAST,connectionFelrockTemple);
         sceneFelrockTemple.addConnection(Direction.WEST,connectionFelrockTemple);
-        //sceneFelrockTemple.addItem(sacredScrollItem);
-        //sceneFelrockTemple.addItem(vaseItem);
+        sceneFelrockTemple.addItem(vaseItem);
 
         sceneFelrockTownHallEntrance.addConnection(Direction.NORTH,connectionFelrockTownHallEntranceNorth);
         sceneFelrockTownHallEntrance.addConnection(Direction.SOUTH,connectionFelrockTownHallEntranceSouth);
         sceneFelrockTownHallEntrance.addConnection(Direction.EAST,connectionFelrockTownHallEntranceEast);
         sceneFelrockTownHallEntrance.addConnection(Direction.WEST,connectionFelrockTownHallEntranceWest);
+        sceneFelrockTownHallEntrance.addItem(townHallEntrance);
 
         sceneFelrockTownHall.addConnection(Direction.NORTH,connectionFelrockTownHall);
         sceneFelrockTownHall.addConnection(Direction.SOUTH,connectionFelrockTownHall);
@@ -576,6 +613,7 @@ public class GameEngine
         sceneCaveOfAnguishEntrance.addConnection(Direction.SOUTH,connectionCaveOfAnguishEntranceSouth);
         sceneCaveOfAnguishEntrance.addConnection(Direction.EAST,connectionCaveOfAnguishEntranceEast);
         sceneCaveOfAnguishEntrance.addConnection(Direction.WEST,connectionCaveOfAnguishEntranceWest);
+        sceneCaveOfAnguishEntrance.addItem(mediumTorch);
 
         sceneCaveOfAnguish.addConnection(Direction.NORTH,connectionCaveOfAnguish);
         sceneCaveOfAnguish.addConnection(Direction.SOUTH,connectionCaveOfAnguish);

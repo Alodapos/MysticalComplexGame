@@ -21,8 +21,8 @@ public class Parser
     {
         textCommandNotFound = "This is not a command that i recognize!";
         textWrongGrammar = "I understood as far as you wanted to ";
-        textWrongDirection = " somewhere.";
-        textWrongItem = " something.";
+        textWrongDirection = "somewhere.";
+        textWrongItem = "something.";
         stream = new TokenStream();
         command = new ParsedCommand();
     }
