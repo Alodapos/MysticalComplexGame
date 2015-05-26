@@ -34,7 +34,7 @@ public class Vase extends IItem implements BreakableItem,ContainerItem {
     @Override
     public void dropLoot(Player player)
     {
-        if(!player.getInventory().containsKey("golden artifact"))
+        if(!player.getInventory().containsValue(this.loot))
         {
             player.getLocation().addItem(loot);
             GameEngine.textOutput("After breaking the " + this.name + " a " + loot.getName() + " drops on the floor.");

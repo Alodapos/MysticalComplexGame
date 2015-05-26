@@ -3,20 +3,18 @@ package MysticalComplexGame.Items;
 public enum LightEmitterState
 {
     LIT("lit"),
-    QUENCHED("quenched"),
-    POSTED("post"),
-    ATTACHED("wall");
+    QUENCHED("quenched");
 
-    private final String burning;
+    private final String state;
 
 
-    LightEmitterState(String burning)
+    LightEmitterState(String state)
     {
-        this.burning = burning;
+        this.state = state;
     }
 
     public String getBurning()
     {
-        return this.burning;
+        return this.state;
     }
 }

@@ -118,6 +118,7 @@ public class GameEngine
         ICommand exitCommand = new ExitCommand();
         ICommand breakCommand = new BreakCommand();
         ICommand lootCommand = new LootCommand();
+        ICommand quenchCommand = new QuenchCommand();
 
         content.addCommand(go);
         content.addCommand(look);
@@ -138,6 +139,7 @@ public class GameEngine
         content.addCommand(exitCommand);
         content.addCommand(breakCommand);
         content.addCommand(lootCommand);
+        content.addCommand(quenchCommand);
 
         tokenizer.addToken("go", Token.VERBDIRECTION);
         tokenizer.addToken("gaze", Token.VERBDIRECTION);
@@ -160,6 +162,7 @@ public class GameEngine
         tokenizer.addToken("enter",Token.VERBITEM);
         tokenizer.addToken("break",Token.VERBITEM);
         tokenizer.addToken("loot",Token.VERBITEM);
+        tokenizer.addToken("quench",Token.VERBITEM);
 
         tokenizer.addToken("north",Token.DIRECTION);
         tokenizer.addToken("south",Token.DIRECTION);
@@ -182,11 +185,13 @@ public class GameEngine
         tokenizer.addToken("scroll",Token.ITEM);
         tokenizer.addToken("artifact",Token.ITEM);
         tokenizer.addToken("fountain",Token.ITEM);
+        tokenizer.addToken("flint",Token.ITEM);
+        tokenizer.addToken("steel",Token.ITEM);
+        tokenizer.addToken("brazier",Token.ITEM);
 
         tokenizer.addToken("shiny",Token.PREITEM);
         tokenizer.addToken("leather",Token.PREITEM);
         tokenizer.addToken("rusty",Token.PREITEM);
-        tokenizer.addToken("medium",Token.PREITEM);
         tokenizer.addToken("lucky",Token.PREITEM);
         tokenizer.addToken("sacred",Token.PREITEM);
         tokenizer.addToken("rugged",Token.PREITEM);
@@ -294,7 +299,7 @@ public class GameEngine
                 "Now one of them is approaching you. He is tall, wearing some kind of armour and holds a stick in his right hand. \n" +
                 "You sense that he could be a very strict character and probably a high-ranked member of the village's army. \n" +
                 "He greets you with a brief introduction, telling you his name: \"General Patrick Eugene Cornelius\" and asking for yours. \n" +
-                "You kindly introduce yourself to both as: " + getPlayerName() + " of the Guild of Resuscitation and ask to learn who the other man is.\n" +
+                "You kindly introduce yourself to both as a member of the Guild of Resuscitation and ask to learn who the other man is.\n" +
                 "He is significantly shorter than General Cornelius and wears neat and elegant clothes making him very prestigious. \n" +
                 "He holds a small case in his hands. His name is Luwin Maester. \n" +
                 "He tells you that he is the mayor's advisor. But when you ask to know where the mayor himself is, \n" +
@@ -497,10 +502,14 @@ public class GameEngine
         //COMMONS
         IItem shinyRockItem = new ShinyRock();
         IItem waterItem = new WaterSource();
+        IItem fireItem = new FireSource();
         IItem papyrusItem = new Papyrus();
         IItem sacredScrollItem = new SacredScroll();
         IItem rustySwordItem = new SimpleWeapon("rusty sword",1,2);
-        IItem mediumTorch = new TorchMedium(LightEmitterState.LIT);
+        IItem torchItem = new Torch(LightEmitterState.LIT);
+        IItem flintItem = new Flint();
+        IItem steelItem = new Steel();
+        IItem brazierItem = new Brazier(LightEmitterState.QUENCHED);
 
         //CONTAINERS
         IItem vaseItem = new Vase(goldenArtifactItem);
@@ -510,8 +519,7 @@ public class GameEngine
         IItem advisorItem = new Advisor();
 
         //GATEWAYS
-        IItem templeEntrance = new GatewayItem("temple","The intense greenery around the stony temple seems to have been there long before it was built.\n" +
-                                               "The entrance is huge and memorable and the gate is shut but probably unlocked.",sceneFelrockTemple);
+        IItem templeEntrance = new GatewayItem("temple","The intense greenery around the stony temple seems to have been there long before it was built.\nThe entrance is huge and memorable and the gate is shut but probably unlocked.",sceneFelrockTemple);
         IItem townHallEntrance = new GatewayItem("town hall","Only by getting closer to the building, you can estimate how magnificent it truly is.\n" +
                 "Its banners flutter as the wind passes through them.\n" +
                 "It seems well preserved and, possibly, recently built or renovated.\n" +
@@ -522,6 +530,7 @@ public class GameEngine
         content.addItem(shinyRockItem);
         content.addItem(flaskItem);
         content.addItem(waterItem);
+        content.addItem(fireItem);
         content.addItem(felrockSignItem);
         content.addItem(papyrusItem);
         content.addItem(rustySwordItem);
@@ -534,7 +543,10 @@ public class GameEngine
         content.addItem(goldenArtifactItem);
         content.addItem(luckyCoinItem);
         content.addItem(sacredScrollItem);
-        content.addItem(mediumTorch);
+        content.addItem(torchItem);
+        content.addItem(flintItem);
+        content.addItem(steelItem);
+        content.addItem(brazierItem);
 
         //</editor-fold>
         // <editor-fold defaultstate="collapsed" desc="ADD CONNECTIONS/ITEMS TO SCENES">
@@ -543,6 +555,8 @@ public class GameEngine
         sceneCampsite.addConnection(Direction.EAST, connectionCampsiteEast);
         sceneCampsite.addConnection(Direction.WEST, connectionCampsiteWest);
         sceneCampsite.addItem(flaskItem);
+        sceneCampsite.addItem(flintItem);
+        sceneCampsite.addItem(steelItem);
 
         sceneCrossroads.addConnection(Direction.NORTH, connectionCrossroadsNorth);
         sceneCrossroads.addConnection(Direction.SOUTH, connectionCrossroadsSouth);
@@ -576,6 +590,7 @@ public class GameEngine
         sceneFelrockTempleEntrance.addConnection(Direction.EAST,connectionFelrockTempleEntranceEast);
         sceneFelrockTempleEntrance.addConnection(Direction.WEST,connectionFelrockTempleEntranceWest);
         sceneFelrockTempleEntrance.addItem(templeEntrance);
+        sceneFelrockTempleEntrance.addItem(brazierItem);
 
         sceneFelrockTemple.addConnection(Direction.NORTH,connectionFelrockTemple);
         sceneFelrockTemple.addConnection(Direction.SOUTH,connectionFelrockTemple);
@@ -613,7 +628,7 @@ public class GameEngine
         sceneCaveOfAnguishEntrance.addConnection(Direction.SOUTH,connectionCaveOfAnguishEntranceSouth);
         sceneCaveOfAnguishEntrance.addConnection(Direction.EAST,connectionCaveOfAnguishEntranceEast);
         sceneCaveOfAnguishEntrance.addConnection(Direction.WEST,connectionCaveOfAnguishEntranceWest);
-        sceneCaveOfAnguishEntrance.addItem(mediumTorch);
+        sceneCaveOfAnguishEntrance.addItem(torchItem);
 
         sceneCaveOfAnguish.addConnection(Direction.NORTH,connectionCaveOfAnguish);
         sceneCaveOfAnguish.addConnection(Direction.SOUTH,connectionCaveOfAnguish);
