@@ -65,7 +65,7 @@ public class GameEngine
             userInputString = userInput.nextLine().trim().toLowerCase();
             tokenizedInput = tokenizer.tokenize(userInputString);
             nextCommand = parser.parse(tokenizedInput, content);
-            if (nextCommand != null) nextCommand.executeCommand(player);
+            if (nextCommand.exists()) nextCommand.executeCommand(player);
             checkThirst(player);
             saveGame(player.getName());
         } while (!player.getLocation().getName().equals("The Sage"));

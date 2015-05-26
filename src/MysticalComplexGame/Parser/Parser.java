@@ -15,7 +15,7 @@ public class Parser
     GameContent content;
     Player player;
     ParsedCommand command;
-    boolean parseSuccessGrammarFail;
+    boolean commandNotFound;
 
     public Parser()
     {
@@ -30,99 +30,67 @@ public class Parser
     public ParsedCommand parse(TokenStream input, GameContent content)
     {
         stream = input;
-        parseSuccessGrammarFail = false;
         this.content = content;
         this.player = content.getPlayer();
-
-        if (stream.getToken(0) == Token.VERBSOLO) verbSoloParse();
-        else if (stream.getToken(0) == Token.VERBDIRECTION) verbDirectionParse();
-        else if (stream.getToken(0) == Token.VERBITEM) verbItemParse();
-        else
-        {
-            GameEngine.textOutput(textCommandNotFound);
-            return null;
-        }
-        if (parseSuccessGrammarFail) return null;
-
+        command.setCommand(null);
+        commandNotFound = true;
+        verbSoloParse();
+        verbDirectionParse();
+        verbItemParse();
         stream.clear();
+        if (commandNotFound)
+            GameEngine.textOutput(textCommandNotFound);
         return command;
     }
 
     private void verbSoloParse()
     {
-        stream.popToken();
-        verbSoloExec();
-    }
-
-    private void verbSoloExec()
-    {
-        if (stream.isEmpty()) command.setCommand(content.getCommand(stream.getText(0)));
-        else
+        if (stream.getToken(0) == Token.VERBSOLO)
         {
-            outputWrongGrammar(".");
-            parseSuccessGrammarFail = true;
+            stream.popToken();
+            commandNotFound = false;
+            if (stream.isEmpty())
+                command.setCommand(content.getCommand(stream.getText(0)));
+            else
+                outputWrongGrammar(".");
         }
     }
 
     private void verbDirectionParse()
     {
-        stream.popToken();
-        verbDirectionArg();
-    }
-
-    private void verbDirectionArg()
-    {
-        if (stream.popToken() == Token.DIRECTION)
-            verbDirectionExec();
-        else
+        if (stream.getToken(0) == Token.VERBDIRECTION)
         {
-            outputWrongGrammar(textWrongDirection);
-            parseSuccessGrammarFail = true;
-        }
-    }
-
-    private void verbDirectionExec()
-    {
-        if (stream.isEmpty())
-        {
-            command.setCommand(content.getCommand(stream.getText(0)));
-            command.setDirectionArgument(Direction.fromString(stream.getText(1)));
-        }
-        else
-        {
-            outputWrongGrammar(stream.getText(1));
-            parseSuccessGrammarFail = true;
+            commandNotFound = false;
+            stream.popToken();
+            if (stream.popToken() == Token.DIRECTION)
+                if (stream.isEmpty())
+                {
+                    command.setCommand(content.getCommand(stream.getText(0)));
+                    command.setDirectionArgument(Direction.fromString(stream.getText(1)));
+                }
+                else
+                    outputWrongGrammar(stream.getText(1));
+            else
+                outputWrongGrammar(textWrongDirection);
         }
     }
 
     private void verbItemParse()
     {
-        stream.popToken();
-        verbItemArg();
-    }
-
-    private void verbItemArg()
-    {
-        if (stream.popToken() == Token.ITEM)
-            verbItemExec();
-        else
+        if (stream.getToken(0) == Token.VERBITEM)
         {
-            outputWrongGrammar(textWrongItem);
-            parseSuccessGrammarFail = true;
-        }
-    }
-
-    private void verbItemExec()
-    {
-        if (stream.isEmpty())
-        {
-            this.command.setCommand(content.getCommand(stream.getText(0)));
-            this.command.setItemArgument(content.stringToItem(stream.getText(1)));
-        }
-        else
-        {
-            outputWrongGrammar(stream.getText(1));
-            parseSuccessGrammarFail = true;
+            commandNotFound = false;
+            stream.popToken();
+            if (stream.popToken() == Token.ITEM)
+                if (stream.isEmpty())
+                {
+                    this.command.setCommand(content.getCommand(stream.getText(0)));
+                    this.command.setItemArgument(content.stringToItem(stream.getText(1)));
+                }
+                else
+                    outputWrongGrammar(stream.getText(1));
+            else
+                outputWrongGrammar(textWrongItem);
         }
     }
 
