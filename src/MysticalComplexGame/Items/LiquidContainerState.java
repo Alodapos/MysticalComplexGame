@@ -1,10 +1,12 @@
 package MysticalComplexGame.Items;
 
-public enum LiquidContainerState {
+public enum LiquidContainerState
+{
     FILLED("filled"),
     EMPTY("empty");
 
     private final String fullness;
+
     LiquidContainerState(String fullness)
     {
         this.fullness = fullness;

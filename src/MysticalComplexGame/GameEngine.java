@@ -99,15 +99,15 @@ public class GameEngine
         // <editor-fold defaultstate="collapsed" desc="COMMANDS">
         content.initializeCommands();
 
-        ICommand go = new GoCommand();
-        ICommand look = new LookCommand();
-        ICommand pick = new PickCommand();
-        ICommand drop = new DropCommand();
-        ICommand inventory = new InventoryCommand();
-        ICommand drink = new DrinkCommand();
-        ICommand fill = new FillCommand();
-        ICommand read = new ReadCommand();
-        ICommand empty = new EmptyCommand();
+        ICommand goCommand = new GoCommand();
+        ICommand lookCommand = new LookCommand();
+        ICommand pickCommand = new PickCommand();
+        ICommand dropCommand = new DropCommand();
+        ICommand inventoryCommand = new InventoryCommand();
+        ICommand drinkCommand = new DrinkCommand();
+        ICommand fillCommand = new FillCommand();
+        ICommand readCommand = new ReadCommand();
+        ICommand emptyCommand = new EmptyCommand();
         ICommand gazeCommand = new GazeCommand();
         ICommand writeCommand = new WriteCommand();
         ICommand equipCommand = new EquipCommand();
@@ -119,16 +119,17 @@ public class GameEngine
         ICommand breakCommand = new BreakCommand();
         ICommand lootCommand = new LootCommand();
         ICommand quenchCommand = new QuenchCommand();
+        ICommand attachCommand = new AttachCommand();
 
-        content.addCommand(go);
-        content.addCommand(look);
-        content.addCommand(pick);
-        content.addCommand(drop);
-        content.addCommand(inventory);
-        content.addCommand(drink);
-        content.addCommand(fill);
-        content.addCommand(read);
-        content.addCommand(empty);
+        content.addCommand(goCommand);
+        content.addCommand(lookCommand);
+        content.addCommand(pickCommand);
+        content.addCommand(dropCommand);
+        content.addCommand(inventoryCommand);
+        content.addCommand(drinkCommand);
+        content.addCommand(fillCommand);
+        content.addCommand(readCommand);
+        content.addCommand(emptyCommand);
         content.addCommand(gazeCommand);
         content.addCommand(writeCommand);
         content.addCommand(equipCommand);
@@ -140,6 +141,7 @@ public class GameEngine
         content.addCommand(breakCommand);
         content.addCommand(lootCommand);
         content.addCommand(quenchCommand);
+        content.addCommand(attachCommand);
 
         tokenizer.addToken("go", Token.VERBDIRECTION);
         tokenizer.addToken("gaze", Token.VERBDIRECTION);
@@ -163,6 +165,7 @@ public class GameEngine
         tokenizer.addToken("break",Token.VERBITEM);
         tokenizer.addToken("loot",Token.VERBITEM);
         tokenizer.addToken("quench",Token.VERBITEM);
+        tokenizer.addToken("attach",Token.VERBITEM);
 
         tokenizer.addToken("north",Token.DIRECTION);
         tokenizer.addToken("south",Token.DIRECTION);
@@ -180,6 +183,8 @@ public class GameEngine
         tokenizer.addToken("barricade",Token.ITEM);
         tokenizer.addToken("temple",Token.ITEM);
         tokenizer.addToken("hall",Token.ITEM);
+        tokenizer.addToken("chamber",Token.ITEM);
+        tokenizer.addToken("passage",Token.ITEM);
         tokenizer.addToken("vase",Token.ITEM);
         tokenizer.addToken("coin",Token.ITEM);
         tokenizer.addToken("scroll",Token.ITEM);
@@ -197,6 +202,8 @@ public class GameEngine
         tokenizer.addToken("rugged",Token.PREITEM);
         tokenizer.addToken("golden",Token.PREITEM);
         tokenizer.addToken("town",Token.PREITEM);
+        tokenizer.addToken("secret",Token.PREITEM);
+        tokenizer.addToken("hidden",Token.PREITEM);
     }
 
     private static void newGame(String s)
@@ -209,6 +216,8 @@ public class GameEngine
         String textNameFelrockVillage = "Felrock Village";
         String textNameFelrockTempleEntrance = "Felrock Temple - Entrance";
         String textNameFelrockTemple = "Felrock Temple";
+        String textNameFelrockTempleSecretChamber = "Felrock Temple - Secret Chamber";
+        String textNameFelrockTempleHiddenPassage = "Felrock Temple - Hidden Passage";
         String textNameFelrockTownHallEntrance = "Felrock Town Hall - Entrance";
         String textNameFelrockTownHall = "Felrock Town Hall";
         String textNameFelrockTownHallLobby = "Felrock Town Hall - Lobby";
@@ -234,7 +243,6 @@ public class GameEngine
         String textDescriptionCrossroads = "The moment you leave the campsite you see the, one and only, road leading upwards, so you take it.\n" +
                 "After a while you are facing a large crossroads and must decide which way to go.";
         String textCrossroadsNorth = "A dimly lit and steep trail leads to a dark forest to the north. \nIt would, probably, be a good idea not to follow that road.";
-        String textCrossroadsWest = "There lies the path you came from, you should continue your journey.";
         String textCrossroadsSouth = "The wooden barricade blocks your way and there's no way around.";
 
         String textDescriptionCrystalLake = "A fairly big lake is located in the center of a, 10-feet diameter, overgrown field.\n" +
@@ -270,6 +278,12 @@ public class GameEngine
                 "Also, on some points, you can detect some vertical, possibly man-made, engraves \n" +
                 "but you can't seem to understand their purpose.";
         String textFelrockTempleNoPass = "You can't travel while inside the Temple";
+
+        String textDescriptionFelrockTempleSecretChamber = "descr";
+        String textFelrockTempleSecretChamberNoPass = "You can't travel inside the Temple";
+
+        String textDescriptionFelrockTempleHiddenPassage = "descr";
+        String textFelrockTempleHiddenPassageNoPass = "You can't travel inside the Temple";
 
         String textDescriptionFelrockTownHallEntrance = "Only by getting closer to the building, you can estimate how magnificent it truly is. \n" +
                 "Its banners flutter as the wind passes through them. \n" +
@@ -374,6 +388,8 @@ public class GameEngine
         Scene sceneFelrockVillage = new Scene(textNameFelrockVillage,textDescriptionFelrockVillage);
         Scene sceneFelrockTempleEntrance = new Scene(textNameFelrockTempleEntrance,textDescriptionFelrockTempleEntrance);
         Scene sceneFelrockTemple = new Scene(textNameFelrockTemple,textDescriptionFelrockTemple);
+        Scene sceneFelrockTempleSecretChamber = new Scene(textNameFelrockTempleSecretChamber,textDescriptionFelrockTempleSecretChamber);
+        Scene sceneFelrockTempleHiddenPassage = new Scene(textNameFelrockTempleHiddenPassage,textDescriptionFelrockTempleHiddenPassage);
         Scene sceneFelrockTownHallEntrance = new Scene(textNameFelrockTownHallEntrance,textDescriptionFelrockTownHallEntrance);
         Scene sceneFelrockTownHall = new Scene(textNameFelrockTownHall,textDescriptionFelrockTownHall);
         Scene sceneFelrockTownHallLobby = new Scene(textNameFelrockTownHallLobby,textDescriptionFelrockTownHallLobby);
@@ -395,6 +411,8 @@ public class GameEngine
         content.addScene(sceneFelrockVillage);
         content.addScene(sceneFelrockTempleEntrance);
         content.addScene(sceneFelrockTemple);
+        content.addScene(sceneFelrockTempleSecretChamber);
+        content.addScene(sceneFelrockTempleHiddenPassage);
         content.addScene(sceneFelrockTownHallEntrance);
         content.addScene(sceneFelrockTownHall);
         content.addScene(sceneFelrockTownHallLobby);
@@ -418,7 +436,7 @@ public class GameEngine
         Connector connectionCrossroadsNorth = new Connector(textCrossroadsNorth);
         Connector connectionCrossroadsSouth = new Connector(sceneCrystalLake,textCrossroadsSouth,"The road to the lake is now open!");
         Connector connectionCrossroadsEast = new Connector(sceneWildernessRoad);
-        Connector connectionCrossroadsWest = new Connector(textCrossroadsWest);
+        Connector connectionCrossroadsWest = new Connector(sceneCampsite);
 
         Connector connectionCrystalLakeNorth = new Connector(sceneCrossroads);
         Connector connectionCrystalLakeSouth = new Connector(textCrystalLakeSouth);
@@ -441,6 +459,10 @@ public class GameEngine
         Connector connectionFelrockTempleEntranceWest = new Connector(textFelrockTempleEntranceWest);
 
         Connector connectionFelrockTemple = new Connector(textFelrockTempleNoPass);
+
+        Connector connectionFelrockTempleSecretChamber = new Connector(textFelrockTempleSecretChamberNoPass);
+
+        Connector connectionFelrockTempleHiddenPassage = new Connector(textFelrockTempleHiddenPassageNoPass);
 
         Connector connectionFelrockTownHallEntranceNorth = new Connector(textFelrockTownHallEntranceNorth);
         Connector connectionFelrockTownHallEntranceSouth = new Connector(sceneFelrockVillage);
@@ -490,14 +512,23 @@ public class GameEngine
         //</editor-fold>
         // <editor-fold defaultstate="collapsed" desc="ITEMS">
 
-        //LOOTS
-        IItem goldenArtifactItem = new GoldenArtifact();
-        IItem luckyCoinItem = new LuckyCoin();
+        //GATEWAYS
+        IItem templeEntrance = new GatewayItem("temple","The intense greenery around the stony temple seems to have been there long before it was built.\n" +
+                "The entrance is huge and memorable and the gate is shut but probably unlocked.",sceneFelrockTemple,
+                "You push and push, harder and harder, but the temple's entrance just won't open. But wait!\n" +
+                        "What is that tube that connects the brazier with the entrance's upper edge?", "A loud sound, some crackling and clinging and finally the temple's entrance is unlocked!");
+        IItem townHallEntrance = new GatewayItem("town hall","Only by getting closer to the building, you can estimate how magnificent it truly is.\n" +
+                "Its banners flutter as the wind passes through them.\n" +
+                "It seems well preserved and, possibly, recently built or renovated.\n" +
+                "It also has weird decorations all over its stony framework.\n" +
+                "No one is entering or exiting the building since it's a small and quite village with a very low population.\n" +
+                "But, surely, there will be someone inside.",sceneFelrockTownHall);
+        IItem secretChamber = new GatewayItem("secret chamber","descr",sceneFelrockTempleSecretChamber);
+        IItem hiddenPassage = new GatewayItem("hidden passage","descr",sceneFelrockTempleHiddenPassage);
 
-        //PATH BLOCKERS
-        IItem flaskItem = new Flask(LiquidContainerState.EMPTY,connectionCampsiteNorth);
-        IItem felrockSignItem = new FelrockSign(connectionWildernessRoadEast);
-        IItem barricadeItem = new Barricade(connectionCrossroadsSouth);
+        //LOOTS
+        IItem goldenArtifactItem = new GoldenArtifact((GatewayItem)secretChamber);
+        IItem luckyCoinItem = new LuckyCoin();
 
         //COMMONS
         IItem shinyRockItem = new ShinyRock();
@@ -506,10 +537,15 @@ public class GameEngine
         IItem papyrusItem = new Papyrus();
         IItem sacredScrollItem = new SacredScroll();
         IItem rustySwordItem = new SimpleWeapon("rusty sword",1,2);
-        IItem torchItem = new Torch(LightEmitterState.LIT);
         IItem flintItem = new Flint();
         IItem steelItem = new Steel();
-        IItem brazierItem = new Brazier(LightEmitterState.QUENCHED);
+        IItem torchItem = new Torch((GatewayItem)hiddenPassage,LightEmitterState.LIT,flintItem,steelItem);
+
+        //PATH BLOCKERS
+        IItem flaskItem = new Flask(LiquidContainerState.EMPTY,connectionCampsiteNorth);
+        IItem felrockSignItem = new FelrockSign(connectionWildernessRoadEast);
+        IItem barricadeItem = new Barricade(connectionCrossroadsSouth);
+        IItem brazierItem = new Brazier((GatewayItem)templeEntrance,LightEmitterState.QUENCHED,flintItem,steelItem);
 
         //CONTAINERS
         IItem vaseItem = new Vase(goldenArtifactItem);
@@ -518,14 +554,6 @@ public class GameEngine
         //ENTITIES
         IItem advisorItem = new Advisor();
 
-        //GATEWAYS
-        IItem templeEntrance = new GatewayItem("temple","The intense greenery around the stony temple seems to have been there long before it was built.\nThe entrance is huge and memorable and the gate is shut but probably unlocked.",sceneFelrockTemple);
-        IItem townHallEntrance = new GatewayItem("town hall","Only by getting closer to the building, you can estimate how magnificent it truly is.\n" +
-                "Its banners flutter as the wind passes through them.\n" +
-                "It seems well preserved and, possibly, recently built or renovated.\n" +
-                "It also has weird decorations all over its stony framework.\n" +
-                "No one is entering or exiting the building since it's a small and quite village with a very low population.\n" +
-                "But, surely, there will be someone inside.",sceneFelrockTownHall);
 
         content.addItem(shinyRockItem);
         content.addItem(flaskItem);
@@ -538,6 +566,8 @@ public class GameEngine
         content.addItem(barricadeItem);
         content.addItem(felrockFountainItem);
         content.addItem(templeEntrance);
+        content.addItem(secretChamber);
+        content.addItem(hiddenPassage);
         content.addItem(townHallEntrance);
         content.addItem(vaseItem);
         content.addItem(goldenArtifactItem);
@@ -597,6 +627,18 @@ public class GameEngine
         sceneFelrockTemple.addConnection(Direction.EAST,connectionFelrockTemple);
         sceneFelrockTemple.addConnection(Direction.WEST,connectionFelrockTemple);
         sceneFelrockTemple.addItem(vaseItem);
+
+        sceneFelrockTempleSecretChamber.addConnection(Direction.NORTH,connectionFelrockTempleSecretChamber);
+        sceneFelrockTempleSecretChamber.addConnection(Direction.SOUTH,connectionFelrockTempleSecretChamber);
+        sceneFelrockTempleSecretChamber.addConnection(Direction.EAST,connectionFelrockTempleSecretChamber);
+        sceneFelrockTempleSecretChamber.addConnection(Direction.WEST,connectionFelrockTempleSecretChamber);
+        sceneFelrockTempleSecretChamber.addItem(torchItem);
+        sceneFelrockTemple.addItem(secretChamber);
+
+        sceneFelrockTempleHiddenPassage.addConnection(Direction.NORTH,connectionFelrockTempleHiddenPassage);
+        sceneFelrockTempleHiddenPassage.addConnection(Direction.SOUTH,connectionFelrockTempleHiddenPassage);
+        sceneFelrockTempleHiddenPassage.addConnection(Direction.EAST,connectionFelrockTempleHiddenPassage);
+        sceneFelrockTempleHiddenPassage.addConnection(Direction.WEST,connectionFelrockTempleHiddenPassage);
 
         sceneFelrockTownHallEntrance.addConnection(Direction.NORTH,connectionFelrockTownHallEntranceNorth);
         sceneFelrockTownHallEntrance.addConnection(Direction.SOUTH,connectionFelrockTownHallEntranceSouth);

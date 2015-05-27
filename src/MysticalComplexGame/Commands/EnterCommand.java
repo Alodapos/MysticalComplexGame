@@ -27,8 +27,10 @@ public class EnterCommand extends ICommandVerbItem
             GameEngine.textOutput(invalidArgument);
         else
         {
-            player.setPreviousScene(player.getLocation());
+            if(!player.canExitScene())
+                player.setPreviousScene(player.getLocation());
             ((GatewayItem) item).enter(player);
+
         }
 
     }

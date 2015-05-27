@@ -17,7 +17,6 @@ public class ExitCommand extends ICommandVerbAlone
         {
             player.setLocation(player.getPreviousScene());
             player.getLocation().printDescription();
-            player.setCanExitScene(false);
         }
         else
             GameEngine.textOutput("You are not indoors.");

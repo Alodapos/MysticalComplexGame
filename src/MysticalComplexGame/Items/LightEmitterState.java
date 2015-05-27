@@ -7,7 +7,6 @@ public enum LightEmitterState
 
     private final String state;
 
-
     LightEmitterState(String state)
     {
         this.state = state;

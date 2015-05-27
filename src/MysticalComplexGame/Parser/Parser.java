@@ -35,8 +35,10 @@ public class Parser
         command.setCommand(null);
         commandNotFound = true;
         verbSoloParse();
-        verbDirectionParse();
-        verbItemParse();
+        if (commandNotFound)
+            verbDirectionParse();
+        if (commandNotFound)
+            verbItemParse();
         stream.clear();
         if (commandNotFound)
             GameEngine.textOutput(textCommandNotFound);

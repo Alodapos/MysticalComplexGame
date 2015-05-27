@@ -6,6 +6,7 @@ import MysticalComplexGame.Player;
 public class Vase extends IItem implements BreakableItem,ContainerItem {
 
     boolean broken;
+    boolean looted;
     IItem loot;
 
     public Vase(IItem loot)
@@ -15,13 +16,15 @@ public class Vase extends IItem implements BreakableItem,ContainerItem {
         description = "An old, dusty, ceramic vase covered in webs sits atop the altar.";
         inventoryDescription = "";
         broken = false;
+        looted = false;
         this.loot = loot;
     }
 
     @Override
     public void breakObject(Player player)
     {
-        if (broken) GameEngine.textOutput("This is already broken.");
+        if (broken)
+            GameEngine.textOutput("This is already broken.");
         else
         {
             broken = true;
@@ -44,7 +47,14 @@ public class Vase extends IItem implements BreakableItem,ContainerItem {
     @Override
     public void pickLoot(Player player)
     {
-        player.addToInventory(loot);
-        GameEngine.textOutput("You loot the " + this.name + " and find a " + loot.getName() + "!");
+        if(looted)
+            GameEngine.textOutput("This is already looted.");
+        else
+        {
+            looted = true;
+            player.addToInventory(loot);
+            GameEngine.textOutput("You loot the " + this.name + " and find a " + loot.getName() + "!");
+            player.getLocation().removeItem(this.loot);
+        }
     }
 }

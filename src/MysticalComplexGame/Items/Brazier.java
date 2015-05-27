@@ -6,55 +6,57 @@ import MysticalComplexGame.Player;
 public class Brazier extends IItem implements LightEmitter
 {
     private LightEmitterState burning;
-    private String emitterBurning;
     private String lightSuccess;
     private String noFireSource;
     private String quenchSuccess;
     private String quenchedFailed;
+    private IItem firstRequirement;
+    private IItem secondRequirement;
+    private GatewayItem toOpen;
 
-    public Brazier(LightEmitterState burning)
+    public Brazier(GatewayItem toOpen,LightEmitterState state,IItem firstRequirement,IItem secondRequirement)
     {
-        pickable = true;
+        pickable = false;
         name = "brazier";
-        this.burning = burning;
-        setDescription(burning);
-        emitterBurning = "This is already burning, you can't relight it.";
-        lightSuccess = "You find some firelighters, light the " + name + " and your surroundings are shrouded in light.\n\n" +
-                "A loud sound, some crackling and clinging and finally the temple's entrance is unlocked!";
-        noFireSource = "There is no fire source nearby and you lack the resources to light this.";
-        quenchSuccess = "You flip the " + name + " to the ground and cinders spread across the ground.";
+        description = "A " + state.getBurning() + " brazier is located just in front of the entrance, right in the middle of the platform.";
+        this.toOpen = toOpen;
+        this.firstRequirement = firstRequirement;
+        this.secondRequirement = secondRequirement;
+        lightSuccess = "You find some firelighters, light the " + name + " and your surroundings are shrouded in light.";
+        noFireSource = "You lack the resources to light this.";
+        quenchSuccess = "You flip the " + name + " and cinders spread across the ground.";
         quenchedFailed = "You cannot quench that, it is already quenched.";
     }
 
     @Override
     public void light(Player player)
     {
-        if (burning == LightEmitterState.LIT)
-            GameEngine.textOutput(emitterBurning);
-        else if (player.getInventory().containsKey("flint") && player.getInventory().containsKey("steel") || player.getInventory().containsValue(LightEmitterState.LIT))
+        if (player.getInventory().containsValue(firstRequirement) && player.getInventory().containsValue(secondRequirement))
         {
             this.burning = LightEmitterState.LIT;
             GameEngine.textOutput(lightSuccess);
-            setDescription(burning);
+            toOpen.openGateway();
         }
-        else GameEngine.textOutput(noFireSource);
+        else
+            GameEngine.textOutput(noFireSource);
     }
 
     @Override
     public void quench()
     {
-        if (burning == LightEmitterState.QUENCHED) GameEngine.textOutput(quenchedFailed);
+        if (burning == LightEmitterState.QUENCHED)
+            GameEngine.textOutput(quenchedFailed);
         else
         {
             this.burning = LightEmitterState.QUENCHED;
-            setDescription(burning);
             GameEngine.textOutput(quenchSuccess);
         }
     }
 
-    private void setDescription(LightEmitterState state)
+    @Override
+    public boolean isBurning()
     {
-        this.description = "There is a " + state.getBurning() + "," + " brazier just in front of the temple's entrance, in the middle of the floor.";
+        return (burning == LightEmitterState.LIT);
     }
 }
 

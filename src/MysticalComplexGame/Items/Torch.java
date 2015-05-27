@@ -6,19 +6,22 @@ import MysticalComplexGame.GameEngine;
 public class Torch extends IItem implements LightEmitter
 {
     private LightEmitterState burning;
-    private String emitterBurning;
     private String lightSuccess;
     private String noFireSource;
     private String quenchSuccess;
     private String quenchedFailed;
+    private IItem firstRequirement;
+    private IItem secondRequirement;
+    private GatewayItem toOpen;
 
-    public Torch(LightEmitterState burning)
+    public Torch(GatewayItem toOpen,LightEmitterState state,IItem firstRequirement,IItem secondRequirement)
     {
         pickable = true;
         name = "torch";
-        this.burning = burning;
-        setDescription(burning);
-        emitterBurning = "This is already burning, you can't relight it.";
+        description = "There is a " + state.getBurning() + "," + " torch attached on the wall.";
+        this.toOpen = toOpen;
+        this.firstRequirement = firstRequirement;
+        this.secondRequirement = secondRequirement;
         lightSuccess = "You light the " + name + " and your surroundings are shrouded in light.";
         noFireSource = "There is no fire source nearby and you lack the resources to light this.";
         quenchSuccess = "You shove the " + name + " to the ground and gray smoke fills the air around you.";
@@ -28,32 +31,39 @@ public class Torch extends IItem implements LightEmitter
     @Override
     public void light(Player player)
     {
-        if (burning == LightEmitterState.LIT)
-            GameEngine.textOutput(emitterBurning);
-        else if (player.getInventory().containsKey("flint") && player.getInventory().containsKey("steel"))
+        if (player.getInventory().containsValue(firstRequirement) && player.getInventory().containsValue(secondRequirement))
         {
             this.burning = LightEmitterState.LIT;
             GameEngine.textOutput(lightSuccess);
-            setDescription(burning);
+            toOpen.openGateway();
         }
-        else GameEngine.textOutput(noFireSource);
+        else
+            GameEngine.textOutput(noFireSource);
     }
 
     @Override
     public void quench()
     {
-        if (burning == LightEmitterState.QUENCHED) GameEngine.textOutput(quenchedFailed);
+        if (burning == LightEmitterState.QUENCHED)
+            GameEngine.textOutput(quenchedFailed);
         else
         {
             this.burning = LightEmitterState.QUENCHED;
-            setDescription(burning);
             GameEngine.textOutput(quenchSuccess);
         }
     }
 
-    private void setDescription(LightEmitterState state)
+    @Override
+    public boolean isBurning()
     {
-        this.description = "There is a " + state.getBurning() + "," + " torch attached on the wall.";
+        return (burning == LightEmitterState.LIT);
+    }
+
+    @Override
+    public void pick(Player player)
+    {
+        super.pick(player);
+        toOpen.openGateway();
     }
 }
 

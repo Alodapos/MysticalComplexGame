@@ -4,6 +4,7 @@ import MysticalComplexGame.Items.IItem;
 import MysticalComplexGame.Items.KeyItem;
 import MysticalComplexGame.Player;
 import MysticalComplexGame.GameEngine;
+import MysticalComplexGame.Scene;
 
 public class DropCommand extends ICommandVerbItem
 {
@@ -25,7 +26,6 @@ public class DropCommand extends ICommandVerbItem
         {
             player.getLocation().addItem(item);
             GameEngine.textOutput("Dropped " + item.getName() + ".");
-            player.removeFromInventory(item);
         }
     }
 }

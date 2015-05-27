@@ -16,12 +16,12 @@ public class Flask extends IItem implements LiquidContainer,KeyItem
     private String water;
     private Connector toOpen;
 
-    public Flask(LiquidContainerState fullness, Connector toUnlock)
+    public Flask(LiquidContainerState state, Connector toUnlock)
     {
         pickable = true;
         name = "leather flask";
-        this.fullness = fullness;
-        setDescription(fullness);
+        description = "There is a small sized, " + state.getFullness() + ", leather flask on a wooden table.";
+        inventoryDescription = "A small " + state.getFullness() + " flask.";
         containerEmpty = "This is empty, i cannot drink from it.";
         drinkSuccess = "You drink from the " + name + " and quench your thirst.";
         fillSuccess = "You fill your flask with water.";
@@ -39,7 +39,6 @@ public class Flask extends IItem implements LiquidContainer,KeyItem
         {
             player.setThirstLevel(15);
             GameEngine.textOutput(drinkSuccess);
-            setDescription(fullness);
             this.fullness = LiquidContainerState.EMPTY;
         }
         else GameEngine.textOutput(containerEmpty);
@@ -52,9 +51,8 @@ public class Flask extends IItem implements LiquidContainer,KeyItem
         if (fullness == LiquidContainerState.FILLED) GameEngine.textOutput(fillFailed);
         else if (player.getLocation().getItems().get(water)!=null)
         {
-            this.fullness = LiquidContainerState.FILLED;
             GameEngine.textOutput(fillSuccess);
-            setDescription(fullness);
+            this.fullness = LiquidContainerState.FILLED;
         }
         else GameEngine.textOutput(noWaterSource);
     }
@@ -65,16 +63,9 @@ public class Flask extends IItem implements LiquidContainer,KeyItem
         if (fullness == LiquidContainerState.EMPTY) GameEngine.textOutput(isAlreadyEmpty);
         else
         {
-            fullness = LiquidContainerState.EMPTY;
-            setDescription(fullness);
             GameEngine.textOutput("You pour the water to the ground till the " + name + " is completely empty.");
+            this.fullness = LiquidContainerState.EMPTY;
         }
-    }
-
-    private void setDescription(LiquidContainerState state)
-    {
-        this.description= "There is a small sized, " + state.getFullness() + ", leather flask on a wooden table.";
-        this.inventoryDescription = "A small "+ state.getFullness() + " flask.";
     }
 
     @Override

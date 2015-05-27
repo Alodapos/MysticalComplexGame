@@ -16,7 +16,9 @@ public class PickCommand extends ICommandVerbItem
     @Override
     public void executeCommand(Player player,IItem item)
     {
-        if (!player.getLocation().getItems().containsValue(item)) GameEngine.textOutput(invalidArgument);
-        else item.pick(player);
+        if (!player.getLocation().getItems().containsValue(item))
+            GameEngine.textOutput(invalidArgument);
+        else
+            item.pick(player);
     }
 }
