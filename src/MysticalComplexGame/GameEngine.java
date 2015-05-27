@@ -271,18 +271,13 @@ public class GameEngine
         String textDescriptionFelrockTemple = "You get in front of the gate and with a strong push you open it wide. \n" +
                 "What you encounter is a bit more than surprising. \n" +
                 "It seems like this temple has not been visited or used in any way for a long time. \n" +
-                "Cobwebs in every corner, dusty benches and rusted metal candlesticks lie on the floor. \n" +
-                "Further inside, there is an altar, with a pile of scriptures on top. \n" +
-                "On the leftmost section of the hall is a wide, flat surface on the wall \n" +
-                "that looks, weirdly enough, untouched by time or decay. \n" +
-                "Also, on some points, you can detect some vertical, possibly man-made, engraves \n" +
-                "but you can't seem to understand their purpose.";
+                "Cobwebs in every corner, dusty benches and rusted metal candlesticks lie on the floor.";
         String textFelrockTempleNoPass = "You can't travel while inside the Temple";
 
-        String textDescriptionFelrockTempleSecretChamber = "descr";
+        String textDescriptionFelrockTempleSecretChamber = "NOT MADE YET";
         String textFelrockTempleSecretChamberNoPass = "You can't travel inside the Temple";
 
-        String textDescriptionFelrockTempleHiddenPassage = "descr";
+        String textDescriptionFelrockTempleHiddenPassage = "NOT MADE YET";
         String textFelrockTempleHiddenPassageNoPass = "You can't travel inside the Temple";
 
         String textDescriptionFelrockTownHallEntrance = "Only by getting closer to the building, you can estimate how magnificent it truly is. \n" +
@@ -515,16 +510,27 @@ public class GameEngine
         //GATEWAYS
         IItem templeEntrance = new GatewayItem("temple","The intense greenery around the stony temple seems to have been there long before it was built.\n" +
                 "The entrance is huge and memorable and the gate is shut but probably unlocked.",sceneFelrockTemple,
-                "You push and push, harder and harder, but the temple's entrance just won't open. But wait!\n" +
-                        "What is that tube that connects the brazier with the entrance's upper edge?", "A loud sound, some crackling and clinging and finally the temple's entrance is unlocked!");
+                "You push and push, harder and harder, but the temple's entrance just won't open.\n" +
+                "But wait! What is that tube that connects the brazier with the entrance's upper edge?",
+                "A loud sound, some crackling and clinging and finally the temple's entrance is unlocked!");
         IItem townHallEntrance = new GatewayItem("town hall","Only by getting closer to the building, you can estimate how magnificent it truly is.\n" +
                 "Its banners flutter as the wind passes through them.\n" +
                 "It seems well preserved and, possibly, recently built or renovated.\n" +
                 "It also has weird decorations all over its stony framework.\n" +
                 "No one is entering or exiting the building since it's a small and quite village with a very low population.\n" +
                 "But, surely, there will be someone inside.",sceneFelrockTownHall);
-        IItem secretChamber = new GatewayItem("secret chamber","descr",sceneFelrockTempleSecretChamber);
-        IItem hiddenPassage = new GatewayItem("hidden passage","descr",sceneFelrockTempleHiddenPassage);
+        IItem secretChamber = new GatewayItem("secret chamber","On the leftmost section of the hall is a wide, flat surface on the wall that looks, weirdly enough, untouched by time or decay.\n" +
+                "Also, on some points, you can detect some vertical, possibly man-made, engraves but you can't seem to understand their purpose.",sceneFelrockTempleSecretChamber,
+                "You grope the flat surface of the leftmost wall, but can't find either a secret button nor any kind of lever or handle,\n" +
+                "apart from some engraves that seem artificial and not random, though.",
+                "You place the golden artifact at the exact spot, so that it matches perfectly with the engrave,\n" +
+                "a locking sound is heard and then, almost immediately, a certain part of the wall starts to standout from the rest of it.\n" +
+                "It was a secret door! And now it seems unlocked and able to be pushed aside...");
+        IItem hiddenPassage = new GatewayItem("hidden passage","Further inside, there is an altar, with a pile of scriptures on top.",sceneFelrockTempleHiddenPassage,
+                "You carefully examine your surroundings but nothing seems to be able to move to reveal a hidden passage.\n" +
+                "Nothing but this strange altar. You can't really tell why, but the closer you are, the more you feel some kind of a cold spot or a slight breeze coming from around it.\n" +
+                "Maybe from below...?","As soon as you pick the torch, a clunking sound is heard and a loud noise, as though something stoney is being dragged across the floor.\n" +
+                "Could it be? You have to see what's going on back there...");
 
         //LOOTS
         IItem goldenArtifactItem = new GoldenArtifact((GatewayItem)secretChamber);
@@ -632,13 +638,25 @@ public class GameEngine
         sceneFelrockTempleSecretChamber.addConnection(Direction.SOUTH,connectionFelrockTempleSecretChamber);
         sceneFelrockTempleSecretChamber.addConnection(Direction.EAST,connectionFelrockTempleSecretChamber);
         sceneFelrockTempleSecretChamber.addConnection(Direction.WEST,connectionFelrockTempleSecretChamber);
-        sceneFelrockTempleSecretChamber.addItem(torchItem);
-        sceneFelrockTemple.addItem(secretChamber);
+        sceneFelrockTempleSecretChamber.addItem(secretChamber);
 
         sceneFelrockTempleHiddenPassage.addConnection(Direction.NORTH,connectionFelrockTempleHiddenPassage);
         sceneFelrockTempleHiddenPassage.addConnection(Direction.SOUTH,connectionFelrockTempleHiddenPassage);
         sceneFelrockTempleHiddenPassage.addConnection(Direction.EAST,connectionFelrockTempleHiddenPassage);
         sceneFelrockTempleHiddenPassage.addConnection(Direction.WEST,connectionFelrockTempleHiddenPassage);
+        sceneFelrockTempleHiddenPassage.addItem(hiddenPassage);
+
+        sceneFelrockTempleSecretChamber.addConnection(Direction.NORTH,connectionFelrockTempleSecretChamber);
+        sceneFelrockTempleSecretChamber.addConnection(Direction.SOUTH,connectionFelrockTempleSecretChamber);
+        sceneFelrockTempleSecretChamber.addConnection(Direction.EAST,connectionFelrockTempleSecretChamber);
+        sceneFelrockTempleSecretChamber.addConnection(Direction.WEST,connectionFelrockTempleSecretChamber);
+        sceneFelrockTempleSecretChamber.addItem(torchItem);
+
+        sceneFelrockTempleHiddenPassage.addConnection(Direction.NORTH,connectionFelrockTempleHiddenPassage);
+        sceneFelrockTempleHiddenPassage.addConnection(Direction.SOUTH,connectionFelrockTempleHiddenPassage);
+        sceneFelrockTempleHiddenPassage.addConnection(Direction.EAST,connectionFelrockTempleHiddenPassage);
+        sceneFelrockTempleHiddenPassage.addConnection(Direction.WEST,connectionFelrockTempleHiddenPassage);
+        sceneFelrockTempleHiddenPassage.addItem(hiddenPassage);
 
         sceneFelrockTownHallEntrance.addConnection(Direction.NORTH,connectionFelrockTownHallEntranceNorth);
         sceneFelrockTownHallEntrance.addConnection(Direction.SOUTH,connectionFelrockTownHallEntranceSouth);

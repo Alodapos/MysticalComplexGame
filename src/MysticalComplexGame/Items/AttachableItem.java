@@ -5,4 +5,6 @@ import MysticalComplexGame.Player;
 public interface AttachableItem
 {
     void attach(Player player);
+
+    boolean isAttached();
 }

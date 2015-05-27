@@ -9,7 +9,6 @@ public class Torch extends IItem implements LightEmitter
     private String lightSuccess;
     private String noFireSource;
     private String quenchSuccess;
-    private String quenchedFailed;
     private IItem firstRequirement;
     private IItem secondRequirement;
     private GatewayItem toOpen;
@@ -25,7 +24,6 @@ public class Torch extends IItem implements LightEmitter
         lightSuccess = "You light the " + name + " and your surroundings are shrouded in light.";
         noFireSource = "There is no fire source nearby and you lack the resources to light this.";
         quenchSuccess = "You shove the " + name + " to the ground and gray smoke fills the air around you.";
-        quenchedFailed = "You cannot quench that, it is already quenched.";
     }
 
     @Override
@@ -44,13 +42,8 @@ public class Torch extends IItem implements LightEmitter
     @Override
     public void quench()
     {
-        if (burning == LightEmitterState.QUENCHED)
-            GameEngine.textOutput(quenchedFailed);
-        else
-        {
             this.burning = LightEmitterState.QUENCHED;
             GameEngine.textOutput(quenchSuccess);
-        }
     }
 
     @Override

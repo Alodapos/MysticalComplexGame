@@ -22,7 +22,7 @@ public class Brazier extends IItem implements LightEmitter
         this.toOpen = toOpen;
         this.firstRequirement = firstRequirement;
         this.secondRequirement = secondRequirement;
-        lightSuccess = "You find some firelighters, light the " + name + " and your surroundings are shrouded in light.";
+        lightSuccess = "You find some tinder and mosses, light the " + name + " and your surroundings are shrouded in light.";
         noFireSource = "You lack the resources to light this.";
         quenchSuccess = "You flip the " + name + " and cinders spread across the ground.";
         quenchedFailed = "You cannot quench that, it is already quenched.";

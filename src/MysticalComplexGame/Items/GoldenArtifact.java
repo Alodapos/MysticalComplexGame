@@ -4,6 +4,7 @@ import MysticalComplexGame.Player;
 
 public class GoldenArtifact extends IItem implements KeyItem, AttachableItem
 {
+    private AttachableItemState attached;
     private GatewayItem toOpen;
 
     public GoldenArtifact(GatewayItem toOpen)
@@ -19,6 +20,13 @@ public class GoldenArtifact extends IItem implements KeyItem, AttachableItem
     @Override
     public void attach(Player player)
     {
-            toOpen.openGateway();
+        this.attached = AttachableItemState.ATTACHED;
+        toOpen.openGateway();
+    }
+
+    @Override
+    public boolean isAttached()
+    {
+        return (attached == AttachableItemState.DETACHED);
     }
 }

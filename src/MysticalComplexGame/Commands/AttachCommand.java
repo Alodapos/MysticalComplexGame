@@ -9,11 +9,13 @@ public class AttachCommand extends ICommandVerbItem
 {
     private String itemMissing;
     private String invalidArgument;
+    private String alreadyAttached;
     public AttachCommand()
     {
         itemMissing = "You do not have this item with you.";
         invalidArgument = "This is not something that you can " + key + ".";
         key = "attach";
+        alreadyAttached = "This is already attached.";
     }
 
     @Override
@@ -23,6 +25,8 @@ public class AttachCommand extends ICommandVerbItem
             GameEngine.textOutput(itemMissing);
         else if (!(item instanceof AttachableItem))
             GameEngine.textOutput(invalidArgument);
+        else if(((AttachableItem) item).isAttached())
+            GameEngine.textOutput(alreadyAttached);
         else
         {
             ((AttachableItem)item).attach(player);

@@ -5,7 +5,6 @@ import MysticalComplexGame.Items.IItem;
 import MysticalComplexGame.Items.LightEmitter;
 import MysticalComplexGame.Player;
 
-
 public class LightCommand extends ICommandVerbItem
 {
     private String itemMissing;
@@ -27,7 +26,7 @@ public class LightCommand extends ICommandVerbItem
             GameEngine.textOutput(itemMissing);
         else if (!(item instanceof LightEmitter))
             GameEngine.textOutput(invalidArgument);
-        else if (((LightEmitter) item).isBurning())
+        else if (((LightEmitter)item).isBurning())
             GameEngine.textOutput(alreadyBurning);
         else
             ((LightEmitter)item).light(player);
