@@ -18,6 +18,7 @@ public class Torch extends IItem implements LightEmitter
         pickable = true;
         name = "torch";
         description = "There is a " + state.getBurning() + "," + " torch attached on the wall.";
+        inventoryDescription = "A " + state.getBurning() + " torch.";
         this.toOpen = toOpen;
         this.firstRequirement = firstRequirement;
         this.secondRequirement = secondRequirement;
@@ -31,9 +32,9 @@ public class Torch extends IItem implements LightEmitter
     {
         if (player.getInventory().containsValue(firstRequirement) && player.getInventory().containsValue(secondRequirement))
         {
+            description = "There is a lit torch attached on the wall.";
             this.burning = LightEmitterState.LIT;
             GameEngine.textOutput(lightSuccess);
-            toOpen.openGateway();
         }
         else
             GameEngine.textOutput(noFireSource);
@@ -55,7 +56,9 @@ public class Torch extends IItem implements LightEmitter
     @Override
     public void pick(Player player)
     {
-        super.pick(player);
+        player.addToInventory(this);
+        player.getLocation().removeItem(this);
+        GameEngine.textOutput("You pick the torch and hold it with your left hand.");
         toOpen.openGateway();
     }
 }

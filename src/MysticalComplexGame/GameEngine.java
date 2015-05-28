@@ -512,7 +512,9 @@ public class GameEngine
                 "The entrance is huge and memorable and the gate is shut but probably unlocked.",sceneFelrockTemple,
                 "You push and push, harder and harder, but the temple's entrance just won't open.\n" +
                 "But wait! What is that tube that connects the brazier with the entrance's upper edge?",
-                "A loud sound, some crackling and clinging and finally the temple's entrance is unlocked!");
+                "A loud sound, some crackling and clinging and finally the temple's entrance is unlocked!",
+                "Steams are emitting out of the tube's connectors and a secret mechanism is heard to be moving.\n" +
+                        "The temple's entrance is probably powered by a complex, hidden mechanism, which started when you lit the brazier, that locks and unlocks it.");
         IItem townHallEntrance = new GatewayItem("town hall","Only by getting closer to the building, you can estimate how magnificent it truly is.\n" +
                 "Its banners flutter as the wind passes through them.\n" +
                 "It seems well preserved and, possibly, recently built or renovated.\n" +
@@ -525,12 +527,17 @@ public class GameEngine
                 "apart from some engraves that seem artificial and not random, though.",
                 "You place the golden artifact at the exact spot, so that it matches perfectly with the engrave,\n" +
                 "a locking sound is heard and then, almost immediately, a certain part of the wall starts to standout from the rest of it.\n" +
-                "It was a secret door! And now it seems unlocked and able to be pushed aside...");
+                "It was a secret chamber! And now it seems unlocked and able to be pushed aside...",
+                "On the leftmost section of the hall is now located the secret chamber that you found earlier,\n" +
+                        "with its entrance wide open and the golden artifact perfectly matched within its engraves.");
         IItem hiddenPassage = new GatewayItem("hidden passage","Further inside, there is an altar, with a pile of scriptures on top.",sceneFelrockTempleHiddenPassage,
                 "You carefully examine your surroundings but nothing seems to be able to move to reveal a hidden passage.\n" +
                 "Nothing but this strange altar. You can't really tell why, but the closer you are, the more you feel some kind of a cold spot or a slight breeze coming from around it.\n" +
-                "Maybe from below...?","As soon as you pick the torch, a clunking sound is heard and a loud noise, as though something stoney is being dragged across the floor.\n" +
-                "Could it be? You have to see what's going on back there...");
+                "Maybe from below...?",
+                "As soon as you pick the torch, a clunking sound is heard, then a smashing one and then a loud noise, as though something stoney is being dragged across the floor.\n" +
+                "Could it be? You have to see what's going on back there...",
+                "Further inside, where the altar once stood, now a hidden passage is uncorked and a staircase leads to its interior.\n" +
+                        "The altar is still there but moved horizontally aside.");
 
         //LOOTS
         IItem goldenArtifactItem = new GoldenArtifact((GatewayItem)secretChamber);
@@ -545,7 +552,7 @@ public class GameEngine
         IItem rustySwordItem = new SimpleWeapon("rusty sword",1,2);
         IItem flintItem = new Flint();
         IItem steelItem = new Steel();
-        IItem torchItem = new Torch((GatewayItem)hiddenPassage,LightEmitterState.LIT,flintItem,steelItem);
+        IItem torchItem = new Torch((GatewayItem)hiddenPassage,LightEmitterState.QUENCHED,flintItem,steelItem);
 
         //PATH BLOCKERS
         IItem flaskItem = new Flask(LiquidContainerState.EMPTY,connectionCampsiteNorth);
@@ -633,18 +640,8 @@ public class GameEngine
         sceneFelrockTemple.addConnection(Direction.EAST,connectionFelrockTemple);
         sceneFelrockTemple.addConnection(Direction.WEST,connectionFelrockTemple);
         sceneFelrockTemple.addItem(vaseItem);
-
-        sceneFelrockTempleSecretChamber.addConnection(Direction.NORTH,connectionFelrockTempleSecretChamber);
-        sceneFelrockTempleSecretChamber.addConnection(Direction.SOUTH,connectionFelrockTempleSecretChamber);
-        sceneFelrockTempleSecretChamber.addConnection(Direction.EAST,connectionFelrockTempleSecretChamber);
-        sceneFelrockTempleSecretChamber.addConnection(Direction.WEST,connectionFelrockTempleSecretChamber);
-        sceneFelrockTempleSecretChamber.addItem(secretChamber);
-
-        sceneFelrockTempleHiddenPassage.addConnection(Direction.NORTH,connectionFelrockTempleHiddenPassage);
-        sceneFelrockTempleHiddenPassage.addConnection(Direction.SOUTH,connectionFelrockTempleHiddenPassage);
-        sceneFelrockTempleHiddenPassage.addConnection(Direction.EAST,connectionFelrockTempleHiddenPassage);
-        sceneFelrockTempleHiddenPassage.addConnection(Direction.WEST,connectionFelrockTempleHiddenPassage);
-        sceneFelrockTempleHiddenPassage.addItem(hiddenPassage);
+        sceneFelrockTemple.addItem(secretChamber);
+        sceneFelrockTemple.addItem(hiddenPassage);
 
         sceneFelrockTempleSecretChamber.addConnection(Direction.NORTH,connectionFelrockTempleSecretChamber);
         sceneFelrockTempleSecretChamber.addConnection(Direction.SOUTH,connectionFelrockTempleSecretChamber);
@@ -656,7 +653,6 @@ public class GameEngine
         sceneFelrockTempleHiddenPassage.addConnection(Direction.SOUTH,connectionFelrockTempleHiddenPassage);
         sceneFelrockTempleHiddenPassage.addConnection(Direction.EAST,connectionFelrockTempleHiddenPassage);
         sceneFelrockTempleHiddenPassage.addConnection(Direction.WEST,connectionFelrockTempleHiddenPassage);
-        sceneFelrockTempleHiddenPassage.addItem(hiddenPassage);
 
         sceneFelrockTownHallEntrance.addConnection(Direction.NORTH,connectionFelrockTownHallEntranceNorth);
         sceneFelrockTownHallEntrance.addConnection(Direction.SOUTH,connectionFelrockTownHallEntranceSouth);
@@ -688,7 +684,6 @@ public class GameEngine
         sceneCaveOfAnguishEntrance.addConnection(Direction.SOUTH,connectionCaveOfAnguishEntranceSouth);
         sceneCaveOfAnguishEntrance.addConnection(Direction.EAST,connectionCaveOfAnguishEntranceEast);
         sceneCaveOfAnguishEntrance.addConnection(Direction.WEST,connectionCaveOfAnguishEntranceWest);
-        sceneCaveOfAnguishEntrance.addItem(torchItem);
 
         sceneCaveOfAnguish.addConnection(Direction.NORTH,connectionCaveOfAnguish);
         sceneCaveOfAnguish.addConnection(Direction.SOUTH,connectionCaveOfAnguish);

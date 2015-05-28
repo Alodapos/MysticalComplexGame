@@ -3,10 +3,12 @@ package MysticalComplexGame.Items;
 import MysticalComplexGame.GameEngine;
 import MysticalComplexGame.Player;
 
-public class FelrockFountain extends IItem implements ContainerItem
+public class FelrockFountain extends IItem implements ContainerItem,LootableItem
 {
 
     IItem loot;
+    private LootableItemState empty;
+    private LootableItemState looted;
 
     public FelrockFountain(IItem loot)
     {
@@ -18,17 +20,35 @@ public class FelrockFountain extends IItem implements ContainerItem
     }
 
     @Override
-    public void dropLoot(Player player)
+    public void pickLoot(Player player)
     {
-        player.addToInventory(loot);
-        GameEngine.textOutput("You loot the " + this.name + " and find a " + loot.getName() + "!");
-        if(loot.getName().equals("lucky coin"))
-            GameEngine.textOutput("What a nice addition to your collection!");
+        if(!player.getInventory().containsValue(this.loot))
+        {
+            this.looted = LootableItemState.LOOTED;
+            player.addToInventory(loot);
+            GameEngine.textOutput("You loot the " + this.name + " and find a " + loot.getName() + "!");
+            if(loot.getName().equals("lucky coin"))
+                GameEngine.textOutput("What a nice addition to your collection!");
+            player.getLocation().removeItem(this.loot);
+        }
     }
 
     @Override
-    public void pickLoot(Player player)
+    public void dropLoot(Player player)
     {
         
     }
+
+    @Override
+    public  boolean isEmpty()
+    {
+        return (empty == LootableItemState.EMPTY);
+    }
+
+    @Override
+    public boolean isLooted()
+    {
+        return (looted == LootableItemState.LOOTED);
+    }
+
 }

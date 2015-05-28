@@ -22,8 +22,8 @@ public class Vase extends IItem implements BreakableItem,ContainerItem,LootableI
     @Override
     public void breakObject(Player player)
     {
+            description = "You see the ceramic pieces of the vase you broke earlier scattered on the ground.";
             this.broken = BreakableItemState.BROKEN;
-            description = "You see the ceramic pieces of the vase you broke earlier atop the altar.";
             GameEngine.textOutput("You smash the vase with your boots and it shatters into pieces. What a badass you are! " + player.getName() + " the vase-slayer!!");
             dropLoot(player);
     }
@@ -46,7 +46,7 @@ public class Vase extends IItem implements BreakableItem,ContainerItem,LootableI
         {
             this.looted = LootableItemState.LOOTED;
             player.addToInventory(loot);
-            GameEngine.textOutput("You loot the " + this.name + " and find a " + loot.getName() + "!");
+            GameEngine.textOutput("You loot the " + this.name + " and add a " + loot.getName() + " to your inventory!");
             player.getLocation().removeItem(this.loot);
         }
     }

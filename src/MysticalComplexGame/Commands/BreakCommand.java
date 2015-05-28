@@ -3,6 +3,7 @@ package MysticalComplexGame.Commands;
 import MysticalComplexGame.GameEngine;
 import MysticalComplexGame.Items.IItem;
 import MysticalComplexGame.Items.BreakableItem;
+import MysticalComplexGame.Items.LootableItem;
 import MysticalComplexGame.Player;
 
 public class BreakCommand extends ICommandVerbItem
@@ -16,7 +17,7 @@ public class BreakCommand extends ICommandVerbItem
         key = "break";
         invalidArgument = "This is not something that you can break...";
         itemMissing = "You can't see such a thing.";
-        alreadyBroken = "This is already broken.";
+        alreadyBroken = "This is already broken and all the loot lie on the floor..";
     }
 
     @Override
@@ -27,7 +28,7 @@ public class BreakCommand extends ICommandVerbItem
             GameEngine.textOutput(itemMissing);
         else if (!(item instanceof BreakableItem))
             GameEngine.textOutput(invalidArgument);
-        else if(((BreakableItem)item).isBroken())
+        else if(((BreakableItem)item).isBroken() && ((LootableItem)item).isEmpty())
             GameEngine.textOutput(alreadyBroken);
         else
             ((BreakableItem)item).breakObject(player);

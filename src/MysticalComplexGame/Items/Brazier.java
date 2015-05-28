@@ -33,6 +33,7 @@ public class Brazier extends IItem implements LightEmitter
     {
         if (player.getInventory().containsValue(firstRequirement) && player.getInventory().containsValue(secondRequirement))
         {
+            description = "A lit brazier is located just in front of the entrance, right in the middle of the platform.";
             this.burning = LightEmitterState.LIT;
             GameEngine.textOutput(lightSuccess);
             toOpen.openGateway();
