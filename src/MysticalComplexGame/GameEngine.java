@@ -187,6 +187,7 @@ public class GameEngine
         tokenizer.addToken("passage",Token.ITEM);
         tokenizer.addToken("vase",Token.ITEM);
         tokenizer.addToken("coin",Token.ITEM);
+        tokenizer.addToken("pebble",Token.ITEM);
         tokenizer.addToken("scroll",Token.ITEM);
         tokenizer.addToken("artifact",Token.ITEM);
         tokenizer.addToken("fountain",Token.ITEM);
@@ -204,6 +205,8 @@ public class GameEngine
         tokenizer.addToken("town",Token.PREITEM);
         tokenizer.addToken("secret",Token.PREITEM);
         tokenizer.addToken("hidden",Token.PREITEM);
+        tokenizer.addToken("turquoise",Token.PREITEM);
+        tokenizer.addToken("pink",Token.PREITEM);
     }
 
     private static void newGame(String s)
@@ -542,6 +545,8 @@ public class GameEngine
         //LOOTS
         IItem goldenArtifactItem = new GoldenArtifact((GatewayItem)secretChamber);
         IItem luckyCoinItem = new LuckyCoin();
+        IItem turquoisePebbleItem = new TurquoisePebble();
+        IItem pinkPebbleItem = new PinkPebble();
 
         //COMMONS
         IItem shinyRockItem = new ShinyRock();
@@ -562,7 +567,8 @@ public class GameEngine
 
         //CONTAINERS
         IItem vaseItem = new Vase(goldenArtifactItem);
-        IItem felrockFountainItem = new FelrockFountain(luckyCoinItem);
+        IItem felrockFountainItem = new FelrockFountain(luckyCoinItem,turquoisePebbleItem,pinkPebbleItem);
+
 
         //ENTITIES
         IItem advisorItem = new Advisor();
@@ -585,6 +591,8 @@ public class GameEngine
         content.addItem(vaseItem);
         content.addItem(goldenArtifactItem);
         content.addItem(luckyCoinItem);
+        content.addItem(turquoisePebbleItem);
+        content.addItem(pinkPebbleItem);
         content.addItem(sacredScrollItem);
         content.addItem(torchItem);
         content.addItem(flintItem);
