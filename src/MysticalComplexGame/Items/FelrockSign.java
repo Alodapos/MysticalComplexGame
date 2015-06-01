@@ -9,13 +9,13 @@ public class FelrockSign extends IItem implements ReadableItem
     private String text;
     private Connector toOpen;
 
-    public FelrockSign(Connector toUnlock)
+    public FelrockSign(Connector toOpen)
     {
         pickable = false;
         name = "sign";
         description = "There is a sign by the end of the path.";
         text = "Welcome to Felrock Village!";
-        this.toOpen = toUnlock;
+        this.toOpen = toOpen;
     }
 
     @Override

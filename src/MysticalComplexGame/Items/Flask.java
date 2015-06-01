@@ -16,7 +16,7 @@ public class Flask extends IItem implements LiquidContainer,KeyItem
     private String water;
     private Connector toOpen;
 
-    public Flask(LiquidContainerState state, Connector toUnlock)
+    public Flask(LiquidContainerState state, Connector toOpen)
     {
         pickable = true;
         name = "leather flask";
@@ -29,7 +29,7 @@ public class Flask extends IItem implements LiquidContainer,KeyItem
         noWaterSource = "There is no water source nearby to fill this.";
         isAlreadyEmpty = "You cannot empty that, it is already empty.";
         water = "water";
-        this.toOpen = toUnlock;
+        this.toOpen = toOpen;
     }
 
     @Override
