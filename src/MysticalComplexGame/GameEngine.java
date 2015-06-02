@@ -597,21 +597,21 @@ public class GameEngine
         sceneCrossroads.addConnection(Direction.NORTH, connectionCrossroadsNorth);
         sceneCrossroads.addConnection(Direction.SOUTH, connectionCrossroadsSouth);
         sceneCrossroads.addConnection(Direction.EAST, connectionCrossroadsEast);
-        sceneCrossroads.addConnection(Direction.WEST,connectionCrossroadsWest);
+        sceneCrossroads.addConnection(Direction.WEST, connectionCrossroadsWest);
         sceneCrossroads.addItem(shinyRockItem);
         sceneCrossroads.addItem(barricadeItem);
 
         sceneCrystalLake.addConnection(Direction.NORTH, connectionCrystalLakeNorth);
         sceneCrystalLake.addConnection(Direction.SOUTH, connectionCrystalLakeSouth);
         sceneCrystalLake.addConnection(Direction.EAST,connectionCrystalLakeEast);
-        sceneCrystalLake.addConnection(Direction.WEST,connectionCrystalLakeWest);
+        sceneCrystalLake.addConnection(Direction.WEST, connectionCrystalLakeWest);
         sceneCrystalLake.addItem(waterItem);
         sceneCrystalLake.addItem(rustySwordItem);
 
         sceneWildernessRoad.addConnection(Direction.NORTH, connectionWildernessRoadNorth);
         sceneWildernessRoad.addConnection(Direction.SOUTH,connectionWildernessRoadSouth);
         sceneWildernessRoad.addConnection(Direction.EAST,connectionWildernessRoadEast);
-        sceneWildernessRoad.addConnection(Direction.WEST,connectionWildernessRoadWest);
+        sceneWildernessRoad.addConnection(Direction.WEST, connectionWildernessRoadWest);
         sceneWildernessRoad.addItem(papyrusItem);
         sceneWildernessRoad.addItem(felrockSignItem);
 
@@ -624,27 +624,27 @@ public class GameEngine
         sceneFelrockTempleEntrance.addConnection(Direction.NORTH,connectionFelrockTempleEntranceNorth);
         sceneFelrockTempleEntrance.addConnection(Direction.SOUTH,connectionFelrockTempleEntranceSouth);
         sceneFelrockTempleEntrance.addConnection(Direction.EAST,connectionFelrockTempleEntranceEast);
-        sceneFelrockTempleEntrance.addConnection(Direction.WEST,connectionFelrockTempleEntranceWest);
+        sceneFelrockTempleEntrance.addConnection(Direction.WEST, connectionFelrockTempleEntranceWest);
         sceneFelrockTempleEntrance.addItem(templeEntrance);
         sceneFelrockTempleEntrance.addItem(brazierItem);
 
         sceneFelrockTemple.addConnection(Direction.NORTH,connectionFelrockTemple);
         sceneFelrockTemple.addConnection(Direction.SOUTH,connectionFelrockTemple);
         sceneFelrockTemple.addConnection(Direction.EAST,connectionFelrockTemple);
-        sceneFelrockTemple.addConnection(Direction.WEST,connectionFelrockTemple);
+        sceneFelrockTemple.addConnection(Direction.WEST, connectionFelrockTemple);
         sceneFelrockTemple.addItem(vaseItem);
+        sceneFelrockTemple.addItem(secretChamber);
+        sceneFelrockTemple.addItem(hiddenPassage);
 
         sceneFelrockTempleSecretChamber.addConnection(Direction.NORTH,connectionFelrockTempleSecretChamber);
         sceneFelrockTempleSecretChamber.addConnection(Direction.SOUTH,connectionFelrockTempleSecretChamber);
         sceneFelrockTempleSecretChamber.addConnection(Direction.EAST,connectionFelrockTempleSecretChamber);
         sceneFelrockTempleSecretChamber.addConnection(Direction.WEST,connectionFelrockTempleSecretChamber);
-        sceneFelrockTempleSecretChamber.addItem(secretChamber);
 
         sceneFelrockTempleHiddenPassage.addConnection(Direction.NORTH,connectionFelrockTempleHiddenPassage);
         sceneFelrockTempleHiddenPassage.addConnection(Direction.SOUTH,connectionFelrockTempleHiddenPassage);
         sceneFelrockTempleHiddenPassage.addConnection(Direction.EAST,connectionFelrockTempleHiddenPassage);
         sceneFelrockTempleHiddenPassage.addConnection(Direction.WEST,connectionFelrockTempleHiddenPassage);
-        sceneFelrockTempleHiddenPassage.addItem(hiddenPassage);
 
         sceneFelrockTempleSecretChamber.addConnection(Direction.NORTH,connectionFelrockTempleSecretChamber);
         sceneFelrockTempleSecretChamber.addConnection(Direction.SOUTH,connectionFelrockTempleSecretChamber);
