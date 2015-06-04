@@ -179,7 +179,7 @@ public class GameEngine
         tokenizer.addToken("sign",Token.ITEM);
         tokenizer.addToken("papyrus",Token.ITEM);
         tokenizer.addToken("sword",Token.ITEM);
-        tokenizer.addToken("luwin",Token.ITEM);
+        tokenizer.addToken("maester",Token.ITEM);
         tokenizer.addToken("cornelius",Token.ITEM);
         tokenizer.addToken("torch",Token.ITEM);
         tokenizer.addToken("barricade",Token.ITEM);
@@ -197,7 +197,7 @@ public class GameEngine
         tokenizer.addToken("flint",Token.ITEM);
         tokenizer.addToken("steel",Token.ITEM);
         tokenizer.addToken("brazier",Token.ITEM);
-        tokenizer.addToken("pass",Token.ITEM);
+        tokenizer.addToken("token",Token.ITEM);
         tokenizer.addToken("hodor",Token.ITEM);
 
         tokenizer.addToken("shiny",Token.PREITEM);
@@ -213,8 +213,8 @@ public class GameEngine
         tokenizer.addToken("turquoise",Token.PREITEM);
         tokenizer.addToken("pink",Token.PREITEM);
         tokenizer.addToken("general",Token.PREITEM);
-        tokenizer.addToken("token",Token.PREITEM);
-        tokenizer.addToken("maester",Token.PREITEM);
+        tokenizer.addToken("silver",Token.PREITEM);
+        tokenizer.addToken("luwin",Token.PREITEM);
     }
 
     private static void newGame(String s)
@@ -571,7 +571,7 @@ public class GameEngine
         IItem barricadeItem = new Barricade(connectionCrossroadsSouth);
         IItem brazierItem = new Brazier((GatewayItem)templeEntrance,flintItem,steelItem);
         IItem torchItem = new Torch((GatewayItem)hiddenPassage);
-        IItem tokenPassItem = new TokenPass(connectionFelrockVillageExitEast);
+        IItem silverTokenItem = new SilverToken(connectionFelrockVillageExitEast);
 
         //CONTAINERS
         IItem vaseItem = new Vase(goldenArtifactItem);
@@ -607,7 +607,8 @@ public class GameEngine
         content.addItem(townHallLobby);
         content.addItem(luwinMaesterItem);
         content.addItem(generalCorneliusItem);
-        content.addItem(tokenPassItem);
+        content.addItem(silverTokenItem);
+        content.addItem(hodorItem);
         //</editor-fold>
         // <editor-fold defaultstate="collapsed" desc="ADD CONNECTIONS/ITEMS TO SCENES">
         sceneCampsite.addConnection(Direction.NORTH,connectionCampsiteNorth);
@@ -690,7 +691,7 @@ public class GameEngine
         sceneFelrockTownHallLobby.addConnection(Direction.WEST,connectionFelrockTownHallLobby);
         sceneFelrockTownHallLobby.addItem(luwinMaesterItem);
         sceneFelrockTownHallLobby.addItem(generalCorneliusItem);
-        sceneFelrockTownHallLobby.addItem(tokenPassItem);
+        sceneFelrockTownHallLobby.addItem(silverTokenItem);
 
         sceneFelrockTownHallFirstFloor.addConnection(Direction.NORTH,connectionFelrockTownHallFirstFloor);
         sceneFelrockTownHallFirstFloor.addConnection(Direction.SOUTH,connectionFelrockTownHallFirstFloor);

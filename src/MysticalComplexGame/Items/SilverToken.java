@@ -3,14 +3,14 @@ package MysticalComplexGame.Items;
 import MysticalComplexGame.Connector;
 import MysticalComplexGame.Player;
 
-public class TokenPass extends IItem implements KeyItem
+public class SilverToken extends IItem implements KeyItem
 {
     private final Connector toOpen;
 
-    public TokenPass(Connector toOpen)
+    public SilverToken(Connector toOpen)
     {
         pickable = true;
-        name = "token pass";
+        name = "silver token";
         description = " ";
         inventoryDescription = "A token pass from General Cornelius.";
         this.toOpen = toOpen;

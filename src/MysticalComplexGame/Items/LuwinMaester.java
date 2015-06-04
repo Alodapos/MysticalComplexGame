@@ -11,7 +11,7 @@ public class LuwinMaester extends IItem implements AttackableItem
     {
         alive = true;
         pickable = false;
-        name = "advisor";
+        name = "luwin maester";
         description = "He is significantly shorter than General Cornelius and wears neat and elegant clothes making him very prestigious.\n" +
                 "He holds a small case in his hands. His name is Luwin Maester. He tells you that he is the Mayor's advisor.";
 
