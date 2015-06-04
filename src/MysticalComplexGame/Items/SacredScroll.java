@@ -1,11 +1,10 @@
 package MysticalComplexGame.Items;
 
 import MysticalComplexGame.GameEngine;
-import MysticalComplexGame.Player;
 
 public class SacredScroll extends IItem implements ReadableItem
 {
-    private String text;
+    private final String text;
 
     public SacredScroll()
     {
@@ -18,8 +17,8 @@ public class SacredScroll extends IItem implements ReadableItem
     }
 
     @Override
-    public void read(Player player)
+    public void read()
     {
-        GameEngine.textOutput("You read the scroll:\n"+text+"");
+        GameEngine.textOutput("You read the scroll:\n"+text);
     }
 }

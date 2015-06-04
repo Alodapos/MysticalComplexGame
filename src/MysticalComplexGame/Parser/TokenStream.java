@@ -5,13 +5,13 @@ import java.util.List;
 
 public class TokenStream
 {
-    private List<String> textStream;
-    private List<Token> tokenStream;
+    private final List<String> textStream;
+    private final List<Token> tokenStream;
 
     public TokenStream()
     {
-        textStream = new LinkedList<String>();
-        tokenStream = new LinkedList<Token>();
+        textStream = new LinkedList<>();
+        tokenStream = new LinkedList<>();
     }
 
     public String getText(int index)
@@ -25,9 +25,9 @@ public class TokenStream
         else return tokenStream.remove(0);
     }
 
-    public Token getToken(int index)
+    public Token getNextToken()
     {
-     return tokenStream.get(index);
+     return tokenStream.get(0);
     }
 
     public void clear()

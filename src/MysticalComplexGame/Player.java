@@ -11,11 +11,10 @@ public class Player implements Serializable
     private String name;
     private Scene currentLocation;
     private WeaponItem equippedWeapon;
-    private HashMap<String, IItem> inventory = new HashMap<>();
+    private final HashMap<String, IItem> inventory = new HashMap<>();
     private int thirstLevel;
     private Scene previousScene;
     private boolean canExitScene = false;
-    //private int burnLevel;
 
     public Player()
     {
@@ -50,6 +49,7 @@ public class Player implements Serializable
     {
         this.previousScene = previousScene;
     }
+
     public void unequipWeapon()
     {
         addToInventory((IItem)equippedWeapon);
@@ -60,30 +60,37 @@ public class Player implements Serializable
     {
         return previousScene;
     }
+
     public Scene getLocation()
     {
         return currentLocation;
     }
+
     public void setLocation(Scene currentLocation)
     {
         this.currentLocation = currentLocation;
     }
+
     public String getName()
     {
         return name;
     }
+
     public void setName(String name)
     {
         this.name = name;
     }
+
     public void addToInventory(IItem itemToAdd)
     {
         inventory.put(itemToAdd.getName(), itemToAdd);
     }
+
     public void removeFromInventory(IItem item)
     {
         inventory.remove(item.getName(),item);
     }
+
     public HashMap<String,IItem> getInventory()
     {
         return inventory;

@@ -2,7 +2,7 @@ package MysticalComplexGame.Commands;
 
 import MysticalComplexGame.Player;
 
-public class LookCommand extends ICommandVerbAlone
+public class LookCommand extends ICommandVerbSolo
 {
     public LookCommand()
     {

@@ -1,16 +1,15 @@
 package MysticalComplexGame.Commands;
 
 import MysticalComplexGame.GameEngine;
-import MysticalComplexGame.Items.ContainerItem;
 import MysticalComplexGame.Items.IItem;
 import MysticalComplexGame.Items.LootableItem;
 import MysticalComplexGame.Player;
 
 public class LootCommand extends ICommandVerbWithItem
 {
-    private String itemMissing;
-    private String invalidArgument;
-    private String alreadyLooted;
+    private final String itemMissing;
+    private final String invalidArgument;
+    private final String alreadyLooted;
 
     public LootCommand()
     {
@@ -26,11 +25,11 @@ public class LootCommand extends ICommandVerbWithItem
 
         if (!player.getLocation().getItems().containsValue(item))
             GameEngine.textOutput(itemMissing);
-        else if (!(item instanceof ContainerItem))
+        else if (!(item instanceof LootableItem))
             GameEngine.textOutput(invalidArgument);
-        else if(((LootableItem)item).isLooted())
+        else if(((LootableItem)item).isEmpty())
             GameEngine.textOutput(alreadyLooted);
         else
-            ((ContainerItem)item).pickLoot(player);
+            ((LootableItem)item).loot(player);
     }
 }

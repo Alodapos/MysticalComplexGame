@@ -7,7 +7,7 @@ public abstract class ICommandVerbWithDirection implements ICommand
 {
     public abstract void executeCommand(Player player,Direction direction);
 
-    protected String key;
+    String key;
 
     @Override
     public String getKey()

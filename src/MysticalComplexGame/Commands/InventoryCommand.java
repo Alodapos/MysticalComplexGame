@@ -6,9 +6,9 @@ import MysticalComplexGame.Items.IItem;
 
 import java.util.Map;
 
-public class InventoryCommand extends ICommandVerbAlone
+public class InventoryCommand extends ICommandVerbSolo
 {
-    private String emptyInventory;
+    private final String emptyInventory;
 
     public InventoryCommand()
     {
@@ -19,11 +19,13 @@ public class InventoryCommand extends ICommandVerbAlone
     @Override
     public void executeCommand(Player player)
     {
-        if (player.getInventory().isEmpty()) GameEngine.textOutput(emptyInventory);
+        if (player.getInventory().isEmpty())
+            GameEngine.textOutput(emptyInventory);
         else
         {
             GameEngine.textOutput("Your inventory:");
-            for (Map.Entry<String, IItem> item: player.getInventory().entrySet()) GameEngine.textOutput(item.getValue().getInventoryDescription());
+            for (Map.Entry<String, IItem> item: player.getInventory().entrySet())
+                GameEngine.textOutput(item.getValue().getInventoryDescription());
         }
     }
 }

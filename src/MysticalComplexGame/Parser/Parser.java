@@ -3,19 +3,17 @@ package MysticalComplexGame.Parser;
 import MysticalComplexGame.Direction;
 import MysticalComplexGame.GameContent;
 import MysticalComplexGame.GameEngine;
-import MysticalComplexGame.Player;
 
 public class Parser
 {
-    String textCommandNotFound;
-    String textWrongGrammar;
-    String textWrongDirection;
-    String textWrongItem;
-    TokenStream stream;
-    GameContent content;
-    Player player;
-    ParsedCommand command;
-    boolean commandNotFound;
+    private final String textCommandNotFound;
+    private final String textWrongGrammar;
+    private final String textWrongDirection;
+    private final String textWrongItem;
+    private TokenStream stream;
+    private GameContent content;
+    private final ParsedCommand command;
+    private boolean commandNotFound;
 
     public Parser()
     {
@@ -31,7 +29,6 @@ public class Parser
     {
         stream = input;
         this.content = content;
-        this.player = content.getPlayer();
         command.setCommand(null);
         commandNotFound = true;
         verbSoloParse();
@@ -47,12 +44,12 @@ public class Parser
 
     private void verbSoloParse()
     {
-        if (stream.getToken(0) == Token.VERBSOLO)
+        if (stream.getNextToken() == Token.VERBSOLO)
         {
             stream.popToken();
             commandNotFound = false;
             if (stream.isEmpty())
-                command.setCommand(content.getCommand(stream.getText(0)));
+                command.setCommand(content.stringToCommand(stream.getText(0)));
             else
                 outputWrongGrammar(".");
         }
@@ -60,14 +57,14 @@ public class Parser
 
     private void verbDirectionParse()
     {
-        if (stream.getToken(0) == Token.VERBDIRECTION)
+        if (stream.getNextToken() == Token.VERBWITHDIRECTION)
         {
             commandNotFound = false;
             stream.popToken();
             if (stream.popToken() == Token.DIRECTION)
                 if (stream.isEmpty())
                 {
-                    command.setCommand(content.getCommand(stream.getText(0)));
+                    command.setCommand(content.stringToCommand(stream.getText(0)));
                     command.setDirectionArgument(Direction.fromString(stream.getText(1)));
                 }
                 else
@@ -79,14 +76,14 @@ public class Parser
 
     private void verbItemParse()
     {
-        if (stream.getToken(0) == Token.VERBITEM)
+        if (stream.getNextToken() == Token.VERBWITHITEM)
         {
             commandNotFound = false;
             stream.popToken();
             if (stream.popToken() == Token.ITEM)
                 if (stream.isEmpty())
                 {
-                    this.command.setCommand(content.getCommand(stream.getText(0)));
+                    this.command.setCommand(content.stringToCommand(stream.getText(0)));
                     this.command.setItemArgument(content.stringToItem(stream.getText(1)));
                 }
                 else

@@ -1,7 +1,10 @@
 package MysticalComplexGame.Items;
 
+import MysticalComplexGame.Player;
+
 public interface LootableItem
 {
-    boolean isLooted();
     boolean isEmpty();
+
+    void loot(Player player);
 }

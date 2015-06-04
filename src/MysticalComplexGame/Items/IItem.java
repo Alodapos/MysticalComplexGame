@@ -1,6 +1,5 @@
 package MysticalComplexGame.Items;
 
-import MysticalComplexGame.Connector;
 import MysticalComplexGame.GameEngine;
 import MysticalComplexGame.Player;
 
@@ -8,11 +7,10 @@ import java.io.Serializable;
 
 public abstract class IItem implements Serializable
 {
-    protected String name;
-    protected String description;
-    protected String inventoryDescription;
-    protected boolean pickable;
-    protected String pickFailed = "This is not something I can pick!";
+    String name;
+    String description;
+    String inventoryDescription;
+    boolean pickable;
 
     public String getDescription()
     {
@@ -29,34 +27,21 @@ public abstract class IItem implements Serializable
         return inventoryDescription;
     }
 
-    public boolean isPickable()
+    private boolean isPickable()
     {
         return pickable;
     }
 
-    public void makePickable()
-    {
-        pickable = true;
-    }
-
-    public void makeUnpickable()
-    {
-        pickable = false;
-    }
-
     public void pick(Player player)
     {
-        if (!this.isPickable()) GameEngine.textOutput(pickFailed);
+        String pickFailed = "This is not something I can pick!";
+        if (!this.isPickable())
+            GameEngine.textOutput(pickFailed);
         else
         {
             player.addToInventory(this);
             GameEngine.textOutput("Picked " + this.getName() + ".");
             player.getLocation().removeItem(this);
         }
-    }
-
-    public void setConnectionToOpen(Connector connectionToOpen)
-    {
-
     }
 }

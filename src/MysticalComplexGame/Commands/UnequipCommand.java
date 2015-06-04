@@ -2,7 +2,7 @@ package MysticalComplexGame.Commands;
 
 import MysticalComplexGame.Player;
 
-public class UnequipCommand extends ICommandVerbAlone
+public class UnequipCommand extends ICommandVerbSolo
 {
     public UnequipCommand()
     {

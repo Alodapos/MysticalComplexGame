@@ -15,15 +15,9 @@ public enum Direction
     public static Direction fromString(String direction)
     {
         if (direction != null)
-        {
             for (Direction dir : Direction.values())
-            {
                 if (direction.equalsIgnoreCase(dir.direction))
-                {
                     return dir;
-                }
-            }
-        }
         return null;
     }
 }

@@ -5,12 +5,11 @@ import MysticalComplexGame.Items.IItem;
 import MysticalComplexGame.Items.LightEmitter;
 import MysticalComplexGame.Player;
 
-
 public class QuenchCommand extends ICommandVerbWithItem
 {
-    private String itemMissing;
-    private String invalidArgument;
-    private String quenchedFailed;
+    private final String itemMissing;
+    private final String invalidArgument;
+    private final String quenchedFailed;
 
     public QuenchCommand()
     {

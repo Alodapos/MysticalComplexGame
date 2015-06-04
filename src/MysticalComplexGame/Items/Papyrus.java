@@ -1,9 +1,8 @@
 package MysticalComplexGame.Items;
 
 import MysticalComplexGame.GameEngine;
-import MysticalComplexGame.Player;
 
-public class Papyrus extends IItem implements ReadableItem,WritableItem
+public class Papyrus extends IItem implements ReadableItem,WriteableItem
 {
     private String text;
 
@@ -17,10 +16,12 @@ public class Papyrus extends IItem implements ReadableItem,WritableItem
     }
 
     @Override
-    public void read(Player player)
+    public void read()
     {
-        if (text.equals("")) GameEngine.textOutput("The papyrus is blank");
-        else GameEngine.textOutput("You read the papyrus:\n\""+text+"\"");
+        if (text.equals(""))
+            GameEngine.textOutput("The papyrus is blank");
+        else
+            GameEngine.textOutput("You read the papyrus:\n\""+text+"\"");
     }
 
     @Override

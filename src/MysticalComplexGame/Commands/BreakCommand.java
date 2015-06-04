@@ -7,9 +7,9 @@ import MysticalComplexGame.Player;
 
 public class BreakCommand extends ICommandVerbWithItem
 {
-    private String itemMissing;
-    private String invalidArgument;
-    private String alreadyBroken;
+    private final String itemMissing;
+    private final String invalidArgument;
+    private final String alreadyBroken;
 
     public BreakCommand()
     {

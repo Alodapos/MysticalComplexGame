@@ -5,9 +5,9 @@ import java.io.Serializable;
 public class Connector implements Serializable
 {
     private ConnectionState connectionState;
-    private String description;
-    private Scene nextScene;
-    private String unlockText;
+    private final String description;
+    private final Scene nextScene;
+    private final String unlockText;
 
     public Connector(String description)
     {

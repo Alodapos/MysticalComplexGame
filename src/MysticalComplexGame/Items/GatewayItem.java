@@ -7,10 +7,10 @@ import MysticalComplexGame.Scene;
 
 public class GatewayItem extends IItem
 {
-    private Scene targetScene;
+    private final Scene targetScene;
     private ConnectionState lockState;
-    private String passageClosedText;
-    private String openText;
+    private final String passageClosedText;
+    private final String openText;
     private String newDescription;
 
     public GatewayItem(String name,String description,Scene targetScene)
@@ -46,12 +46,6 @@ public class GatewayItem extends IItem
             player.getLocation().printDescription();
             player.setCanExitScene(true);
         }
-    }
-
-    public void exit(Player player)
-    {
-        player.setLocation(player.getPreviousScene());
-        player.getLocation().printDescription();
     }
 
     public void openGateway()

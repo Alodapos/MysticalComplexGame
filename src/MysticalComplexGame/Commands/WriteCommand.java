@@ -2,13 +2,13 @@ package MysticalComplexGame.Commands;
 
 import MysticalComplexGame.GameEngine;
 import MysticalComplexGame.Items.IItem;
-import MysticalComplexGame.Items.WritableItem;
+import MysticalComplexGame.Items.WriteableItem;
 import MysticalComplexGame.Player;
 
 public class WriteCommand extends ICommandVerbWithItem
 {
-    private String itemMissing;
-    private String invalidArgument;
+    private final String itemMissing;
+    private final String invalidArgument;
 
     public WriteCommand()
     {
@@ -20,12 +20,11 @@ public class WriteCommand extends ICommandVerbWithItem
     @Override
     public void executeCommand(Player player,IItem item)
     {
-        if (!player.getInventory().containsValue(item)) GameEngine.textOutput(itemMissing);
-        else if (!(item instanceof WritableItem)) GameEngine.textOutput(invalidArgument);
+        if (!player.getInventory().containsValue(item))
+            GameEngine.textOutput(itemMissing);
+        else if (!(item instanceof WriteableItem))
+            GameEngine.textOutput(invalidArgument);
         else
-        {
-            WritableItem toWrite = (WritableItem)item;
-            toWrite.write();
-        }
+            ((WriteableItem)item).write();
     }
 }

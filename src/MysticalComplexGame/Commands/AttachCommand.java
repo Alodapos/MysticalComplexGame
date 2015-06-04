@@ -7,8 +7,8 @@ import MysticalComplexGame.Player;
 
 public class AttachCommand extends ICommandVerbWithItem
 {
-    private String itemMissing;
-    private String invalidArgument;
+    private final String itemMissing;
+    private final String invalidArgument;
     public AttachCommand()
     {
         itemMissing = "You do not have this item with you.";

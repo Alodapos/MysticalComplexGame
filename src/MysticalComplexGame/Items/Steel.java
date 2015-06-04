@@ -9,5 +9,4 @@ public class Steel extends IItem
         inventoryDescription = "A piece of steel.";
         pickable = true;
     }
-
 }

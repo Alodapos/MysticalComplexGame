@@ -11,8 +11,8 @@ import java.util.List;
 
 public class ReadCommand extends ICommandVerbWithItem
 {
-    private String itemMissing;
-    private String invalidArgument;
+    private final String itemMissing;
+    private final String invalidArgument;
 
     public ReadCommand()
     {
@@ -33,7 +33,7 @@ public class ReadCommand extends ICommandVerbWithItem
         else
         {
             ReadableItem toRead = (ReadableItem)item;
-            toRead.read(player);
+            toRead.read();
         }
     }
 }

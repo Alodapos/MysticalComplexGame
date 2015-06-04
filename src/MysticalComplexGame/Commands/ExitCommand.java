@@ -3,7 +3,7 @@ package MysticalComplexGame.Commands;
 import MysticalComplexGame.GameEngine;
 import MysticalComplexGame.Player;
 
-public class ExitCommand extends ICommandVerbAlone
+public class ExitCommand extends ICommandVerbSolo
 {
     public ExitCommand()
     {

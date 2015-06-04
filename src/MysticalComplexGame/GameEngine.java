@@ -10,9 +10,9 @@ import java.util.Scanner;
 public class GameEngine
 {
     //CONTENT
-    static GameContent content;
-    static Tokenizer tokenizer = new Tokenizer();
-    static Parser parser = new Parser();
+    private static GameContent content;
+    private static final Tokenizer tokenizer = new Tokenizer();
+    private static final Parser parser = new Parser();
 
     public static void startGame()
     {
@@ -144,29 +144,29 @@ public class GameEngine
         content.addCommand(quenchCommand);
         content.addCommand(attachCommand);
 
-        tokenizer.addToken("go", Token.VERBDIRECTION);
-        tokenizer.addToken("gaze", Token.VERBDIRECTION);
+        tokenizer.addToken("go", Token.VERBWITHDIRECTION);
+        tokenizer.addToken("gaze", Token.VERBWITHDIRECTION);
 
         tokenizer.addToken("look", Token.VERBSOLO);
         tokenizer.addToken("inventory", Token.VERBSOLO);
         tokenizer.addToken("unequip", Token.VERBSOLO);
-        tokenizer.addToken("exit",Token.VERBSOLO);
+        tokenizer.addToken("exit", Token.VERBSOLO);
 
-        tokenizer.addToken("pick", Token.VERBITEM);
-        tokenizer.addToken("drop",Token.VERBITEM);
-        tokenizer.addToken("fill",Token.VERBITEM);
-        tokenizer.addToken("drink",Token.VERBITEM);
-        tokenizer.addToken("empty",Token.VERBITEM);
-        tokenizer.addToken("read",Token.VERBITEM);
-        tokenizer.addToken("write",Token.VERBITEM);
-        tokenizer.addToken("equip",Token.VERBITEM);
-        tokenizer.addToken("attack",Token.VERBITEM);
-        tokenizer.addToken("light",Token.VERBITEM);
-        tokenizer.addToken("enter",Token.VERBITEM);
-        tokenizer.addToken("break",Token.VERBITEM);
-        tokenizer.addToken("loot",Token.VERBITEM);
-        tokenizer.addToken("quench",Token.VERBITEM);
-        tokenizer.addToken("attach",Token.VERBITEM);
+        tokenizer.addToken("pick", Token.VERBWITHITEM);
+        tokenizer.addToken("drop", Token.VERBWITHITEM);
+        tokenizer.addToken("fill", Token.VERBWITHITEM);
+        tokenizer.addToken("drink", Token.VERBWITHITEM);
+        tokenizer.addToken("empty",Token.VERBWITHITEM);
+        tokenizer.addToken("read",Token.VERBWITHITEM);
+        tokenizer.addToken("write",Token.VERBWITHITEM);
+        tokenizer.addToken("equip",Token.VERBWITHITEM);
+        tokenizer.addToken("attack",Token.VERBWITHITEM);
+        tokenizer.addToken("light",Token.VERBWITHITEM);
+        tokenizer.addToken("enter",Token.VERBWITHITEM);
+        tokenizer.addToken("break",Token.VERBWITHITEM);
+        tokenizer.addToken("loot",Token.VERBWITHITEM);
+        tokenizer.addToken("quench",Token.VERBWITHITEM);
+        tokenizer.addToken("attach",Token.VERBWITHITEM);
 
         tokenizer.addToken("north",Token.DIRECTION);
         tokenizer.addToken("south",Token.DIRECTION);
@@ -219,10 +219,6 @@ public class GameEngine
 
     private static void newGame(String s)
     {
-        Player player = new Player();
-        player.setName(s);
-        content.setPlayer(player);
-
         // <editor-fold defaultstate="collapsed" desc="SCRIPTS">
         String textNameCampsite = "Campsite";
         String textNameCrossroads = "Crossroads";
@@ -311,7 +307,7 @@ public class GameEngine
                 "When you reveal yourself they look at you with shirred eyes and a concerned expression. Now one of them is approaching you.\n" +
                 "He is tall, wearing some kind of armour and holds a stick in his right hand. You sense that he could be a very strict character and probably a high-ranked member of the village's army.\n" +
                 "He greets you with a brief introduction, telling you his name: General Patrick Eugene Cornelius and asking for yours.\n" +
-                "You kindly introduce yourself to both as " + player.getName() + ", member of the Guild of Resuscitation and ask to learn who the other man is.";
+                "You kindly introduce yourself to both as a member of the Guild of Resuscitation and ask to learn who the other man is.";
         String textFelrockTownHallLobbyNoPass = "You can't travel while inside the Town Hall.";
 
         String textDescriptionFelrockTownHallFirstFloor = "NOT MADE YET.";
@@ -563,7 +559,6 @@ public class GameEngine
         //COMMONS
         IItem shinyRockItem = new ShinyRock();
         IItem waterItem = new WaterSource();
-        IItem fireItem = new FireSource();
         IItem papyrusItem = new Papyrus();
         IItem sacredScrollItem = new SacredScroll();
         IItem rustySwordItem = new SimpleWeapon("rusty sword",1,2);
@@ -571,24 +566,22 @@ public class GameEngine
         IItem steelItem = new Steel();
 
         //PATH BLOCKERS
-        IItem flaskItem = new Flask(LiquidContainerState.EMPTY,connectionCampsiteNorth);
+        IItem flaskItem = new Flask(connectionCampsiteNorth,waterItem,10);
         IItem felrockSignItem = new FelrockSign(connectionWildernessRoadEast);
         IItem barricadeItem = new Barricade(connectionCrossroadsSouth);
-        IItem brazierItem = new Brazier((GatewayItem)templeEntrance,LightEmitterState.QUENCHED,flintItem,steelItem);
-        IItem torchItem = new Torch((GatewayItem)hiddenPassage,LightEmitterState.QUENCHED,flintItem,steelItem);
+        IItem brazierItem = new Brazier((GatewayItem)templeEntrance,flintItem,steelItem);
+        IItem torchItem = new Torch((GatewayItem)hiddenPassage);
         IItem tokenPassItem = new TokenPass(connectionFelrockVillageExitEast);
 
         //CONTAINERS
         IItem vaseItem = new Vase(goldenArtifactItem);
         IItem felrockFountainItem = new FelrockFountain(luckyCoinItem,turquoisePebbleItem,pinkPebbleItem);
 
-
         //ENTITIES
         IItem luwinMaesterItem = new LuwinMaester();
         IItem generalCorneliusItem = new GeneralCornelius();
         IItem hodorItem = new Hodor();
 
-        content.addItem(fireItem);
         content.addItem(flaskItem);
         content.addItem(flintItem);
         content.addItem(steelItem);
@@ -615,8 +608,6 @@ public class GameEngine
         content.addItem(luwinMaesterItem);
         content.addItem(generalCorneliusItem);
         content.addItem(tokenPassItem);
-
-
         //</editor-fold>
         // <editor-fold defaultstate="collapsed" desc="ADD CONNECTIONS/ITEMS TO SCENES">
         sceneCampsite.addConnection(Direction.NORTH,connectionCampsiteNorth);
@@ -753,7 +744,9 @@ public class GameEngine
         sceneGardenOfRadiance.addConnection(Direction.WEST,connectionGardenOfRadianceWest);
 
         //</editor-fold>
-
+        Player player = new Player();
+        player.setName(s);
+        content.setPlayer(player);
         player.setLocation(sceneCampsite);
     }
 

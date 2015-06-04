@@ -1,10 +1,11 @@
 package MysticalComplexGame.Items;
 
-//import MysticalComplexGame.Player;
+import MysticalComplexGame.GameEngine;
+import MysticalComplexGame.Player;
 
-public class Hodor extends IItem //implements AttackableItem
+public class Hodor extends IItem implements AttackableItem
 {
-    private boolean alive;
+    private final boolean alive;
 
     public Hodor()
     {
@@ -15,17 +16,16 @@ public class Hodor extends IItem //implements AttackableItem
 
     }
 
-    /*@Override
+    @Override
     public void attack(Player player)
     {
-        alive = false;
-        description = "The LuwinMaester lies dead on the floor.";
-        //TODO drop loot & text on death
+        GameEngine.textOutput("You should not attack the residents of the village.");
+        //TODO attack
     }
 
     @Override
     public boolean isAlive()
     {
         return alive;
-    }*/
+    }
 }

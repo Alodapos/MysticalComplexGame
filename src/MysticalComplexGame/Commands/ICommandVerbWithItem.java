@@ -7,7 +7,7 @@ public abstract class ICommandVerbWithItem implements ICommand
 {
     public abstract void executeCommand(Player player,IItem item);
 
-    protected String key;
+    String key;
 
     @Override
     public String getKey()

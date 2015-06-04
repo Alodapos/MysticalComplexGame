@@ -5,8 +5,7 @@ import MysticalComplexGame.Player;
 
 public class TokenPass extends IItem implements KeyItem
 {
-
-    private Connector toOpen;
+    private final Connector toOpen;
 
     public TokenPass(Connector toOpen)
     {

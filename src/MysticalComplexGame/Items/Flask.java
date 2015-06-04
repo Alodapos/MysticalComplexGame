@@ -6,66 +6,58 @@ import MysticalComplexGame.GameEngine;
 
 public class Flask extends IItem implements LiquidContainer,KeyItem
 {
-    private LiquidContainerState fullness;
-    private String containerEmpty;
-    private String drinkSuccess;
-    private String fillSuccess;
-    private String fillFailed;
-    private String noWaterSource;
-    private String isAlreadyEmpty;
-    private String water;
-    private Connector toOpen;
+    private boolean full;
+    private final String drinkSuccess;
+    private final String fillSuccess;
+    private final String noSource;
+    private final IItem toFillWith;
+    private final Connector toOpen;
+    private final int thirstRestored;
 
-    public Flask(LiquidContainerState state, Connector toOpen)
+    public Flask(Connector toOpen,IItem toFillWith,int thirstRestored)
     {
         pickable = true;
         name = "leather flask";
-        description = "There is a small sized, " + state.getFullness() + ", leather flask on a wooden table.";
-        inventoryDescription = "A small " + state.getFullness() + " flask.";
-        containerEmpty = "This is empty, i cannot drink from it.";
+        description = "There is a small sized leather flask on a wooden table.";
+        inventoryDescription = "A small flask.";
         drinkSuccess = "You drink from the " + name + " and quench your thirst.";
-        fillSuccess = "You fill your flask with water.";
-        fillFailed = "The flask is already filled.";
-        noWaterSource = "There is no water source nearby to fill this.";
-        isAlreadyEmpty = "You cannot empty that, it is already empty.";
-        water = "water";
+        fillSuccess = "You fill your flask with "+ toFillWith.getName() +".";
+        noSource = "There is no water source nearby to fill this.";
+        this.toFillWith = toFillWith;
         this.toOpen = toOpen;
+        this.thirstRestored = thirstRestored;
+    }
+
+    @Override
+    public boolean isFull()
+    {
+        return full;
     }
 
     @Override
     public void drink(Player player)
     {
-        if (fullness == LiquidContainerState.FILLED)
-        {
-            player.setThirstLevel(15);
-            GameEngine.textOutput(drinkSuccess);
-            this.fullness = LiquidContainerState.EMPTY;
-        }
-        else GameEngine.textOutput(containerEmpty);
-
+        player.setThirstLevel(thirstRestored);
+        GameEngine.textOutput(drinkSuccess);
+        full = false;
     }
 
     @Override
     public void fill(Player player)
     {
-        if (fullness == LiquidContainerState.FILLED) GameEngine.textOutput(fillFailed);
-        else if (player.getLocation().getItems().get(water)!=null)
+        if (player.getLocation().getItems().containsValue(toFillWith))
         {
             GameEngine.textOutput(fillSuccess);
-            this.fullness = LiquidContainerState.FILLED;
+            full = true;
         }
-        else GameEngine.textOutput(noWaterSource);
+        else GameEngine.textOutput(noSource);
     }
 
     @Override
     public void empty()
     {
-        if (fullness == LiquidContainerState.EMPTY) GameEngine.textOutput(isAlreadyEmpty);
-        else
-        {
-            GameEngine.textOutput("You pour the water to the ground till the " + name + " is completely empty.");
-            this.fullness = LiquidContainerState.EMPTY;
-        }
+        GameEngine.textOutput("You pour the water to the ground until the " + name + " is completely empty.");
+        full = false;
     }
 
     @Override

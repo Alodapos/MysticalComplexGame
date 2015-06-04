@@ -1,9 +1,9 @@
 package MysticalComplexGame.Parser;
 
 import MysticalComplexGame.Commands.ICommand;
-import MysticalComplexGame.Commands.ICommandVerbAlone;
-import MysticalComplexGame.Commands.ICommandVerbDirection;
-import MysticalComplexGame.Commands.ICommandVerbItem;
+import MysticalComplexGame.Commands.ICommandVerbSolo;
+import MysticalComplexGame.Commands.ICommandVerbWithDirection;
+import MysticalComplexGame.Commands.ICommandVerbWithItem;
 import MysticalComplexGame.Direction;
 import MysticalComplexGame.Items.IItem;
 import MysticalComplexGame.Player;
@@ -31,19 +31,19 @@ public class ParsedCommand
 
     public void executeCommand(Player player)
     {
-        if (commandToExecute instanceof ICommandVerbAlone)
+        if (commandToExecute instanceof ICommandVerbSolo)
         {
-            ICommandVerbAlone command = (ICommandVerbAlone)commandToExecute;
+            ICommandVerbSolo command = (ICommandVerbSolo)commandToExecute;
             command.executeCommand(player);
         }
-        else if (commandToExecute instanceof ICommandVerbDirection)
+        else if (commandToExecute instanceof ICommandVerbWithDirection)
         {
-            ICommandVerbDirection command = (ICommandVerbDirection)commandToExecute;
+            ICommandVerbWithDirection command = (ICommandVerbWithDirection)commandToExecute;
             command.executeCommand(player,directionArgument);
         }
         else
         {
-            ICommandVerbItem command = (ICommandVerbItem)commandToExecute;
+            ICommandVerbWithItem command = (ICommandVerbWithItem)commandToExecute;
             command.executeCommand(player,itemArgument);
         }
     }

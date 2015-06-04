@@ -7,9 +7,9 @@ import MysticalComplexGame.Player;
 
 public class LightCommand extends ICommandVerbWithItem
 {
-    private String itemMissing;
-    private String invalidArgument;
-    private String alreadyBurning;
+    private final String itemMissing;
+    private final String invalidArgument;
+    private final String alreadyBurning;
 
     public LightCommand()
     {

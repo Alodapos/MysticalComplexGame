@@ -3,16 +3,15 @@ package MysticalComplexGame;
 import MysticalComplexGame.Items.IItem;
 
 import java.io.Serializable;
-import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
 
 public class Scene implements Serializable
 {
-    private String description;
-    private String name;
-    private Map<String, IItem> items;
-    private Map<Direction, Connector> connections;
+    private final String description;
+    private final String name;
+    private final Map<String, IItem> items;
+    private final Map<Direction, Connector> connections;
 
     public Scene(String name, String description)
     {
@@ -53,13 +52,9 @@ public class Scene implements Serializable
     {
         return this.items;
     }
+
     public String getName()
     {
         return name;
-    }
-
-    public Collection<Connector> getConnections()
-    {
-        return this.connections.values();
     }
 }

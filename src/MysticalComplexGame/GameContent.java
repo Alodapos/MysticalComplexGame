@@ -5,25 +5,28 @@ import MysticalComplexGame.Items.IItem;
 
 import java.io.Serializable;
 import java.util.HashMap;
+import java.util.LinkedList;
+import java.util.List;
 import java.util.Map;
 
 public class GameContent implements Serializable
 {
-    private transient Map<String, ICommand> commandMap;
-    private Map<String, Scene> sceneMap;
-    private Map<String, IItem> itemMap;
+    private transient Map<String, ICommand> commands;
+    @SuppressWarnings("MismatchedQueryAndUpdateOfCollection")
+    private final List<Scene> scenes;
+    private final Map<String, IItem> items;
     private Player player;
 
     public GameContent()
     {
-        sceneMap = new HashMap<>();
-        itemMap = new HashMap<>();
+        scenes = new LinkedList<>();
+        items = new HashMap<>();
         player = new Player();
     }
 
     public void initializeCommands()
     {
-        commandMap = new HashMap<>();
+        commands = new HashMap<>();
     }
 
     public void setPlayer(Player player)
@@ -38,32 +41,26 @@ public class GameContent implements Serializable
 
     public void addCommand(ICommand command)
     {
-        commandMap.put(command.getKey(),command);
+        commands.put(command.getKey(),command);
     }
+
     public void addItem(IItem item)
     {
-        itemMap.put(item.getName(),item);
+        items.put(item.getName(),item);
     }
 
     public IItem stringToItem(String item)
     {
-        return itemMap.get(item);
+        return items.get(item);
     }
 
-    public void removeItem(IItem item)
-    {
-        itemMap.remove(item.getName());
-    }
     public void addScene(Scene scene)
     {
-        this.sceneMap.put(scene.getName(),scene);
+        scenes.add(scene);
     }
-    public ICommand getCommand(String command)
+
+    public ICommand stringToCommand(String command)
     {
-        return this.commandMap.get(command);
-    }
-    public Scene getScene(String scene)
-    {
-        return this.sceneMap.get(scene);
+        return commands.get(command);
     }
 }

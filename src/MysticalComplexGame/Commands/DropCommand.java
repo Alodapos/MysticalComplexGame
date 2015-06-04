@@ -7,8 +7,8 @@ import MysticalComplexGame.GameEngine;
 
 public class DropCommand extends ICommandVerbWithItem
 {
-    private String invalidArgument;
-    private String actionFailed;
+    private final String invalidArgument;
+    private final String actionFailed;
     public DropCommand()
     {
         invalidArgument = "You do not have this item with you.";

@@ -7,14 +7,16 @@ import MysticalComplexGame.Items.LiquidContainer;
 
 public class FillCommand extends ICommandVerbWithItem
 {
-    private String itemMissing;
-    private String invalidArgument;
+    private final String itemMissing;
+    private final String invalidArgument;
+    private final String isFull;
 
     public FillCommand()
     {
         key = "fill";
         invalidArgument = "This is not something that i can fill";
         itemMissing = "You don't have something like this with you.";
+        isFull = "This is already filled.";
     }
 
     @Override
@@ -24,7 +26,9 @@ public class FillCommand extends ICommandVerbWithItem
             GameEngine.textOutput(itemMissing);
         else if (!(item instanceof LiquidContainer))
             GameEngine.textOutput(invalidArgument);
+        else if (((LiquidContainer)item).isFull())
+            GameEngine.textOutput(isFull);
         else
-            ((LiquidContainer)item).fill(player);
+            ((LiquidContainer) item).fill(player);
     }
 }

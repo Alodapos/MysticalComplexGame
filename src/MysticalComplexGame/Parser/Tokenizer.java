@@ -1,13 +1,12 @@
 package MysticalComplexGame.Parser;
 
-import MysticalComplexGame.GameEngine;
-
-import java.util.*;
+import java.util.HashMap;
+import java.util.Map;
 
 public class Tokenizer
 {
-    private Map<String,Token> tokenInfo;
-    private TokenStream tokens;
+    private final Map<String,Token> tokenInfo;
+    private final TokenStream tokens;
 
     public Tokenizer()
     {

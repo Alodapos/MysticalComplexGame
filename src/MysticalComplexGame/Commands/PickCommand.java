@@ -6,7 +6,7 @@ import MysticalComplexGame.GameEngine;
 
 public class PickCommand extends ICommandVerbWithItem
 {
-    private String invalidArgument;
+    private final String invalidArgument;
     public PickCommand()
     {
         invalidArgument = "I can't see such a thing.";

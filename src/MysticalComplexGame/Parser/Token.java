@@ -3,8 +3,8 @@ package MysticalComplexGame.Parser;
 public enum Token
 {
     VERBSOLO,
-    VERBITEM,
-    VERBDIRECTION,
+    VERBWITHITEM,
+    VERBWITHDIRECTION,
     ITEM,
     DIRECTION,
     PREITEM
