@@ -6,7 +6,7 @@ import MysticalComplexGame.Items.LightEmitter;
 import MysticalComplexGame.Player;
 
 
-public class QuenchCommand extends ICommandVerbItem
+public class QuenchCommand extends ICommandVerbWithItem
 {
     private String itemMissing;
     private String invalidArgument;

@@ -5,7 +5,7 @@ import MysticalComplexGame.Items.IItem;
 import MysticalComplexGame.Items.WritableItem;
 import MysticalComplexGame.Player;
 
-public class WriteCommand extends ICommandVerbItem
+public class WriteCommand extends ICommandVerbWithItem
 {
     private String itemMissing;
     private String invalidArgument;

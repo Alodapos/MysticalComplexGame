@@ -5,7 +5,7 @@ import MysticalComplexGame.Items.IItem;
 import MysticalComplexGame.Items.LightEmitter;
 import MysticalComplexGame.Player;
 
-public class LightCommand extends ICommandVerbItem
+public class LightCommand extends ICommandVerbWithItem
 {
     private String itemMissing;
     private String invalidArgument;

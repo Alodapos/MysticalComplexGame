@@ -68,8 +68,9 @@ public class GameEngine
             if (nextCommand.exists()) nextCommand.executeCommand(player);
             checkThirst(player);
             saveGame(player.getName());
-        } while (!player.getLocation().getName().equals("The Sage"));
-        textOutput("\n\n\nYou have completed ACT I, ACT II is under development, stay tuned for more...\n");
+        } while (!player.getLocation().getName().equals("Cave Of Anguish - Entrance"));
+        textOutput("\n\n\nYou have completed ACT I!\n" +
+                   "ACT II is under development, stay tuned for more...\n");
     }
 
     private static void checkThirst(Player player)
@@ -178,21 +179,26 @@ public class GameEngine
         tokenizer.addToken("sign",Token.ITEM);
         tokenizer.addToken("papyrus",Token.ITEM);
         tokenizer.addToken("sword",Token.ITEM);
-        tokenizer.addToken("advisor",Token.ITEM);
+        tokenizer.addToken("luwin",Token.ITEM);
+        tokenizer.addToken("cornelius",Token.ITEM);
         tokenizer.addToken("torch",Token.ITEM);
         tokenizer.addToken("barricade",Token.ITEM);
         tokenizer.addToken("temple",Token.ITEM);
-        tokenizer.addToken("hall",Token.ITEM);
         tokenizer.addToken("chamber",Token.ITEM);
         tokenizer.addToken("passage",Token.ITEM);
+        tokenizer.addToken("hall",Token.ITEM);
+        tokenizer.addToken("lobby",Token.ITEM);
         tokenizer.addToken("vase",Token.ITEM);
         tokenizer.addToken("coin",Token.ITEM);
+        tokenizer.addToken("pebble",Token.ITEM);
         tokenizer.addToken("scroll",Token.ITEM);
         tokenizer.addToken("artifact",Token.ITEM);
         tokenizer.addToken("fountain",Token.ITEM);
         tokenizer.addToken("flint",Token.ITEM);
         tokenizer.addToken("steel",Token.ITEM);
         tokenizer.addToken("brazier",Token.ITEM);
+        tokenizer.addToken("pass",Token.ITEM);
+        tokenizer.addToken("hodor",Token.ITEM);
 
         tokenizer.addToken("shiny",Token.PREITEM);
         tokenizer.addToken("leather",Token.PREITEM);
@@ -204,10 +210,19 @@ public class GameEngine
         tokenizer.addToken("town",Token.PREITEM);
         tokenizer.addToken("secret",Token.PREITEM);
         tokenizer.addToken("hidden",Token.PREITEM);
+        tokenizer.addToken("turquoise",Token.PREITEM);
+        tokenizer.addToken("pink",Token.PREITEM);
+        tokenizer.addToken("general",Token.PREITEM);
+        tokenizer.addToken("token",Token.PREITEM);
+        tokenizer.addToken("maester",Token.PREITEM);
     }
 
     private static void newGame(String s)
     {
+        Player player = new Player();
+        player.setName(s);
+        content.setPlayer(player);
+
         // <editor-fold defaultstate="collapsed" desc="SCRIPTS">
         String textNameCampsite = "Campsite";
         String textNameCrossroads = "Crossroads";
@@ -223,6 +238,7 @@ public class GameEngine
         String textNameFelrockTownHallLobby = "Felrock Town Hall - Lobby";
         String textNameFelrockTownHallFirstFloor = "Felrock Town Hall - First Floor";
         String textNameFelrockTownHallSecondFloor = "Felrock Town Hall - Second Floor";
+        String textNameFelrockVillageExit = "Felrock Village - Exit";
         String textNameCaveOfAnguishEntrance = "Cave Of Anguish - Entrance";
         String textNameCaveOfAnguish = "Cave Of Anguish";
         String textNameClearing = "Clearing";
@@ -261,7 +277,6 @@ public class GameEngine
                 "To the south you can distinguish a great and majestic building which, judging from the decoration, size and location, must be the village's worship temple.\n" +
                 "To the north, there lies a grand structure, of white and pale shades of brown which, considering the architecture that's been used and its position, must be the town hall.\n" +
                 "To the east, your sight follows a path, quite narrow, leading somewhere far ahead, but you can't see exactly where.";
-        String textFelrockVillageEast = "The road is currently guarded by a husky man that won't let you pass until you present to him a special license, signed by the village mayor.";
 
         String textDescriptionFelrockTempleEntrance = "You now stand in front of the temple.";
         String textFelrockTempleEntranceSouth = "The dense forest completely surrounds the village, providing a good defence at the same time.";
@@ -280,39 +295,23 @@ public class GameEngine
         String textDescriptionFelrockTempleHiddenPassage = "NOT MADE YET";
         String textFelrockTempleHiddenPassageNoPass = "You can't travel inside the Temple";
 
-        String textDescriptionFelrockTownHallEntrance = "Only by getting closer to the building, you can estimate how magnificent it truly is. \n" +
-                "Its banners flutter as the wind passes through them. \n" +
-                "It seems well preserved and, possibly, recently built or renovated. \n" +
-                "It also has weird decorations all over its stony framework. \n" +
-                "No one is entering or exiting the building since it's a small and quite village with a very low population. \n" +
-                "But, surely, there will be someone inside.";
+        String textDescriptionFelrockTownHallEntrance = "Only by getting closer to the building, you can estimate how magnificent it truly is.";
         String textFelrockTownHallEntranceNorth = "More of a dense growth over there.";
         String textFelrockTownHallEntranceEast = "There's one weird road leading away from the village to your east.";
         String textFelrockTownHallEntranceWest = "Some more residencies are neatly built here.";
 
         String textDescriptionFelrockTownHall = "Surprisingly, the door requires a bit above than average force to open, \n" +
                 "but with a tight grip and a strong push you manage to shove it aside. \n" +
-                "Before you spreads a long hallway, ending up in a grand lobby. \n" +
                 "On your left, a staircase extends all the way up, to the top of the Town Hall. \n" +
                 "As far as you can see there are three floors, including the ground floor. \n" +
-                "On your right and left there are several rooms, probably offices and storerooms. \n" +
-                "While you examine your surroundings and trying to see what's on the top floors, a low voice is heard in the distance, further onto your right, in what seems to be the lobby. \n" +
-                "but the only words you can make out are: \"cave\" and \"corruption\". \n" +
-                "At once, a different voice replies and you can only hear the words: \"dying\" and \"leave\". \n" +
-                "The conversation continues...";
+                "On your right and left there are several rooms, probably offices and storerooms.";
         String textFelrockTownHallNoPass = "You can't travel while inside the Town Hall.";
 
-        String textDescriptionFelrockTownHallLobby = "Reluctantly, you get closer to the room and the voices are getting clearer. \n" +
-                "The two men hear your footsteps and stop at once. \n" +
-                "When you reveal yourself they look at you with shirred eyes and a concerned expression. \n" +
-                "Now one of them is approaching you. He is tall, wearing some kind of armour and holds a stick in his right hand. \n" +
-                "You sense that he could be a very strict character and probably a high-ranked member of the village's army. \n" +
-                "He greets you with a brief introduction, telling you his name: \"General Patrick Eugene Cornelius\" and asking for yours. \n" +
-                "You kindly introduce yourself to both as a member of the Guild of Resuscitation and ask to learn who the other man is.\n" +
-                "He is significantly shorter than General Cornelius and wears neat and elegant clothes making him very prestigious. \n" +
-                "He holds a small case in his hands. His name is Luwin Maester. \n" +
-                "He tells you that he is the mayor's advisor. But when you ask to know where the mayor himself is, \n" +
-                "General Cornelius tells you that he's gone missing for a few days now.";
+        String textDescriptionFelrockTownHallLobby = "Reluctantly, you get closer to the room and the voices are getting clearer.The two men hear your footsteps and stop at once.\n" +
+                "When you reveal yourself they look at you with shirred eyes and a concerned expression. Now one of them is approaching you.\n" +
+                "He is tall, wearing some kind of armour and holds a stick in his right hand. You sense that he could be a very strict character and probably a high-ranked member of the village's army.\n" +
+                "He greets you with a brief introduction, telling you his name: General Patrick Eugene Cornelius and asking for yours.\n" +
+                "You kindly introduce yourself to both as " + player.getName() + ", member of the Guild of Resuscitation and ask to learn who the other man is.";
         String textFelrockTownHallLobbyNoPass = "You can't travel while inside the Town Hall.";
 
         String textDescriptionFelrockTownHallFirstFloor = "NOT MADE YET.";
@@ -321,7 +320,13 @@ public class GameEngine
         String textDescriptionFelrockTownHallSecondFloor = "You push the door to open but it won't budge. \nIt seems to be locked for the moment, though the right key would unlock it right away.";
         String textFelrockTownHallSecondFloorNoPass = "You can't travel while inside the Town Hall.";
 
-        String textDescriptionCaveOfAnguishEntrance = "From the roads leading away from the village you take the northern. +\n" +
+        String textDescriptionFelrockVillageExit = "This is the eastern end of Felrock Village.";
+        String textFelrockVillageExitNorth = "The village's outskirts, just trees and a rocky landscape.";
+        String textFelrockVillageExitSouth = "The village's outskirts, just trees and a rocky landscape.";
+        String textFelrockVillageExitEast = "The road is currently guarded by a husky man that won't let you pass. \"Hodor!\", he shouts.";
+
+
+        String textDescriptionCaveOfAnguishEntrance = "From the roads leading away from the village you take the northern. \n" +
                 "It's a relatively short road, not very wide, but neither too slim. \n" +
                 "Unlike the village's scenery, here lies a barren landscape, with no trees, no flowers, no water either. \n" +
                 "As the road seems to be coming to its end, you begin to sense an unsettling aura filling the space around you. \n" +
@@ -334,7 +339,6 @@ public class GameEngine
                 "Death awaits all those who enter and all who have entered did not return. \n" +
                 "Proceed at your own risk. \n" +
                 "WARNING! \n" +
-                " There are also two medium sized torches placed on each side of the cave's entrance that burn bright. \n" +
                 "Now you can clearly feel dark energies emanating from the cave's insides. \n" +
                 "Vision is blocked beyond the threshold of the entrance and since the mountain is massive you can't see past it, \n" +
                 "for it spreads far to the east and a dense forest extends to the west.";
@@ -390,6 +394,7 @@ public class GameEngine
         Scene sceneFelrockTownHallLobby = new Scene(textNameFelrockTownHallLobby,textDescriptionFelrockTownHallLobby);
         Scene sceneFelrockTownHallFirstFloor = new Scene(textNameFelrockTownHallFirstFloor,textDescriptionFelrockTownHallFirstFloor);
         Scene sceneFelrockTownHallSecondFloor = new Scene(textNameFelrockTownHallSecondFloor,textDescriptionFelrockTownHallSecondFloor);
+        Scene sceneFelrockVillageExit = new Scene(textNameFelrockVillageExit,textDescriptionFelrockVillageExit);
         Scene sceneCaveOfAnguishEntrance = new Scene(textNameCaveOfAnguishEntrance,textDescriptionCaveOfAnguishEntrance);
         Scene sceneCaveOfAnguish = new Scene(textNameCaveOfAnguish,textDescriptionCaveOfAnguish);
         Scene sceneClearing = new Scene(textNameClearing,textDescriptionClearing);
@@ -440,12 +445,12 @@ public class GameEngine
 
         Connector connectionWildernessRoadNorth = new Connector(textWildernessRoadNorth);
         Connector connectionWildernessRoadSouth = new Connector(textWildernessRoadSouth);
-        Connector connectionWildernessRoadEast = new Connector(sceneFelrockVillage,textWildernessRoadEast,"You should take a look at that village");
+        Connector connectionWildernessRoadEast = new Connector(sceneFelrockVillage,textWildernessRoadEast,"Maybe you could rest and find useful information at that village.");
         Connector connectionWildernessRoadWest = new Connector(sceneCrossroads);
 
         Connector connectionFelrockVillageNorth = new Connector(sceneFelrockTownHallEntrance);
         Connector connectionFelrockVillageSouth = new Connector(sceneFelrockTempleEntrance);
-        Connector connectionFelrockVillageEast = new Connector(sceneCaveOfAnguishEntrance,textFelrockVillageEast,"The husky guard speaks: \"You may pass little one. But know that no good resides further ahead.\"");
+        Connector connectionFelrockVillageEast = new Connector(sceneFelrockVillageExit);
         Connector connectionFelrockVillageWest = new Connector(sceneWildernessRoad);
 
         Connector connectionFelrockTempleEntranceNorth = new Connector(sceneFelrockVillage);
@@ -471,6 +476,11 @@ public class GameEngine
         Connector connectionFelrockTownHallFirstFloor = new Connector(textFelrockTownHallFirstFloorNoPass);
 
         Connector connectionFelrockTownHallSecondFloor = new Connector(textFelrockTownHallSecondFloorNoPass);
+
+        Connector connectionFelrockVillageExitNorth = new Connector(textFelrockVillageExitNorth);
+        Connector connectionFelrockVillageExitSouth = new Connector(textFelrockVillageExitSouth);
+        Connector connectionFelrockVillageExitEast = new Connector(sceneCaveOfAnguishEntrance,textFelrockVillageExitEast,"This should grant you access through the village's exit.");
+        Connector connectionFelrockVillageExitWest = new Connector(sceneFelrockVillage);
 
         Connector connectionCaveOfAnguishEntranceNorth = new Connector(textCaveOfAnguishEntranceNorth);
         Connector connectionCaveOfAnguishEntranceSouth = new Connector(textCaveOfAnguishEntranceSouth);
@@ -512,29 +522,43 @@ public class GameEngine
                 "The entrance is huge and memorable and the gate is shut but probably unlocked.",sceneFelrockTemple,
                 "You push and push, harder and harder, but the temple's entrance just won't open.\n" +
                 "But wait! What is that tube that connects the brazier with the entrance's upper edge?",
-                "A loud sound, some crackling and clinging and finally the temple's entrance is unlocked!");
-        IItem townHallEntrance = new GatewayItem("town hall","Only by getting closer to the building, you can estimate how magnificent it truly is.\n" +
-                "Its banners flutter as the wind passes through them.\n" +
-                "It seems well preserved and, possibly, recently built or renovated.\n" +
-                "It also has weird decorations all over its stony framework.\n" +
-                "No one is entering or exiting the building since it's a small and quite village with a very low population.\n" +
-                "But, surely, there will be someone inside.",sceneFelrockTownHall);
+                "A loud sound, some crackling and clinging and finally the temple's entrance is unlocked!",
+                "Steams are emitting out of the tube's connectors and a secret mechanism is heard to be moving.\n" +
+                        "The temple's entrance is probably powered by a complex, hidden mechanism, which started when you lit the brazier, that locks and unlocks it.");
         IItem secretChamber = new GatewayItem("secret chamber","On the leftmost section of the hall is a wide, flat surface on the wall that looks, weirdly enough, untouched by time or decay.\n" +
                 "Also, on some points, you can detect some vertical, possibly man-made, engraves but you can't seem to understand their purpose.",sceneFelrockTempleSecretChamber,
                 "You grope the flat surface of the leftmost wall, but can't find either a secret button nor any kind of lever or handle,\n" +
                 "apart from some engraves that seem artificial and not random, though.",
                 "You place the golden artifact at the exact spot, so that it matches perfectly with the engrave,\n" +
                 "a locking sound is heard and then, almost immediately, a certain part of the wall starts to standout from the rest of it.\n" +
-                "It was a secret door! And now it seems unlocked and able to be pushed aside...");
+                "It was a secret chamber! And now it seems unlocked and able to be pushed aside...",
+                "On the leftmost section of the hall is now located the secret chamber that you found earlier,\n" +
+                        "with its entrance wide open and the golden artifact perfectly matched within its engraves.");
         IItem hiddenPassage = new GatewayItem("hidden passage","Further inside, there is an altar, with a pile of scriptures on top.",sceneFelrockTempleHiddenPassage,
                 "You carefully examine your surroundings but nothing seems to be able to move to reveal a hidden passage.\n" +
                 "Nothing but this strange altar. You can't really tell why, but the closer you are, the more you feel some kind of a cold spot or a slight breeze coming from around it.\n" +
-                "Maybe from below...?","As soon as you pick the torch, a clunking sound is heard and a loud noise, as though something stoney is being dragged across the floor.\n" +
-                "Could it be? You have to see what's going on back there...");
+                "Maybe from below...?",
+                "As soon as you pick the torch, a clunking sound is heard, then a smashing one and then a loud noise, as though something stoney is being dragged across the floor.\n" +
+                "Could it be? You have to see what's going on back there...",
+                "Further inside, where the altar once stood, now a hidden passage is uncorked and a staircase leads to its interior.\n" +
+                        "The altar is still there but moved horizontally aside.");
+        IItem townHallEntrance = new GatewayItem("town hall","Its banners flutter as the wind passes through them.\n" +
+                "It seems well preserved and, possibly, recently built or renovated.\n" +
+                "It also has weird decorations all over its stony framework.\n" +
+                "No one is entering or exiting the building since it's a small and quite village with a very low population.\n" +
+                "But, surely, there will be someone inside.",sceneFelrockTownHall);
+        IItem townHallLobby = new GatewayItem("lobby","Before you spreads a long hallway, ending up in a grand lobby.\n" +
+                "While you examine your surroundings and trying to see what's on the top floors,\n" +
+                "a low voice is heard in the distance, further onto your right, in what seems to be the lobby,\n" +
+                "but the only words you can make out are: \"cave\" and \"corruption\".\n" +
+                "At once, a different voice replies and you can only hear the words: \"dying\" and \"leave\". The conversation continues...",
+                sceneFelrockTownHallLobby);
 
         //LOOTS
         IItem goldenArtifactItem = new GoldenArtifact((GatewayItem)secretChamber);
         IItem luckyCoinItem = new LuckyCoin();
+        IItem turquoisePebbleItem = new TurquoisePebble();
+        IItem pinkPebbleItem = new PinkPebble();
 
         //COMMONS
         IItem shinyRockItem = new ShinyRock();
@@ -545,44 +569,53 @@ public class GameEngine
         IItem rustySwordItem = new SimpleWeapon("rusty sword",1,2);
         IItem flintItem = new Flint();
         IItem steelItem = new Steel();
-        IItem torchItem = new Torch((GatewayItem)hiddenPassage,LightEmitterState.LIT,flintItem,steelItem);
 
         //PATH BLOCKERS
         IItem flaskItem = new Flask(LiquidContainerState.EMPTY,connectionCampsiteNorth);
         IItem felrockSignItem = new FelrockSign(connectionWildernessRoadEast);
         IItem barricadeItem = new Barricade(connectionCrossroadsSouth);
         IItem brazierItem = new Brazier((GatewayItem)templeEntrance,LightEmitterState.QUENCHED,flintItem,steelItem);
+        IItem torchItem = new Torch((GatewayItem)hiddenPassage,LightEmitterState.QUENCHED,flintItem,steelItem);
+        IItem tokenPassItem = new TokenPass(connectionFelrockVillageExitEast);
 
         //CONTAINERS
         IItem vaseItem = new Vase(goldenArtifactItem);
-        IItem felrockFountainItem = new FelrockFountain(luckyCoinItem);
+        IItem felrockFountainItem = new FelrockFountain(luckyCoinItem,turquoisePebbleItem,pinkPebbleItem);
+
 
         //ENTITIES
-        IItem advisorItem = new Advisor();
+        IItem luwinMaesterItem = new LuwinMaester();
+        IItem generalCorneliusItem = new GeneralCornelius();
+        IItem hodorItem = new Hodor();
 
-
-        content.addItem(shinyRockItem);
-        content.addItem(flaskItem);
-        content.addItem(waterItem);
         content.addItem(fireItem);
-        content.addItem(felrockSignItem);
-        content.addItem(papyrusItem);
-        content.addItem(rustySwordItem);
-        content.addItem(advisorItem);
-        content.addItem(barricadeItem);
-        content.addItem(felrockFountainItem);
-        content.addItem(templeEntrance);
-        content.addItem(secretChamber);
-        content.addItem(hiddenPassage);
-        content.addItem(townHallEntrance);
-        content.addItem(vaseItem);
-        content.addItem(goldenArtifactItem);
-        content.addItem(luckyCoinItem);
-        content.addItem(sacredScrollItem);
-        content.addItem(torchItem);
+        content.addItem(flaskItem);
         content.addItem(flintItem);
         content.addItem(steelItem);
+        content.addItem(shinyRockItem);
+        content.addItem(barricadeItem);
+        content.addItem(waterItem);
+        content.addItem(rustySwordItem);
+        content.addItem(felrockSignItem);
+        content.addItem(papyrusItem);
+        content.addItem(felrockFountainItem);
+        content.addItem(luckyCoinItem);
+        content.addItem(turquoisePebbleItem);
+        content.addItem(pinkPebbleItem);
+        content.addItem(templeEntrance);
         content.addItem(brazierItem);
+        content.addItem(vaseItem);
+        content.addItem(goldenArtifactItem);
+        content.addItem(secretChamber);
+        content.addItem(torchItem);
+        content.addItem(hiddenPassage);
+        content.addItem(sacredScrollItem);
+        content.addItem(townHallEntrance);
+        content.addItem(townHallLobby);
+        content.addItem(luwinMaesterItem);
+        content.addItem(generalCorneliusItem);
+        content.addItem(tokenPassItem);
+
 
         //</editor-fold>
         // <editor-fold defaultstate="collapsed" desc="ADD CONNECTIONS/ITEMS TO SCENES">
@@ -597,21 +630,21 @@ public class GameEngine
         sceneCrossroads.addConnection(Direction.NORTH, connectionCrossroadsNorth);
         sceneCrossroads.addConnection(Direction.SOUTH, connectionCrossroadsSouth);
         sceneCrossroads.addConnection(Direction.EAST, connectionCrossroadsEast);
-        sceneCrossroads.addConnection(Direction.WEST, connectionCrossroadsWest);
+        sceneCrossroads.addConnection(Direction.WEST,connectionCrossroadsWest);
         sceneCrossroads.addItem(shinyRockItem);
         sceneCrossroads.addItem(barricadeItem);
 
         sceneCrystalLake.addConnection(Direction.NORTH, connectionCrystalLakeNorth);
         sceneCrystalLake.addConnection(Direction.SOUTH, connectionCrystalLakeSouth);
         sceneCrystalLake.addConnection(Direction.EAST,connectionCrystalLakeEast);
-        sceneCrystalLake.addConnection(Direction.WEST, connectionCrystalLakeWest);
+        sceneCrystalLake.addConnection(Direction.WEST,connectionCrystalLakeWest);
         sceneCrystalLake.addItem(waterItem);
         sceneCrystalLake.addItem(rustySwordItem);
 
         sceneWildernessRoad.addConnection(Direction.NORTH, connectionWildernessRoadNorth);
         sceneWildernessRoad.addConnection(Direction.SOUTH,connectionWildernessRoadSouth);
         sceneWildernessRoad.addConnection(Direction.EAST,connectionWildernessRoadEast);
-        sceneWildernessRoad.addConnection(Direction.WEST, connectionWildernessRoadWest);
+        sceneWildernessRoad.addConnection(Direction.WEST,connectionWildernessRoadWest);
         sceneWildernessRoad.addItem(papyrusItem);
         sceneWildernessRoad.addItem(felrockSignItem);
 
@@ -624,27 +657,17 @@ public class GameEngine
         sceneFelrockTempleEntrance.addConnection(Direction.NORTH,connectionFelrockTempleEntranceNorth);
         sceneFelrockTempleEntrance.addConnection(Direction.SOUTH,connectionFelrockTempleEntranceSouth);
         sceneFelrockTempleEntrance.addConnection(Direction.EAST,connectionFelrockTempleEntranceEast);
-        sceneFelrockTempleEntrance.addConnection(Direction.WEST, connectionFelrockTempleEntranceWest);
+        sceneFelrockTempleEntrance.addConnection(Direction.WEST,connectionFelrockTempleEntranceWest);
         sceneFelrockTempleEntrance.addItem(templeEntrance);
         sceneFelrockTempleEntrance.addItem(brazierItem);
 
         sceneFelrockTemple.addConnection(Direction.NORTH,connectionFelrockTemple);
         sceneFelrockTemple.addConnection(Direction.SOUTH,connectionFelrockTemple);
         sceneFelrockTemple.addConnection(Direction.EAST,connectionFelrockTemple);
-        sceneFelrockTemple.addConnection(Direction.WEST, connectionFelrockTemple);
+        sceneFelrockTemple.addConnection(Direction.WEST,connectionFelrockTemple);
         sceneFelrockTemple.addItem(vaseItem);
         sceneFelrockTemple.addItem(secretChamber);
         sceneFelrockTemple.addItem(hiddenPassage);
-
-        sceneFelrockTempleSecretChamber.addConnection(Direction.NORTH,connectionFelrockTempleSecretChamber);
-        sceneFelrockTempleSecretChamber.addConnection(Direction.SOUTH,connectionFelrockTempleSecretChamber);
-        sceneFelrockTempleSecretChamber.addConnection(Direction.EAST,connectionFelrockTempleSecretChamber);
-        sceneFelrockTempleSecretChamber.addConnection(Direction.WEST,connectionFelrockTempleSecretChamber);
-
-        sceneFelrockTempleHiddenPassage.addConnection(Direction.NORTH,connectionFelrockTempleHiddenPassage);
-        sceneFelrockTempleHiddenPassage.addConnection(Direction.SOUTH,connectionFelrockTempleHiddenPassage);
-        sceneFelrockTempleHiddenPassage.addConnection(Direction.EAST,connectionFelrockTempleHiddenPassage);
-        sceneFelrockTempleHiddenPassage.addConnection(Direction.WEST,connectionFelrockTempleHiddenPassage);
 
         sceneFelrockTempleSecretChamber.addConnection(Direction.NORTH,connectionFelrockTempleSecretChamber);
         sceneFelrockTempleSecretChamber.addConnection(Direction.SOUTH,connectionFelrockTempleSecretChamber);
@@ -656,7 +679,7 @@ public class GameEngine
         sceneFelrockTempleHiddenPassage.addConnection(Direction.SOUTH,connectionFelrockTempleHiddenPassage);
         sceneFelrockTempleHiddenPassage.addConnection(Direction.EAST,connectionFelrockTempleHiddenPassage);
         sceneFelrockTempleHiddenPassage.addConnection(Direction.WEST,connectionFelrockTempleHiddenPassage);
-        sceneFelrockTempleHiddenPassage.addItem(hiddenPassage);
+        sceneFelrockTempleHiddenPassage.addItem(sacredScrollItem);
 
         sceneFelrockTownHallEntrance.addConnection(Direction.NORTH,connectionFelrockTownHallEntranceNorth);
         sceneFelrockTownHallEntrance.addConnection(Direction.SOUTH,connectionFelrockTownHallEntranceSouth);
@@ -668,11 +691,15 @@ public class GameEngine
         sceneFelrockTownHall.addConnection(Direction.SOUTH,connectionFelrockTownHall);
         sceneFelrockTownHall.addConnection(Direction.EAST,connectionFelrockTownHall);
         sceneFelrockTownHall.addConnection(Direction.WEST,connectionFelrockTownHall);
+        sceneFelrockTownHall.addItem(townHallLobby);
 
         sceneFelrockTownHallLobby.addConnection(Direction.NORTH,connectionFelrockTownHallLobby);
         sceneFelrockTownHallLobby.addConnection(Direction.SOUTH,connectionFelrockTownHallLobby);
         sceneFelrockTownHallLobby.addConnection(Direction.EAST,connectionFelrockTownHallLobby);
         sceneFelrockTownHallLobby.addConnection(Direction.WEST,connectionFelrockTownHallLobby);
+        sceneFelrockTownHallLobby.addItem(luwinMaesterItem);
+        sceneFelrockTownHallLobby.addItem(generalCorneliusItem);
+        sceneFelrockTownHallLobby.addItem(tokenPassItem);
 
         sceneFelrockTownHallFirstFloor.addConnection(Direction.NORTH,connectionFelrockTownHallFirstFloor);
         sceneFelrockTownHallFirstFloor.addConnection(Direction.SOUTH,connectionFelrockTownHallFirstFloor);
@@ -684,11 +711,16 @@ public class GameEngine
         sceneFelrockTownHallSecondFloor.addConnection(Direction.EAST,connectionFelrockTownHallSecondFloor);
         sceneFelrockTownHallSecondFloor.addConnection(Direction.WEST,connectionFelrockTownHallSecondFloor);
 
+        sceneFelrockVillageExit.addConnection(Direction.NORTH,connectionFelrockVillageExitNorth);
+        sceneFelrockVillageExit.addConnection(Direction.SOUTH,connectionFelrockVillageExitSouth);
+        sceneFelrockVillageExit.addConnection(Direction.EAST,connectionFelrockVillageExitEast);
+        sceneFelrockVillageExit.addConnection(Direction.WEST,connectionFelrockVillageExitWest);
+        sceneFelrockVillageExit.addItem(hodorItem);
+
         sceneCaveOfAnguishEntrance.addConnection(Direction.NORTH,connectionCaveOfAnguishEntranceNorth);
         sceneCaveOfAnguishEntrance.addConnection(Direction.SOUTH,connectionCaveOfAnguishEntranceSouth);
         sceneCaveOfAnguishEntrance.addConnection(Direction.EAST,connectionCaveOfAnguishEntranceEast);
         sceneCaveOfAnguishEntrance.addConnection(Direction.WEST,connectionCaveOfAnguishEntranceWest);
-        sceneCaveOfAnguishEntrance.addItem(torchItem);
 
         sceneCaveOfAnguish.addConnection(Direction.NORTH,connectionCaveOfAnguish);
         sceneCaveOfAnguish.addConnection(Direction.SOUTH,connectionCaveOfAnguish);
@@ -721,9 +753,7 @@ public class GameEngine
         sceneGardenOfRadiance.addConnection(Direction.WEST,connectionGardenOfRadianceWest);
 
         //</editor-fold>
-        Player player = new Player();
-        player.setName(s);
-        content.setPlayer(player);
+
         player.setLocation(sceneCampsite);
     }
 

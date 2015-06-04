@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-public class ReadCommand extends ICommandVerbItem
+public class ReadCommand extends ICommandVerbWithItem
 {
     private String itemMissing;
     private String invalidArgument;
@@ -25,10 +25,9 @@ public class ReadCommand extends ICommandVerbItem
     public void executeCommand(Player player,IItem item)
     {
 
-        List<IItem> localItems = new ArrayList<IItem>();
+        List<IItem> localItems = new ArrayList<>();
         localItems.addAll(player.getInventory().values());
         localItems.addAll(player.getLocation().getItems().values());
-
         if (!localItems.contains(item)) GameEngine.textOutput(itemMissing);
         else if (!(item instanceof ReadableItem)) GameEngine.textOutput(invalidArgument);
         else

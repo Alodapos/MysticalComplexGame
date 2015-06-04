@@ -1,6 +1,6 @@
 package MysticalComplexGame.Items;
 
-public interface WritableItem
+public interface WriteableItem
 {
     void write();
 }

@@ -5,7 +5,7 @@ import MysticalComplexGame.Items.IItem;
 import MysticalComplexGame.Items.AttackableItem;
 import MysticalComplexGame.Player;
 
-public class AttackCommand extends ICommandVerbItem
+public class AttackCommand extends ICommandVerbWithItem
 {
     private String itemMissing;
     private String invalidArgument;
@@ -21,8 +21,10 @@ public class AttackCommand extends ICommandVerbItem
     public void executeCommand(Player player,IItem item)
     {
 
-        if (!player.getLocation().getItems().containsValue(item)) GameEngine.textOutput(itemMissing);
-        else if (!(item instanceof AttackableItem)) GameEngine.textOutput(invalidArgument);
+        if (!player.getLocation().getItems().containsValue(item))
+            GameEngine.textOutput(itemMissing);
+        else if (!(item instanceof AttackableItem))
+            GameEngine.textOutput(invalidArgument);
         else
         {
             AttackableItem toAttack = (AttackableItem)item;
@@ -30,7 +32,8 @@ public class AttackCommand extends ICommandVerbItem
                 GameEngine.textOutput("The "+item.getName()+" is already dead!");
             else if(player.getEquippedWeapon() == null)
                 GameEngine.textOutput("You need a weapon equipped to attack!");
-            else toAttack.attack(player);
+            else
+                toAttack.attack(player);
         }
     }
 }

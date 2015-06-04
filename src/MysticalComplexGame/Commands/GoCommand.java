@@ -1,8 +1,11 @@
 package MysticalComplexGame.Commands;
 
-import MysticalComplexGame.*;
+import MysticalComplexGame.Connector;
+import MysticalComplexGame.Direction;
+import MysticalComplexGame.GameEngine;
+import MysticalComplexGame.Player;
 
-public class GoCommand extends ICommandVerbDirection
+public class GoCommand extends ICommandVerbWithDirection
 {
     public GoCommand()
     {
@@ -10,7 +13,7 @@ public class GoCommand extends ICommandVerbDirection
     }
 
     @Override
-    public void executeCommand(Player player,Direction direction)
+    public void executeCommand(Player player, Direction direction)
     {
         Connector connector = player.getLocation().getConnection(direction);
         if (!connector.isClosed())
@@ -20,6 +23,7 @@ public class GoCommand extends ICommandVerbDirection
             player.getLocation().printDescription();
             player.setThirstLevel(player.getThirstLevel()-1);
         }
-        else GameEngine.textOutput(connector.getDescription());
+        else
+            GameEngine.textOutput(connector.getDescription());
     }
 }

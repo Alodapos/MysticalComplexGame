@@ -4,7 +4,7 @@ import MysticalComplexGame.Items.IItem;
 import MysticalComplexGame.Player;
 import MysticalComplexGame.GameEngine;
 
-public class PickCommand extends ICommandVerbItem
+public class PickCommand extends ICommandVerbWithItem
 {
     private String invalidArgument;
     public PickCommand()

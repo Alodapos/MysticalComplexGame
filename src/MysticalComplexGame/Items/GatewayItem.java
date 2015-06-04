@@ -11,6 +11,7 @@ public class GatewayItem extends IItem
     private ConnectionState lockState;
     private String passageClosedText;
     private String openText;
+    private String newDescription;
 
     public GatewayItem(String name,String description,Scene targetScene)
     {
@@ -23,7 +24,7 @@ public class GatewayItem extends IItem
         pickable = false;
     }
 
-    public GatewayItem(String name, String description,Scene targetScene,String passageClosedText,String openText)
+    public GatewayItem(String name, String description,Scene targetScene,String passageClosedText,String openText,String newDescription)
     {
         this.targetScene = targetScene;
         lockState = ConnectionState.CLOSED;
@@ -31,6 +32,7 @@ public class GatewayItem extends IItem
         this.passageClosedText = passageClosedText;
         this.name = name;
         this.description = description;
+        this.newDescription = newDescription;
         pickable = false;
     }
 
@@ -58,6 +60,7 @@ public class GatewayItem extends IItem
         {
             lockState = ConnectionState.OPEN;
             GameEngine.textOutput(openText);
+            this.description = newDescription;
         }
     }
 }

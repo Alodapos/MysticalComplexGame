@@ -3,7 +3,7 @@ package MysticalComplexGame.Commands;
 import MysticalComplexGame.Direction;
 import MysticalComplexGame.Player;
 
-public abstract class ICommandVerbDirection implements ICommand
+public abstract class ICommandVerbWithDirection implements ICommand
 {
     public abstract void executeCommand(Player player,Direction direction);
 

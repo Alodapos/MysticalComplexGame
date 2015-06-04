@@ -5,7 +5,7 @@ import MysticalComplexGame.Items.GatewayItem;
 import MysticalComplexGame.Items.IItem;
 import MysticalComplexGame.Player;
 
-public class EnterCommand extends ICommandVerbItem
+public class EnterCommand extends ICommandVerbWithItem
 {
     private String itemMissing;
     private String invalidArgument;
@@ -30,8 +30,6 @@ public class EnterCommand extends ICommandVerbItem
             if(!player.canExitScene())
                 player.setPreviousScene(player.getLocation());
             ((GatewayItem) item).enter(player);
-
         }
-
     }
 }

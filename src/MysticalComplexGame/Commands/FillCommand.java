@@ -5,7 +5,7 @@ import MysticalComplexGame.Player;
 import MysticalComplexGame.GameEngine;
 import MysticalComplexGame.Items.LiquidContainer;
 
-public class FillCommand extends ICommandVerbItem
+public class FillCommand extends ICommandVerbWithItem
 {
     private String itemMissing;
     private String invalidArgument;

@@ -5,17 +5,15 @@ import MysticalComplexGame.Items.IItem;
 import MysticalComplexGame.Items.AttachableItem;
 import MysticalComplexGame.Player;
 
-public class AttachCommand extends ICommandVerbItem
+public class AttachCommand extends ICommandVerbWithItem
 {
     private String itemMissing;
     private String invalidArgument;
-    private String alreadyAttached;
     public AttachCommand()
     {
         itemMissing = "You do not have this item with you.";
         invalidArgument = "This is not something that you can " + key + ".";
         key = "attach";
-        alreadyAttached = "This is already attached.";
     }
 
     @Override
@@ -25,11 +23,7 @@ public class AttachCommand extends ICommandVerbItem
             GameEngine.textOutput(itemMissing);
         else if (!(item instanceof AttachableItem))
             GameEngine.textOutput(invalidArgument);
-        else if(((AttachableItem) item).isAttached())
-            GameEngine.textOutput(alreadyAttached);
         else
-        {
             ((AttachableItem)item).attach(player);
-        }
     }
 }

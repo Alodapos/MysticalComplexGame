@@ -5,7 +5,7 @@ import MysticalComplexGame.Items.IItem;
 import MysticalComplexGame.Items.WeaponItem;
 import MysticalComplexGame.Player;
 
-public class EquipCommand extends ICommandVerbItem
+public class EquipCommand extends ICommandVerbWithItem
 {
     private String itemMissing;
     private String invalidArgument;
@@ -20,12 +20,11 @@ public class EquipCommand extends ICommandVerbItem
     @Override
     public void executeCommand(Player player,IItem item)
     {
-        if (!player.getInventory().containsValue(item)) GameEngine.textOutput(itemMissing);
-        else if (!(item instanceof WeaponItem)) GameEngine.textOutput(invalidArgument);
+        if (!player.getInventory().containsValue(item))
+            GameEngine.textOutput(itemMissing);
+        else if (!(item instanceof WeaponItem))
+            GameEngine.textOutput(invalidArgument);
         else
-        {
-            WeaponItem toEquip = (WeaponItem)item;
-            toEquip.equip(player);
-        }
+            ((WeaponItem)item).equip(player);
     }
 }

@@ -1,12 +1,10 @@
 package MysticalComplexGame.Commands;
 
-import MysticalComplexGame.Items.IItem;
 import MysticalComplexGame.Player;
 
-public abstract class ICommandVerbItem implements ICommand
+public abstract class ICommandVerbSolo implements ICommand
 {
-    public abstract void executeCommand(Player player,IItem item);
-
+    public abstract void executeCommand(Player player);
     protected String key;
 
     @Override
